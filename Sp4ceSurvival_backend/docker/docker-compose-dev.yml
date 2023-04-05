@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+
+  postgresSp4ceDev:
+    container_name: "postgresSp4ceDev"
+    image: postgres:14.1-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=mario
+      - POSTGRES_PASSWORD=user1234
+      - POSTGRES_DB=sp4ceSurvival
+    ports:
+      - "5555:5432"
+    volumes:
+      - postgresSp4ceDev:/var/lib/postgresql/data
+
+volumes:
+  postgresSp4ceDev:
+    driver: local
