@@ -6,14 +6,14 @@ import resa.mario.models.User
 fun getUsersInit() = listOf(
     UserDTOCreate(
         username = "Mario999",
-        password = "1234",
+        password = "12345",
         email = "mario@gmail.com",
         role = User.UserRole.ADMIN,
         active = "true"
     ),
     UserDTOCreate(
         username = "Mario111",
-        password = "1234",
+        password = "12345",
         email = "mario111@gmail.com",
         role = User.UserRole.USER,
         active = "true"

@@ -12,6 +12,8 @@ import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import resa.mario.dto.*
+import resa.mario.exceptions.UserExceptionBadRequest
+import resa.mario.exceptions.UserExceptionNotFound
 import resa.mario.mappers.toDTOProfile
 import resa.mario.mappers.toScore
 import resa.mario.mappers.toScoreDTO
@@ -19,6 +21,7 @@ import resa.mario.mappers.toUser
 import resa.mario.models.Score
 import resa.mario.models.User
 import resa.mario.repositories.score.ScoreRepositoryCached
+import resa.mario.repositories.user.UserRepository
 import resa.mario.repositories.user.UserRepositoryImplement
 import java.time.LocalDate
 import java.util.*
@@ -30,7 +33,7 @@ class UserService
 @Autowired constructor(
     private val userRepositoryImplement: UserRepositoryImplement,
     private val scoreRepositoryCached: ScoreRepositoryCached,
-    private val passwordEncoder: PasswordEncoder
+    private val passwordEncoder: PasswordEncoder, private val userRepository: UserRepository
 ) : UserDetailsService {
 
     // -- USERS --
@@ -94,26 +97,26 @@ class UserService
     }
 
 
-    suspend fun updatePassword(user: User, userDTOPasswordUpdate: UserDTOPasswordUpdate): User {
+    suspend fun updatePassword(user: User, userDTOPasswordUpdate: UserDTOPasswordUpdate): Boolean {
         log.info { "User with username: ${user.username} is trying to update the password" }
 
-        val updatedPassword =
-            if (!passwordEncoder.matches(userDTOPasswordUpdate.actualPassword, user.password) ||
-                userDTOPasswordUpdate.newPassword != userDTOPasswordUpdate.repeatNewPassword ||
-                userDTOPasswordUpdate.newPassword.isBlank() || userDTOPasswordUpdate.repeatNewPassword.isBlank()
-            ) {
-                log.info { "Error updating password" }
-                user.password
-            } else {
-                log.info { "Updating password" }
-                passwordEncoder.encode(userDTOPasswordUpdate.newPassword)
-            }
+        val updatedPassword: String
+
+        if (!passwordEncoder.matches(userDTOPasswordUpdate.actualPassword, user.password)) {
+            log.info { "Error updating password" }
+            throw UserExceptionBadRequest("The Actual Password is not correct.")
+        } else {
+            log.info { "Updating password" }
+            updatedPassword = passwordEncoder.encode(userDTOPasswordUpdate.newPassword)
+        }
 
         val userUpdated = user.copy(
             password = updatedPassword
         )
 
-        return userRepositoryImplement.save(userUpdated)
+        userRepositoryImplement.save(userUpdated)
+
+        return true
     }
 
     suspend fun delete(username: String): User {
@@ -121,12 +124,12 @@ class UserService
 
         val user =
             userRepositoryImplement.findByUsername(username)
-                ?: throw Exception("1.User with username: $username not found")
+                ?: throw UserExceptionNotFound("1.User with username: $username not found")
 
         scoreRepositoryCached.deleteByUserId(user.id!!)
 
         return userRepositoryImplement.deleteById(user.id)
-            ?: throw Exception("2.User with username: $username not found")
+            ?: throw UserExceptionNotFound("2.User with username: $username not found")
     }
 
     // -- SCORES --

@@ -14,9 +14,12 @@ import org.springframework.web.bind.annotation.*
 import resa.mario.config.APIConfig
 import resa.mario.config.security.jwt.JwtTokensUtils
 import resa.mario.dto.*
+import resa.mario.exceptions.UserExceptionBadRequest
+import resa.mario.exceptions.UserExceptionNotFound
 import resa.mario.mappers.toDTOResponse
 import resa.mario.models.User
 import resa.mario.services.UserService
+import resa.mario.validators.validate
 import java.util.*
 
 private val log = KotlinLogging.logger {}
@@ -35,11 +38,12 @@ class UserController
     suspend fun register(@Valid @RequestBody userDto: UserDTORegister): ResponseEntity<String> {
         log.info { "USER: ${userDto.username} TRYING TO REGISTER" }
 
+        userDto.validate()
         try {
             val userSaved = service.register(userDto)
             return ResponseEntity.ok(jwtTokenUtils.create(userSaved))
         } catch (e: Exception) {
-            throw Exception(e.message)
+            throw UserExceptionBadRequest(e.message)
         }
     }
 
@@ -51,11 +55,12 @@ class UserController
     ): ResponseEntity<String> {
         log.info { "USER: ${userDto.username} TRYING TO CREATE" }
 
+        userDto.validate()
         try {
             val userSaved = service.create(userDto)
             return ResponseEntity.ok(jwtTokenUtils.create(userSaved))
         } catch (e: Exception) {
-            throw Exception(e.message)
+            throw UserExceptionBadRequest(e.message)
         }
     }
 
@@ -63,6 +68,7 @@ class UserController
     suspend fun login(@Valid @RequestBody userDto: UserDTOLogin): ResponseEntity<String> {
         log.info { "USER: ${userDto.username} TRYING TO LOGIN" }
 
+        userDto.validate()
         val authentication: Authentication = authenticationManager.authenticate(
             UsernamePasswordAuthenticationToken(
                 userDto.username,
@@ -103,9 +109,13 @@ class UserController
     ): ResponseEntity<List<UserDtoLeaderBoard>> {
         log.info { "OBTAINING USERS FOR LEADERBOARD, PAGE: $page" }
 
-        val pageResponse = service.findAllForLeaderBoard(page, size, sortBy)
+        try {
+            val pageResponse = service.findAllForLeaderBoard(page, size, sortBy)
+            return ResponseEntity.ok(pageResponse.content)
+        } catch (e: Exception) {
+            throw UserExceptionNotFound("Page not found")
+        }
 
-        return ResponseEntity.ok(pageResponse.content)
     }
 
     // -- ME METHODS --
@@ -131,12 +141,13 @@ class UserController
     suspend fun updatePassword(
         @AuthenticationPrincipal user: User,
         @Valid @RequestBody userDTOPasswordUpdate: UserDTOPasswordUpdate
-    ): ResponseEntity<User> {
+    ): ResponseEntity<String> {
         log.info { "USER: ${user.username} IS TRYING TO UPDATE THE PASSWORD" }
 
+        userDTOPasswordUpdate.validate()
         val userSaved = service.updatePassword(user, userDTOPasswordUpdate)
 
-        return ResponseEntity.ok(userSaved)
+        return ResponseEntity.ok("USER UPDATED")
     }
 
     @DeleteMapping("/me/delete")
@@ -150,6 +161,7 @@ class UserController
     // -- INITIAL DATA METHODS --
     suspend fun createUserInitializer(userDTOCreate: UserDTOCreate): User {
         log.info { "GENERATING INITIAL USER DATA" }
+        userDTOCreate.validate()
         return service.create(userDTOCreate)
     }
 
