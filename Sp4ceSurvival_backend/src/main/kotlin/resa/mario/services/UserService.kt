@@ -38,13 +38,13 @@ class UserService
     // -- USERS --
 
     override fun loadUserByUsername(username: String): UserDetails = runBlocking {
-        userRepositoryImplement.findByUsername(username) ?: throw Exception("User not found with username: $username")
+        userRepositoryImplement.findByUsername(username) ?: throw UserExceptionNotFound("User not found with username: $username")
     }
 
     suspend fun register(userDtoRegister: UserDTORegister): User {
         log.info { "Registering User with username: ${userDtoRegister.username}" }
         try {
-            val user = userDtoRegister.toUser() ?: throw Exception("Password and repeated password does not match.")
+            val user = userDtoRegister.toUser() ?: throw UserExceptionBadRequest("Password and repeated password does not match.")
 
             val userNew = user.copy(
                 password = passwordEncoder.encode(user.password)
@@ -52,7 +52,7 @@ class UserService
 
             return userRepositoryImplement.save(userNew)
         } catch (e: Exception) {
-            throw Exception(e.message)
+            throw UserExceptionBadRequest(e.message)
         }
     }
 
@@ -72,7 +72,7 @@ class UserService
         log.info { "Finding User with username: $username" }
 
         return userRepositoryImplement.findByUsername(username)
-            ?: throw Exception("User not found with username: $username")
+            ?: throw UserExceptionBadRequest("User not found with username: $username")
     }
 
     suspend fun findScoreByUserId(user: User): UserDTOProfile {
@@ -92,7 +92,7 @@ class UserService
 
         val pageRequest = PageRequest.of(page, size, Sort.Direction.DESC, sortBy)
         return userRepositoryImplement.findUsersForLeaderBoard(pageRequest).firstOrNull()
-            ?: throw Exception("Page $page not found")
+            ?: throw UserExceptionNotFound("Page $page not found")
     }
 
 
