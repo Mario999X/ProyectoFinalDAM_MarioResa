@@ -13,8 +13,8 @@ fun User.toDTOProfile(score: ScoreDTOResponse?): UserDTOProfile {
     )
 }
 
-fun User.toDTOLeaderBoard(position: String, score: ScoreDTOResponse): UserDtoLeaderBoard {
-    return UserDtoLeaderBoard(
+fun User.toDTOLeaderBoard(position: String, score: ScoreDTOResponse): UserDTOLeaderBoard {
+    return UserDTOLeaderBoard(
         position,
         username = username,
         score

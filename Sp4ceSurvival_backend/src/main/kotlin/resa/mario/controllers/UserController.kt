@@ -106,7 +106,7 @@ class UserController
         @RequestParam(defaultValue = APIConfig.PAGINATION_INIT) page: Int = 0,
         @RequestParam(defaultValue = APIConfig.PAGINATION_SIZE) size: Int = 10,
         @RequestParam(defaultValue = APIConfig.PAGINATION_SORT) sortBy: String = "scoreNumber",
-    ): ResponseEntity<List<UserDtoLeaderBoard>> {
+    ): ResponseEntity<List<UserDTOLeaderBoard>> {
         log.info { "OBTAINING USERS FOR LEADERBOARD, PAGE: $page" }
 
         try {

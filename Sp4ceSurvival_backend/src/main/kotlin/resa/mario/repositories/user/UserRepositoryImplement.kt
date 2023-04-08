@@ -10,7 +10,7 @@ import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageImpl
 import org.springframework.data.domain.PageRequest
 import org.springframework.stereotype.Repository
-import resa.mario.dto.UserDtoLeaderBoard
+import resa.mario.dto.UserDTOLeaderBoard
 import resa.mario.mappers.toDTOLeaderBoard
 import resa.mario.mappers.toScoreDTO
 import resa.mario.models.User
@@ -29,7 +29,7 @@ class UserRepositoryImplement
     }
 
     @Cacheable("users")
-    override suspend fun findUsersForLeaderBoard(page: PageRequest): Flow<Page<UserDtoLeaderBoard>> =
+    override suspend fun findUsersForLeaderBoard(page: PageRequest): Flow<Page<UserDTOLeaderBoard>> =
         withContext(Dispatchers.IO) {
             var position = if (page.pageNumber == 0) 0 else 10 * page.pageNumber
 

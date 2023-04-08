@@ -21,7 +21,6 @@ import resa.mario.mappers.toUser
 import resa.mario.models.Score
 import resa.mario.models.User
 import resa.mario.repositories.score.ScoreRepositoryCached
-import resa.mario.repositories.user.UserRepository
 import resa.mario.repositories.user.UserRepositoryImplement
 import java.time.LocalDate
 import java.util.*
@@ -33,7 +32,7 @@ class UserService
 @Autowired constructor(
     private val userRepositoryImplement: UserRepositoryImplement,
     private val scoreRepositoryCached: ScoreRepositoryCached,
-    private val passwordEncoder: PasswordEncoder, private val userRepository: UserRepository
+    private val passwordEncoder: PasswordEncoder
 ) : UserDetailsService {
 
     // -- USERS --
@@ -88,7 +87,7 @@ class UserService
         }
     }
 
-    suspend fun findAllForLeaderBoard(page: Int, size: Int, sortBy: String): Page<UserDtoLeaderBoard> {
+    suspend fun findAllForLeaderBoard(page: Int, size: Int, sortBy: String): Page<UserDTOLeaderBoard> {
         log.info { "Obtaining users for LeaderBoard" }
 
         val pageRequest = PageRequest.of(page, size, Sort.Direction.DESC, sortBy)
