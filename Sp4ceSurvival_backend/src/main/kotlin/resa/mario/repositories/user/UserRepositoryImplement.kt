@@ -4,6 +4,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.withContext
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.cache.annotation.CacheEvict
+import org.springframework.cache.annotation.Cacheable
 import org.springframework.data.domain.Page
 import org.springframework.data.domain.PageImpl
 import org.springframework.data.domain.PageRequest
@@ -26,6 +28,7 @@ class UserRepositoryImplement
         return@withContext repository.findByUsername(username).firstOrNull()
     }
 
+    @Cacheable("users")
     override suspend fun findUsersForLeaderBoard(page: PageRequest): Flow<Page<UserDtoLeaderBoard>> =
         withContext(Dispatchers.IO) {
             var position = if (page.pageNumber == 0) 0 else 10 * page.pageNumber
@@ -44,6 +47,7 @@ class UserRepositoryImplement
         return@withContext repository.save(user)
     }
 
+    @CacheEvict("users")
     override suspend fun deleteById(id: UUID): User? = withContext(Dispatchers.IO) {
         val user = repository.findById(id) ?: return@withContext null
         user.id?.let { repository.deleteById(it) }

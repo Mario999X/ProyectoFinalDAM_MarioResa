@@ -23,7 +23,6 @@ data class User(
     val role: UserRole,
     @Column("created_at")
     val createdAt: LocalDate,
-    val active: Boolean
 ) : UserDetails {
 
     enum class UserRole {
