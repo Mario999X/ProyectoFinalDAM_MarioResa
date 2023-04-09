@@ -13,8 +13,8 @@ fun User.toDTOProfile(score: ScoreDTOResponse?): UserDTOProfile {
     )
 }
 
-fun User.toDTOLeaderBoard(position: String, score: ScoreDTOResponse): UserDtoLeaderBoard {
-    return UserDtoLeaderBoard(
+fun User.toDTOLeaderBoard(position: String, score: ScoreDTOResponse): UserDTOLeaderBoard {
+    return UserDTOLeaderBoard(
         position,
         username = username,
         score
@@ -35,7 +35,6 @@ fun UserDTORegister.toUser(): User? {
         email = email,
         role = User.UserRole.USER,
         createdAt = LocalDate.now(),
-        active = true
     )
 }
 
@@ -46,6 +45,5 @@ fun UserDTOCreate.toUser(): User {
         email = email,
         role = role,
         createdAt = LocalDate.now(),
-        active = active.lowercase().toBooleanStrict()
     )
 }

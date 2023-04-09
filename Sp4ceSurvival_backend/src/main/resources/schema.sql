@@ -9,7 +9,6 @@ CREATE TABLE IF NOT EXISTS users(
     email VARCHAR(75) NOT NULL UNIQUE,
     role VARCHAR(15) NOT NULL,
     created_at DATE NOT NULL,
-    active boolean NOT NULL,
     PRIMARY KEY (id)
 );
 

@@ -22,8 +22,7 @@ data class UserDTOCreate(
     val username: String,
     val password: String,
     val email: String,
-    val role: User.UserRole,
-    val active: String
+    val role: User.UserRole
 )
 
 @Serializable
@@ -40,7 +39,7 @@ data class UserDTOProfile(
 )
 
 @Serializable
-data class UserDtoLeaderBoard(
+data class UserDTOLeaderBoard(
     val position: String,
     val username: String,
     val score: ScoreDTOResponse
