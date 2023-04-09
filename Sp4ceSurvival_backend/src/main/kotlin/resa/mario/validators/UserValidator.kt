@@ -15,6 +15,8 @@ fun UserDTORegister.validate(): UserDTORegister {
         throw UserExceptionBadRequest("Invalid email.")
     else if (this.password.length < 5 || this.password.isBlank())
         throw UserExceptionBadRequest("Password must at least be 5 characters long.")
+    else if (this.repeatPassword != this.password)
+        throw UserExceptionBadRequest("Password and Repeat Password must be the same.")
     else return this
 }
 
