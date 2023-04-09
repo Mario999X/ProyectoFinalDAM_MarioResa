@@ -43,7 +43,7 @@ class UserController
             val userSaved = service.register(userDto)
             return ResponseEntity.ok(jwtTokenUtils.create(userSaved))
         } catch (e: Exception) {
-            throw UserExceptionBadRequest(e.message)
+            throw UserExceptionBadRequest("USERNAME OR EMAIL USED BY ANOTHER USER.")
         }
     }
 
@@ -60,7 +60,7 @@ class UserController
             val userSaved = service.create(userDto)
             return ResponseEntity.ok(jwtTokenUtils.create(userSaved))
         } catch (e: Exception) {
-            throw UserExceptionBadRequest(e.message)
+            throw UserExceptionBadRequest("USERNAME OR EMAIL USED BY ANOTHER USER.")
         }
     }
 
@@ -113,7 +113,7 @@ class UserController
             val pageResponse = service.findAllForLeaderBoard(page, size, sortBy)
             return ResponseEntity.ok(pageResponse.content)
         } catch (e: Exception) {
-            throw UserExceptionNotFound("Page not found")
+            throw UserExceptionNotFound("PAGE NOT FOUND")
         }
 
     }
@@ -123,18 +123,26 @@ class UserController
     suspend fun findMe(@AuthenticationPrincipal user: User): ResponseEntity<UserDTOProfile> {
         log.info { "OBTAINING SELF DATA" }
 
-        return ResponseEntity.ok(service.findScoreByUserId(user))
+        try {
+            return ResponseEntity.ok(service.findScoreByUserId(user))
+        } catch (e: Exception) {
+            throw UserExceptionNotFound("USER NOT FOUND")
+        }
     }
 
     @PutMapping("/me/score")
     suspend fun updateScore(@AuthenticationPrincipal user: User, scoreNumber: String): ResponseEntity<String> {
         log.info { "USER: ${user.username} IS UDPATING AN SCORE" }
+        try {
+            val response = service.saveScore(user.id.toString(), scoreNumber)
 
-        val response = service.saveScore(user.id.toString(), scoreNumber)
+            return if (!response) {
+                throw UserExceptionBadRequest("SCORE NOT HIGHER THAN ACTUAL REGISTERED")
+            } else ResponseEntity.ok("SCORE UPDATED")
+        } catch (e: Exception) {
+            throw UserExceptionNotFound("USER NOT FOUND")
+        }
 
-        return if (!response) {
-            ResponseEntity.badRequest().body("SCORE NOT UPDATED")
-        } else ResponseEntity.ok("SCORE UPDATED")
     }
 
     @PutMapping("/me/password")
@@ -150,7 +158,7 @@ class UserController
         return ResponseEntity.ok("USER UPDATED")
     }
 
-    @DeleteMapping("/me/delete")
+    @DeleteMapping("/me")
     suspend fun deleteMe(@AuthenticationPrincipal user: User) {
         log.info { "USER: ${user.username} SELF DELETING ACCOUNT" }
 
