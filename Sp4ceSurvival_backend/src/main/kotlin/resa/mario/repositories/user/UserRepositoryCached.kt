@@ -18,7 +18,7 @@ import resa.mario.repositories.score.ScoreRepository
 import java.util.*
 
 @Repository
-class UserRepositoryImplement
+class UserRepositoryCached
 @Autowired constructor(
     private val repository: UserRepository,
     private val scoreRepository: ScoreRepository

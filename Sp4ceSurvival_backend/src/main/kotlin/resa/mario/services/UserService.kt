@@ -21,7 +21,7 @@ import resa.mario.mappers.toUser
 import resa.mario.models.Score
 import resa.mario.models.User
 import resa.mario.repositories.score.ScoreRepositoryCached
-import resa.mario.repositories.user.UserRepositoryImplement
+import resa.mario.repositories.user.UserRepositoryCached
 import java.time.LocalDate
 import java.util.*
 
@@ -30,7 +30,7 @@ private val log = KotlinLogging.logger {}
 @Service
 class UserService
 @Autowired constructor(
-    private val userRepositoryImplement: UserRepositoryImplement,
+    private val userRepositoryCached: UserRepositoryCached,
     private val scoreRepositoryCached: ScoreRepositoryCached,
     private val passwordEncoder: PasswordEncoder
 ) : UserDetailsService {
@@ -38,7 +38,7 @@ class UserService
     // -- USERS --
 
     override fun loadUserByUsername(username: String): UserDetails = runBlocking {
-        userRepositoryImplement.findByUsername(username) ?: throw UserExceptionNotFound("User not found with username: $username")
+        userRepositoryCached.findByUsername(username) ?: throw UserExceptionNotFound("User not found with username: $username")
     }
 
     suspend fun register(userDtoRegister: UserDTORegister): User {
@@ -50,7 +50,7 @@ class UserService
                 password = passwordEncoder.encode(user.password)
             )
 
-            return userRepositoryImplement.save(userNew)
+            return userRepositoryCached.save(userNew)
         } catch (e: Exception) {
             throw UserExceptionBadRequest(e.message)
         }
@@ -65,13 +65,13 @@ class UserService
             password = passwordEncoder.encode(user.password)
         )
 
-        return userRepositoryImplement.save(userNew)
+        return userRepositoryCached.save(userNew)
     }
 
     suspend fun findByUsername(username: String): User {
         log.info { "Finding User with username: $username" }
 
-        return userRepositoryImplement.findByUsername(username)
+        return userRepositoryCached.findByUsername(username)
             ?: throw UserExceptionBadRequest("User not found with username: $username")
     }
 
@@ -91,7 +91,7 @@ class UserService
         log.info { "Obtaining users for LeaderBoard" }
 
         val pageRequest = PageRequest.of(page, size, Sort.Direction.DESC, sortBy)
-        return userRepositoryImplement.findUsersForLeaderBoard(pageRequest).firstOrNull()
+        return userRepositoryCached.findUsersForLeaderBoard(pageRequest).firstOrNull()
             ?: throw UserExceptionNotFound("Page $page not found")
     }
 
@@ -113,7 +113,7 @@ class UserService
             password = updatedPassword
         )
 
-        userRepositoryImplement.save(userUpdated)
+        userRepositoryCached.save(userUpdated)
 
         return true
     }
@@ -122,12 +122,12 @@ class UserService
         log.info { "Deleting user with username: $username" }
 
         val user =
-            userRepositoryImplement.findByUsername(username)
+            userRepositoryCached.findByUsername(username)
                 ?: throw UserExceptionNotFound("1.User with username: $username not found")
 
         scoreRepositoryCached.deleteByUserId(user.id!!)
 
-        return userRepositoryImplement.deleteById(user.id)
+        return userRepositoryCached.deleteById(user.id)
             ?: throw UserExceptionNotFound("2.User with username: $username not found")
     }
 
