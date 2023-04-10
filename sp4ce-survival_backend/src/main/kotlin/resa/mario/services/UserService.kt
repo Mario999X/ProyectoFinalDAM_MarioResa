@@ -38,13 +38,15 @@ class UserService
     // -- USERS --
 
     override fun loadUserByUsername(username: String): UserDetails = runBlocking {
-        userRepositoryCached.findByUsername(username) ?: throw UserExceptionNotFound("User not found with username: $username")
+        userRepositoryCached.findByUsername(username)
+            ?: throw UserExceptionNotFound("User not found with username: $username")
     }
 
     suspend fun register(userDtoRegister: UserDTORegister): User {
         log.info { "Registering User with username: ${userDtoRegister.username}" }
         try {
-            val user = userDtoRegister.toUser() ?: throw UserExceptionBadRequest("Password and repeated password does not match.")
+            val user = userDtoRegister.toUser()
+                ?: throw UserExceptionBadRequest("Password and repeated password does not match.")
 
             val userNew = user.copy(
                 password = passwordEncoder.encode(user.password)
@@ -104,6 +106,11 @@ class UserService
         if (!passwordEncoder.matches(userDTOPasswordUpdate.actualPassword, user.password)) {
             log.info { "Error updating password" }
             throw UserExceptionBadRequest("The Actual Password is not correct.")
+
+        } else if (passwordEncoder.matches(userDTOPasswordUpdate.newPassword, user.password) ||
+            passwordEncoder.matches(userDTOPasswordUpdate.repeatNewPassword, user.password)
+        ) {
+            throw UserExceptionBadRequest("The new password is the same as the old password")
         } else {
             log.info { "Updating password" }
             updatedPassword = passwordEncoder.encode(userDTOPasswordUpdate.newPassword)
