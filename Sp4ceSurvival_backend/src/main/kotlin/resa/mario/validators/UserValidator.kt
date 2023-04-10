@@ -42,7 +42,7 @@ fun UserDTOLogin.validate(): UserDTOLogin {
 
 fun UserDTOPasswordUpdate.validate(): UserDTOPasswordUpdate {
     if (this.newPassword != this.repeatNewPassword)
-        throw UserExceptionBadRequest("New password must be the same in both new cases.")
+        throw UserExceptionBadRequest("New Password and Repeat New Password must be the same.")
     else if (this.newPassword.isBlank() || this.repeatNewPassword.isBlank())
         throw UserExceptionBadRequest("Both cases must not be blank.")
     else if (this.newPassword.length < 5 || this.repeatNewPassword.length < 5)

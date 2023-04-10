@@ -153,7 +153,7 @@ class UserController
         log.info { "USER: ${user.username} IS TRYING TO UPDATE THE PASSWORD" }
 
         userDTOPasswordUpdate.validate()
-        val userSaved = service.updatePassword(user, userDTOPasswordUpdate)
+        service.updatePassword(user, userDTOPasswordUpdate)
 
         return ResponseEntity.ok("USER UPDATED")
     }
@@ -162,7 +162,9 @@ class UserController
     suspend fun deleteMe(@AuthenticationPrincipal user: User) {
         log.info { "USER: ${user.username} SELF DELETING ACCOUNT" }
 
-        service.delete(user.username)
+        val deletedUser = service.delete(user.username)
+
+        log.info { "USER: ${deletedUser.username} HAS BEEN DELETED" }
     }
 
 
