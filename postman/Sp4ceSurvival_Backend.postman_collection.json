@@ -281,6 +281,43 @@
 					"response": []
 				},
 				{
+					"name": "FirstScore",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token_noScore}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:6969/sp4ceSurvival/me/score?scoreNumber=20",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "6969",
+							"path": [
+								"sp4ceSurvival",
+								"me",
+								"score"
+							],
+							"query": [
+								{
+									"key": "scoreNumber",
+									"value": "20"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "UpdateSelfPassword",
 					"request": {
 						"auth": {
@@ -1018,12 +1055,17 @@
 	"variable": [
 		{
 			"key": "token_admin",
-			"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhODBhOTViMy05NmExLTRhNTgtYjRjOS1hZjkyYzEwNzkxYjEiLCJyb2xlIjoiQURNSU4iLCJleHAiOjE2ODEyMTQyMzgsInVzZXJuYW1lIjoiTWFyaW85OTkifQ.qaaY4wlVlXTc0YiegeNctHFNjM6l2yLU1cywjXx5bSO3YkwaRRo8tocabRM-W65GaavmFHAlxIYVLnaJoVf2cQ",
+			"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiI2NGM0NDJkMy03YTlkLTRmOTMtYTkzZS1kNDU2OTM0MTljYWYiLCJyb2xlIjoiQURNSU4iLCJleHAiOjE2ODEzMTAxMjksInVzZXJuYW1lIjoiTWFyaW85OTkifQ.IXmv9rl4THuUk-_-NlcxSvPbuoW7gXc5ExLy1ga1EVQWn47wjz4en3YU-9JrSFO8Ko5FkksDFsJ0xGq6ARW6GA",
 			"type": "string"
 		},
 		{
 			"key": "token_user",
-			"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIxYmUyYzU0Mi1iMzhlLTQ5NmEtODYyNy1lNTI4NjFjOWRjNGMiLCJyb2xlIjoiVVNFUiIsImV4cCI6MTY4MTIxMzU4OCwidXNlcm5hbWUiOiJNYXJpbzExMSJ9.tEvckAA2MNQlFJCOcbTy3PSvGZZ5mpVbnRaw7sNaZeW5sV-BHdIxcyRWBaFSbF84DLWPLySEsxdFQ2qKOb3F1g",
+			"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJjM2Y2OWUzZS00NmNmLTRhMjMtODFhMy0zZjQxNzM3M2UwZmQiLCJyb2xlIjoiVVNFUiIsImV4cCI6MTY4MTMxMDE0NCwidXNlcm5hbWUiOiJNYXJpbzExMSJ9.z36_JcC-kGjGuqlhzupJhOzUu5LHkLEq4gYnxpWlT1XRDo4Sjr1iDWdvmmFv-z9FnTKkTYyzUtr1uUBMgMiW4Q",
+			"type": "string"
+		},
+		{
+			"key": "token_noScore",
+			"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkYzc4MWY0NC0wNmQxLTQ1ZGItYWQwZC03MDlhZjRiMzNlYTYiLCJyb2xlIjoiVVNFUiIsImV4cCI6MTY4MTMxMDA0OCwidXNlcm5hbWUiOiJhYWEifQ.4u8Q5mILxggiIyovUvy4mhTRSTrFEHbfp4a5wCo34EY4x9MOtW60S1WhaD8NtDp22cC2IyhnPeSZZHtzGzmVtg",
 			"type": "string"
 		}
 	]
