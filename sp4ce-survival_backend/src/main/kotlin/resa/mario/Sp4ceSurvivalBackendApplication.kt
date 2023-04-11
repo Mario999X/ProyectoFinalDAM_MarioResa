@@ -12,6 +12,11 @@ import resa.mario.db.getScoresInit
 import resa.mario.db.getUsersInit
 import resa.mario.models.User
 
+/**
+ * @author Mario Resa
+ *
+ * @property controller UserController for InitializerMethods
+ */
 @SpringBootApplication
 @EnableR2dbcRepositories
 @EnableCaching

@@ -9,6 +9,16 @@ import org.springframework.security.core.userdetails.UserDetails
 import java.time.LocalDate
 import java.util.UUID
 
+/**
+ * User model
+ *
+ * @property id Main ID, UUID
+ * @property username Username of User, String
+ * @property password Password of User, String
+ * @property email Email of User, String
+ * @property role Role of User, [UserRole]
+ * @property createdAt Creation Date, LocalDate
+ */
 @Table(name = "users")
 data class User(
     @Id
@@ -25,6 +35,10 @@ data class User(
     val createdAt: LocalDate,
 ) : UserDetails {
 
+    /**
+     * Enum class for the User Roles
+     *
+     */
     enum class UserRole {
         USER, ADMIN
     }
