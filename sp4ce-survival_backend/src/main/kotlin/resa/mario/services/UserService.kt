@@ -46,7 +46,6 @@ class UserService
         log.info { "Registering User with username: ${userDtoRegister.username}" }
         try {
             val user = userDtoRegister.toUser()
-                ?: throw UserExceptionBadRequest("Password and repeated password does not match.")
 
             val userNew = user.copy(
                 password = passwordEncoder.encode(user.password)
