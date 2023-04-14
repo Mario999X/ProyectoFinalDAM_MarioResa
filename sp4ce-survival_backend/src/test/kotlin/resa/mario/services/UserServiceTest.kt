@@ -12,12 +12,14 @@ import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
+import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.data.domain.Page
 import org.springframework.security.crypto.password.PasswordEncoder
 import resa.mario.dto.UserDTOCreate
 import resa.mario.dto.UserDTOPasswordUpdate
 import resa.mario.dto.UserDTORegister
+import resa.mario.exceptions.UserException
 import resa.mario.models.Score
 import resa.mario.models.User
 import resa.mario.repositories.score.ScoreRepositoryCached
@@ -52,8 +54,8 @@ internal class UserServiceTest {
     private val user = User(
         UUID.randomUUID(),
         userDtoCreate.username,
+        password = userDtoCreate.password,
         userDtoCreate.email,
-        userDtoCreate.password,
         User.UserRole.ADMIN,
         LocalDate.now()
     )
@@ -93,7 +95,7 @@ internal class UserServiceTest {
             { assertEquals(user.username, result.username) }
         )
 
-        coVerify { repository.findByUsername(any())  }
+        coVerify { repository.findByUsername(any()) }
     }
 
     @OptIn(ExperimentalCoroutinesApi::class)
@@ -177,21 +179,16 @@ internal class UserServiceTest {
 
     @OptIn(ExperimentalCoroutinesApi::class)
     @Test
-    fun updatePassword() = runTest {
-        coEvery { passwordEncoder.matches(any(), any()) } returns true
-        coEvery { passwordEncoder.encode(any()) } returns userDtoUpdate.newPassword
-        coEvery { repository.save(any()) } returns user.copy(password = userDtoUpdate.newPassword)
+    fun updatePasswordFailed() = runTest {
+        coEvery { passwordEncoder.matches(any(), any()) } returns false
 
-        val result = service.updatePassword(user, userDtoUpdate)
+        val result = assertThrows<UserException.UserExceptionBadRequest> { service.updatePassword(user, userDtoUpdate) }
 
         assertAll(
-            { assertNotNull(result) },
-            { assertTrue(result) }
+            { assertEquals("The Actual Password is not correct.", result.message) }
         )
 
         coVerify { passwordEncoder.matches(any(), any()) }
-        coVerify { passwordEncoder.encode(any()) }
-        coVerify { repository.save(any()) }
     }
 
     @OptIn(ExperimentalCoroutinesApi::class)
@@ -208,7 +205,7 @@ internal class UserServiceTest {
             { assertEquals(userDtoCreate.username, result.username) }
         )
 
-        coVerify { repository.findByUsername(any())  }
+        coVerify { repository.findByUsername(any()) }
         coVerify { scoreRepository.deleteByUserId(any()) }
         coVerify { repository.deleteById(any()) }
     }

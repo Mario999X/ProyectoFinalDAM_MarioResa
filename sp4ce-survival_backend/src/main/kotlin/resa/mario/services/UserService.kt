@@ -12,8 +12,8 @@ import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import resa.mario.dto.*
-import resa.mario.exceptions.UserExceptionBadRequest
-import resa.mario.exceptions.UserExceptionNotFound
+import resa.mario.exceptions.UserException.UserExceptionBadRequest
+import resa.mario.exceptions.UserException.UserExceptionNotFound
 import resa.mario.mappers.toDTOProfile
 import resa.mario.mappers.toScore
 import resa.mario.mappers.toScoreDTO
@@ -38,23 +38,18 @@ class UserService
     // -- USERS --
 
     override fun loadUserByUsername(username: String): UserDetails = runBlocking {
-        userRepositoryCached.findByUsername(username)
-            ?: throw UserExceptionNotFound("User not found with username: $username")
+        userRepositoryCached.findByUsername(username) ?: throw UserExceptionNotFound("USER NOT FOUND")
     }
 
     suspend fun register(userDtoRegister: UserDTORegister): User {
         log.info { "Registering User with username: ${userDtoRegister.username}" }
-        try {
-            val user = userDtoRegister.toUser()
+        val user = userDtoRegister.toUser()
 
-            val userNew = user.copy(
-                password = passwordEncoder.encode(user.password)
-            )
+        val userNew = user.copy(
+            password = passwordEncoder.encode(user.password)
+        )
 
-            return userRepositoryCached.save(userNew)
-        } catch (e: Exception) {
-            throw UserExceptionBadRequest(e.message)
-        }
+        return userRepositoryCached.save(userNew)
     }
 
     suspend fun create(userDTOCreate: UserDTOCreate): User {
@@ -73,7 +68,7 @@ class UserService
         log.info { "Finding User with username: $username" }
 
         return userRepositoryCached.findByUsername(username)
-            ?: throw UserExceptionBadRequest("User not found with username: $username")
+            ?: throw UserExceptionNotFound("User not found with username: $username")
     }
 
     suspend fun findScoreByUserId(user: User): UserDTOProfile {
@@ -137,7 +132,7 @@ class UserService
             ?: throw UserExceptionNotFound("2.User with username: $username not found")
     }
 
-    // -- SCORES --
+// -- SCORES --
 
     suspend fun saveScore(userId: String, scoreNumber: String): Boolean {
         log.info { "Saving Score for user: $userId" }

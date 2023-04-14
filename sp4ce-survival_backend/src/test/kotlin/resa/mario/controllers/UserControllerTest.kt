@@ -8,11 +8,9 @@ import io.mockk.impl.annotations.MockK
 import io.mockk.junit5.MockKExtension
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
-import org.junit.jupiter.api.Test
-
 import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
-import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.data.domain.Page
 import org.springframework.security.authentication.AuthenticationManager
@@ -21,7 +19,7 @@ import resa.mario.dto.UserDTOCreate
 import resa.mario.dto.UserDTOLogin
 import resa.mario.dto.UserDTOPasswordUpdate
 import resa.mario.dto.UserDTORegister
-import resa.mario.exceptions.UserExceptionBadRequest
+import resa.mario.exceptions.UserException.*
 import resa.mario.mappers.toDTOProfile
 import resa.mario.mappers.toScoreDTO
 import resa.mario.models.Score
@@ -136,12 +134,10 @@ internal class UserControllerTest {
     @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun loginFailed() = runTest {
-        val result = assertThrows<UserExceptionBadRequest> {
-            controller.login(userDTOLoginBad)
-        }
+        val result = controller.login(userDTOLoginBad)
 
         assertAll(
-            { assertEquals("Username must not be blank.", result.message) }
+            { assertEquals("Username must not be blank.", result.body) }
         )
     }
 
@@ -243,7 +239,7 @@ internal class UserControllerTest {
 
         assertAll(
             { assertNotNull(result) },
-            { assertEquals(user.username, result.username) }
+            { assertEquals(user.username, result!!.username) }
         )
 
         coVerify { service.create(any()) }
