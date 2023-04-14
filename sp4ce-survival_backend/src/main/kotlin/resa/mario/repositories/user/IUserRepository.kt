@@ -8,7 +8,10 @@ import resa.mario.dto.UserDTOLeaderBoard
 import resa.mario.models.User
 import java.util.UUID
 
-
+/**
+ * Interface that the Repository Class will implement
+ *
+ */
 @Repository
 interface IUserRepository {
     suspend fun findByUsername(username: String): User?
