@@ -29,7 +29,7 @@ class Sp4ceSurvivalBackendApplication
 
         getUsersInit().forEach {
             val user = controller.createUserInitializer(it)
-            users.add(user)
+            users.add(user!!)
         }
 
         var i = 0

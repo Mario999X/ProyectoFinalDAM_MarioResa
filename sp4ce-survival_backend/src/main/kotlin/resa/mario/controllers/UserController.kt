@@ -1,8 +1,11 @@
 package resa.mario.controllers
 
+import com.github.michaelbull.result.*
 import jakarta.validation.Valid
 import mu.KotlinLogging
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.dao.DataIntegrityViolationException
+import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.security.authentication.AuthenticationManager
@@ -14,8 +17,8 @@ import org.springframework.web.bind.annotation.*
 import resa.mario.config.APIConfig
 import resa.mario.config.security.jwt.JwtTokensUtils
 import resa.mario.dto.*
-import resa.mario.exceptions.UserExceptionBadRequest
-import resa.mario.exceptions.UserExceptionNotFound
+import resa.mario.exceptions.UserDataBaseConflict
+import resa.mario.exceptions.UserException.*
 import resa.mario.mappers.toDTOResponse
 import resa.mario.models.User
 import resa.mario.services.UserService
@@ -38,13 +41,19 @@ class UserController
     suspend fun register(@Valid @RequestBody userDto: UserDTORegister): ResponseEntity<String> {
         log.info { "USER: ${userDto.username} TRYING TO REGISTER" }
 
-        userDto.validate()
         try {
-            val userSaved = service.register(userDto)
-            return ResponseEntity.ok(jwtTokenUtils.create(userSaved))
-        } catch (e: Exception) {
-            throw UserExceptionBadRequest("USERNAME OR EMAIL USED BY ANOTHER USER.")
+            return when (val userResult = userDto.validate()) {
+                is Ok -> {
+                    val userSaved = service.register(userResult.value)
+                    ResponseEntity.status(HttpStatus.CREATED).body(jwtTokenUtils.create(userSaved))
+                }
+
+                is Err -> ResponseEntity.status(HttpStatus.BAD_REQUEST).body(userResult.error.message)
+            }
+        } catch (e: DataIntegrityViolationException) {
+            throw UserDataBaseConflict("USERNAME OR EMAIL ALREADY IN USE")
         }
+
     }
 
     @PreAuthorize("hasRole('ADMIN')")
@@ -55,12 +64,18 @@ class UserController
     ): ResponseEntity<String> {
         log.info { "USER: ${userDto.username} TRYING TO CREATE" }
 
-        userDto.validate()
         try {
-            val userSaved = service.create(userDto)
-            return ResponseEntity.ok(jwtTokenUtils.create(userSaved))
-        } catch (e: Exception) {
-            throw UserExceptionBadRequest("USERNAME OR EMAIL USED BY ANOTHER USER.")
+            return when (val userResult = userDto.validate()) {
+                is Ok -> {
+                    val userSaved = service.create(userResult.value)
+                    ResponseEntity.status(HttpStatus.CREATED).body(jwtTokenUtils.create(userSaved))
+                }
+
+                is Err -> ResponseEntity.status(HttpStatus.BAD_REQUEST).body(userResult.error.message)
+            }
+
+        } catch (e: DataIntegrityViolationException) {
+            throw UserDataBaseConflict("USERNAME OR EMAIL ALREADY IN USE")
         }
     }
 
@@ -68,20 +83,26 @@ class UserController
     suspend fun login(@Valid @RequestBody userDto: UserDTOLogin): ResponseEntity<String> {
         log.info { "USER: ${userDto.username} TRYING TO LOGIN" }
 
-        userDto.validate()
-        val authentication: Authentication = authenticationManager.authenticate(
-            UsernamePasswordAuthenticationToken(
-                userDto.username,
-                userDto.password
-            )
-        )
-        // Now we authenticate the user
-        SecurityContextHolder.getContext().authentication = authentication
+        return when (val userResult = userDto.validate()) {
+            is Ok -> {
+                val authentication: Authentication = authenticationManager.authenticate(
+                    UsernamePasswordAuthenticationToken(
+                        userDto.username,
+                        userDto.password
+                    )
+                )
+                // Now we authenticate the user
+                SecurityContextHolder.getContext().authentication = authentication
 
-        // And return the authenticated user
-        val user = authentication.principal as User
+                // And return the authenticated user
+                val user = authentication.principal as User
 
-        return ResponseEntity.ok(jwtTokenUtils.create(user))
+                ResponseEntity.ok(jwtTokenUtils.create(user))
+            }
+
+            is Err -> ResponseEntity.status(HttpStatus.BAD_REQUEST).body(userResult.error.message)
+        }
+
     }
 
     // -- SEARCH METHOD
@@ -97,6 +118,7 @@ class UserController
 
         return ResponseEntity.ok(userSearched.toDTOResponse())
     }
+
 
     // -- LEADERBOARD METHOD
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
@@ -133,16 +155,11 @@ class UserController
     @PutMapping("/me/score")
     suspend fun updateScore(@AuthenticationPrincipal user: User, scoreNumber: String): ResponseEntity<String> {
         log.info { "USER: ${user.username} IS UDPATING AN SCORE" }
-        try {
-            val response = service.saveScore(user.id.toString(), scoreNumber)
+        val response = service.saveScore(user.id.toString(), scoreNumber)
 
-            return if (!response) {
-                throw UserExceptionBadRequest("SCORE NOT HIGHER THAN ACTUAL REGISTERED")
-            } else ResponseEntity.ok("SCORE UPDATED")
-        } catch (e: Exception) {
-            throw UserExceptionNotFound("USER NOT FOUND")
-        }
-
+        return if (!response) {
+            throw UserExceptionBadRequest("SCORE NOT HIGHER THAN ACTUAL REGISTERED")
+        } else ResponseEntity.ok("SCORE UPDATED")
     }
 
     @PutMapping("/me/password")
@@ -152,26 +169,32 @@ class UserController
     ): ResponseEntity<String> {
         log.info { "USER: ${user.username} IS TRYING TO UPDATE THE PASSWORD" }
 
-        userDTOPasswordUpdate.validate()
-        service.updatePassword(user, userDTOPasswordUpdate)
+        return when (val userResult = userDTOPasswordUpdate.validate()) {
+            is Ok -> {
+                service.updatePassword(user, userResult.value)
 
-        return ResponseEntity.ok("USER UPDATED")
+                return ResponseEntity.ok("USER UPDATED")
+            }
+
+            is Err -> ResponseEntity.status(HttpStatus.BAD_REQUEST).body(userResult.error.message)
+        }
+
     }
 
     @DeleteMapping("/me")
-    suspend fun deleteMe(@AuthenticationPrincipal user: User) {
+    suspend fun deleteMe(@AuthenticationPrincipal user: User): ResponseEntity<String> {
         log.info { "USER: ${user.username} SELF DELETING ACCOUNT" }
-
         val deletedUser = service.delete(user.username)
 
         log.info { "USER: ${deletedUser.username} HAS BEEN DELETED" }
+
+        return ResponseEntity.noContent().build()
     }
 
-
     // -- INITIAL DATA METHODS --
-    suspend fun createUserInitializer(userDTOCreate: UserDTOCreate): User {
+    suspend fun createUserInitializer(userDTOCreate: UserDTOCreate): User? {
         log.info { "GENERATING INITIAL USER DATA" }
-        userDTOCreate.validate()
+        //userDTOCreate.validate()
         return service.create(userDTOCreate)
     }
 

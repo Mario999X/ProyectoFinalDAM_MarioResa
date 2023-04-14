@@ -70,7 +70,11 @@ fun UserDTOCreate.toUser(): User {
         username = username,
         password = password,
         email = email,
-        role = role,
+        role = role.let {
+            if (role == "USER") {
+                User.UserRole.USER
+            } else User.UserRole.ADMIN
+        },
         createdAt = LocalDate.now(),
     )
 }
