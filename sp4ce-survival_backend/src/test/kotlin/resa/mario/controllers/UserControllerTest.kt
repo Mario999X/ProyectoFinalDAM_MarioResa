@@ -36,7 +36,7 @@ internal class UserControllerTest {
         "test_user",
         "123455",
         "test@test.com",
-        User.UserRole.ADMIN
+        User.UserRole.ADMIN.name
     )
 
     private val userDtoRegister = UserDTORegister(
@@ -55,6 +55,11 @@ internal class UserControllerTest {
     private val userDTOLoginBad = UserDTOLogin(
         "",
         userDtoCreate.password
+    )
+
+    private val userDTOLoginBad2 = UserDTOLogin(
+        userDtoCreate.username,
+        ""
     )
 
     private val user = User(
@@ -138,6 +143,15 @@ internal class UserControllerTest {
 
         assertAll(
             { assertEquals("Username must not be blank.", result.body) }
+        )
+    }
+    @OptIn(ExperimentalCoroutinesApi::class)
+    @Test
+    fun loginFailed2() = runTest {
+        val result = controller.login(userDTOLoginBad2)
+
+        assertAll(
+            { assertEquals("Password must at least be 5 characters long.", result.body) }
         )
     }
 

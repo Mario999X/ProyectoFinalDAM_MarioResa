@@ -44,7 +44,7 @@ data class UserDTOCreate(
     val username: String,
     val password: String,
     val email: String,
-    val role: User.UserRole
+    val role: String
 )
 
 /**

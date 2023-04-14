@@ -7,6 +7,7 @@ import resa.mario.dto.UserDTORegister
 import resa.mario.exceptions.UserException
 import resa.mario.exceptions.UserException.*
 import com.github.michaelbull.result.*
+import resa.mario.models.User
 
 fun UserDTORegister.validate(): Result<UserDTORegister, UserException> {
     if (this.username.isBlank()) return Err(UserExceptionBadRequest("Username must not be blank."))
@@ -34,6 +35,8 @@ fun UserDTOCreate.validate(): Result<UserDTOCreate, UserException> {
     )
 
     if (this.password.length < 5 || this.password.isBlank()) return Err(UserExceptionBadRequest("Password must at least be 5 characters long."))
+
+    if (this.role != User.UserRole.USER.name && this.role != User.UserRole.ADMIN.name) return Err(UserExceptionBadRequest("Role not identity."))
 
     return Ok(this)
 }

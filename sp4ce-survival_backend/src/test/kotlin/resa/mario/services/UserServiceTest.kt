@@ -35,7 +35,7 @@ internal class UserServiceTest {
         "test_user",
         "123455",
         "test@test.com",
-        User.UserRole.ADMIN
+        User.UserRole.ADMIN.name
     )
 
     private val userDtoRegister = UserDTORegister(
