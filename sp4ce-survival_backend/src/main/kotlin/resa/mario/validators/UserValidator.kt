@@ -9,6 +9,11 @@ import resa.mario.exceptions.UserException.*
 import com.github.michaelbull.result.*
 import resa.mario.models.User
 
+/**
+ * Extension Function that validates through series of filters a data receive: [UserDTORegister]
+ *
+ * @return [Result] with two possibles values: [UserDTORegister], [UserException]
+ */
 fun UserDTORegister.validate(): Result<UserDTORegister, UserException> {
     if (this.username.isBlank()) return Err(UserExceptionBadRequest("Username must not be blank."))
 
@@ -25,6 +30,11 @@ fun UserDTORegister.validate(): Result<UserDTORegister, UserException> {
     return Ok(this)
 }
 
+/**
+ * Extension Function that validates through series of filters a data receive: [UserDTOCreate]
+ *
+ * @return [Result] with two possibles values: [UserDTOCreate], [UserException]
+ */
 fun UserDTOCreate.validate(): Result<UserDTOCreate, UserException> {
     if (this.username.isBlank()) return Err(UserExceptionBadRequest("Username must not be blank."))
 
@@ -41,6 +51,11 @@ fun UserDTOCreate.validate(): Result<UserDTOCreate, UserException> {
     return Ok(this)
 }
 
+/**
+ * Extension Function that validates through series of filters a data receive: [UserDTOLogin]
+ *
+ * @return [Result] with two possibles values: [UserDTOLogin], [UserException]
+ */
 fun UserDTOLogin.validate(): Result<UserDTOLogin, UserException> {
     if (this.username.isBlank()) return Err(UserExceptionBadRequest("Username must not be blank."))
 
@@ -49,6 +64,11 @@ fun UserDTOLogin.validate(): Result<UserDTOLogin, UserException> {
     return Ok(this)
 }
 
+/**
+ * Extension Function that validates through series of filters a data receive: [UserDTOPasswordUpdate]
+ *
+ * @return [Result] with two possibles values: [UserDTOPasswordUpdate], [UserException]
+ */
 fun UserDTOPasswordUpdate.validate(): Result<UserDTOPasswordUpdate, UserException> {
     if (this.newPassword != this.repeatNewPassword) return Err(UserExceptionBadRequest("New Password and Repeat New Password must be the same."))
 
