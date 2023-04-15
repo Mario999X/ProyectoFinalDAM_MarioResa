@@ -7,7 +7,7 @@
 	},
 	"item": [
 		{
-			"name": "Funcionales",
+			"name": "Working",
 			"item": [
 				{
 					"name": "Register",
@@ -390,7 +390,7 @@
 			]
 		},
 		{
-			"name": "No_Funcionales",
+			"name": "Not_Working",
 			"item": [
 				{
 					"name": "Register-UserWithSameData",
@@ -458,6 +458,64 @@
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"username\": \"xxx\",\r\n    \"password\": \"12345\",\r\n    \"repeatPassword\": \"1234\",\r\n    \"email\": \"xxx@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:6969/sp4ceSurvival/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "6969",
+							"path": [
+								"sp4ceSurvival",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register-Password-Incorrect_3",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"xxx\",\r\n    \"password\": \"  \",\r\n    \"repeatPassword\": \"1234\",\r\n    \"email\": \"xxx@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:6969/sp4ceSurvival/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "6969",
+							"path": [
+								"sp4ceSurvival",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register-Username-Incorrect",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"\",\r\n    \"password\": \"1234\",\r\n    \"repeatPassword\": \"1234\",\r\n    \"email\": \"xxx@gmail.com\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -587,6 +645,84 @@
 					"response": []
 				},
 				{
+					"name": "Create-Password-Incorrect_2",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token_admin}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"xxx\",\r\n    \"password\": \"\",\r\n    \"email\": \"xxx@gmail.com\",\r\n    \"role\": \"ADMIN\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:6969/sp4ceSurvival/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "6969",
+							"path": [
+								"sp4ceSurvival",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create-Username-Incorrect",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token_admin}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"\",\r\n    \"password\": \"12345\",\r\n    \"email\": \"xxx@gmail.com\",\r\n    \"role\": \"ADMIN\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:6969/sp4ceSurvival/create",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "6969",
+							"path": [
+								"sp4ceSurvival",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Create-Email-Incorrect",
 					"request": {
 						"auth": {
@@ -642,7 +778,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"xxx\",\r\n    \"password\": \"12345\",\r\n    \"email\": \"xxx@gmail.com\",\r\n    \"role\": \"aaaa\"\r\n}",
+							"raw": "{\r\n    \"username\": \"xxx\",\r\n    \"password\": \"12345\",\r\n    \"email\": \"xxx@gmail.com\",\r\n    \"role\": \"aaa\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -918,7 +1054,7 @@
 			]
 		},
 		{
-			"name": "No_autorizados",
+			"name": "Unauthorized",
 			"item": [
 				{
 					"name": "Create-Unauthorized",
@@ -1026,36 +1162,6 @@
 									"key": "page",
 									"value": "0"
 								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Me/Profile-Unauthorized",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:6969/sp4ceSurvival/me",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "6969",
-							"path": [
-								"sp4ceSurvival",
-								"me"
 							]
 						}
 					},

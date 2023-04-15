@@ -6,7 +6,7 @@ plugins {
 	kotlin("jvm") version "1.7.22"
 	kotlin("plugin.spring") version "1.7.22"
 	// Dokka
-	id("org.jetbrains.dokka") version "1.7.20"
+	id("org.jetbrains.dokka") version "1.8.10"
 	// Plugin de Serialization Kotlin
 	kotlin("plugin.serialization") version "1.7.20"
 }

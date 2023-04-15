@@ -15,6 +15,8 @@ import resa.mario.models.User
 /**
  * @author Mario Resa
  *
+ * Main Class
+ *
  * @property controller UserController for InitializerMethods
  */
 @SpringBootApplication

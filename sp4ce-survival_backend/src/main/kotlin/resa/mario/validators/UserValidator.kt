@@ -36,7 +36,7 @@ fun UserDTOCreate.validate(): Result<UserDTOCreate, UserException> {
 
     if (this.password.length < 5 || this.password.isBlank()) return Err(UserExceptionBadRequest("Password must at least be 5 characters long."))
 
-    if (this.role != User.UserRole.USER.name && this.role != User.UserRole.ADMIN.name) return Err(UserExceptionBadRequest("Role not identity."))
+    if (this.role.uppercase() != User.UserRole.USER.name && this.role.uppercase() != User.UserRole.ADMIN.name) return Err(UserExceptionBadRequest("Role not identity."))
 
     return Ok(this)
 }
