@@ -146,7 +146,7 @@ class UserController
         log.info { "OBTAINING SELF DATA" }
 
         try {
-            return ResponseEntity.ok(service.findScoreByUserId(user))
+            return ResponseEntity.ok(service.findUserProfile(user))
         } catch (e: Exception) {
             throw UserExceptionNotFound("USER NOT FOUND")
         }
@@ -184,6 +184,7 @@ class UserController
     @DeleteMapping("/me")
     suspend fun deleteMe(@AuthenticationPrincipal user: User): ResponseEntity<String> {
         log.info { "USER: ${user.username} SELF DELETING ACCOUNT" }
+
         val deletedUser = service.delete(user.username)
 
         log.info { "USER: ${deletedUser.username} HAS BEEN DELETED" }
@@ -194,7 +195,6 @@ class UserController
     // -- INITIAL DATA METHODS --
     suspend fun createUserInitializer(userDTOCreate: UserDTOCreate): User? {
         log.info { "GENERATING INITIAL USER DATA" }
-        //userDTOCreate.validate()
         return service.create(userDTOCreate)
     }
 

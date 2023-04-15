@@ -149,10 +149,10 @@ internal class UserServiceTest {
 
     @OptIn(ExperimentalCoroutinesApi::class)
     @Test
-    fun findScoreByUserId() = runTest {
+    fun findUserProfile() = runTest {
         coEvery { scoreRepository.findByUserId(any()) } returns score
 
-        val result = service.findScoreByUserId(user)
+        val result = service.findUserProfile(user)
 
         assertAll(
             { assertNotNull(result) },

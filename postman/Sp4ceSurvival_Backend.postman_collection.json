@@ -386,6 +386,36 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "DeleteSelf-NoScore",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token_noScore}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:6969/sp4ceSurvival/me",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "6969",
+							"path": [
+								"sp4ceSurvival",
+								"me"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},

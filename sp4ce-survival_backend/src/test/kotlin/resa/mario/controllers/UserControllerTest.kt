@@ -188,7 +188,7 @@ internal class UserControllerTest {
     @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun findMe() = runTest {
-        coEvery { service.findScoreByUserId(any()) } returns user.toDTOProfile(score.toScoreDTO())
+        coEvery { service.findUserProfile(any()) } returns user.toDTOProfile(score.toScoreDTO())
 
         val result = controller.findMe(user)
 
@@ -197,7 +197,7 @@ internal class UserControllerTest {
             { assertEquals(user.username, result.body!!.username) }
         )
 
-        coVerify { service.findScoreByUserId(any()) }
+        coVerify { service.findUserProfile(any()) }
     }
 
     @OptIn(ExperimentalCoroutinesApi::class)

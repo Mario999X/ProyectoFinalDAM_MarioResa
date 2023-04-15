@@ -15,6 +15,12 @@ import resa.mario.dto.UserDTOLogin
 import resa.mario.models.User
 import java.util.*
 
+/**
+ * Class for creating an authentication filter for Spring Security.
+ *
+ * @property jwtTokensUtils
+ * @property authenticationManager
+ */
 class JwtAuthenticationFilter(
     private val jwtTokensUtils: JwtTokensUtils,
     private val authenticationManager: AuthenticationManager

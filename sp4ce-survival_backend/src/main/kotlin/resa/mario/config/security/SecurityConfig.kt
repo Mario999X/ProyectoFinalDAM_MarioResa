@@ -16,6 +16,12 @@ import resa.mario.config.security.jwt.JwtAuthorizationFilter
 import resa.mario.config.security.jwt.JwtTokensUtils
 import resa.mario.services.UserService
 
+/**
+ * Principal Configuration Class for Spring Security
+ *
+ * @property service
+ * @property jwtTokensUtils
+ */
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity(securedEnabled = true, prePostEnabled = true)

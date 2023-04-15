@@ -8,6 +8,10 @@ import org.springframework.core.io.ClassPathResource
 import org.springframework.r2dbc.connection.init.ConnectionFactoryInitializer
 import org.springframework.r2dbc.connection.init.ResourceDatabasePopulator
 
+/**
+ * Class for loading automatically the schema.sql from Resources when executing the application.
+ *
+ */
 @Configuration
 class LoadSchema {
 

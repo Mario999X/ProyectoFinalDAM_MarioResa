@@ -8,12 +8,22 @@ import org.springframework.stereotype.Component
 import resa.mario.models.User
 import java.util.*
 
+/**
+ * Component class for creating, verifying and decoding tokens using JWT.
+ *
+ */
 @Component
 class JwtTokensUtils {
 
     @Value("\${jwt.secret}")
     private val secretJwt: String? = null
 
+    /**
+     * Token Creation Method
+     *
+     * @param user
+     * @return Token created, String
+     */
     fun create(user: User): String {
         return JWT.create()
             .withSubject(user.id.toString())
@@ -24,6 +34,12 @@ class JwtTokensUtils {
             .sign(Algorithm.HMAC512(secretJwt))
     }
 
+    /**
+     * Token Decoding Method
+     *
+     * @param token
+     * @return A possible Token decoded, [DecodedJWT]
+     */
     fun decode(token: String): DecodedJWT? {
         val verifier = JWT.require(Algorithm.HMAC512(secretJwt))
             .build()

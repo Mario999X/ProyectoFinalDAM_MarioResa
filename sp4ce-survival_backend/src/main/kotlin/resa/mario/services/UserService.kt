@@ -27,6 +27,13 @@ import java.util.*
 
 private val log = KotlinLogging.logger {}
 
+/**
+ * Service that will execute functions from the different repositories.
+ *
+ * @property userRepositoryCached
+ * @property scoreRepositoryCached
+ * @property passwordEncoder
+ */
 @Service
 class UserService
 @Autowired constructor(
@@ -37,10 +44,23 @@ class UserService
 
     // -- USERS --
 
+    /**
+     * Special Function from Spring Security that searches a user using the username.
+     * Cannot be a suspended function.
+     *
+     * @param username
+     * @return [UserDetails]
+     */
     override fun loadUserByUsername(username: String): UserDetails = runBlocking {
         userRepositoryCached.findByUsername(username) ?: throw UserExceptionNotFound("USER NOT FOUND")
     }
 
+    /**
+     * Register Function for new Users
+     *
+     * @param userDtoRegister
+     * @return [User]
+     */
     suspend fun register(userDtoRegister: UserDTORegister): User {
         log.info { "Registering User with username: ${userDtoRegister.username}" }
         val user = userDtoRegister.toUser()
@@ -52,6 +72,12 @@ class UserService
         return userRepositoryCached.save(userNew)
     }
 
+    /**
+     * Creation Function for Admins to create/register new Users by them self's
+     *
+     * @param userDTOCreate
+     * @return [User]
+     */
     suspend fun create(userDTOCreate: UserDTOCreate): User {
         log.info { "Creating User with username: ${userDTOCreate.username}" }
 
@@ -64,6 +90,12 @@ class UserService
         return userRepositoryCached.save(userNew)
     }
 
+    /**
+     * Function to search a user by username
+     *
+     * @param username
+     * @return [User]
+     */
     suspend fun findByUsername(username: String): User {
         log.info { "Finding User with username: $username" }
 
@@ -71,8 +103,14 @@ class UserService
             ?: throw UserExceptionNotFound("User not found with username: $username")
     }
 
-    suspend fun findScoreByUserId(user: User): UserDTOProfile {
-        log.info { "Finding Score by User: ${user.username}" }
+    /**
+     * Function to obtain a profile for a User
+     *
+     * @param user
+     * @return [UserDTOProfile]
+     */
+    suspend fun findUserProfile(user: User): UserDTOProfile {
+        log.info { "Finding Score by User: ${user.username} for Profile" }
 
         val score = scoreRepositoryCached.findByUserId(user.id!!)
 
@@ -83,6 +121,14 @@ class UserService
         }
     }
 
+    /**
+     * Function that obtains an X page for a User with an associated score
+     *
+     * @param page
+     * @param size
+     * @param sortBy
+     * @return [Page] of [UserDTOLeaderBoard]
+     */
     suspend fun findAllForLeaderBoard(page: Int, size: Int, sortBy: String): Page<UserDTOLeaderBoard> {
         log.info { "Obtaining users for LeaderBoard" }
 
@@ -91,7 +137,13 @@ class UserService
             ?: throw UserExceptionNotFound("Page $page not found")
     }
 
-
+    /**
+     * Function to update a password of a user.
+     *
+     * @param user
+     * @param userDTOPasswordUpdate
+     * @return Boolean
+     */
     suspend fun updatePassword(user: User, userDTOPasswordUpdate: UserDTOPasswordUpdate): Boolean {
         log.info { "User with username: ${user.username} is trying to update the password" }
 
@@ -119,6 +171,12 @@ class UserService
         return true
     }
 
+    /**
+     * Function to delete an existing user.
+     *
+     * @param username
+     * @return [User]
+     */
     suspend fun delete(username: String): User {
         log.info { "Deleting user with username: $username" }
 
@@ -134,6 +192,13 @@ class UserService
 
 // -- SCORES --
 
+    /**
+     * Function to save/update a score
+     *
+     * @param userId
+     * @param scoreNumber
+     * @return Boolean
+     */
     suspend fun saveScore(userId: String, scoreNumber: String): Boolean {
         log.info { "Saving Score for user: $userId" }
 
