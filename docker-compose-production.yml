@@ -19,6 +19,8 @@ services:
     restart: always
     environment:
       - POSTGRES_CONNECTION=r2dbc:postgresql://mario:user1234@postgresSp4ce/sp4ceSurvival
+      - JWT_SECRET=F5G7J9P
+      - KEY_STORE_PATH=classpath:certs/sp4ceSurvivalServer.p12
     ports:
       - '6969:6969'
     depends_on:
