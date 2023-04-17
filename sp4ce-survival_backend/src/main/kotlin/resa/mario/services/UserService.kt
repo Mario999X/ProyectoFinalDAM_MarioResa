@@ -12,8 +12,8 @@ import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import resa.mario.dto.*
-import resa.mario.exceptions.UserExceptionBadRequest
-import resa.mario.exceptions.UserExceptionNotFound
+import resa.mario.exceptions.UserException.UserExceptionBadRequest
+import resa.mario.exceptions.UserException.UserExceptionNotFound
 import resa.mario.mappers.toDTOProfile
 import resa.mario.mappers.toScore
 import resa.mario.mappers.toScoreDTO
@@ -27,6 +27,13 @@ import java.util.*
 
 private val log = KotlinLogging.logger {}
 
+/**
+ * Service that will execute functions from the different repositories.
+ *
+ * @property userRepositoryCached
+ * @property scoreRepositoryCached
+ * @property passwordEncoder
+ */
 @Service
 class UserService
 @Autowired constructor(
@@ -37,25 +44,40 @@ class UserService
 
     // -- USERS --
 
+    /**
+     * Special Function from Spring Security that searches a user using the username.
+     * Cannot be a suspended function.
+     *
+     * @param username
+     * @return [UserDetails]
+     */
     override fun loadUserByUsername(username: String): UserDetails = runBlocking {
-        userRepositoryCached.findByUsername(username) ?: throw UserExceptionNotFound("User not found with username: $username")
+        userRepositoryCached.findByUsername(username) ?: throw UserExceptionNotFound("USER NOT FOUND")
     }
 
+    /**
+     * Register Function for new Users
+     *
+     * @param userDtoRegister
+     * @return [User]
+     */
     suspend fun register(userDtoRegister: UserDTORegister): User {
         log.info { "Registering User with username: ${userDtoRegister.username}" }
-        try {
-            val user = userDtoRegister.toUser() ?: throw UserExceptionBadRequest("Password and repeated password does not match.")
+        val user = userDtoRegister.toUser()
 
-            val userNew = user.copy(
-                password = passwordEncoder.encode(user.password)
-            )
+        val userNew = user.copy(
+            password = passwordEncoder.encode(user.password)
+        )
 
-            return userRepositoryCached.save(userNew)
-        } catch (e: Exception) {
-            throw UserExceptionBadRequest(e.message)
-        }
+        return userRepositoryCached.save(userNew)
     }
 
+    /**
+     * Creation Function for Admins to create/register new Users by them self's
+     *
+     * @param userDTOCreate
+     * @return [User]
+     */
     suspend fun create(userDTOCreate: UserDTOCreate): User {
         log.info { "Creating User with username: ${userDTOCreate.username}" }
 
@@ -68,15 +90,27 @@ class UserService
         return userRepositoryCached.save(userNew)
     }
 
+    /**
+     * Function to search a user by username
+     *
+     * @param username
+     * @return [User]
+     */
     suspend fun findByUsername(username: String): User {
         log.info { "Finding User with username: $username" }
 
         return userRepositoryCached.findByUsername(username)
-            ?: throw UserExceptionBadRequest("User not found with username: $username")
+            ?: throw UserExceptionNotFound("User not found with username: $username")
     }
 
-    suspend fun findScoreByUserId(user: User): UserDTOProfile {
-        log.info { "Finding Score by User: ${user.username}" }
+    /**
+     * Function to obtain a profile for a User
+     *
+     * @param user
+     * @return [UserDTOProfile]
+     */
+    suspend fun findUserProfile(user: User): UserDTOProfile {
+        log.info { "Finding Score by User: ${user.username} for Profile" }
 
         val score = scoreRepositoryCached.findByUserId(user.id!!)
 
@@ -87,6 +121,14 @@ class UserService
         }
     }
 
+    /**
+     * Function that obtains an X page for a User with an associated score
+     *
+     * @param page
+     * @param size
+     * @param sortBy
+     * @return [Page] of [UserDTOLeaderBoard]
+     */
     suspend fun findAllForLeaderBoard(page: Int, size: Int, sortBy: String): Page<UserDTOLeaderBoard> {
         log.info { "Obtaining users for LeaderBoard" }
 
@@ -95,7 +137,13 @@ class UserService
             ?: throw UserExceptionNotFound("Page $page not found")
     }
 
-
+    /**
+     * Function to update a password of a user.
+     *
+     * @param user
+     * @param userDTOPasswordUpdate
+     * @return Boolean
+     */
     suspend fun updatePassword(user: User, userDTOPasswordUpdate: UserDTOPasswordUpdate): Boolean {
         log.info { "User with username: ${user.username} is trying to update the password" }
 
@@ -104,6 +152,11 @@ class UserService
         if (!passwordEncoder.matches(userDTOPasswordUpdate.actualPassword, user.password)) {
             log.info { "Error updating password" }
             throw UserExceptionBadRequest("The Actual Password is not correct.")
+
+        } else if (passwordEncoder.matches(userDTOPasswordUpdate.newPassword, user.password) ||
+            passwordEncoder.matches(userDTOPasswordUpdate.repeatNewPassword, user.password)
+        ) {
+            throw UserExceptionBadRequest("The new password is the same as the old password")
         } else {
             log.info { "Updating password" }
             updatedPassword = passwordEncoder.encode(userDTOPasswordUpdate.newPassword)
@@ -118,6 +171,12 @@ class UserService
         return true
     }
 
+    /**
+     * Function to delete an existing user.
+     *
+     * @param username
+     * @return [User]
+     */
     suspend fun delete(username: String): User {
         log.info { "Deleting user with username: $username" }
 
@@ -131,8 +190,15 @@ class UserService
             ?: throw UserExceptionNotFound("2.User with username: $username not found")
     }
 
-    // -- SCORES --
+// -- SCORES --
 
+    /**
+     * Function to save/update a score
+     *
+     * @param userId
+     * @param scoreNumber
+     * @return Boolean
+     */
     suspend fun saveScore(userId: String, scoreNumber: String): Boolean {
         log.info { "Saving Score for user: $userId" }
 

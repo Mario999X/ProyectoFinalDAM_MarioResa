@@ -6,6 +6,14 @@ import org.springframework.data.relational.core.mapping.Table
 import java.time.LocalDate
 import java.util.UUID
 
+/**
+ * Score model
+ *
+ * @property id Main ID, UUID
+ * @property userId Foreing Key of User ID, UUID
+ * @property scoreNumber Number of the score obtained, Long
+ * @property dateObtained Date Score obtained, LocalDate
+ */
 @Table(name = "scores")
 data class Score(
     @Id

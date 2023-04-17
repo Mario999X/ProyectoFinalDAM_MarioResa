@@ -6,7 +6,7 @@ plugins {
 	kotlin("jvm") version "1.7.22"
 	kotlin("plugin.spring") version "1.7.22"
 	// Dokka
-	id("org.jetbrains.dokka") version "1.7.20"
+	id("org.jetbrains.dokka") version "1.8.10"
 	// Plugin de Serialization Kotlin
 	kotlin("plugin.serialization") version "1.7.20"
 }
@@ -58,6 +58,9 @@ dependencies {
 
 	// Logs
 	implementation("io.github.microutils:kotlin-logging-jvm:3.0.5")
+
+	// Result
+	implementation("com.michael-bull.kotlin-result:kotlin-result:1.1.17")
 
 	// Dokka
 	dokkaHtmlPlugin("org.jetbrains.dokka:kotlin-as-java-plugin:1.8.10")

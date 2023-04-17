@@ -16,6 +16,17 @@ import java.io.IOException
 
 private val log = KotlinLogging.logger {}
 
+/**
+ * Class for creating an authorization filter for Spring Security.
+ *
+ * @property jwtTokensUtils
+ * @property service
+ * @constructor
+ * It uses the class for generating tokens [JwtTokensUtils], the User Service [UserService]
+ * and an Authentication Manager.
+ *
+ * @param authManager
+ */
 class JwtAuthorizationFilter(
     private val jwtTokensUtils: JwtTokensUtils,
     private val service: UserService,

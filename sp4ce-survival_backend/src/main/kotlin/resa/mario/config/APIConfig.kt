@@ -2,6 +2,10 @@ package resa.mario.config
 
 import org.springframework.context.annotation.Configuration
 
+/**
+ * API basic configuration using the different constants in other classes.
+ *
+ */
 @Configuration
 class APIConfig {
     companion object {

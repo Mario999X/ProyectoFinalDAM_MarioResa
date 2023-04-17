@@ -12,6 +12,13 @@ import resa.mario.db.getScoresInit
 import resa.mario.db.getUsersInit
 import resa.mario.models.User
 
+/**
+ * @author Mario Resa
+ *
+ * Main Class
+ *
+ * @property controller UserController for InitializerMethods
+ */
 @SpringBootApplication
 @EnableR2dbcRepositories
 @EnableCaching
@@ -24,7 +31,7 @@ class Sp4ceSurvivalBackendApplication
 
         getUsersInit().forEach {
             val user = controller.createUserInitializer(it)
-            users.add(user)
+            users.add(user!!)
         }
 
         var i = 0

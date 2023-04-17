@@ -7,6 +7,11 @@ import org.springframework.stereotype.Repository
 import resa.mario.models.Score
 import java.util.UUID
 
+/**
+ * Repository that will execute the CRUD operations with the database
+ * Repository type: CoroutineCrudRepository
+ *
+ */
 @Repository
 interface ScoreRepository : CoroutineCrudRepository<Score, UUID> {
     fun findByUserId(userId: UUID): Flow<Score>
