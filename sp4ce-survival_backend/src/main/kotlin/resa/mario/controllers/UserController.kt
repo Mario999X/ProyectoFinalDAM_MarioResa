@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*
 import resa.mario.config.APIConfig
 import resa.mario.config.security.jwt.JwtTokensUtils
 import resa.mario.dto.*
+import resa.mario.exceptions.TokenExpired
 import resa.mario.exceptions.UserDataBaseConflict
 import resa.mario.exceptions.UserException.*
 import resa.mario.mappers.toDTOResponse
@@ -27,6 +28,14 @@ import java.util.*
 
 private val log = KotlinLogging.logger {}
 
+/**
+ * RestController that will manage every endpoint related to users and scores using the different
+ * functions from the service.
+ *
+ * @property service
+ * @property authenticationManager
+ * @property jwtTokenUtils
+ */
 @RestController
 @RequestMapping(APIConfig.API_PATH)
 class UserController
@@ -37,6 +46,13 @@ class UserController
 ) {
 
     // -- REGISTER, CREATE & LOGIN FOR USERS
+
+    /**
+     * Function to register new users by themselves.
+     *
+     * @param userDto [UserDTORegister]
+     * @return A personal Token for that user.
+     */
     @PostMapping("/register")
     suspend fun register(@Valid @RequestBody userDto: UserDTORegister): ResponseEntity<String> {
         log.info { "USER: ${userDto.username} TRYING TO REGISTER" }
@@ -56,6 +72,13 @@ class UserController
 
     }
 
+    /**
+     * Function to create new users by an Admin.
+     *
+     * @param userDto [UserDTOCreate]
+     * @param user Token from an Admin.
+     * @return A unique Token for that user to the Admin.
+     */
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/create")
     suspend fun create(
@@ -76,9 +99,17 @@ class UserController
 
         } catch (e: DataIntegrityViolationException) {
             throw UserDataBaseConflict("USERNAME OR EMAIL ALREADY IN USE")
+        } catch (e: NullPointerException) {
+            throw TokenExpired("TOKEN EXPIRED")
         }
     }
 
+    /**
+     * Function to log in.
+     *
+     * @param userDto [UserDTOLogin]
+     * @return A personal token for that user.
+     */
     @GetMapping("/login")
     suspend fun login(@Valid @RequestBody userDto: UserDTOLogin): ResponseEntity<String> {
         log.info { "USER: ${userDto.username} TRYING TO LOGIN" }
@@ -106,6 +137,14 @@ class UserController
     }
 
     // -- SEARCH METHOD
+
+    /**
+     * Function to search an existing user
+     *
+     * @param user Token from an existing user
+     * @param username Username of the user to search
+     * @return A possible user found, [UserDTOResponse]
+     */
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @GetMapping("/username")
     suspend fun findUserByUsername(
@@ -121,6 +160,16 @@ class UserController
 
 
     // -- LEADERBOARD METHOD
+
+    /**
+     * Function to obtain a list of users with scores associated.
+     *
+     * @param user Token from an existing user
+     * @param page Page to retrieve data
+     * @param size Size of the page/list
+     * @param sortBy Sort by X, in this case, [ScoreDTOResponse.scoreNumber]
+     * @return A possible list of users with scores, [UserDTOLeaderBoard]
+     */
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @GetMapping("/leaderboard")
     suspend fun getPagingForLeaderBoard(
@@ -141,27 +190,54 @@ class UserController
     }
 
     // -- ME METHODS --
+
+    /**
+     * Function to retrieve self information.
+     *
+     * @param user Token from an existing user
+     * @return [UserDTOProfile], except if the token is expired.
+     */
     @GetMapping("/me")
     suspend fun findMe(@AuthenticationPrincipal user: User): ResponseEntity<UserDTOProfile> {
         log.info { "OBTAINING SELF DATA" }
 
         try {
             return ResponseEntity.ok(service.findUserProfile(user))
-        } catch (e: Exception) {
-            throw UserExceptionNotFound("USER NOT FOUND")
+        } catch (e: NullPointerException) {
+            throw TokenExpired("TOKEN EXPIRED")
         }
     }
 
+    /**
+     * Function to save/update a self score.
+     *
+     * @param user Token from an existing user
+     * @param scoreNumber Score number obtained
+     * @return A message confirming o denying of the saved/updated score.
+     */
     @PutMapping("/me/score")
     suspend fun updateScore(@AuthenticationPrincipal user: User, scoreNumber: String): ResponseEntity<String> {
         log.info { "USER: ${user.username} IS UDPATING AN SCORE" }
-        val response = service.saveScore(user.id.toString(), scoreNumber)
 
-        return if (!response) {
-            throw UserExceptionBadRequest("SCORE NOT HIGHER THAN ACTUAL REGISTERED")
-        } else ResponseEntity.ok("SCORE UPDATED")
+        try {
+            val response = service.saveScore(user.id.toString(), scoreNumber)
+
+            return if (!response) {
+                ResponseEntity.status(HttpStatus.BAD_REQUEST).body("SCORE NOT HIGHER THAN ACTUAL REGISTERED")
+            } else ResponseEntity.ok("SCORE UPDATED")
+
+        } catch (e: NullPointerException) {
+            throw TokenExpired("TOKEN EXPIRED")
+        }
     }
 
+    /**
+     * Function to update a self password.
+     *
+     * @param user Token from an existing user
+     * @param userDTOPasswordUpdate [UserDTOPasswordUpdate]
+     * @return A message confirming o denying of the updated password.
+     */
     @PutMapping("/me/password")
     suspend fun updatePassword(
         @AuthenticationPrincipal user: User,
@@ -169,35 +245,63 @@ class UserController
     ): ResponseEntity<String> {
         log.info { "USER: ${user.username} IS TRYING TO UPDATE THE PASSWORD" }
 
-        return when (val userResult = userDTOPasswordUpdate.validate()) {
-            is Ok -> {
-                service.updatePassword(user, userResult.value)
+        try {
+            return when (val userResult = userDTOPasswordUpdate.validate()) {
+                is Ok -> {
+                    service.updatePassword(user, userResult.value)
 
-                return ResponseEntity.ok("USER UPDATED")
+                    return ResponseEntity.ok("USER UPDATED")
+                }
+
+                is Err -> ResponseEntity.status(HttpStatus.BAD_REQUEST).body(userResult.error.message)
             }
 
-            is Err -> ResponseEntity.status(HttpStatus.BAD_REQUEST).body(userResult.error.message)
+        } catch (e: NullPointerException) {
+            throw TokenExpired("TOKEN EXPIRED")
         }
 
     }
 
+    /**
+     * Function to delete a user by themselves.
+     *
+     * @param user Token from an existing user
+     * @return A response entity of type No Content or a message denying because the token is expired or is manipulated and the user don't exist.
+     */
     @DeleteMapping("/me")
     suspend fun deleteMe(@AuthenticationPrincipal user: User): ResponseEntity<String> {
         log.info { "USER: ${user.username} SELF DELETING ACCOUNT" }
 
-        val deletedUser = service.delete(user.username)
+        try {
+            val deletedUser = service.delete(user.username)
 
-        log.info { "USER: ${deletedUser.username} HAS BEEN DELETED" }
+            log.info { "USER: ${deletedUser.username} HAS BEEN DELETED" }
 
-        return ResponseEntity.noContent().build()
+            return ResponseEntity.noContent().build()
+        } catch (e: NullPointerException) {
+            throw TokenExpired("TOKEN EXPIRED")
+        }
     }
 
     // -- INITIAL DATA METHODS --
+
+    /**
+     * Function without endpoint to load initial data
+     *
+     * @param userDTOCreate [UserDTOCreate]
+     * @return A possible [User]
+     */
     suspend fun createUserInitializer(userDTOCreate: UserDTOCreate): User? {
         log.info { "GENERATING INITIAL USER DATA" }
         return service.create(userDTOCreate)
     }
 
+    /**
+     * Function without endpoint to load initial data
+     *
+     * @param userId [UUID] from an existing user
+     * @param scoreNumber Number of the score, String
+     */
     suspend fun createScoreInitializer(userId: UUID, scoreNumber: String) {
         log.info { "GENERATING INITIAL SCORE DATA" }
         service.saveScore(userId.toString(), scoreNumber)

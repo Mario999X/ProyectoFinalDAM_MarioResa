@@ -3,6 +3,10 @@ package resa.mario.db
 import resa.mario.dto.UserDTOCreate
 import resa.mario.models.User
 
+/**
+ * Data to load when initializing the application for the first time.
+ *
+ */
 fun getUsersInit() = listOf(
     UserDTOCreate(
         username = "Mario999",
@@ -18,6 +22,10 @@ fun getUsersInit() = listOf(
     )
 )
 
+/**
+ * Data to load when initializing the application for the first time. II
+ *
+ */
 fun getScoresInit() = listOf(
     "1230",
     "12"

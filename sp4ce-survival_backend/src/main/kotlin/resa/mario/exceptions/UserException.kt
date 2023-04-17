@@ -46,4 +46,15 @@ sealed class UserException(message: String?) : RuntimeException(message) {
 @ResponseStatus(HttpStatus.CONFLICT)
 class UserDataBaseConflict(message: String?) : Exception(message)
 
+/**
+ * For a Token error Response
+ *
+ * @constructor
+ * A possible message, String
+ *
+ * @param message
+ */
+@ResponseStatus(HttpStatus.UNAUTHORIZED)
+class TokenExpired(message: String?) : Exception(message)
+
 
