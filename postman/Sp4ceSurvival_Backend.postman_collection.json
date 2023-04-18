@@ -416,6 +416,66 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Obtain-SelfScore",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token_admin}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:6969/sp4ceSurvival/score",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "6969",
+							"path": [
+								"sp4ceSurvival",
+								"score"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtain-SelfScore-NoScore",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token_noScore}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:6969/sp4ceSurvival/score",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "6969",
+							"path": [
+								"sp4ceSurvival",
+								"score"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -1076,6 +1136,36 @@
 								"sp4ceSurvival",
 								"me",
 								"password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtain-SelfScore-TokenError",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:6969/sp4ceSurvival/score",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "6969",
+							"path": [
+								"sp4ceSurvival",
+								"score"
 							]
 						}
 					},

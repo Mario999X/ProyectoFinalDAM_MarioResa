@@ -212,6 +212,21 @@ internal class UserServiceTest {
 
     @OptIn(ExperimentalCoroutinesApi::class)
     @Test
+    fun findScoreByUsername() = runTest {
+        coEvery { scoreRepository.findByUserId(any()) } returns score
+
+        val result = service.findScoreByUsername(user.id!!)
+
+        assertAll(
+            { assertNotNull(result) },
+            { assertEquals(score.scoreNumber, result!!.scoreNumber) }
+        )
+
+        coVerify { scoreRepository.findByUserId(any()) }
+    }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    @Test
     fun saveScore() = runTest {
         coEvery { scoreRepository.findByUserId(any()) } returns null
         coEvery { scoreRepository.deleteByUserId(any()) } returns score

@@ -193,6 +193,18 @@ class UserService
 // -- SCORES --
 
     /**
+     * Function to search a score using the given username
+     *
+     * @param userId
+     * @return A possible [Score]
+     */
+    suspend fun findScoreByUsername(userId: UUID): Score? {
+        log.info { "Searching Score for user: $userId" }
+
+        return scoreRepositoryCached.findByUserId(userId)
+    }
+
+    /**
      * Function to save/update a score
      *
      * @param userId

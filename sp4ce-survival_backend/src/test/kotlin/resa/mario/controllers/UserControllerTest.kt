@@ -145,6 +145,7 @@ internal class UserControllerTest {
             { assertEquals("Username must not be blank.", result.body) }
         )
     }
+
     @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun loginFailed2() = runTest {
@@ -242,6 +243,21 @@ internal class UserControllerTest {
         )
 
         coVerify { service.delete(any()) }
+    }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    @Test
+    fun getScore() = runTest {
+        coEvery { service.findScoreByUsername(any()) } returns score
+
+        val result = controller.getScore(user)
+
+        assertAll(
+            { assertNotNull(result) },
+            { assertEquals(score.scoreNumber.toString(), result.body!!.scoreNumber) }
+        )
+
+        coVerify { service.findScoreByUsername(any()) }
     }
 
     @OptIn(ExperimentalCoroutinesApi::class)

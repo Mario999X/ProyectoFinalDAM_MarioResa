@@ -55,6 +55,6 @@ class UserDataBaseConflict(message: String?) : Exception(message)
  * @param message
  */
 @ResponseStatus(HttpStatus.UNAUTHORIZED)
-class TokenExpired(message: String?) : Exception(message)
+class TokenError(message: String?) : Exception(message)
 
 

@@ -17,10 +17,11 @@ import org.springframework.web.bind.annotation.*
 import resa.mario.config.APIConfig
 import resa.mario.config.security.jwt.JwtTokensUtils
 import resa.mario.dto.*
-import resa.mario.exceptions.TokenExpired
+import resa.mario.exceptions.TokenError
 import resa.mario.exceptions.UserDataBaseConflict
 import resa.mario.exceptions.UserException.*
 import resa.mario.mappers.toDTOResponse
+import resa.mario.mappers.toScoreDTO
 import resa.mario.models.User
 import resa.mario.services.UserService
 import resa.mario.validators.validate
@@ -100,7 +101,7 @@ class UserController
         } catch (e: DataIntegrityViolationException) {
             throw UserDataBaseConflict("USERNAME OR EMAIL ALREADY IN USE")
         } catch (e: NullPointerException) {
-            throw TokenExpired("TOKEN EXPIRED")
+            throw TokenError("TOKEN ERROR")
         }
     }
 
@@ -204,7 +205,7 @@ class UserController
         try {
             return ResponseEntity.ok(service.findUserProfile(user))
         } catch (e: NullPointerException) {
-            throw TokenExpired("TOKEN EXPIRED")
+            throw TokenError("TOKEN ERROR")
         }
     }
 
@@ -227,7 +228,7 @@ class UserController
             } else ResponseEntity.ok("SCORE UPDATED")
 
         } catch (e: NullPointerException) {
-            throw TokenExpired("TOKEN EXPIRED")
+            throw TokenError("TOKEN ERROR")
         }
     }
 
@@ -257,7 +258,7 @@ class UserController
             }
 
         } catch (e: NullPointerException) {
-            throw TokenExpired("TOKEN EXPIRED")
+            throw TokenError("TOKEN ERROR")
         }
 
     }
@@ -279,7 +280,33 @@ class UserController
 
             return ResponseEntity.noContent().build()
         } catch (e: NullPointerException) {
-            throw TokenExpired("TOKEN EXPIRED")
+            throw TokenError("TOKEN ERROR")
+        }
+    }
+
+    // -- SCORES METHODS --
+
+    /**
+     * Function to obtain a possible [ScoreDTOResponse] from an existing user.
+     *
+     * @param user Token from an existing user
+     * @return A possible [ScoreDTOResponse]
+     */
+    @GetMapping("/score")
+    suspend fun getScore(@AuthenticationPrincipal user: User): ResponseEntity<ScoreDTOResponse> {
+        log.info { "USER: ${user.username} OBTAINING SELF SCORE" }
+
+        try {
+            val score = service.findScoreByUsername(user.id!!)
+
+            return if (score != null) {
+                ResponseEntity.ok(score.toScoreDTO())
+            } else {
+                ResponseEntity.noContent().build()
+            }
+
+        } catch (e: NullPointerException) {
+            throw TokenError("TOKEN ERROR")
         }
     }
 
