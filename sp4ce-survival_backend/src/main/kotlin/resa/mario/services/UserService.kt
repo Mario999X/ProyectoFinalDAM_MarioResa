@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import resa.mario.dto.*
+import resa.mario.exceptions.UserException
 import resa.mario.exceptions.UserException.UserExceptionBadRequest
 import resa.mario.exceptions.UserException.UserExceptionNotFound
 import resa.mario.mappers.toDTOProfile
@@ -19,6 +20,7 @@ import resa.mario.mappers.toScore
 import resa.mario.mappers.toScoreDTO
 import resa.mario.mappers.toUser
 import resa.mario.models.Score
+import com.github.michaelbull.result.*
 import resa.mario.models.User
 import resa.mario.repositories.score.ScoreRepositoryCached
 import resa.mario.repositories.user.UserRepositoryCached
@@ -94,30 +96,38 @@ class UserService
      * Function to search a user by username
      *
      * @param username
-     * @return [User]
+     * @return [User] or [UserExceptionNotFound]
      */
-    suspend fun findByUsername(username: String): User {
+    suspend fun findByUsername(username: String): Result<User, UserException> {
         log.info { "Finding User with username: $username" }
 
-        return userRepositoryCached.findByUsername(username)
-            ?: throw UserExceptionNotFound("User not found with username: $username")
+        val user = userRepositoryCached.findByUsername(username)
+        return if (user == null) {
+            Err(UserExceptionNotFound("User not found with username: $username"))
+        } else Ok(user)
     }
 
     /**
      * Function to obtain a profile for a User
      *
      * @param user
-     * @return [UserDTOProfile]
+     * @return [UserDTOProfile] or [UserExceptionNotFound]
      */
-    suspend fun findUserProfile(user: User): UserDTOProfile {
+    suspend fun findUserProfile(user: User): Result<UserDTOProfile, UserException> {
         log.info { "Finding Score by User: ${user.username} for Profile" }
 
-        val score = scoreRepositoryCached.findByUserId(user.id!!)
+        val userSearched = userRepositoryCached.findByUsername(user.username)
 
-        return if (score == null) {
-            user.toDTOProfile(null)
+        return if (userSearched == null) {
+            Err(UserExceptionNotFound("User not found with username: ${user.username}"))
         } else {
-            user.toDTOProfile(score.toScoreDTO())
+            val score = scoreRepositoryCached.findByUserId(userSearched.id!!)
+
+            if (score == null) {
+                Ok(user.toDTOProfile(null))
+            } else {
+                Ok(user.toDTOProfile(score.toScoreDTO()))
+            }
         }
     }
 
@@ -127,14 +137,21 @@ class UserService
      * @param page
      * @param size
      * @param sortBy
-     * @return [Page] of [UserDTOLeaderBoard]
+     * @return [Page] of [UserDTOLeaderBoard] or [UserExceptionNotFound]
      */
-    suspend fun findAllForLeaderBoard(page: Int, size: Int, sortBy: String): Page<UserDTOLeaderBoard> {
+    suspend fun findAllForLeaderBoard(
+        page: Int,
+        size: Int,
+        sortBy: String
+    ): Result<Page<UserDTOLeaderBoard>, UserException> {
         log.info { "Obtaining users for LeaderBoard" }
 
         val pageRequest = PageRequest.of(page, size, Sort.Direction.DESC, sortBy)
-        return userRepositoryCached.findUsersForLeaderBoard(pageRequest).firstOrNull()
-            ?: throw UserExceptionNotFound("Page $page not found")
+        val pageFound = userRepositoryCached.findUsersForLeaderBoard(pageRequest).firstOrNull()
+
+        return if (pageFound == null) {
+            Err(UserExceptionNotFound("Page ${pageRequest.pageNumber} not found"))
+        } else Ok(pageFound)
     }
 
     /**
@@ -142,63 +159,67 @@ class UserService
      *
      * @param user
      * @param userDTOPasswordUpdate
-     * @return Boolean
+     * @return True or [UserExceptionBadRequest]
      */
-    suspend fun updatePassword(user: User, userDTOPasswordUpdate: UserDTOPasswordUpdate): Boolean {
+    suspend fun updatePassword(
+        user: User,
+        userDTOPasswordUpdate: UserDTOPasswordUpdate
+    ): Result<Boolean, UserException> {
         log.info { "User with username: ${user.username} is trying to update the password" }
-
         val updatedPassword: String
 
-        if (!passwordEncoder.matches(userDTOPasswordUpdate.actualPassword, user.password)) {
-            log.info { "Error updating password" }
-            throw UserExceptionBadRequest("The Actual Password is not correct.")
+        return if (!passwordEncoder.matches(userDTOPasswordUpdate.actualPassword, user.password)) {
+            log.info { "Failed in first step" }
+            Err(UserExceptionBadRequest("The Actual Password is not correct."))
 
-        } else if (passwordEncoder.matches(userDTOPasswordUpdate.newPassword, user.password) ||
-            passwordEncoder.matches(userDTOPasswordUpdate.repeatNewPassword, user.password)
-        ) {
-            throw UserExceptionBadRequest("The new password is the same as the old password")
+        } else if (passwordEncoder.matches(userDTOPasswordUpdate.newPassword, user.password)) {
+            log.info { "Failed in second step" }
+            Err(UserExceptionBadRequest("The new password is the same as the old password"))
+
         } else {
-            log.info { "Updating password" }
+            log.info { "Updating the password..." }
+
             updatedPassword = passwordEncoder.encode(userDTOPasswordUpdate.newPassword)
+            val userUpdated = user.copy(
+                password = updatedPassword
+            )
+
+            userRepositoryCached.save(userUpdated)
+
+            Ok(true)
         }
 
-        val userUpdated = user.copy(
-            password = updatedPassword
-        )
-
-        userRepositoryCached.save(userUpdated)
-
-        return true
     }
 
     /**
      * Function to delete an existing user.
      *
      * @param username
-     * @return [User]
+     * @return [User] or [UserExceptionNotFound]
      */
-    suspend fun delete(username: String): User {
+    suspend fun delete(username: String): Result<User, UserException> {
         log.info { "Deleting user with username: $username" }
 
-        val user =
-            userRepositoryCached.findByUsername(username)
-                ?: throw UserExceptionNotFound("1.User with username: $username not found")
+        val user = userRepositoryCached.findByUsername(username)
 
-        scoreRepositoryCached.deleteByUserId(user.id!!)
+        return if (user == null) {
+            Err(UserExceptionNotFound("User not found with username: $username"))
+        } else {
+            scoreRepositoryCached.deleteByUserId(user.id!!)
 
-        return userRepositoryCached.deleteById(user.id)
-            ?: throw UserExceptionNotFound("2.User with username: $username not found")
+            Ok(userRepositoryCached.deleteById(user.id)!!)
+        }
     }
 
 // -- SCORES --
 
     /**
-     * Function to search a score using the given username
+     * Function to search a score using the given user ID
      *
      * @param userId
      * @return A possible [Score]
      */
-    suspend fun findScoreByUsername(userId: UUID): Score? {
+    suspend fun findScoreByUserId(userId: UUID): Score? {
         log.info { "Searching Score for user: $userId" }
 
         return scoreRepositoryCached.findByUserId(userId)

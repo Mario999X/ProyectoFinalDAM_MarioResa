@@ -78,7 +78,7 @@ class UserController
      *
      * @param userDto [UserDTOCreate]
      * @param user Token from an Admin.
-     * @return A unique Token for that user to the Admin.
+     * @return A unique Token for that user to the Admin, a bad request if the [UserDTOCreate] is invalid or exceptions.
      */
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/create")
@@ -109,7 +109,7 @@ class UserController
      * Function to log in.
      *
      * @param userDto [UserDTOLogin]
-     * @return A personal token for that user.
+     * @return A personal token for that user or a bad request if the [UserDTOLogin] is invalid
      */
     @GetMapping("/login")
     suspend fun login(@Valid @RequestBody userDto: UserDTOLogin): ResponseEntity<String> {
@@ -144,19 +144,20 @@ class UserController
      *
      * @param user Token from an existing user
      * @param username Username of the user to search
-     * @return A possible user found, [UserDTOResponse]
+     * @return A possible user found, [UserDTOResponse] or a not found message
      */
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @GetMapping("/username")
     suspend fun findUserByUsername(
         @AuthenticationPrincipal user: User,
         @RequestParam(defaultValue = "") username: String
-    ): ResponseEntity<UserDTOResponse> {
+    ): ResponseEntity<out Any> {
         log.info { "SEARCHING USER WITH USERNAME: $username" }
 
-        val userSearched = service.findByUsername(username)
-
-        return ResponseEntity.ok(userSearched.toDTOResponse())
+        return when (val serviceResult = service.findByUsername(username)) {
+            is Ok -> ResponseEntity.status(HttpStatus.OK).body(serviceResult.value.toDTOResponse())
+            is Err -> ResponseEntity.status(HttpStatus.NOT_FOUND).body(serviceResult.error.message)
+        }
     }
 
 
@@ -169,7 +170,7 @@ class UserController
      * @param page Page to retrieve data
      * @param size Size of the page/list
      * @param sortBy Sort by X, in this case, [ScoreDTOResponse.scoreNumber]
-     * @return A possible list of users with scores, [UserDTOLeaderBoard]
+     * @return A possible list of users with scores, [UserDTOLeaderBoard] or a Not Found message
      */
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @GetMapping("/leaderboard")
@@ -178,16 +179,13 @@ class UserController
         @RequestParam(defaultValue = APIConfig.PAGINATION_INIT) page: Int = 0,
         @RequestParam(defaultValue = APIConfig.PAGINATION_SIZE) size: Int = 10,
         @RequestParam(defaultValue = APIConfig.PAGINATION_SORT) sortBy: String = "scoreNumber",
-    ): ResponseEntity<List<UserDTOLeaderBoard>> {
+    ): ResponseEntity<out Any> {
         log.info { "OBTAINING USERS FOR LEADERBOARD, PAGE: $page" }
 
-        try {
-            val pageResponse = service.findAllForLeaderBoard(page, size, sortBy)
-            return ResponseEntity.ok(pageResponse.content)
-        } catch (e: Exception) {
-            throw UserExceptionNotFound("PAGE NOT FOUND")
+        return when (val pageResponse = service.findAllForLeaderBoard(page, size, sortBy)) {
+            is Ok -> ResponseEntity.ok(pageResponse.value.content)
+            is Err -> ResponseEntity.status(HttpStatus.NOT_FOUND).body(pageResponse.error.message)
         }
-
     }
 
     // -- ME METHODS --
@@ -196,14 +194,17 @@ class UserController
      * Function to retrieve self information.
      *
      * @param user Token from an existing user
-     * @return [UserDTOProfile], except if the token is expired.
+     * @return [UserDTOProfile], except if the token is not correct or expired.
      */
     @GetMapping("/me")
-    suspend fun findMe(@AuthenticationPrincipal user: User): ResponseEntity<UserDTOProfile> {
+    suspend fun findMe(@AuthenticationPrincipal user: User): ResponseEntity<out Any> {
         log.info { "OBTAINING SELF DATA" }
 
         try {
-            return ResponseEntity.ok(service.findUserProfile(user))
+            return when (val serviceResult = service.findUserProfile(user)) {
+                is Ok -> ResponseEntity.ok(serviceResult.value)
+                is Err -> ResponseEntity.status(HttpStatus.BAD_REQUEST).body(serviceResult.error.message)
+            }
         } catch (e: NullPointerException) {
             throw TokenError("TOKEN ERROR")
         }
@@ -249,9 +250,11 @@ class UserController
         try {
             return when (val userResult = userDTOPasswordUpdate.validate()) {
                 is Ok -> {
-                    service.updatePassword(user, userResult.value)
+                    when (val serviceResult = service.updatePassword(user, userDTOPasswordUpdate)) {
+                        is Ok -> ResponseEntity.ok("USER UPDATED")
 
-                    return ResponseEntity.ok("USER UPDATED")
+                        is Err -> ResponseEntity.status(HttpStatus.BAD_REQUEST).body(serviceResult.error.message)
+                    }
                 }
 
                 is Err -> ResponseEntity.status(HttpStatus.BAD_REQUEST).body(userResult.error.message)
@@ -274,11 +277,14 @@ class UserController
         log.info { "USER: ${user.username} SELF DELETING ACCOUNT" }
 
         try {
-            val deletedUser = service.delete(user.username)
+            return when (val deletedUser = service.delete(user.username)) {
+                is Ok -> {
+                    log.info { "USER: ${deletedUser.value.username} HAS BEEN DELETED" }
+                    ResponseEntity.noContent().build()
+                }
 
-            log.info { "USER: ${deletedUser.username} HAS BEEN DELETED" }
-
-            return ResponseEntity.noContent().build()
+                is Err -> ResponseEntity.status(HttpStatus.NOT_FOUND).body(deletedUser.error.message)
+            }
         } catch (e: NullPointerException) {
             throw TokenError("TOKEN ERROR")
         }
@@ -297,7 +303,7 @@ class UserController
         log.info { "USER: ${user.username} OBTAINING SELF SCORE" }
 
         try {
-            val score = service.findScoreByUsername(user.id!!)
+            val score = service.findScoreByUserId(user.id!!)
 
             return if (score != null) {
                 ResponseEntity.ok(score.toScoreDTO())
