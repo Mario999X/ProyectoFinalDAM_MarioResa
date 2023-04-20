@@ -99,6 +99,8 @@ internal class UserServiceTest {
     @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun register() = runTest {
+        coEvery { repository.findByUsername(any()) } returns null
+        coEvery { repository.findByEmail(any()) } returns null
         coEvery { passwordEncoder.encode(any()) } returns userDtoCreate.password
         coEvery { repository.save(any()) } returns user
 
@@ -106,9 +108,11 @@ internal class UserServiceTest {
 
         assertAll(
             { assertNotNull(result) },
-            { assertEquals(userDtoCreate.username, result.username) }
+            { assertEquals(userDtoCreate.username, result.component1()!!.username) }
         )
 
+        coVerify { repository.findByUsername(any()) }
+        coVerify { repository.findByEmail(any()) }
         coVerify { passwordEncoder.encode(any()) }
         coVerify { repository.save(any()) }
     }
@@ -116,6 +120,8 @@ internal class UserServiceTest {
     @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun create() = runTest {
+        coEvery { repository.findByUsername(any()) } returns null
+        coEvery { repository.findByEmail(any()) } returns null
         coEvery { passwordEncoder.encode(any()) } returns userDtoCreate.password
         coEvery { repository.save(any()) } returns user
 
@@ -123,9 +129,11 @@ internal class UserServiceTest {
 
         assertAll(
             { assertNotNull(result) },
-            { assertEquals(userDtoCreate.username, result.username) }
+            { assertEquals(userDtoCreate.username, result.component1()!!.username) }
         )
 
+        coVerify { repository.findByUsername(any()) }
+        coVerify { repository.findByEmail(any()) }
         coVerify { passwordEncoder.encode(any()) }
         coVerify { repository.save(any()) }
     }

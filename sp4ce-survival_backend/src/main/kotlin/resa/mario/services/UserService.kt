@@ -12,15 +12,14 @@ import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import resa.mario.dto.*
-import resa.mario.exceptions.UserException
-import resa.mario.exceptions.UserException.UserExceptionBadRequest
-import resa.mario.exceptions.UserException.UserExceptionNotFound
+import resa.mario.exceptions.UserException.*
 import resa.mario.mappers.toDTOProfile
 import resa.mario.mappers.toScore
 import resa.mario.mappers.toScoreDTO
 import resa.mario.mappers.toUser
 import resa.mario.models.Score
 import com.github.michaelbull.result.*
+import resa.mario.exceptions.UserException
 import resa.mario.models.User
 import resa.mario.repositories.score.ScoreRepositoryCached
 import resa.mario.repositories.user.UserRepositoryCached
@@ -54,42 +53,61 @@ class UserService
      * @return [UserDetails]
      */
     override fun loadUserByUsername(username: String): UserDetails = runBlocking {
-        userRepositoryCached.findByUsername(username) ?: throw UserExceptionNotFound("USER NOT FOUND")
+        userRepositoryCached.findByUsername(username) ?: throw UserExceptionNotFound("User not found")
     }
 
     /**
      * Register Function for new Users
      *
      * @param userDtoRegister
-     * @return [User]
+     * @return [User] or a [UserException]
      */
-    suspend fun register(userDtoRegister: UserDTORegister): User {
+    suspend fun register(userDtoRegister: UserDTORegister): Result<User, UserException> {
         log.info { "Registering User with username: ${userDtoRegister.username}" }
-        val user = userDtoRegister.toUser()
 
-        val userNew = user.copy(
-            password = passwordEncoder.encode(user.password)
-        )
+        val usernameUsed = userRepositoryCached.findByUsername(userDtoRegister.username)
 
-        return userRepositoryCached.save(userNew)
+        return if (usernameUsed == null) {
+            val emailUsed = userRepositoryCached.findByEmail(userDtoRegister.email)
+
+            if (emailUsed == null) {
+                val user = userDtoRegister.toUser()
+
+                val userNew = user.copy(
+                    password = passwordEncoder.encode(user.password)
+                )
+
+                Ok(userRepositoryCached.save(userNew))
+
+            } else Err(UserDataBaseConflict("Email already used"))
+        } else Err(UserDataBaseConflict("Username already used"))
     }
 
     /**
      * Creation Function for Admins to create/register new Users by them self's
      *
      * @param userDTOCreate
-     * @return [User]
+     * @return [User] or [UserException]
      */
-    suspend fun create(userDTOCreate: UserDTOCreate): User {
+    suspend fun create(userDTOCreate: UserDTOCreate): Result<User, UserException> {
         log.info { "Creating User with username: ${userDTOCreate.username}" }
 
-        val user = userDTOCreate.toUser()
+        val usernameUsed = userRepositoryCached.findByUsername(userDTOCreate.username)
 
-        val userNew = user.copy(
-            password = passwordEncoder.encode(user.password)
-        )
+        return if (usernameUsed == null) {
+            val emailUsed = userRepositoryCached.findByEmail(userDTOCreate.email)
 
-        return userRepositoryCached.save(userNew)
+            if (emailUsed == null) {
+                val user = userDTOCreate.toUser()
+
+                val userNew = user.copy(
+                    password = passwordEncoder.encode(user.password)
+                )
+
+                Ok(userRepositoryCached.save(userNew))
+
+            } else Err(UserDataBaseConflict("Email already used"))
+        } else Err(UserDataBaseConflict("Username already used"))
     }
 
     /**

@@ -106,7 +106,7 @@ internal class UserControllerTest {
     @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun register() = runTest {
-        coEvery { service.register(any()) } returns user
+        coEvery { service.register(any()) } returns user.toResultOr { UserDataBaseConflict("") }
         coEvery { jwtTokensUtils.create(any()) } returns ""
 
         val result = controller.register(userDtoRegister).body
@@ -123,7 +123,7 @@ internal class UserControllerTest {
     @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun create() = runTest {
-        coEvery { service.create(any()) } returns user
+        coEvery { service.create(any()) } returns user.toResultOr { UserDataBaseConflict("") }
         coEvery { jwtTokensUtils.create(any()) } returns ""
 
         val result = controller.create(userDtoCreate, user2).body
@@ -278,7 +278,7 @@ internal class UserControllerTest {
     @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun createUserInitializer() = runTest {
-        coEvery { service.create(any()) } returns user
+        coEvery { service.create(any()) } returns user.toResultOr { UserDataBaseConflict("") }
 
         val result = controller.createUserInitializer(userDtoCreate)
 

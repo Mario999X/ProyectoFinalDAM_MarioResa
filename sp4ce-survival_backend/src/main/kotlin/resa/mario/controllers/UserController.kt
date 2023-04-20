@@ -4,7 +4,6 @@ import com.github.michaelbull.result.*
 import jakarta.validation.Valid
 import mu.KotlinLogging
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.dao.DataIntegrityViolationException
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.security.access.prepost.PreAuthorize
@@ -18,7 +17,6 @@ import resa.mario.config.APIConfig
 import resa.mario.config.security.jwt.JwtTokensUtils
 import resa.mario.dto.*
 import resa.mario.exceptions.TokenError
-import resa.mario.exceptions.UserDataBaseConflict
 import resa.mario.exceptions.UserException.*
 import resa.mario.mappers.toDTOResponse
 import resa.mario.mappers.toScoreDTO
@@ -58,17 +56,16 @@ class UserController
     suspend fun register(@Valid @RequestBody userDto: UserDTORegister): ResponseEntity<String> {
         log.info { "USER: ${userDto.username} TRYING TO REGISTER" }
 
-        try {
-            return when (val userResult = userDto.validate()) {
-                is Ok -> {
-                    val userSaved = service.register(userResult.value)
-                    ResponseEntity.status(HttpStatus.CREATED).body(jwtTokenUtils.create(userSaved))
-                }
+        return when (val userResult = userDto.validate()) {
+            is Ok -> {
+                when (val userSaved = service.register(userResult.value)) {
+                    is Ok -> ResponseEntity.status(HttpStatus.CREATED).body(jwtTokenUtils.create(userSaved.value))
 
-                is Err -> ResponseEntity.status(HttpStatus.BAD_REQUEST).body(userResult.error.message)
+                    is Err -> ResponseEntity.status(HttpStatus.CONFLICT).body(userSaved.error.message)
+                }
             }
-        } catch (e: DataIntegrityViolationException) {
-            throw UserDataBaseConflict("USERNAME OR EMAIL ALREADY IN USE")
+
+            is Err -> ResponseEntity.status(HttpStatus.BAD_REQUEST).body(userResult.error.message)
         }
 
     }
@@ -91,15 +88,14 @@ class UserController
         try {
             return when (val userResult = userDto.validate()) {
                 is Ok -> {
-                    val userSaved = service.create(userResult.value)
-                    ResponseEntity.status(HttpStatus.CREATED).body(jwtTokenUtils.create(userSaved))
+                    when (val userSaved = service.create(userResult.value)) {
+                        is Ok -> ResponseEntity.status(HttpStatus.CREATED).body(jwtTokenUtils.create(userSaved.value))
+                        is Err -> ResponseEntity.status(HttpStatus.CONFLICT).body(userSaved.error.message)
+                    }
                 }
 
                 is Err -> ResponseEntity.status(HttpStatus.BAD_REQUEST).body(userResult.error.message)
             }
-
-        } catch (e: DataIntegrityViolationException) {
-            throw UserDataBaseConflict("USERNAME OR EMAIL ALREADY IN USE")
         } catch (e: NullPointerException) {
             throw TokenError("TOKEN ERROR")
         }
@@ -227,7 +223,6 @@ class UserController
             return if (!response) {
                 ResponseEntity.status(HttpStatus.BAD_REQUEST).body("SCORE NOT HIGHER THAN ACTUAL REGISTERED")
             } else ResponseEntity.ok("SCORE UPDATED")
-
         } catch (e: NullPointerException) {
             throw TokenError("TOKEN ERROR")
         }
@@ -259,11 +254,9 @@ class UserController
 
                 is Err -> ResponseEntity.status(HttpStatus.BAD_REQUEST).body(userResult.error.message)
             }
-
         } catch (e: NullPointerException) {
             throw TokenError("TOKEN ERROR")
         }
-
     }
 
     /**
@@ -310,7 +303,6 @@ class UserController
             } else {
                 ResponseEntity.noContent().build()
             }
-
         } catch (e: NullPointerException) {
             throw TokenError("TOKEN ERROR")
         }
@@ -326,7 +318,7 @@ class UserController
      */
     suspend fun createUserInitializer(userDTOCreate: UserDTOCreate): User? {
         log.info { "GENERATING INITIAL USER DATA" }
-        return service.create(userDTOCreate)
+        return service.create(userDTOCreate).component1()
     }
 
     /**
