@@ -2,7 +2,7 @@
 
 Servicio orientado a la gestión del sistema online de almacenamiento de datos del videojuego Sp4ce Survival.
 
-Proyecto final de Módulo Superior de Desarrollo de Aplicaciones Multiplataforma curso 22/23.
+Proyecto final del Módulo Superior de Desarrollo de Aplicaciones Multiplataforma curso 22/23.
 
 # Índice
 - [Diseño](#diseño)
@@ -105,7 +105,7 @@ La ruta **base** del servicio: https://localhost:6969/sp4ceSurvival
 # Funcionamiento
 
 Para probar el funcionamiento de los distintos endpoints durante el desarrollo se usó un cliente que permita recibir y enviar *request-response*, por ejemplo:
-- [Postman](https://www.postman.com/)
+- [Postman](https://www.postman.com/).
 - [ThunderClient](https://www.thunderclient.com/) como *plugin* en [VSC](https://code.visualstudio.com/).
 
 Cuando el desarrollo se complete, se usará desde un videojuego actuando como cliente.
