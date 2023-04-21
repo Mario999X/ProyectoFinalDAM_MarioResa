@@ -94,7 +94,7 @@ La ruta **base** del servicio: https://localhost:6969/sp4ceSurvival
 | POST   | /create                     		      | JWT  | Creación de un usuario por parte de un administrador.          		       		     | 201             | String         |
 | GET 	 | /login                      		      | NO   | Iniciar sesión usando el nombre de usuario y la contraseña.    		       		     | 200             | String         |
 | GET    | /username?username=X        		      | JWT  | Búsqueda de un usuario usando su nombre de usuario.            		       		     | 200             | JSON           |
-| GET    | /leaderBoard?page=X&size=Y&sortBy=Z        | JWT  | Obtención de usuarios con puntuación y su posición según esta. 		       		     | 200             | JSON           |
+| GET    | /leaderboard?page=X&size=Y&sortBy=Z        | JWT  | Obtención de usuarios con puntuación y su posición según esta. 		       		     | 200             | JSON           |
 | GET    | /me                                        | JWT  | Obtención de la información propia por parte de un usuario.    		       		     | 200             | JSON           |
 | PUT    | /me/score                                  | JWT  | Almacenar o actualizar la puntuación obtenida por parte de un usuario.          		     | 200             | String         |
 | PUT    | /me/password                               | JWT  | Actualizar la contraseña actual por parte de un usuario.		               		     | 200             | String         |
