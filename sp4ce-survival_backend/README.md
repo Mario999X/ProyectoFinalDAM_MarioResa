@@ -76,7 +76,7 @@ Según el despliegue de la aplicación, la base de datos tendra los puertos expu
 
 Las clases se encuentran documentadas con *KDoc* en inglés, y usando una librería externa, **Dokka** se puede visualizar en formato *HTML*.
 
-Además, los *endpoints* se encuentran documentados con **Swagger**, visible desde el respectivo endpoint.
+Además, los *endpoints* se encuentran documentados con **Swagger**, visibles desde el siguiente [enlace](https://localhost:6969/swagger-ui/index.html#/), con la aplicación en ejecución.
 
 ## Seguridad
 
@@ -110,15 +110,11 @@ Para probar el funcionamiento de los distintos endpoints durante el desarrollo s
 
 Cuando el desarrollo se complete, se usará desde un videojuego actuando como cliente.
 
-## Swagger
-
-La ruta de Swagger para probar los distintos endpoints documentados: https://localhost:6969/swagger-ui/index.html#/
-
 # Tests
 
 Se han testeado los repositorios, el servicio y el controlador, usando **JUnit 5** y **MockK**
 
-Se han testeado los endpoints usando **Postman** "E2E"; se adjunta el *JSON* exportado.
+Se han testeado los endpoints usando **Postman** "E2E"; se adjunta el *JSON* exportado en la carpeta *postman* en la raíz del proyecto.
 
 - **AVISO**: Los **tokens** usados para las distintas operaciones han sido almacenados como *variables de entorno*, por lo que pueden surgir problemas al tratar de ejecutar el JSON en *ThunderClient*.
 
