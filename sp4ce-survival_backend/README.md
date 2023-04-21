@@ -110,6 +110,10 @@ Para probar el funcionamiento de los distintos endpoints durante el desarrollo s
 
 Cuando el desarrollo se complete, se usará desde un videojuego actuando como cliente.
 
+## Swagger
+
+La ruta de Swagger para probar los distintos endpoints documentados: https://localhost:6969/swagger-ui/index.html#/
+
 # Tests
 
 Se han testeado los repositorios, el servicio y el controlador, usando **JUnit 5** y **MockK**
