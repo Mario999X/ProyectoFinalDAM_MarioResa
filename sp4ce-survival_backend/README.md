@@ -58,7 +58,7 @@ Según el despliegue de la aplicación, la base de datos tendra los puertos expu
 | username  | String    | Nombre del usuario.                        |
 | password  | String    | Contraseña del usuario.                    |
 | email     | String    | Email del usuario.                         |
-| role      | UserRole  | Rol del usuario(USER, ADMIN O SUPER_ADMIN).|
+| role      | UserRole  | Rol del usuario(USER, ADMIN).              |
 | createdAt | LocalDate | Fecha de creación del usuario.             |
 
 ### Puntuación
