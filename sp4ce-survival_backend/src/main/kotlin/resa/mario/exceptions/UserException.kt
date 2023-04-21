@@ -47,15 +47,4 @@ sealed class UserException(message: String?) : RuntimeException(message) {
 
 }
 
-/**
- * For a Token error Response
- *
- * @constructor
- * A possible message, String
- *
- * @param message
- */
-@ResponseStatus(HttpStatus.UNAUTHORIZED)
-class TokenError(message: String?) : Exception(message)
-
 

@@ -1242,7 +1242,7 @@
 			]
 		},
 		{
-			"name": "TokenExpired",
+			"name": "TokenError",
 			"item": [
 				{
 					"name": "Create",
