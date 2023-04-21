@@ -45,8 +45,8 @@ La base de datos es ejecutada desde un [docker](https://www.docker.com/).
 Las tablas son cargadas desde el archivo [schema.sql](./src/main/resources/schema.sql) y los datos base son cargados cada vez que se ejecuta la aplicación desde la clase *main*, haciendo un reseteo a las tablas.
 
 Según el despliegue de la aplicación, la base de datos tendra los puertos expuestos.
-- Si se ejecuta el *docker de desarrollo* (**dev**), la base de datos estara expuesta y se podra ejecutar la aplicación desde el IDE.
-- Si se ejecuta el *docker de producción* (**pro**), la base de datos **no** estará expuesta y se trabajara a través de los puertos expuestos del propio *servicio*.
+- Si se ejecuta el *docker-compose de desarrollo* (**dev**), la base de datos estara expuesta y se podra ejecutar la aplicación desde el IDE.
+- Si se ejecuta el *docker-compose de producción* (**production**), la base de datos **no** estará expuesta y se trabajara a través de los puertos expuestos del propio *servicio*.
 
 ## Dominio
 
