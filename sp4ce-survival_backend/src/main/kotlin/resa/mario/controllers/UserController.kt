@@ -117,7 +117,7 @@ class UserController
      */
     @Operation(summary = "Login", description = "Endpoint for log in.", tags = ["USER"])
     @Parameter(name = "userDTO", description = "Valid user DTO for logging in", required = true)
-    @ApiResponse(responseCode = "201", description = "A personal Token for that user.")
+    @ApiResponse(responseCode = "200", description = "A personal Token for that user.")
     @ApiResponse(responseCode = "400", description = "If the userDTO is not validated.")
     @ApiResponse(responseCode = "404", description = "If the user is not found.")
     @GetMapping("/login")
