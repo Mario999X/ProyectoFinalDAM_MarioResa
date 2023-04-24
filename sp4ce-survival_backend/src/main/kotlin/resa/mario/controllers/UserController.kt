@@ -226,7 +226,7 @@ class UserController
      */
     @Operation(summary = "Find own data", description = "Endpoint for obtaining self data.", tags = ["USER"])
     @Parameter(name = "user", description = "Token for authentication.", required = true)
-    @ApiResponse(responseCode = "200", description = "A personal Token for that user.")
+    @ApiResponse(responseCode = "200", description = "The profile of that user.")
     @ApiResponse(responseCode = "404", description = "If the user is not found.")
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @GetMapping("/me")
