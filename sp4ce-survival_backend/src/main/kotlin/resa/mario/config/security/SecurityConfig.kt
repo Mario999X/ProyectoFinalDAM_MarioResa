@@ -63,11 +63,15 @@ class SecurityConfig
             // This allows us to show the errors, instead of getting a code FORBIDDEN.
             .requestMatchers("/error/**").permitAll()
 
+            // This allows swagger.
+            .requestMatchers("/v3/api-docs/**", "/swagger-ui/**").permitAll() // /swagger-ui/index.html#/
+
+            // Configuration for the API endpoints
             .requestMatchers("/sp4ceSurvival/**").permitAll()
 
-            //.requestMatchers("/sp4ceSurvival/register", "/sp4ceSurvival/login").permitAll()
+            //.requestMatchers("/sp4ceSurvival/register", "/sp4ceSurvival/login").permitAll() // Is not necessary.
             .requestMatchers(HttpMethod.POST, "/sp4ceSurvival/create").hasRole("ADMIN")
-            .requestMatchers(HttpMethod.GET, "/sp4ceSurvival/username", "/sp4ceSurvival/leaderboard", "/sp4ceSurvival/me").hasAnyRole("USER", "ADMIN")
+            .requestMatchers(HttpMethod.GET, "/sp4ceSurvival/username", "/sp4ceSurvival/leaderboard", "/sp4ceSurvival/me", "/sp4ceSurvival/score").hasAnyRole("USER", "ADMIN")
             .requestMatchers(HttpMethod.PUT,  "/sp4ceSurvival/me/score", "/sp4ceSurvival/me/password").hasAnyRole("USER", "ADMIN")
             .requestMatchers(HttpMethod.DELETE, "/sp4ceSurvival/me").hasAnyRole("USER", "ADMIN")
 

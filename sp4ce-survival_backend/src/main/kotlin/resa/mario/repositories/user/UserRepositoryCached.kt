@@ -32,13 +32,23 @@ class UserRepositoryCached
 ) : IUserRepository {
 
     /**
-     * Function that using the user´s username search that unique user.
+     * Function that using the user´s username to search that unique user.
      *
      * @param username
      * @return A possible [User]
      */
     override suspend fun findByUsername(username: String): User? = withContext(Dispatchers.IO) {
         return@withContext repository.findByUsername(username).firstOrNull()
+    }
+
+    /**
+     * Function that using the user´s email to search that unique user.
+     *
+     * @param email
+     * @return A possible [User]
+     */
+    override suspend fun findByEmail(email: String): User? = withContext(Dispatchers.IO) {
+        return@withContext repository.findByEmail(email).firstOrNull()
     }
 
     /**

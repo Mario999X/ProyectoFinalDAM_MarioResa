@@ -12,14 +12,12 @@ import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
-import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.api.extension.ExtendWith
 import org.springframework.data.domain.Page
 import org.springframework.security.crypto.password.PasswordEncoder
 import resa.mario.dto.UserDTOCreate
 import resa.mario.dto.UserDTOPasswordUpdate
 import resa.mario.dto.UserDTORegister
-import resa.mario.exceptions.UserException
 import resa.mario.models.Score
 import resa.mario.models.User
 import resa.mario.repositories.score.ScoreRepositoryCached
@@ -101,6 +99,8 @@ internal class UserServiceTest {
     @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun register() = runTest {
+        coEvery { repository.findByUsername(any()) } returns null
+        coEvery { repository.findByEmail(any()) } returns null
         coEvery { passwordEncoder.encode(any()) } returns userDtoCreate.password
         coEvery { repository.save(any()) } returns user
 
@@ -108,9 +108,11 @@ internal class UserServiceTest {
 
         assertAll(
             { assertNotNull(result) },
-            { assertEquals(userDtoCreate.username, result.username) }
+            { assertEquals(userDtoCreate.username, result.component1()!!.username) }
         )
 
+        coVerify { repository.findByUsername(any()) }
+        coVerify { repository.findByEmail(any()) }
         coVerify { passwordEncoder.encode(any()) }
         coVerify { repository.save(any()) }
     }
@@ -118,6 +120,8 @@ internal class UserServiceTest {
     @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun create() = runTest {
+        coEvery { repository.findByUsername(any()) } returns null
+        coEvery { repository.findByEmail(any()) } returns null
         coEvery { passwordEncoder.encode(any()) } returns userDtoCreate.password
         coEvery { repository.save(any()) } returns user
 
@@ -125,9 +129,11 @@ internal class UserServiceTest {
 
         assertAll(
             { assertNotNull(result) },
-            { assertEquals(userDtoCreate.username, result.username) }
+            { assertEquals(userDtoCreate.username, result.component1()!!.username) }
         )
 
+        coVerify { repository.findByUsername(any()) }
+        coVerify { repository.findByEmail(any()) }
         coVerify { passwordEncoder.encode(any()) }
         coVerify { repository.save(any()) }
     }
@@ -141,7 +147,7 @@ internal class UserServiceTest {
 
         assertAll(
             { assertNotNull(result) },
-            { assertEquals(userDtoCreate.username, result.username) }
+            { assertEquals(userDtoCreate.username, result.component1()!!.username) }
         )
 
         coVerify { repository.findByUsername(any()) }
@@ -156,7 +162,7 @@ internal class UserServiceTest {
 
         assertAll(
             { assertNotNull(result) },
-            { assertEquals(userDtoCreate.username, result.username) }
+            { assertEquals(userDtoCreate.username, result.component1()!!.username) }
         )
 
         coVerify { scoreRepository.findByUserId(any()) }
@@ -164,10 +170,10 @@ internal class UserServiceTest {
 
     @OptIn(ExperimentalCoroutinesApi::class)
     @Test
-    fun findAllForLeaderBoardNF() = runTest {
+    fun findAllForLeaderBoardEmpty() = runTest {
         coEvery { repository.findUsersForLeaderBoard(any()) } returns flowOf(Page.empty())
 
-        val result = service.findAllForLeaderBoard(99, 10, "scoreNumber").toList()
+        val result = service.findAllForLeaderBoard(99, 10, "scoreNumber").component1()!!.toList()
 
         assertAll(
             { assertNotNull(result) },
@@ -182,10 +188,12 @@ internal class UserServiceTest {
     fun updatePasswordFailed() = runTest {
         coEvery { passwordEncoder.matches(any(), any()) } returns false
 
-        val result = assertThrows<UserException.UserExceptionBadRequest> { service.updatePassword(user, userDtoUpdate) }
+        val result = service.updatePassword(user, userDtoUpdate)
 
+        println(result)
         assertAll(
-            { assertEquals("The Actual Password is not correct.", result.message) }
+            { assertNotNull(result) },
+            { assertEquals("The Actual Password is not correct.", result.component2()!!.message) }
         )
 
         coVerify { passwordEncoder.matches(any(), any()) }
@@ -202,12 +210,27 @@ internal class UserServiceTest {
 
         assertAll(
             { assertNotNull(result) },
-            { assertEquals(userDtoCreate.username, result.username) }
+            { assertEquals(userDtoCreate.username, result.component1()!!.username) }
         )
 
         coVerify { repository.findByUsername(any()) }
         coVerify { scoreRepository.deleteByUserId(any()) }
         coVerify { repository.deleteById(any()) }
+    }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    @Test
+    fun findScoreByUsername() = runTest {
+        coEvery { scoreRepository.findByUserId(any()) } returns score
+
+        val result = service.findScoreByUserId(user.id!!)
+
+        assertAll(
+            { assertNotNull(result) },
+            { assertEquals(score.scoreNumber, result!!.scoreNumber) }
+        )
+
+        coVerify { scoreRepository.findByUserId(any()) }
     }
 
     @OptIn(ExperimentalCoroutinesApi::class)

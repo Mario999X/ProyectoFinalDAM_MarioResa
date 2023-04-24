@@ -7,16 +7,16 @@
 	},
 	"item": [
 		{
-			"name": "Working",
+			"name": "Not_Working",
 			"item": [
 				{
-					"name": "Register",
+					"name": "Register-UserWithSameData",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"aaa\",\r\n    \"password\": \"12345\",\r\n    \"repeatPassword\": \"12345\",\r\n    \"email\": \"aaa@gmail.com\"\r\n}",
+							"raw": "{\r\n    \"username\": \"Mario999\",\r\n    \"password\": \"12345\",\r\n    \"repeatPassword\": \"12345\",\r\n    \"email\": \"mario@gmail.com\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -39,397 +39,13 @@
 					"response": []
 				},
 				{
-					"name": "Create",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token_admin}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"bbb\",\r\n    \"password\": \"12345\",\r\n    \"email\": \"bbb@gmail.com\",\r\n    \"role\": \"ADMIN\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "https://localhost:6969/sp4ceSurvival/create",
-							"protocol": "https",
-							"host": [
-								"localhost"
-							],
-							"port": "6969",
-							"path": [
-								"sp4ceSurvival",
-								"create"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Login_Admin",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"Mario999\",\r\n    \"password\": \"12345\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "https://localhost:6969/sp4ceSurvival/login",
-							"protocol": "https",
-							"host": [
-								"localhost"
-							],
-							"port": "6969",
-							"path": [
-								"sp4ceSurvival",
-								"login"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Login_User",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"Mario111\",\r\n    \"password\": \"12345\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "https://localhost:6969/sp4ceSurvival/login",
-							"protocol": "https",
-							"host": [
-								"localhost"
-							],
-							"port": "6969",
-							"path": [
-								"sp4ceSurvival",
-								"login"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "FindUserByUsername",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token_admin}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "https://localhost:6969/sp4ceSurvival/username?username=Mario111",
-							"protocol": "https",
-							"host": [
-								"localhost"
-							],
-							"port": "6969",
-							"path": [
-								"sp4ceSurvival",
-								"username"
-							],
-							"query": [
-								{
-									"key": "username",
-									"value": "Mario111"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "LeaderBoard",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token_admin}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "https://localhost:6969/sp4ceSurvival/leaderboard?page=0",
-							"protocol": "https",
-							"host": [
-								"localhost"
-							],
-							"port": "6969",
-							"path": [
-								"sp4ceSurvival",
-								"leaderboard"
-							],
-							"query": [
-								{
-									"key": "page",
-									"value": "0"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Me/Profile",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token_user}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "https://localhost:6969/sp4ceSurvival/me",
-							"protocol": "https",
-							"host": [
-								"localhost"
-							],
-							"port": "6969",
-							"path": [
-								"sp4ceSurvival",
-								"me"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "UpdateScore",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token_user}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "PUT",
-						"header": [],
-						"url": {
-							"raw": "https://localhost:6969/sp4ceSurvival/me/score?scoreNumber=25",
-							"protocol": "https",
-							"host": [
-								"localhost"
-							],
-							"port": "6969",
-							"path": [
-								"sp4ceSurvival",
-								"me",
-								"score"
-							],
-							"query": [
-								{
-									"key": "scoreNumber",
-									"value": "25"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "FirstScore",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token_noScore}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "PUT",
-						"header": [],
-						"url": {
-							"raw": "https://localhost:6969/sp4ceSurvival/me/score?scoreNumber=20",
-							"protocol": "https",
-							"host": [
-								"localhost"
-							],
-							"port": "6969",
-							"path": [
-								"sp4ceSurvival",
-								"me",
-								"score"
-							],
-							"query": [
-								{
-									"key": "scoreNumber",
-									"value": "20"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "UpdateSelfPassword",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token_user}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"actualPassword\": \"12345\",\r\n    \"newPassword\": \"123456\",\r\n    \"repeatNewPassword\": \"123456\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "https://localhost:6969/sp4ceSurvival/me/password",
-							"protocol": "https",
-							"host": [
-								"localhost"
-							],
-							"port": "6969",
-							"path": [
-								"sp4ceSurvival",
-								"me",
-								"password"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "DeleteSelf",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token_user}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "https://localhost:6969/sp4ceSurvival/me",
-							"protocol": "https",
-							"host": [
-								"localhost"
-							],
-							"port": "6969",
-							"path": [
-								"sp4ceSurvival",
-								"me"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "DeleteSelf-NoScore",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "{{token_noScore}}",
-									"type": "string"
-								}
-							]
-						},
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "https://localhost:6969/sp4ceSurvival/me",
-							"protocol": "https",
-							"host": [
-								"localhost"
-							],
-							"port": "6969",
-							"path": [
-								"sp4ceSurvival",
-								"me"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "Not_Working",
-			"item": [
-				{
-					"name": "Register-UserWithSameData",
+					"name": "Register-UserWithSameData_2",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"Mario999\",\r\n    \"password\": \"12345\",\r\n    \"repeatPassword\": \"12345\",\r\n    \"email\": \"mario@gmail.com\"\r\n}",
+							"raw": "{\r\n    \"username\": \"Mario99\",\r\n    \"password\": \"12345\",\r\n    \"repeatPassword\": \"12345\",\r\n    \"email\": \"mario@gmail.com\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -614,6 +230,45 @@
 						"body": {
 							"mode": "raw",
 							"raw": "{\r\n    \"username\": \"Mario999\",\r\n    \"password\": \"12345\",\r\n    \"email\": \"mario@gmail.com\",\r\n    \"role\": \"ADMIN\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:6969/sp4ceSurvival/create",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "6969",
+							"path": [
+								"sp4ceSurvival",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create-UserWithSameData_2",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token_admin}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"Mario99\",\r\n    \"password\": \"12345\",\r\n    \"email\": \"mario@gmail.com\",\r\n    \"role\": \"ADMIN\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1080,21 +735,90 @@
 						}
 					},
 					"response": []
-				}
-			]
-		},
-		{
-			"name": "Forbidden",
-			"item": [
+				},
 				{
-					"name": "Create-Forbidden",
+					"name": "Obtain-SelfScore-TokenError",
 					"request": {
 						"auth": {
 							"type": "bearer",
 							"bearer": [
 								{
 									"key": "token",
-									"value": "",
+									"value": "aaaa",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:6969/sp4ceSurvival/score",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "6969",
+							"path": [
+								"sp4ceSurvival",
+								"score"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "TokenError",
+			"item": [
+				{
+					"name": "Create-TokenUser",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token_user}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"Mario999\",\r\n    \"password\": \"12345\",\r\n    \"email\": \"mario@gmail.com\",\r\n    \"role\": \"ADMIN\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:6969/sp4ceSurvival/create",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "6969",
+							"path": [
+								"sp4ceSurvival",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token_expired}}",
 									"type": "string"
 								}
 							]
@@ -1126,14 +850,14 @@
 					"response": []
 				},
 				{
-					"name": "FindUserByUsername-Forbidden",
+					"name": "FindUserByUsername",
 					"request": {
 						"auth": {
 							"type": "bearer",
 							"bearer": [
 								{
 									"key": "token",
-									"value": "",
+									"value": "{{token_expired}}",
 									"type": "string"
 								}
 							]
@@ -1162,14 +886,14 @@
 					"response": []
 				},
 				{
-					"name": "LeaderBoard-Forbidden",
+					"name": "LeaderBoard",
 					"request": {
 						"auth": {
 							"type": "bearer",
 							"bearer": [
 								{
 									"key": "token",
-									"value": "",
+									"value": "{{token_expired}}",
 									"type": "string"
 								}
 							]
@@ -1192,6 +916,743 @@
 									"key": "page",
 									"value": "0"
 								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Me/Profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token_expired}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:6969/sp4ceSurvival/me",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "6969",
+							"path": [
+								"sp4ceSurvival",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateScore",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token_expired}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:6969/sp4ceSurvival/me/score?scoreNumber=25",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "6969",
+							"path": [
+								"sp4ceSurvival",
+								"me",
+								"score"
+							],
+							"query": [
+								{
+									"key": "scoreNumber",
+									"value": "25"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FirstScore",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token_expired}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:6969/sp4ceSurvival/me/score?scoreNumber=20",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "6969",
+							"path": [
+								"sp4ceSurvival",
+								"me",
+								"score"
+							],
+							"query": [
+								{
+									"key": "scoreNumber",
+									"value": "20"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateSelfPassword",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token_expired}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"actualPassword\": \"12345\",\r\n    \"newPassword\": \"123456\",\r\n    \"repeatNewPassword\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:6969/sp4ceSurvival/me/password",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "6969",
+							"path": [
+								"sp4ceSurvival",
+								"me",
+								"password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteSelf",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token_expired}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:6969/sp4ceSurvival/me",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "6969",
+							"path": [
+								"sp4ceSurvival",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteSelf-NoScore",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token_expired}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:6969/sp4ceSurvival/me",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "6969",
+							"path": [
+								"sp4ceSurvival",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtain-SelfScore",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token_expired}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:6969/sp4ceSurvival/score",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "6969",
+							"path": [
+								"sp4ceSurvival",
+								"score"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtain-SelfScore-NoScore",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token_expired}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:6969/sp4ceSurvival/score",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "6969",
+							"path": [
+								"sp4ceSurvival",
+								"score"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Working",
+			"item": [
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"aaa\",\r\n    \"password\": \"12345\",\r\n    \"repeatPassword\": \"12345\",\r\n    \"email\": \"aaa@gmail.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:6969/sp4ceSurvival/register",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "6969",
+							"path": [
+								"sp4ceSurvival",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token_admin}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"bbb\",\r\n    \"password\": \"12345\",\r\n    \"email\": \"bbb@gmail.com\",\r\n    \"role\": \"ADMIN\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:6969/sp4ceSurvival/create",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "6969",
+							"path": [
+								"sp4ceSurvival",
+								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login_Admin",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"Mario999\",\r\n    \"password\": \"12345\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:6969/sp4ceSurvival/login",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "6969",
+							"path": [
+								"sp4ceSurvival",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login_User",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"Mario111\",\r\n    \"password\": \"12345\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:6969/sp4ceSurvival/login",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "6969",
+							"path": [
+								"sp4ceSurvival",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FindUserByUsername",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token_admin}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:6969/sp4ceSurvival/username?username=Mario111",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "6969",
+							"path": [
+								"sp4ceSurvival",
+								"username"
+							],
+							"query": [
+								{
+									"key": "username",
+									"value": "Mario111"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "LeaderBoard",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token_admin}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:6969/sp4ceSurvival/leaderboard?page=0",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "6969",
+							"path": [
+								"sp4ceSurvival",
+								"leaderboard"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Me/Profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token_user}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:6969/sp4ceSurvival/me",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "6969",
+							"path": [
+								"sp4ceSurvival",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateScore",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token_user}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:6969/sp4ceSurvival/me/score?scoreNumber=25",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "6969",
+							"path": [
+								"sp4ceSurvival",
+								"me",
+								"score"
+							],
+							"query": [
+								{
+									"key": "scoreNumber",
+									"value": "25"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "FirstScore",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token_noScore}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:6969/sp4ceSurvival/me/score?scoreNumber=20",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "6969",
+							"path": [
+								"sp4ceSurvival",
+								"me",
+								"score"
+							],
+							"query": [
+								{
+									"key": "scoreNumber",
+									"value": "20"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateSelfPassword",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token_user}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"actualPassword\": \"12345\",\r\n    \"newPassword\": \"123456\",\r\n    \"repeatNewPassword\": \"123456\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:6969/sp4ceSurvival/me/password",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "6969",
+							"path": [
+								"sp4ceSurvival",
+								"me",
+								"password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtain-SelfScore",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token_admin}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:6969/sp4ceSurvival/score",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "6969",
+							"path": [
+								"sp4ceSurvival",
+								"score"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obtain-SelfScore-NoScore",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token_noScore}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:6969/sp4ceSurvival/score",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "6969",
+							"path": [
+								"sp4ceSurvival",
+								"score"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteSelf",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token_user}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:6969/sp4ceSurvival/me",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "6969",
+							"path": [
+								"sp4ceSurvival",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteSelf-NoScore",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token_noScore}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:6969/sp4ceSurvival/me",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "6969",
+							"path": [
+								"sp4ceSurvival",
+								"me"
 							]
 						}
 					},
@@ -1234,6 +1695,11 @@
 		{
 			"key": "token_noScore",
 			"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkYzc4MWY0NC0wNmQxLTQ1ZGItYWQwZC03MDlhZjRiMzNlYTYiLCJyb2xlIjoiVVNFUiIsImV4cCI6MTY4MTMxMDA0OCwidXNlcm5hbWUiOiJhYWEifQ.4u8Q5mILxggiIyovUvy4mhTRSTrFEHbfp4a5wCo34EY4x9MOtW60S1WhaD8NtDp22cC2IyhnPeSZZHtzGzmVtg",
+			"type": "string"
+		},
+		{
+			"key": "token_expired",
+			"value": "",
 			"type": "string"
 		}
 	]

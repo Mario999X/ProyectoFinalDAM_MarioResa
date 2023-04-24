@@ -72,6 +72,21 @@ internal class UserRepositoryCachedTest {
 
     @OptIn(ExperimentalCoroutinesApi::class)
     @Test
+    fun findByEmail() = runTest {
+        coEvery { repository.findByEmail(any()) } returns flowOf(user)
+
+        val result = repositoryCached.findByEmail(user.email)
+
+        assertAll(
+            { assertNotNull(result) },
+            { assertEquals(result!!.username, user.username) }
+        )
+
+        coVerify { repository.findByEmail(any()) }
+    }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    @Test
     fun findUsersForLeaderBoard() = runTest {
         coEvery { scoreRepository.findAllBy(any()) } returns flowOf(score)
         coEvery { repository.findById(any()) } returns user
