@@ -52,8 +52,8 @@ class UserService
      * @param username
      * @return [UserDetails]
      */
-    override fun loadUserByUsername(username: String): UserDetails = runBlocking {
-        userRepositoryCached.findByUsername(username) ?: throw UserExceptionNotFound("User not found")
+    override fun loadUserByUsername(username: String): UserDetails? = runBlocking {
+        userRepositoryCached.findByUsername(username)
     }
 
     /**

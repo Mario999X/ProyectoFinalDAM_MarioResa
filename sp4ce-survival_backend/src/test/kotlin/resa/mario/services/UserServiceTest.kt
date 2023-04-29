@@ -90,7 +90,7 @@ internal class UserServiceTest {
 
         assertAll(
             { assertNotNull(result) },
-            { assertEquals(user.username, result.username) }
+            { assertEquals(user.username, result!!.username) }
         )
 
         coVerify { repository.findByUsername(any()) }

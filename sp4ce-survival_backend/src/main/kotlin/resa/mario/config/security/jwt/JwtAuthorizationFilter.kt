@@ -59,7 +59,7 @@ class JwtAuthorizationFilter(
 
         val username = tokenDecoded.getClaim("username").toString().replace("\"", "")
 
-        val user = service.loadUserByUsername(username)
+        val user = service.loadUserByUsername(username) ?: return@runBlocking null
 
         return@runBlocking UsernamePasswordAuthenticationToken(
             user,
