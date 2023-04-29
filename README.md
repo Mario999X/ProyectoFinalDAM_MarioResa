@@ -12,13 +12,27 @@ Se basara en un bullet hell orientado a la supervivencia del jugador donde su ma
 
 ## Diseño
 
-<Insertar diagrama de clase>
+### [Diagramas](diagrams)
 
-<Explicación básica del diagrama>
+#### Diagrama de Clases
 
-<Insertar diagrama entidad-relación>
+<img align="center" src="diagrams/Class_diagram.png">
 
-<Explicación del diagrama entidad-relación>
+Se observan dos elementos principales del proyecto, *Usuario* y *Puntuación*.
+
+La relación es sencilla, un usuario puede no tener una puntuación asociada, o **una** como **máximo**.
+
+Además, exiten **dos** roles para los usuarios:
+
+- USER
+- ADMIN
+
+#### Diagrama de Entidad-Relación
+
+<img align="center" src="diagrams/Entity_Relationship_diagram.png">
+
+Un usuario obtiene una puntuación y la puede almacenar/actualizar.
+
 
 ## Autor
 

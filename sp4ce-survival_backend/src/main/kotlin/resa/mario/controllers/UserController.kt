@@ -56,7 +56,7 @@ class UserController
     @Operation(summary = "Register", description = "Endpoint for registering", tags = ["USER"])
     @Parameter(name = "userDTO", description = "Valid user DTO for resistering", required = true)
     @ApiResponse(responseCode = "201", description = "A personal Token for that user.")
-    @ApiResponse(responseCode = "209", description = "If the username or the email is alredy in use.")
+    @ApiResponse(responseCode = "209", description = "If the username or the email is already in use.")
     @ApiResponse(responseCode = "400", description = "If the userDTO is not validated")
     @PostMapping("/register")
     suspend fun register(@RequestBody userDto: UserDTORegister): ResponseEntity<String> {
@@ -86,7 +86,7 @@ class UserController
     @Parameter(name = "userDTO", description = "Valid user DTO for resistering", required = true)
     @Parameter(name = "user", description = "Token for authentication.", required = true)
     @ApiResponse(responseCode = "201", description = "A personal Token for that user.")
-    @ApiResponse(responseCode = "209", description = "If the username or the email is alredy in use.")
+    @ApiResponse(responseCode = "209", description = "If the username or the email is already in use.")
     @ApiResponse(responseCode = "400", description = "If the userDTO is not validated.")
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/create")
@@ -225,7 +225,7 @@ class UserController
      */
     @Operation(summary = "Find own data", description = "Endpoint for obtaining self data.", tags = ["USER"])
     @Parameter(name = "user", description = "Token for authentication.", required = true)
-    @ApiResponse(responseCode = "201", description = "A personal Token for that user.")
+    @ApiResponse(responseCode = "200", description = "The profile of that user.")
     @ApiResponse(responseCode = "404", description = "If the user is not found.")
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @GetMapping("/me")
