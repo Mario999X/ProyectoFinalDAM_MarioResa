@@ -1,0 +1,223 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://assets/backgrounds/Menu_Background.png" type="Texture" id=1]
+[ext_resource path="res://assets/fonts/Xolonium-Regular.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://menus/WelcomeMenu.gd" type="Script" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 23
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=2]
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 12
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 15
+font_data = ExtResource( 2 )
+
+[node name="WelcomeMenu" type="CanvasLayer"]
+script = ExtResource( 3 )
+
+[node name="BackgroundColor" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="MenuTexture" type="TextureRect" parent="BackgroundColor"]
+modulate = Color( 1, 1, 1, 0.509804 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 1 )
+expand = true
+stretch_mode = 2
+
+[node name="GameTitleBackground2" type="ColorRect" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -201.0
+margin_top = 20.0
+margin_right = 201.0
+margin_bottom = 123.0
+color = Color( 0, 0.117647, 0.654902, 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="GameTitleBackground" type="ColorRect" parent="GameTitleBackground2"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -200.0
+margin_top = 1.0
+margin_right = 200.0
+margin_bottom = 101.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="GameTitle" type="Label" parent="GameTitleBackground2/GameTitleBackground"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -105.0
+margin_top = 37.0
+margin_right = 117.0
+margin_bottom = 66.0
+custom_fonts/font = SubResource( 1 )
+text = "SP4CE SURVIVAL"
+valign = 1
+
+[node name="LoginBackground2" type="ColorRect" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -201.0
+margin_top = -195.0
+margin_right = 201.0
+margin_bottom = 7.0
+color = Color( 0.133333, 0.615686, 0, 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="LoginBackground" type="ColorRect" parent="LoginBackground2"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -200.0
+margin_top = -100.0
+margin_right = 200.0
+margin_bottom = 100.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="UsernameLabel" type="Label" parent="LoginBackground2/LoginBackground"]
+margin_left = 12.0
+margin_top = 12.0
+margin_right = 113.0
+margin_bottom = 32.0
+custom_fonts/font = SubResource( 2 )
+text = "USERNAME"
+
+[node name="UsernameTextLine" type="LineEdit" parent="LoginBackground2/LoginBackground"]
+margin_left = 5.0
+margin_top = 56.0
+margin_right = 394.0
+margin_bottom = 84.0
+custom_fonts/font = SubResource( 3 )
+max_length = 20
+
+[node name="PasswordLabel" type="Label" parent="LoginBackground2/LoginBackground"]
+margin_left = 12.0
+margin_top = 106.0
+margin_right = 115.0
+margin_bottom = 126.0
+custom_fonts/font = SubResource( 2 )
+text = "PASSWORD"
+
+[node name="PasswordTextLine" type="LineEdit" parent="LoginBackground2/LoginBackground"]
+margin_left = 5.0
+margin_top = 147.0
+margin_right = 394.0
+margin_bottom = 175.0
+custom_fonts/font = SubResource( 3 )
+max_length = 20
+secret = true
+
+[node name="ButtonsBackground2" type="ColorRect" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -201.0
+margin_top = 44.0
+margin_right = 201.0
+margin_bottom = 224.0
+color = Color( 0.133333, 0.615686, 0, 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="ButtonsBackground" type="ColorRect" parent="ButtonsBackground2"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -200.0
+margin_top = -89.0
+margin_right = 200.0
+margin_bottom = 89.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="LoginButton" type="Button" parent="ButtonsBackground2/ButtonsBackground"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -195.0
+margin_top = -77.5
+margin_right = 195.5
+margin_bottom = -42.5
+custom_fonts/font = SubResource( 4 )
+text = "LOGIN"
+icon_align = 1
+
+[node name="RegisterButton" type="Button" parent="ButtonsBackground2/ButtonsBackground"]
+margin_left = 5.0
+margin_top = 90.0
+margin_right = 189.0
+margin_bottom = 132.0
+custom_fonts/font = SubResource( 4 )
+text = "REGISTER"
+
+[node name="OfflineButton" type="Button" parent="ButtonsBackground2/ButtonsBackground"]
+margin_left = 207.0
+margin_top = 90.0
+margin_right = 395.0
+margin_bottom = 132.0
+custom_fonts/font = SubResource( 4 )
+text = "PLAY_OFFLINE"
+
+[node name="OthersBackground2" type="ColorRect" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -301.0
+margin_top = -151.0
+margin_right = -14.0
+margin_bottom = -15.0
+color = Color( 0.431373, 0, 0, 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="OthersBackground" type="ColorRect" parent="OthersBackground2"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -285.0
+margin_top = -134.0
+margin_right = -2.0
+margin_bottom = -2.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="OptionsButton" type="Button" parent="OthersBackground2"]
+margin_left = 54.0
+margin_top = 10.0
+margin_right = 238.0
+margin_bottom = 52.0
+custom_fonts/font = SubResource( 4 )
+text = "OPTIONS"
+
+[node name="ExitButton" type="Button" parent="OthersBackground2"]
+margin_left = 53.0
+margin_top = 77.0
+margin_right = 237.0
+margin_bottom = 119.0
+custom_fonts/font = SubResource( 4 )
+text = "EXIT"
+
+[connection signal="pressed" from="OthersBackground2/ExitButton" to="." method="_on_ExitButton_pressed"]
