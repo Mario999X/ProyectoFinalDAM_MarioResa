@@ -8,7 +8,7 @@ Este proyecto se encuentra formado por dos partes, clásicas en un desarrollo de
 
 ¿Y... el nombre elegido? **¡Sp4ce Survival!**
 
-Se basara en un bullet hell orientado a la supervivencia del jugador donde su mayor baza será disparar para destruir ciertas balas enemigas o esquivar el mayor número de balas para así obtener una puntuación alta.
+Se basará en un bullet hell orientado a la supervivencia del jugador donde su mayor baza será disparar para destruir ciertas balas enemigas o esquivar el mayor número de balas para así obtener una puntuación alta.
 
 ## Diseño
 

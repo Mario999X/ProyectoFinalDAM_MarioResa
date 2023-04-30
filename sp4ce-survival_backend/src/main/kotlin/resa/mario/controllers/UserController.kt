@@ -4,7 +4,6 @@ import com.github.michaelbull.result.*
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.Parameter
 import io.swagger.v3.oas.annotations.responses.ApiResponse
-import jakarta.validation.Valid
 import mu.KotlinLogging
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
@@ -60,7 +59,7 @@ class UserController
     @ApiResponse(responseCode = "209", description = "If the username or the email is already in use.")
     @ApiResponse(responseCode = "400", description = "If the userDTO is not validated")
     @PostMapping("/register")
-    suspend fun register(@Valid @RequestBody userDto: UserDTORegister): ResponseEntity<String> {
+    suspend fun register(@RequestBody userDto: UserDTORegister): ResponseEntity<String> {
         log.info { "USER: ${userDto.username} TRYING TO REGISTER" }
 
         return when (val userResult = userDto.validate()) {
@@ -92,7 +91,7 @@ class UserController
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/create")
     suspend fun create(
-        @Valid @RequestBody userDto: UserDTOCreate,
+        @RequestBody userDto: UserDTOCreate,
         @AuthenticationPrincipal user: User
     ): ResponseEntity<String> {
         log.info { "USER: ${userDto.username} TRYING TO CREATE" }
@@ -121,7 +120,7 @@ class UserController
     @ApiResponse(responseCode = "400", description = "If the userDTO is not validated.")
     @ApiResponse(responseCode = "404", description = "If the user is not found.")
     @GetMapping("/login")
-    suspend fun login(@Valid @RequestBody userDto: UserDTOLogin): ResponseEntity<String> {
+    suspend fun login(@RequestBody userDto: UserDTOLogin): ResponseEntity<String> {
         log.info { "USER: ${userDto.username} TRYING TO LOGIN" }
 
         return when (val userResult = userDto.validate()) {
@@ -283,7 +282,7 @@ class UserController
     @PutMapping("/me/password")
     suspend fun updatePassword(
         @AuthenticationPrincipal user: User,
-        @Valid @RequestBody userDTOPasswordUpdate: UserDTOPasswordUpdate
+        @RequestBody userDTOPasswordUpdate: UserDTOPasswordUpdate
     ): ResponseEntity<String> {
         log.info { "USER: ${user.username} IS TRYING TO UPDATE THE PASSWORD" }
 
