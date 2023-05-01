@@ -10,21 +10,29 @@ config_version=4
 
 [application]
 
-config/name="Sp4Ce Survival"
-run/main_scene="res://menus/WelcomeMenu.tscn"
+config/name="Sp4ce Survival"
+run/main_scene="res://menus/main_menus/WelcomeMenu.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+SaveSystem="*res://utils/SaveSystem.gd"
+LoadSettings="*res://utils/LoadSettings.gd"
 
 [display]
 
 window/size/width=1920
 window/size/height=1080
-window/size/fullscreen=true
 window/stretch/mode="viewport"
-window/stretch/aspect="keep"
+window/stretch/aspect="expand"
 
 [gui]
 
 common/drop_mouse_on_gui_input_disabled=true
+
+[locale]
+
+translations=PoolStringArray( "res://lenguages/Translations.en_US.translation", "res://lenguages/Translations.es_ES.translation" )
 
 [physics]
 
