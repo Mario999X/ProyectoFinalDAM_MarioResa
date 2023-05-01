@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://assets/backgrounds/Menu_Background.png" type="Texture" id=1]
 [ext_resource path="res://assets/fonts/Xolonium-Regular.ttf" type="DynamicFontData" id=2]
@@ -8,16 +8,45 @@
 size = 23
 font_data = ExtResource( 2 )
 
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0, 0, 0, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.176471, 1, 0, 1 )
+border_blend = true
+
 [sub_resource type="DynamicFont" id=2]
 font_data = ExtResource( 2 )
 
+[sub_resource type="DynamicFontData" id=7]
+font_path = "res://assets/fonts/Xolonium-Regular.ttf"
+
+[sub_resource type="DynamicFont" id=8]
+size = 13
+font_data = SubResource( 7 )
+
 [sub_resource type="DynamicFont" id=3]
-size = 12
 font_data = ExtResource( 2 )
 
-[sub_resource type="DynamicFont" id=4]
-size = 15
-font_data = ExtResource( 2 )
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0, 0, 0, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.815686, 0.384314, 0, 1 )
+border_blend = true
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0, 0, 0, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.780392, 0, 0, 1 )
+border_blend = true
 
 [node name="WelcomeMenu" type="CanvasLayer"]
 script = ExtResource( 3 )
@@ -65,159 +94,165 @@ margin_right = 117.0
 margin_bottom = 66.0
 custom_fonts/font = SubResource( 1 )
 text = "SP4CE SURVIVAL"
+align = 1
 valign = 1
 
-[node name="LoginBackground2" type="ColorRect" parent="."]
+[node name="LoginElementsPanel" type="Panel" parent="."]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -201.0
-margin_top = -195.0
-margin_right = 201.0
-margin_bottom = 7.0
-color = Color( 0.133333, 0.615686, 0, 1 )
+margin_left = -150.0
+margin_top = -160.0
+margin_right = 150.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 300, 230 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 4 )
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="LoginBackground" type="ColorRect" parent="LoginBackground2"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -200.0
-margin_top = -100.0
-margin_right = 200.0
-margin_bottom = 100.0
-color = Color( 0, 0, 0, 1 )
+[node name="LoginElementsContainer" type="VBoxContainer" parent="LoginElementsPanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 20.0
+margin_right = -20.0
+margin_bottom = -10.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
 
-[node name="UsernameLabel" type="Label" parent="LoginBackground2/LoginBackground"]
-margin_left = 12.0
-margin_top = 12.0
-margin_right = 113.0
-margin_bottom = 32.0
+[node name="Separation3" type="Control" parent="LoginElementsPanel/LoginElementsContainer"]
+margin_right = 260.0
+margin_bottom = 5.0
+rect_min_size = Vector2( 0, 5 )
+
+[node name="UsernameLabel" type="Label" parent="LoginElementsPanel/LoginElementsContainer"]
+margin_top = 9.0
+margin_right = 260.0
+margin_bottom = 29.0
 custom_fonts/font = SubResource( 2 )
 text = "USERNAME"
+align = 1
 
-[node name="UsernameTextLine" type="LineEdit" parent="LoginBackground2/LoginBackground"]
-margin_left = 5.0
-margin_top = 56.0
-margin_right = 394.0
-margin_bottom = 84.0
-custom_fonts/font = SubResource( 3 )
+[node name="UsernameLineEdit" type="LineEdit" parent="LoginElementsPanel/LoginElementsContainer"]
+margin_top = 33.0
+margin_right = 260.0
+margin_bottom = 60.0
+rect_min_size = Vector2( 100, 20 )
+custom_fonts/font = SubResource( 8 )
 max_length = 20
 
-[node name="PasswordLabel" type="Label" parent="LoginBackground2/LoginBackground"]
-margin_left = 12.0
-margin_top = 106.0
-margin_right = 115.0
-margin_bottom = 126.0
+[node name="Separation" type="Control" parent="LoginElementsPanel/LoginElementsContainer"]
+margin_top = 64.0
+margin_right = 260.0
+margin_bottom = 84.0
+rect_min_size = Vector2( 0, 20 )
+
+[node name="PasswordLabel" type="Label" parent="LoginElementsPanel/LoginElementsContainer"]
+margin_top = 88.0
+margin_right = 260.0
+margin_bottom = 108.0
 custom_fonts/font = SubResource( 2 )
 text = "PASSWORD"
+align = 1
 
-[node name="PasswordTextLine" type="LineEdit" parent="LoginBackground2/LoginBackground"]
-margin_left = 5.0
-margin_top = 147.0
-margin_right = 394.0
-margin_bottom = 175.0
-custom_fonts/font = SubResource( 3 )
-max_length = 20
+[node name="PasswordLineEdit" type="LineEdit" parent="LoginElementsPanel/LoginElementsContainer"]
+margin_top = 112.0
+margin_right = 260.0
+margin_bottom = 139.0
+rect_min_size = Vector2( 100, 20 )
+custom_fonts/font = SubResource( 8 )
+max_length = 25
 secret = true
 
-[node name="ButtonsBackground2" type="ColorRect" parent="."]
+[node name="Separation2" type="Control" parent="LoginElementsPanel/LoginElementsContainer"]
+margin_top = 143.0
+margin_right = 260.0
+margin_bottom = 193.0
+rect_min_size = Vector2( 0, 50 )
+
+[node name="LoginButton" type="Button" parent="LoginElementsPanel/LoginElementsContainer"]
+margin_top = 197.0
+margin_right = 260.0
+margin_bottom = 223.0
+custom_fonts/font = SubResource( 3 )
+text = "LOGIN"
+
+[node name="RegisterAndOfflineElementsPanel" type="Panel" parent="."]
 anchor_left = 0.5
-anchor_top = 0.5
+anchor_top = 1.0
 anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -201.0
-margin_top = 44.0
-margin_right = 201.0
-margin_bottom = 224.0
-color = Color( 0.133333, 0.615686, 0, 1 )
+anchor_bottom = 1.0
+margin_left = -200.0
+margin_top = -220.0
+margin_right = 200.0
+margin_bottom = -170.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 5 )
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="ButtonsBackground" type="ColorRect" parent="ButtonsBackground2"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -200.0
-margin_top = -89.0
-margin_right = 200.0
-margin_bottom = 89.0
-color = Color( 0, 0, 0, 1 )
+[node name="RegisterAndOfflineElementsContainer" type="HBoxContainer" parent="RegisterAndOfflineElementsPanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 30.0
+margin_top = 10.0
+margin_right = -3.0
+margin_bottom = -10.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 110
 
-[node name="LoginButton" type="Button" parent="ButtonsBackground2/ButtonsBackground"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -195.0
-margin_top = -77.5
-margin_right = 195.5
-margin_bottom = -42.5
-custom_fonts/font = SubResource( 4 )
-text = "LOGIN"
-icon_align = 1
-
-[node name="RegisterButton" type="Button" parent="ButtonsBackground2/ButtonsBackground"]
-margin_left = 5.0
-margin_top = 90.0
-margin_right = 189.0
-margin_bottom = 132.0
-custom_fonts/font = SubResource( 4 )
+[node name="RegisterButton" type="Button" parent="RegisterAndOfflineElementsPanel/RegisterAndOfflineElementsContainer"]
+margin_right = 99.0
+margin_bottom = 30.0
+custom_fonts/font = SubResource( 3 )
 text = "REGISTER"
 
-[node name="OfflineButton" type="Button" parent="ButtonsBackground2/ButtonsBackground"]
-margin_left = 207.0
-margin_top = 90.0
-margin_right = 395.0
-margin_bottom = 132.0
-custom_fonts/font = SubResource( 4 )
-text = "PLAY_OFFLINE"
+[node name="PlayOfflineButton" type="Button" parent="RegisterAndOfflineElementsPanel/RegisterAndOfflineElementsContainer"]
+margin_left = 209.0
+margin_right = 344.0
+margin_bottom = 30.0
+custom_fonts/font = SubResource( 3 )
+text = "PLAY OFFLINE"
 
-[node name="OthersBackground2" type="ColorRect" parent="."]
+[node name="OptionsAndExitElementsPanel" type="Panel" parent="."]
 anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -301.0
-margin_top = -151.0
-margin_right = -14.0
+margin_left = -140.0
+margin_top = -90.0
+margin_right = -10.0
 margin_bottom = -15.0
-color = Color( 0.431373, 0, 0, 1 )
+custom_styles/panel = SubResource( 6 )
 __meta__ = {
 "_edit_group_": true
 }
 
-[node name="OthersBackground" type="ColorRect" parent="OthersBackground2"]
-anchor_left = 1.0
-anchor_top = 1.0
+[node name="OptionsAndExitElementsPanel" type="VBoxContainer" parent="OptionsAndExitElementsPanel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -285.0
-margin_top = -134.0
-margin_right = -2.0
-margin_bottom = -2.0
-color = Color( 0, 0, 0, 1 )
+margin_left = 3.0
+margin_top = 3.0
+margin_right = -3.0
+custom_constants/separation = 15
 
-[node name="OptionsButton" type="Button" parent="OthersBackground2"]
-margin_left = 54.0
-margin_top = 10.0
-margin_right = 238.0
-margin_bottom = 52.0
-custom_fonts/font = SubResource( 4 )
+[node name="OptionsButton" type="Button" parent="OptionsAndExitElementsPanel/OptionsAndExitElementsPanel"]
+margin_right = 124.0
+margin_bottom = 26.0
+custom_fonts/font = SubResource( 3 )
 text = "OPTIONS"
 
-[node name="ExitButton" type="Button" parent="OthersBackground2"]
-margin_left = 53.0
-margin_top = 77.0
-margin_right = 237.0
-margin_bottom = 119.0
-custom_fonts/font = SubResource( 4 )
+[node name="ExitButton" type="Button" parent="OptionsAndExitElementsPanel/OptionsAndExitElementsPanel"]
+margin_top = 41.0
+margin_right = 124.0
+margin_bottom = 67.0
+custom_fonts/font = SubResource( 3 )
 text = "EXIT"
 
-[connection signal="pressed" from="OthersBackground2/ExitButton" to="." method="_on_ExitButton_pressed"]
+[connection signal="pressed" from="OptionsAndExitElementsPanel/OptionsAndExitElementsPanel/ExitButton" to="." method="_on_ExitButton_pressed"]
