@@ -11,3 +11,10 @@ SOUND,Sonido,Sound
 MUTED,Silenciado,Muted
 SCREEN,Pantalla,Screen
 FULL_SCREEN,Pantalla Completa,Full Screen
+CHOSEN_DIFFICULTY:,Dificultad Elegida:,Chosen Difficulty:
+EASY,Fácil,Easy
+MEDIUM,Normal,Medium
+HARD,Difícil,Hard
+PLAY,JUGAR,PLAY
+PROFILE,Perfil,Profile
+LEADERBOARD,Tabla de clasificación,Leaderboard
