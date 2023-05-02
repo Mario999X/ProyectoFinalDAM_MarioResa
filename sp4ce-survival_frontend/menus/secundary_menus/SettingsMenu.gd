@@ -1,6 +1,5 @@
 extends CanvasLayer
 
-
 func _ready():
 	print(get_tree().current_scene.name, " | ", OS.get_time().hour, ":", OS.get_time().minute)
 	set_options()
@@ -22,7 +21,7 @@ func set_options():
 
 
 func _on_ReturnSettingsButton_pressed():
-	visible = false
+	self.hide()
 
 
 func _on_MutedCheckButton_toggled(button_pressed):

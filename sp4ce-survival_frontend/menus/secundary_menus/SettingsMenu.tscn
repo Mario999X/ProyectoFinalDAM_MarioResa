@@ -1,11 +1,14 @@
 [gd_scene load_steps=13 format=2]
 
-[ext_resource path="res://assets/backgrounds/Menu_BackGround.png" type="Texture" id=1]
 [ext_resource path="res://assets/icons/Return_Arrow_Original.png" type="Texture" id=2]
 [ext_resource path="res://menus/secundary_menus/SettingsMenu.gd" type="Script" id=3]
 [ext_resource path="res://assets/icons/Return_Arrow_Pressed.png" type="Texture" id=4]
 [ext_resource path="res://assets/icons/Return_Arrow_Hoover.png" type="Texture" id=5]
 [ext_resource path="res://assets/fonts/Xolonium-Regular.ttf" type="DynamicFontData" id=6]
+
+[sub_resource type="StreamTexture" id=7]
+flags = 4
+load_path = "res://.import/Menu_Background.png-3265d903de1c82a6adf9a4e8c4fb13ba.stex"
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0, 0, 0, 1 )
@@ -47,15 +50,15 @@ color = Color( 0, 0, 0, 1 )
 modulate = Color( 1, 1, 1, 0.509804 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-texture = ExtResource( 1 )
+texture = SubResource( 7 )
 expand = true
 
 [node name="ReturnSettingsButton" type="TextureButton" parent="."]
 anchor_top = 0.5
 anchor_bottom = 0.5
-margin_top = -25.0
+margin_top = -40.0
 margin_right = 150.0
-margin_bottom = 55.0
+margin_bottom = 40.0
 texture_normal = ExtResource( 2 )
 texture_pressed = ExtResource( 4 )
 texture_hover = ExtResource( 5 )

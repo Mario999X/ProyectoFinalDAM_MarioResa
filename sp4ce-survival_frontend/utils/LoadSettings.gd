@@ -1,6 +1,7 @@
 extends Node
 
 func load_Settings():
+	
 	var lenguage = SaveSystem.load_value("Lenguages", "Lenguage")
 	
 	if lenguage == "es":
@@ -13,11 +14,19 @@ func load_Settings():
 	
 	if soundMuted == "Off":
 		AudioServer.set_bus_mute(bus_idx, false)
-	if soundMuted == "On":
+	else:
 		AudioServer.set_bus_mute(bus_idx, true)
 	
 	var fullScreen = SaveSystem.load_value("Screen", "FullScreen")
+	
 	if fullScreen == "Off":
 		OS.window_fullscreen = false
-	if fullScreen == "On":
+	else:
 		OS.window_fullscreen = true
+	
+	var onlineMode = SaveSystem.load_value("Online", "Account")
+	
+	if onlineMode == "Off":
+		print("Account not detected")
+	else:
+		print("Account detected")

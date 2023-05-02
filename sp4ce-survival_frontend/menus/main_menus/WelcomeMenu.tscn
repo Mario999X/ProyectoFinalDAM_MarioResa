@@ -1,10 +1,9 @@
 [gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://menus/main_menus/WelcomeMenu.gd" type="Script" id=1]
-[ext_resource path="res://assets/backgrounds/Menu_BackGround.png" type="Texture" id=2]
+[ext_resource path="res://assets/backgrounds/Menu_Background.png" type="Texture" id=2]
 [ext_resource path="res://assets/fonts/Xolonium-Regular.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://menus/secundary_menus/SettingsMenu.tscn" type="PackedScene" id=4]
-[ext_resource path="res://assets/sounds/music/loops/Menus_Music.mp3" type="AudioStream" id=5]
 
 [sub_resource type="DynamicFont" id=1]
 size = 23
@@ -20,16 +19,18 @@ border_color = Color( 0.176471, 1, 0, 1 )
 border_blend = true
 
 [sub_resource type="DynamicFont" id=2]
+size = 20
 font_data = ExtResource( 3 )
 
 [sub_resource type="DynamicFontData" id=7]
 font_path = "res://assets/fonts/Xolonium-Regular.ttf"
 
 [sub_resource type="DynamicFont" id=8]
-size = 13
+size = 15
 font_data = SubResource( 7 )
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=10]
+size = 20
 font_data = ExtResource( 3 )
 
 [sub_resource type="StyleBoxFlat" id=5]
@@ -41,6 +42,9 @@ border_width_bottom = 2
 border_color = Color( 0.815686, 0.384314, 0, 1 )
 border_blend = true
 
+[sub_resource type="DynamicFont" id=9]
+font_data = ExtResource( 3 )
+
 [sub_resource type="StyleBoxFlat" id=6]
 bg_color = Color( 0, 0, 0, 1 )
 border_width_left = 2
@@ -51,11 +55,13 @@ border_color = Color( 0.780392, 0, 0, 1 )
 border_blend = true
 
 [node name="WelcomeMenu" type="CanvasLayer"]
+pause_mode = 2
 script = ExtResource( 1 )
 
 [node name="BackgroundColor" type="ColorRect" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+mouse_filter = 2
 color = Color( 0, 0, 0, 1 )
 
 [node name="MenuTexture" type="TextureRect" parent="BackgroundColor"]
@@ -72,6 +78,7 @@ margin_left = -201.0
 margin_top = 20.0
 margin_right = 201.0
 margin_bottom = 123.0
+mouse_filter = 2
 color = Color( 0, 0.117647, 0.654902, 1 )
 __meta__ = {
 "_edit_group_": true
@@ -119,7 +126,7 @@ __meta__ = {
 margin_left = 2.0
 margin_top = 2.0
 margin_right = 348.0
-margin_bottom = 240.0
+margin_bottom = 270.0
 size_flags_vertical = 0
 
 [node name="Separation3" type="Control" parent="LoginElementsPanel/LoginElementsContainer"]
@@ -130,53 +137,54 @@ rect_min_size = Vector2( 0, 10 )
 [node name="UsernameLabel" type="Label" parent="LoginElementsPanel/LoginElementsContainer"]
 margin_top = 14.0
 margin_right = 346.0
-margin_bottom = 34.0
+margin_bottom = 39.0
 custom_fonts/font = SubResource( 2 )
 text = "USERNAME"
 align = 1
 
 [node name="UsernameLineEdit" type="LineEdit" parent="LoginElementsPanel/LoginElementsContainer"]
-margin_top = 38.0
+margin_top = 43.0
 margin_right = 346.0
-margin_bottom = 65.0
-rect_min_size = Vector2( 100, 20 )
+margin_bottom = 83.0
+rect_min_size = Vector2( 100, 40 )
 custom_fonts/font = SubResource( 8 )
 max_length = 20
 
 [node name="Separation" type="Control" parent="LoginElementsPanel/LoginElementsContainer"]
-margin_top = 69.0
+margin_top = 87.0
 margin_right = 346.0
-margin_bottom = 89.0
+margin_bottom = 107.0
 rect_min_size = Vector2( 0, 20 )
 
 [node name="PasswordLabel" type="Label" parent="LoginElementsPanel/LoginElementsContainer"]
-margin_top = 93.0
+margin_top = 111.0
 margin_right = 346.0
-margin_bottom = 113.0
+margin_bottom = 136.0
 custom_fonts/font = SubResource( 2 )
 text = "PASSWORD"
 align = 1
 
 [node name="PasswordLineEdit" type="LineEdit" parent="LoginElementsPanel/LoginElementsContainer"]
-margin_top = 117.0
+margin_top = 140.0
 margin_right = 346.0
-margin_bottom = 144.0
-rect_min_size = Vector2( 100, 20 )
+margin_bottom = 180.0
+rect_min_size = Vector2( 100, 40 )
 custom_fonts/font = SubResource( 8 )
 max_length = 25
 secret = true
 
 [node name="Separation2" type="Control" parent="LoginElementsPanel/LoginElementsContainer"]
-margin_top = 148.0
+margin_top = 184.0
 margin_right = 346.0
-margin_bottom = 208.0
-rect_min_size = Vector2( 0, 60 )
+margin_bottom = 214.0
+rect_min_size = Vector2( 0, 30 )
 
 [node name="LoginButton" type="Button" parent="LoginElementsPanel/LoginElementsContainer"]
-margin_top = 212.0
+margin_top = 218.0
 margin_right = 346.0
-margin_bottom = 238.0
-custom_fonts/font = SubResource( 3 )
+margin_bottom = 268.0
+rect_min_size = Vector2( 0, 50 )
+custom_fonts/font = SubResource( 10 )
 text = "LOGIN"
 
 [node name="RegisterAndOfflineElementsPanel" type="PanelContainer" parent="."]
@@ -200,21 +208,21 @@ margin_left = 2.0
 margin_top = 2.0
 margin_right = 398.0
 margin_bottom = 68.0
-custom_constants/separation = 110
+custom_constants/separation = 100
 alignment = 1
 
 [node name="RegisterButton" type="Button" parent="RegisterAndOfflineElementsPanel/RegisterAndOfflineElementsContainer"]
-margin_left = 23.0
-margin_right = 122.0
+margin_left = 28.0
+margin_right = 127.0
 margin_bottom = 66.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 9 )
 text = "REGISTER"
 
 [node name="PlayOfflineButton" type="Button" parent="RegisterAndOfflineElementsPanel/RegisterAndOfflineElementsContainer"]
-margin_left = 232.0
-margin_right = 372.0
+margin_left = 227.0
+margin_right = 367.0
 margin_bottom = 66.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 9 )
 text = "PLAY_OFFLINE"
 
 [node name="OptionsAndExitElementsPanel" type="PanelContainer" parent="."]
@@ -243,23 +251,20 @@ alignment = 1
 margin_top = 4.0
 margin_right = 156.0
 margin_bottom = 30.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 9 )
 text = "OPTIONS"
 
 [node name="ExitButton" type="Button" parent="OptionsAndExitElementsPanel/OptionsAndExitElementsPanel"]
 margin_top = 45.0
 margin_right = 156.0
 margin_bottom = 71.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 9 )
 text = "EXIT"
 
 [node name="SettingsMenu" parent="." instance=ExtResource( 4 )]
-pause_mode = 2
+layer = 2
 visible = false
 
-[node name="BackGroundMusic" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 5 )
-autoplay = true
-
+[connection signal="pressed" from="RegisterAndOfflineElementsPanel/RegisterAndOfflineElementsContainer/PlayOfflineButton" to="." method="_on_PlayOfflineButton_pressed"]
 [connection signal="pressed" from="OptionsAndExitElementsPanel/OptionsAndExitElementsPanel/OptionsButton" to="." method="_on_OptionsButton_pressed"]
 [connection signal="pressed" from="OptionsAndExitElementsPanel/OptionsAndExitElementsPanel/ExitButton" to="." method="_on_ExitButton_pressed"]
