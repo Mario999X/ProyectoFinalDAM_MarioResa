@@ -1,10 +1,6 @@
 extends CanvasLayer
 
-var settings_instance = load("res://menus/secundary_menus/SettingsMenu.tscn").instance()
-
 func _ready():
-	add_child(settings_instance) 
-	settings_instance.visible = false
 	
 	print(get_tree().current_scene.name, " | ", OS.get_time().hour, ":", OS.get_time().minute)
 	var onlineMode = SaveSystem.load_value("Online", "Account")
@@ -34,7 +30,7 @@ func _on_ReturnMainMenu_pressed():
 
 
 func _on_OptionsButton_pressed():
-	settings_instance.visible = true
+	$SettingsMenu.visible = true
 
 
 func _on_ExitButton_pressed():
