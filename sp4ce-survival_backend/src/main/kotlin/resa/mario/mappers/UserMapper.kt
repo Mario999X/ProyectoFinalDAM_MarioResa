@@ -35,17 +35,6 @@ fun User.toDTOLeaderBoard(position: String, score: ScoreDTOResponse): UserDTOLea
 }
 
 /**
- * Mapper for [User] to [UserDTOResponse]
- *
- * @return [UserDTOResponse]
- */
-fun User.toDTOResponse(): UserDTOResponse {
-    return UserDTOResponse(
-        username = username,
-    )
-}
-
-/**
  * Mapper for [UserDTORegister] to [User]
  *
  * @return [User]

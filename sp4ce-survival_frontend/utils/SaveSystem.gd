@@ -28,7 +28,6 @@ func _ready():
 		save_value("Sound", "Muted", "Off")
 		save_value("Screen", "FullScreen", "On")
 		save_value("Online", "Account", "Off")
-		save_value("Difficulty", "Selected", "0")
 
 
 func save_value(section, key, value):

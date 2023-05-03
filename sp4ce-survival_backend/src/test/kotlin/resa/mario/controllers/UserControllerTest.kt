@@ -113,7 +113,7 @@ internal class UserControllerTest {
 
         assertAll(
             { assertNotNull(result) },
-            { assertEquals("", result) }
+            { assertEquals("", result!!.value) }
         )
 
         coVerify { service.register(any()) }
@@ -130,7 +130,7 @@ internal class UserControllerTest {
 
         assertAll(
             { assertNotNull(result) },
-            { assertEquals("", result) }
+            { assertEquals("", result!!.value) }
         )
 
         coVerify { service.create(any()) }
@@ -143,7 +143,7 @@ internal class UserControllerTest {
         val result = controller.login(userDTOLoginBad)
 
         assertAll(
-            { assertEquals("Username must not be blank.", result.body) }
+            { assertEquals("Username must not be blank.", result.body!!.value) }
         )
     }
 
@@ -154,7 +154,7 @@ internal class UserControllerTest {
         val result = controller.login(userDTOLoginBad2)
 
         assertAll(
-            { assertEquals("Password must at least be 5 characters long.", result.body) }
+            { assertEquals("Password must at least be 5 characters long.", result.body!!.value) }
         )
     }
 
@@ -221,7 +221,7 @@ internal class UserControllerTest {
 
         assertAll(
             { assertNotNull(result) },
-            { assertEquals("SCORE UPDATED", result.body) }
+            { assertEquals("SCORE UPDATED", result.body!!.value) }
         )
 
         coVerify { service.saveScore(any(), any()) }
@@ -237,7 +237,7 @@ internal class UserControllerTest {
 
         assertAll(
             { assertNotNull(result) },
-            { assertEquals("USER UPDATED", result.body) }
+            { assertEquals("USER UPDATED", result.body!!.value) }
         )
 
         coVerify { service.updatePassword(any(), any()) }

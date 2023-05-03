@@ -19,7 +19,6 @@ import resa.mario.config.APIConfig
 import resa.mario.config.security.jwt.JwtTokensUtils
 import resa.mario.dto.*
 import resa.mario.exceptions.UserException.*
-import resa.mario.mappers.toDTOResponse
 import resa.mario.mappers.toScoreDTO
 import resa.mario.models.User
 import resa.mario.services.UserService
@@ -59,19 +58,19 @@ class UserController
     @ApiResponse(responseCode = "209", description = "If the username or the email is already in use.")
     @ApiResponse(responseCode = "400", description = "If the userDTO is not validated")
     @PostMapping("/register")
-    suspend fun register(@RequestBody userDto: UserDTORegister): ResponseEntity<String> {
+    suspend fun register(@RequestBody userDto: UserDTORegister): ResponseEntity<GenericResponse> {
         log.info { "USER: ${userDto.username} TRYING TO REGISTER" }
 
         return when (val userResult = userDto.validate()) {
             is Ok -> {
                 when (val userSaved = service.register(userResult.value)) {
-                    is Ok -> ResponseEntity.status(HttpStatus.CREATED).body(jwtTokenUtils.create(userSaved.value))
+                    is Ok -> ResponseEntity.status(HttpStatus.CREATED).body(GenericResponse(jwtTokenUtils.create(userSaved.value)))
 
-                    is Err -> ResponseEntity.status(HttpStatus.CONFLICT).body(userSaved.error.message)
+                    is Err -> ResponseEntity.status(HttpStatus.CONFLICT).body(GenericResponse(userSaved.error.message!!))
                 }
             }
 
-            is Err -> ResponseEntity.status(HttpStatus.BAD_REQUEST).body(userResult.error.message)
+            is Err -> ResponseEntity.status(HttpStatus.BAD_REQUEST).body(GenericResponse(userResult.error.message!!))
         }
     }
 
@@ -93,18 +92,18 @@ class UserController
     suspend fun create(
         @RequestBody userDto: UserDTOCreate,
         @AuthenticationPrincipal user: User
-    ): ResponseEntity<String> {
+    ): ResponseEntity<GenericResponse> {
         log.info { "USER: ${userDto.username} TRYING TO CREATE" }
 
         return when (val userResult = userDto.validate()) {
             is Ok -> {
                 when (val userSaved = service.create(userResult.value)) {
-                    is Ok -> ResponseEntity.status(HttpStatus.CREATED).body(jwtTokenUtils.create(userSaved.value))
-                    is Err -> ResponseEntity.status(HttpStatus.CONFLICT).body(userSaved.error.message)
+                    is Ok -> ResponseEntity.status(HttpStatus.CREATED).body(GenericResponse(jwtTokenUtils.create(userSaved.value)))
+                    is Err -> ResponseEntity.status(HttpStatus.CONFLICT).body(GenericResponse(userSaved.error.message!!))
                 }
             }
 
-            is Err -> ResponseEntity.status(HttpStatus.BAD_REQUEST).body(userResult.error.message)
+            is Err -> ResponseEntity.status(HttpStatus.BAD_REQUEST).body(GenericResponse(userResult.error.message!!))
         }
     }
 
@@ -120,7 +119,7 @@ class UserController
     @ApiResponse(responseCode = "400", description = "If the userDTO is not validated.")
     @ApiResponse(responseCode = "404", description = "If the user is not found.")
     @GetMapping("/login")
-    suspend fun login(@RequestBody userDto: UserDTOLogin): ResponseEntity<String> {
+    suspend fun login(@RequestBody userDto: UserDTOLogin): ResponseEntity<GenericResponse> {
         log.info { "USER: ${userDto.username} TRYING TO LOGIN" }
 
         return when (val userResult = userDto.validate()) {
@@ -137,10 +136,10 @@ class UserController
                 // And return the authenticated user
                 val user = authentication.principal as User
 
-                ResponseEntity.ok(jwtTokenUtils.create(user))
+                ResponseEntity.ok(GenericResponse(jwtTokenUtils.create(user)))
             }
 
-            is Err -> ResponseEntity.status(HttpStatus.BAD_REQUEST).body(userResult.error.message)
+            is Err -> ResponseEntity.status(HttpStatus.BAD_REQUEST).body(GenericResponse(userResult.error.message!!))
         }
     }
 
@@ -151,7 +150,7 @@ class UserController
      *
      * @param user Token from an existing user
      * @param username Username of the user to search
-     * @return A possible user found, [UserDTOResponse] or a not found message
+     * @return A possible user found, [GenericResponse] or a not found message
      */
     @Operation(
         summary = "Find by username",
@@ -167,12 +166,12 @@ class UserController
     suspend fun findUserByUsername(
         @AuthenticationPrincipal user: User,
         @RequestParam(defaultValue = "") username: String
-    ): ResponseEntity<out Any> {
+    ): ResponseEntity<GenericResponse> {
         log.info { "SEARCHING USER WITH USERNAME: $username" }
 
         return when (val serviceResult = service.findByUsername(username)) {
-            is Ok -> ResponseEntity.status(HttpStatus.OK).body(serviceResult.value.toDTOResponse())
-            is Err -> ResponseEntity.status(HttpStatus.NOT_FOUND).body(serviceResult.error.message)
+            is Ok -> ResponseEntity.status(HttpStatus.OK).body(GenericResponse(serviceResult.value.username))
+            is Err -> ResponseEntity.status(HttpStatus.NOT_FOUND).body(GenericResponse(serviceResult.error.message!!))
         }
     }
 
@@ -211,7 +210,7 @@ class UserController
 
         return when (val pageResponse = service.findAllForLeaderBoard(page, size, sortBy)) {
             is Ok -> ResponseEntity.ok(pageResponse.value.content)
-            is Err -> ResponseEntity.status(HttpStatus.NOT_FOUND).body(pageResponse.error.message)
+            is Err -> ResponseEntity.status(HttpStatus.NOT_FOUND).body(GenericResponse(pageResponse.error.message!!))
         }
     }
 
@@ -234,7 +233,7 @@ class UserController
 
         return when (val serviceResult = service.findUserProfile(user)) {
             is Ok -> ResponseEntity.ok(serviceResult.value)
-            is Err -> ResponseEntity.status(HttpStatus.NOT_FOUND).body(serviceResult.error.message)
+            is Err -> ResponseEntity.status(HttpStatus.NOT_FOUND).body(GenericResponse(serviceResult.error.message!!))
         }
     }
 
@@ -256,14 +255,14 @@ class UserController
     @ApiResponse(responseCode = "400", description = "Score not updated")
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @PutMapping("/me/score")
-    suspend fun updateScore(@AuthenticationPrincipal user: User, scoreNumber: String): ResponseEntity<String> {
+    suspend fun updateScore(@AuthenticationPrincipal user: User, scoreNumber: String): ResponseEntity<GenericResponse> {
         log.info { "USER: ${user.username} IS UDPATING AN SCORE" }
 
         val response = service.saveScore(user.id.toString(), scoreNumber)
 
         return if (!response) {
-            ResponseEntity.status(HttpStatus.BAD_REQUEST).body("SCORE NOT HIGHER THAN ACTUAL REGISTERED")
-        } else ResponseEntity.ok("SCORE UPDATED")
+            ResponseEntity.status(HttpStatus.BAD_REQUEST).body(GenericResponse("SCORE NOT HIGHER THAN ACTUAL REGISTERED"))
+        } else ResponseEntity.ok(GenericResponse("SCORE UPDATED"))
     }
 
     /**
@@ -283,19 +282,19 @@ class UserController
     suspend fun updatePassword(
         @AuthenticationPrincipal user: User,
         @RequestBody userDTOPasswordUpdate: UserDTOPasswordUpdate
-    ): ResponseEntity<String> {
+    ): ResponseEntity<GenericResponse> {
         log.info { "USER: ${user.username} IS TRYING TO UPDATE THE PASSWORD" }
 
         return when (val userResult = userDTOPasswordUpdate.validate()) {
             is Ok -> {
                 when (val serviceResult = service.updatePassword(user, userDTOPasswordUpdate)) {
-                    is Ok -> ResponseEntity.ok("USER UPDATED")
+                    is Ok -> ResponseEntity.ok(GenericResponse("USER UPDATED"))
 
-                    is Err -> ResponseEntity.status(HttpStatus.BAD_REQUEST).body(serviceResult.error.message)
+                    is Err -> ResponseEntity.status(HttpStatus.BAD_REQUEST).body(GenericResponse(serviceResult.error.message!!))
                 }
             }
 
-            is Err -> ResponseEntity.status(HttpStatus.BAD_REQUEST).body(userResult.error.message)
+            is Err -> ResponseEntity.status(HttpStatus.BAD_REQUEST).body(GenericResponse(userResult.error.message!!))
         }
     }
 
@@ -311,7 +310,7 @@ class UserController
     @ApiResponse(responseCode = "404", description = "If user was not found.")
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")
     @DeleteMapping("/me")
-    suspend fun deleteMe(@AuthenticationPrincipal user: User): ResponseEntity<String> {
+    suspend fun deleteMe(@AuthenticationPrincipal user: User): ResponseEntity<GenericResponse> {
         log.info { "USER: ${user.username} SELF DELETING ACCOUNT" }
 
         return when (val deletedUser = service.delete(user.username)) {
@@ -320,7 +319,7 @@ class UserController
                 ResponseEntity.noContent().build()
             }
 
-            is Err -> ResponseEntity.status(HttpStatus.NOT_FOUND).body(deletedUser.error.message)
+            is Err -> ResponseEntity.status(HttpStatus.NOT_FOUND).body(GenericResponse(deletedUser.error.message!!))
         }
     }
 

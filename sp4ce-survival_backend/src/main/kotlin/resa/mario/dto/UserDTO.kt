@@ -48,16 +48,6 @@ data class UserDTOCreate(
 )
 
 /**
- * DTO for a Generic Response
- *
- * @property username Username of a user, String
- */
-@Serializable
-data class UserDTOResponse(
-    val username: String
-)
-
-/**
  * DTO for a Profile Response
  *
  * @property username Username of a user, String
@@ -99,4 +89,14 @@ data class UserDTOPasswordUpdate(
     val actualPassword: String,
     val newPassword: String,
     val repeatNewPassword: String
+)
+
+/**
+ * DTO for a Generic Response
+ *
+ * @property value, String
+ */
+@Serializable
+data class GenericResponse(
+    val value: String
 )
