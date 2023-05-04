@@ -1,13 +1,13 @@
 extends CanvasLayer
 
 func _ready():
-	
 	print(get_tree().current_scene.name, " | ", OS.get_time().hour, ":", OS.get_time().minute)
-	var onlineMode = SaveSystem.load_value("Online", "Account")
 	
 	_reloadLabel(GlobalVariables.difficultySelected)
 	
-	if onlineMode == "Off":
+	var onlineMode = SaveSystem.load_value_user("Online", "Account")
+	
+	if onlineMode == "0":
 		$MainElementsPanel/MainElementsContainer/OnlineElementsPanel/OnlineElementsContainer/ProfileButton.disabled = true
 		$MainElementsPanel/MainElementsContainer/OnlineElementsPanel/OnlineElementsContainer/LeaderboardButton.disabled = true
 
@@ -25,6 +25,7 @@ func _reloadLabel(difficultySelected):
 
 
 func _on_ReturnMainMenu_pressed():
+	SaveSystem.save_value_user("Online", "Account", "0")
 	get_tree().change_scene("res://menus/main_menus/WelcomeMenu.tscn")
 	queue_free()
 

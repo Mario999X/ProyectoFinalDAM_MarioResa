@@ -1,9 +1,10 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://menus/main_menus/WelcomeMenu.gd" type="Script" id=1]
 [ext_resource path="res://assets/backgrounds/Menu_Background.png" type="Texture" id=2]
 [ext_resource path="res://assets/fonts/Xolonium-Regular.ttf" type="DynamicFontData" id=3]
 [ext_resource path="res://menus/secundary_menus/SettingsMenu.tscn" type="PackedScene" id=4]
+[ext_resource path="res://loading_screens/LoadingScreen.tscn" type="PackedScene" id=5]
 
 [sub_resource type="DynamicFont" id=1]
 size = 23
@@ -28,6 +29,9 @@ font_path = "res://assets/fonts/Xolonium-Regular.ttf"
 [sub_resource type="DynamicFont" id=8]
 size = 15
 font_data = SubResource( 7 )
+
+[sub_resource type="DynamicFont" id=11]
+font_data = ExtResource( 3 )
 
 [sub_resource type="DynamicFont" id=10]
 size = 20
@@ -110,10 +114,12 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-margin_left = -180.0
-margin_top = -160.0
-margin_right = 170.0
-margin_bottom = 120.0
+margin_left = -175.0
+margin_top = -140.0
+margin_right = 175.0
+margin_bottom = 140.0
+grow_horizontal = 2
+grow_vertical = 2
 rect_min_size = Vector2( 300, 230 )
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -150,6 +156,15 @@ rect_min_size = Vector2( 100, 40 )
 custom_fonts/font = SubResource( 8 )
 max_length = 20
 
+[node name="MessageWarningUsername" type="Label" parent="LoginElementsPanel/LoginElementsContainer"]
+visible = false
+margin_top = 87.0
+margin_right = 346.0
+margin_bottom = 107.0
+custom_fonts/font = SubResource( 11 )
+text = "WARNING_USERNAME"
+align = 1
+
 [node name="Separation" type="Control" parent="LoginElementsPanel/LoginElementsContainer"]
 margin_top = 87.0
 margin_right = 346.0
@@ -172,6 +187,15 @@ rect_min_size = Vector2( 100, 40 )
 custom_fonts/font = SubResource( 8 )
 max_length = 25
 secret = true
+
+[node name="MessageWarningPassword" type="Label" parent="LoginElementsPanel/LoginElementsContainer"]
+visible = false
+margin_top = 184.0
+margin_right = 346.0
+margin_bottom = 204.0
+custom_fonts/font = SubResource( 11 )
+text = "WARNING_PASSWORD"
+align = 1
 
 [node name="Separation2" type="Control" parent="LoginElementsPanel/LoginElementsContainer"]
 margin_top = 184.0
@@ -265,6 +289,24 @@ text = "EXIT"
 layer = 2
 visible = false
 
+[node name="LoadScreen" parent="." instance=ExtResource( 5 )]
+layer = 3
+visible = false
+
+[node name="RequestTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="Login" type="HTTPRequest" parent="."]
+timeout = 10.0
+
+[node name="CheckToken" type="HTTPRequest" parent="."]
+timeout = 10.0
+
+[connection signal="pressed" from="LoginElementsPanel/LoginElementsContainer/LoginButton" to="." method="_on_LoginButton_pressed"]
 [connection signal="pressed" from="RegisterAndOfflineElementsPanel/RegisterAndOfflineElementsContainer/PlayOfflineButton" to="." method="_on_PlayOfflineButton_pressed"]
 [connection signal="pressed" from="OptionsAndExitElementsPanel/OptionsAndExitElementsPanel/OptionsButton" to="." method="_on_OptionsButton_pressed"]
 [connection signal="pressed" from="OptionsAndExitElementsPanel/OptionsAndExitElementsPanel/ExitButton" to="." method="_on_ExitButton_pressed"]
+[connection signal="timeout" from="RequestTimer" to="." method="_on_RequestTimer_timeout"]
+[connection signal="request_completed" from="Login" to="." method="_on_Login_request_completed"]
+[connection signal="request_completed" from="CheckToken" to="." method="_on_CheckToken_request_completed"]

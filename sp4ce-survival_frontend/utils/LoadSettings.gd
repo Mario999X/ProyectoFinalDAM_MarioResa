@@ -24,9 +24,3 @@ func load_Settings():
 	else:
 		OS.window_fullscreen = true
 	
-	var onlineMode = SaveSystem.load_value("Online", "Account")
-	
-	if onlineMode == "Off":
-		print("Account not detected")
-	else:
-		print("Account detected")
