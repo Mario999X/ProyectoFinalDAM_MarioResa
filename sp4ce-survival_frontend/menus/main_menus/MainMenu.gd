@@ -23,7 +23,6 @@ func _reloadLabel(difficultySelected):
 		originalLabel.text = $MainElementsPanel/MainElementsContainer/DifficultyLevelsContainer/HardButton.text
 
 
-
 func _on_ReturnMainMenu_pressed():
 	SaveSystem.save_value_user("Online", "Account", "0")
 	get_tree().change_scene("res://menus/main_menus/WelcomeMenu.tscn")

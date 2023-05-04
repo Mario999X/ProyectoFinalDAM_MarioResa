@@ -18,3 +18,8 @@ HARD,Difícil,Hard
 PLAY,JUGAR,PLAY
 PROFILE,Perfil,Profile
 LEADERBOARD,Tabla de clasificación,Leaderboard
+USERNAME_CANNOT_BE_EMPTY,El nombre de usuario no puede estar vacío.,Username cannot be empty
+PASSWORD_MUST_BE_AT_LEAST_5_CHARACTERS,La contraseña debe de tener 5 caracteres como mínimo.,The password must be at least 5 characters
+TIMEOUT,Conexión fallida,Timeout
+CORRECT,Operación completada con éxito,Operation completed successfully
+LOADING,Cargando…,Loading…
