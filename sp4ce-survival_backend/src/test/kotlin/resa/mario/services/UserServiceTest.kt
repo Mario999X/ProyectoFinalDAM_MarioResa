@@ -101,20 +101,35 @@ internal class UserServiceTest {
     fun register() = runTest {
         coEvery { repository.findByUsername(any()) } returns null
         coEvery { repository.findByEmail(any()) } returns null
-        coEvery { passwordEncoder.encode(any()) } returns userDtoCreate.password
+        coEvery { passwordEncoder.encode(any()) } returns userDtoRegister.password
         coEvery { repository.save(any()) } returns user
 
         val result = service.register(userDtoRegister)
 
         assertAll(
             { assertNotNull(result) },
-            { assertEquals(userDtoCreate.username, result.component1()!!.username) }
+            { assertEquals(userDtoRegister.username, result.component1()!!.username) }
         )
 
         coVerify { repository.findByUsername(any()) }
         coVerify { repository.findByEmail(any()) }
         coVerify { passwordEncoder.encode(any()) }
         coVerify { repository.save(any()) }
+    }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    @Test
+    fun registerFailed() = runTest {
+        coEvery { repository.findByUsername(any()) } returns user
+
+        val result = service.register(userDtoRegister)
+
+        assertAll(
+            { assertNotNull(result) },
+            { assertEquals("Username already used", result.component2()!!.message) }
+        )
+
+        coVerify { repository.findByUsername(any()) }
     }
 
     @OptIn(ExperimentalCoroutinesApi::class)
@@ -136,6 +151,21 @@ internal class UserServiceTest {
         coVerify { repository.findByEmail(any()) }
         coVerify { passwordEncoder.encode(any()) }
         coVerify { repository.save(any()) }
+    }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    @Test
+    fun createFailed() = runTest {
+        coEvery { repository.findByUsername(any()) } returns user
+
+        val result = service.create(userDtoCreate)
+
+        assertAll(
+            { assertNotNull(result) },
+            { assertEquals("Username already used", result.component2()!!.message) }
+        )
+
+        coVerify { repository.findByUsername(any()) }
     }
 
     @OptIn(ExperimentalCoroutinesApi::class)
