@@ -18,8 +18,13 @@ HARD,Difícil,Hard
 PLAY,JUGAR,PLAY
 PROFILE,Perfil,Profile
 LEADERBOARD,Tabla de clasificación,Leaderboard
-USERNAME_CANNOT_BE_EMPTY,El nombre de usuario no puede estar vacío.,Username cannot be empty
-PASSWORD_MUST_BE_AT_LEAST_5_CHARACTERS,La contraseña debe de tener 5 caracteres como mínimo.,The password must be at least 5 characters
+USERNAME_CANNOT_BE_EMPTY,El nombre de usuario no puede estar vacío,Username cannot be empty
+PASSWORD_MUST_BE_AT_LEAST_5_CHARACTERS,La contraseña debe de tener 5 caracteres como mínimo,The password must be at least 5 characters
+EMAIL_CANNOT_BE_EMPTY,El correo electrónico no puede estar vacío,The email cannot be empty
+EMAIL_INCORRECT,El correo electrónico no tiene un formato válido,The email does not have a valid format
+PASSWORD_AND_REPEAT_PASSWORD_MUST_BE_THE_SAME,Las contraseñas no coinciden,Passwords do not match
 TIMEOUT,Conexión fallida,Timeout
 CORRECT,Operación completada con éxito,Operation completed successfully
 LOADING,Cargando…,Loading…
+EMAIL,Correo Electrónico,Email
+REPEAT_PASSWORD,Confirme la contraseña,Confirm password

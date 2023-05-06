@@ -1,5 +1,6 @@
 extends CanvasLayer
 
+
 func _ready():
 	print(get_tree().current_scene.name, " | ", OS.get_time().hour, ":", OS.get_time().minute)
 	LoadSettings.load_Settings()
@@ -7,7 +8,7 @@ func _ready():
 	var onlineMode = SaveSystem.load_value_user("Online", "Account")
 	
 	if onlineMode != "0":
-		$LoadScreen.visible = true
+		$LoadScreen.show()
 		_check_token_query(onlineMode)
 
 
@@ -16,7 +17,7 @@ func _on_ExitButton_pressed():
 
 
 func _on_OptionsButton_pressed():
-	$SettingsMenu.visible = true
+	$SettingsMenu.show()
 
 
 func _on_PlayOfflineButton_pressed():
@@ -25,6 +26,7 @@ func _on_PlayOfflineButton_pressed():
 	queue_free()
 
 
+# "Use SSL" must be false because I use Self-Signed Certificate
 func _check_token_query(token):
 	var url = "https://localhost:6969/sp4ceSurvival/me"
 	var headers = ["Authorization: Bearer " + token]
@@ -32,7 +34,7 @@ func _check_token_query(token):
 	$CheckToken.request(url, headers, false, HTTPClient.METHOD_GET)
 
 
-func prepare_login_query(username, password):
+func _prepare_login_query(username, password):
 	var url = "https://localhost:6969/sp4ceSurvival/login"
 	var query = {"username": username, "password": password}
 	var headers = ["Content-Type: application/json"]
@@ -48,22 +50,20 @@ func _on_LoginButton_pressed():
 	var passwordMessage = $LoginElementsPanel/LoginElementsContainer/MessageWarningPassword
 	
 	if !usernameField.text.strip_edges().empty() && passwordField.text.strip_edges().length() >= 5 :
-		usernameMessage.visible = false
-		passwordMessage.visible = false
 		$LoadScreen.show()
-		prepare_login_query(usernameField.text.strip_edges(), passwordField.text.strip_edges())
+		_prepare_login_query(usernameField.text.strip_edges(), passwordField.text.strip_edges())
 		
 	if usernameField.text.strip_edges().empty():
 		usernameMessage.text = "USERNAME_CANNOT_BE_EMPTY"
-		usernameMessage.visible = true
+		usernameMessage.show()
 	else:
-		usernameMessage.visible = false
+		usernameMessage.hide()
 	
 	if passwordField.text.strip_edges().length() <= 4:
 		passwordMessage.text = "PASSWORD_MUST_BE_AT_LEAST_5_CHARACTERS"
-		passwordMessage.visible = true
+		passwordMessage.show()
 	else:
-		passwordMessage.visible = false
+		passwordMessage.hide()
 	
 
 
@@ -99,7 +99,7 @@ func _on_RequestTimer_timeout():
 		get_tree().change_scene("res://menus/main_menus/MainMenu.tscn")
 		queue_free()
 	
-	$LoadScreen.visible = false
+	$LoadScreen.hide()
 	GlobalVariables.message_http_request = "LOADING"
 	$LoadScreen/LoadingElementsContainer/LoadingMessage.text = GlobalVariables.message_http_request
 
@@ -124,3 +124,8 @@ func _on_CheckToken_request_completed(result, response_code, headers, body):
 			GlobalVariables.message_http_request = error
 	$LoadScreen/LoadingElementsContainer/LoadingMessage.text = GlobalVariables.message_http_request
 	$RequestTimer.start()
+
+
+func _on_RegisterButton_pressed():
+	get_tree().change_scene("res://menus/main_menus/RegisterMenu.tscn")
+	queue_free()

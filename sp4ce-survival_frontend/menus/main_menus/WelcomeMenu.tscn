@@ -131,18 +131,18 @@ __meta__ = {
 [node name="LoginElementsContainer" type="VBoxContainer" parent="LoginElementsPanel"]
 margin_left = 2.0
 margin_top = 2.0
-margin_right = 348.0
+margin_right = 352.0
 margin_bottom = 277.0
 size_flags_vertical = 0
 
 [node name="Separation3" type="Control" parent="LoginElementsPanel/LoginElementsContainer"]
-margin_right = 346.0
+margin_right = 350.0
 margin_bottom = 10.0
-rect_min_size = Vector2( 0, 10 )
+rect_min_size = Vector2( 350, 10 )
 
 [node name="UsernameLabel" type="Label" parent="LoginElementsPanel/LoginElementsContainer"]
 margin_top = 14.0
-margin_right = 346.0
+margin_right = 350.0
 margin_bottom = 39.0
 custom_fonts/font = SubResource( 2 )
 text = "USERNAME"
@@ -150,7 +150,7 @@ align = 1
 
 [node name="UsernameLineEdit" type="LineEdit" parent="LoginElementsPanel/LoginElementsContainer"]
 margin_top = 43.0
-margin_right = 346.0
+margin_right = 350.0
 margin_bottom = 83.0
 rect_min_size = Vector2( 100, 40 )
 custom_fonts/font = SubResource( 8 )
@@ -168,13 +168,13 @@ align = 1
 
 [node name="Separation" type="Control" parent="LoginElementsPanel/LoginElementsContainer"]
 margin_top = 87.0
-margin_right = 346.0
+margin_right = 350.0
 margin_bottom = 109.0
 rect_min_size = Vector2( 0, 22 )
 
 [node name="PasswordLabel" type="Label" parent="LoginElementsPanel/LoginElementsContainer"]
 margin_top = 113.0
-margin_right = 346.0
+margin_right = 350.0
 margin_bottom = 138.0
 custom_fonts/font = SubResource( 2 )
 text = "PASSWORD"
@@ -182,7 +182,7 @@ align = 1
 
 [node name="PasswordLineEdit" type="LineEdit" parent="LoginElementsPanel/LoginElementsContainer"]
 margin_top = 142.0
-margin_right = 346.0
+margin_right = 350.0
 margin_bottom = 182.0
 rect_min_size = Vector2( 100, 40 )
 custom_fonts/font = SubResource( 8 )
@@ -200,13 +200,13 @@ align = 1
 
 [node name="Separation2" type="Control" parent="LoginElementsPanel/LoginElementsContainer"]
 margin_top = 186.0
-margin_right = 346.0
+margin_right = 350.0
 margin_bottom = 221.0
 rect_min_size = Vector2( 0, 35 )
 
 [node name="LoginButton" type="Button" parent="LoginElementsPanel/LoginElementsContainer"]
 margin_top = 225.0
-margin_right = 346.0
+margin_right = 350.0
 margin_bottom = 275.0
 rect_min_size = Vector2( 0, 50 )
 custom_fonts/font = SubResource( 10 )
@@ -307,6 +307,7 @@ timeout = 10.0
 timeout = 10.0
 
 [connection signal="pressed" from="LoginElementsPanel/LoginElementsContainer/LoginButton" to="." method="_on_LoginButton_pressed"]
+[connection signal="pressed" from="RegisterAndOfflineElementsPanel/RegisterAndOfflineElementsContainer/RegisterButton" to="." method="_on_RegisterButton_pressed"]
 [connection signal="pressed" from="RegisterAndOfflineElementsPanel/RegisterAndOfflineElementsContainer/PlayOfflineButton" to="." method="_on_PlayOfflineButton_pressed"]
 [connection signal="pressed" from="OptionsAndExitElementsPanel/OptionsAndExitElementsPanel/OptionsButton" to="." method="_on_OptionsButton_pressed"]
 [connection signal="pressed" from="OptionsAndExitElementsPanel/OptionsAndExitElementsPanel/ExitButton" to="." method="_on_ExitButton_pressed"]

@@ -30,7 +30,7 @@ func _on_ReturnMainMenu_pressed():
 
 
 func _on_OptionsButton_pressed():
-	$SettingsMenu.visible = true
+	$SettingsMenu.show()
 
 
 func _on_ExitButton_pressed():
