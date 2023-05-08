@@ -49,7 +49,7 @@ func _on_LoginButton_pressed():
 	var usernameMessage = $LoginElementsPanel/LoginElementsContainer/MessageWarningUsername
 	var passwordMessage = $LoginElementsPanel/LoginElementsContainer/MessageWarningPassword
 	
-	if !usernameField.text.strip_edges().empty() && passwordField.text.strip_edges().length() >= 5 :
+	if !usernameField.text.strip_edges().empty() and passwordField.text.strip_edges().length() >= 5 :
 		$LoadScreen.show()
 		_prepare_login_query(usernameField.text.strip_edges(), passwordField.text.strip_edges())
 		

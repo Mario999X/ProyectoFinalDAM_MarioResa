@@ -32,9 +32,9 @@ func _on_RegisterButton_pressed():
 	var regex = RegEx.new()
 	regex.compile("^[\\w\\-\\.]+@[\\w\\-]+\\.[\\w\\-]{2,4}$")
 	
-	if (!usernameRegisterField.text.strip_edges().empty() && !emailRegisterField.text.strip_edges().empty()
-	&& regex.search(emailRegisterField.text.strip_edges()) != null && passwordRegisterField.text.strip_edges().length() >= 5 
-	&& repeatPasswordRegisterField.text.strip_edges() == passwordRegisterField.text.strip_edges()): 
+	if (!usernameRegisterField.text.strip_edges().empty() and !emailRegisterField.text.strip_edges().empty()
+	and regex.search(emailRegisterField.text.strip_edges()) != null and passwordRegisterField.text.strip_edges().length() >= 5 
+	and repeatPasswordRegisterField.text.strip_edges() == passwordRegisterField.text.strip_edges()): 
 		
 		$LoadScreen.show()
 		_prepare_register_query(usernameRegisterField.text.strip_edges(), emailRegisterField.text.strip_edges(), 
