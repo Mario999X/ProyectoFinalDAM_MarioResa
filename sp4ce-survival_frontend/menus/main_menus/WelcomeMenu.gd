@@ -17,10 +17,12 @@ func _on_ExitButton_pressed():
 
 
 func _on_OptionsButton_pressed():
+	Select1.play()
 	$SettingsMenu.show()
 
 
 func _on_PlayOfflineButton_pressed():
+	Select1.play()
 	SaveSystem.save_value_user("Online", "Account", "0")
 	get_tree().change_scene("res://menus/main_menus/MainMenu.tscn")
 	queue_free()
@@ -43,6 +45,7 @@ func _prepare_login_query(username, password):
 
 
 func _on_LoginButton_pressed():
+	Select1.play()
 	var usernameField = $LoginElementsPanel/LoginElementsContainer/UsernameLineEdit
 	var passwordField = $LoginElementsPanel/LoginElementsContainer/PasswordLineEdit
 	
@@ -127,5 +130,6 @@ func _on_CheckToken_request_completed(result, response_code, headers, body):
 
 
 func _on_RegisterButton_pressed():
+	Select1.play()
 	get_tree().change_scene("res://menus/main_menus/RegisterMenu.tscn")
 	queue_free()

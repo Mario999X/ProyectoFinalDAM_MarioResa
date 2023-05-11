@@ -2,7 +2,7 @@
 
 Servicio orientado a la gestión del sistema online de almacenamiento de datos del videojuego Sp4ce Survival.
 
-Proyecto final del Módulo Superior de Desarrollo de Aplicaciones Multiplataforma curso 22/23.
+Proyecto final del Módulo Superior de Desarrollo de Aplicaciones Multiplataforma curso 22/23. IES Luis Vives.
 
 # Índice
 
@@ -118,7 +118,7 @@ La ruta **base** del servicio: https://localhost:6969/sp4ceSurvival
 
 # Funcionamiento
 
-Para probar el funcionamiento de los distintos endpoints durante el desarrollo se usó un cliente que permita recibir y
+Para probar el funcionamiento de los distintos endpoints se recomienda el uso de un cliente que permita recibir y
 enviar *request-response*, por ejemplo:
 
 - [Postman](https://www.postman.com/).

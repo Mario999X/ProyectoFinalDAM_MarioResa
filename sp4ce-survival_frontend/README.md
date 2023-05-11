@@ -2,7 +2,7 @@
 
 Videojuego de género Bullet Hell y con capacidades online competitivas.
 
-Proyecto final del Módulo Superior de Desarrollo de Aplicaciones Multiplataforma curso 22/23
+Proyecto final del Módulo Superior de Desarrollo de Aplicaciones Multiplataforma curso 22/23. IES Luis Vives.
 
 ## Índice
 

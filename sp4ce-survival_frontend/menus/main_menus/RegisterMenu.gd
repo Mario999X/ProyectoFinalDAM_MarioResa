@@ -14,11 +14,13 @@ func _prepare_register_query(username, email, password, repeatPassword):
 
 
 func _on_ReturnMainMenu_pressed():
+	Select2.play()
 	get_tree().change_scene("res://menus/main_menus/WelcomeMenu.tscn")
 	queue_free()
 
 
 func _on_RegisterButton_pressed():
+	Select1.play()
 	var usernameRegisterField = $RegisterElementsPanel/RegisterElementsContainer/UsernameRegisterLineEdit
 	var emailRegisterField = $RegisterElementsPanel/RegisterElementsContainer/EmailRegisterLineEdit
 	var passwordRegisterField = $RegisterElementsPanel/RegisterElementsContainer/PasswordRegisterLineEdit

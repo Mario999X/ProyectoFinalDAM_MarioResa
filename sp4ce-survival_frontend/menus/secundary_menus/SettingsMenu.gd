@@ -18,8 +18,8 @@ func set_options():
 	else: $ScreenElementsPanel/ScreenElementsContainer/FullScreenCheckButton.pressed = true
 
 
-
 func _on_ReturnSettingsButton_pressed():
+	Select2.play()
 	self.hide()
 
 

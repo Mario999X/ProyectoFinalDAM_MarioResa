@@ -19,7 +19,9 @@ config/icon="res://icon.png"
 SaveSystem="*res://utils/SaveSystem.gd"
 LoadSettings="*res://utils/LoadSettings.gd"
 GlobalVariables="*res://utils/GlobalVariables.gd"
-BackgroundMusic="*res://music_background/BackgroundMusic.tscn"
+BackgroundMusic="*res://sounds/BackgroundMusic.tscn"
+Select1="*res://sounds/Select1.tscn"
+Select2="*res://sounds/Select2.tscn"
 
 [display]
 

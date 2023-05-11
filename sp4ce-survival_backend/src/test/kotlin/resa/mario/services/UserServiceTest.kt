@@ -282,6 +282,27 @@ internal class UserServiceTest {
 
     @OptIn(ExperimentalCoroutinesApi::class)
     @Test
+    fun updatePassword() = runTest {
+        coEvery { passwordEncoder.matches(any(), any()) } returns true
+        coEvery { passwordEncoder.matches(userDtoUpdate.newPassword, any()) } returns false
+        coEvery { passwordEncoder.encode(any()) } returns userDtoUpdate.newPassword
+        coEvery { repository.save(any()) } returns user
+
+        val result = service.updatePassword(user, userDtoUpdate)
+
+        assertAll(
+            { assertNotNull(result) },
+            { assertTrue(result.component1()!!) }
+        )
+
+        coVerify { passwordEncoder.matches(any(), any()) }
+        coVerify { passwordEncoder.matches(userDtoUpdate.newPassword, any()) }
+        coVerify { passwordEncoder.encode(any()) }
+        coVerify { repository.save(any()) }
+    }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    @Test
     fun updatePasswordFailed() = runTest {
         coEvery { passwordEncoder.matches(any(), any()) } returns false
 
