@@ -22,7 +22,8 @@ Si se quiere descargar el videojuego en formato de ejecutable, se realizará a t
 
 ## Documentación
 
-En el documento PDF del proyecto, se ha escrito un apartado estilo GDD que documenta el videojuego en sus aspectos generales y decisiones de diseño tomadas.
+En el documento [PDF del proyecto](/docs/Proyecto_Desarrollo_de_aplicaciones_IES_Luis_Vives-Mario_Resa.pdf), 
+se ha escrito un apartado estilo GDD que documenta el videojuego en sus aspectos generales y decisiones de diseño tomadas.
 
 En **Godot** no existe un formato específico de documentar el código, como **JavaDoc o Kdoc**, por lo que se ha tratado de explicar brevemente valores o funciones clave con simples comentarios.
 
