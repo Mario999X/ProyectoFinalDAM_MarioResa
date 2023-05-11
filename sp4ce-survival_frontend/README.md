@@ -38,6 +38,8 @@ En **Godot** no existe un formato específico de documentar el código, como **J
 
 - <a href="https://www.flaticon.com/free-icons/loading" title="loading icons">Loading icons created by th studio - Flaticon</a>
     - [Icono Específico](https://www.flaticon.com/free-icon/sync_2767294?term=loading&page=1&position=13&origin=tag&related_id=2767294)
+- <a href="https://www.flaticon.com/free-icons/space" title="space icons">Space icons created by Freepik - Flaticon</a>
+    - [Icono Específico](https://www.flaticon.com/free-icon/galaxy_3919942)
 
 ## Autor
 
