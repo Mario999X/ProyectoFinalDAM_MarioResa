@@ -81,6 +81,9 @@ Según el despliegue de la aplicación, la base de datos tendra los puertos expu
 
 ## Documentación
 
+El proyecto ha sido ampliamente documentado en el archivo [PDF del proyecto](/docs/Proyecto_Desarrollo_de_aplicaciones_IES_Luis_Vives-Mario_Resa.pdf) en español, 
+tanto la toma de decisiones en las tecnologías aplicadas como en el funcionamiento de las distintas clases y métodos.
+
 Las clases se encuentran documentadas con *KDoc* en inglés, y usando una librería externa, **Dokka** se puede visualizar
 en formato *HTML*.
 
