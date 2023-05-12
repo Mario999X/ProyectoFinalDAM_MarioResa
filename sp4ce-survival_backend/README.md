@@ -2,7 +2,7 @@
 
 Servicio orientado a la gestión del sistema online de almacenamiento de datos del videojuego Sp4ce Survival.
 
-Proyecto final del Módulo Superior de Desarrollo de Aplicaciones Multiplataforma curso 22/23.
+Proyecto final del Módulo Superior de Desarrollo de Aplicaciones Multiplataforma curso 22/23. IES Luis Vives.
 
 # Índice
 
@@ -81,11 +81,14 @@ Según el despliegue de la aplicación, la base de datos tendra los puertos expu
 
 ## Documentación
 
+El proyecto ha sido ampliamente documentado en el archivo [PDF del proyecto](/docs/Proyecto_Desarrollo_de_aplicaciones_IES_Luis_Vives-Mario_Resa.pdf) en español, 
+tanto la toma de decisiones en las tecnologías aplicadas como en el funcionamiento de las distintas clases y métodos.
+
 Las clases se encuentran documentadas con *KDoc* en inglés, y usando una librería externa, **Dokka** se puede visualizar
 en formato *HTML*.
 
 Además, los *endpoints* se encuentran documentados con **Swagger**, visibles desde el
-siguiente [enlace](https://localhost:6969/swagger-ui/index.html#/), con la aplicación en ejecución.
+siguiente [enlace](https://localhost:6969/swagger-ui/index.html#/), con la aplicación en ejecución y en modo **"dev"**.
 
 ## Seguridad
 
@@ -115,7 +118,7 @@ La ruta **base** del servicio: https://localhost:6969/sp4ceSurvival
 
 # Funcionamiento
 
-Para probar el funcionamiento de los distintos endpoints durante el desarrollo se usó un cliente que permita recibir y
+Para probar el funcionamiento de los distintos endpoints se recomienda el uso de un cliente que permita recibir y
 enviar *request-response*, por ejemplo:
 
 - [Postman](https://www.postman.com/).

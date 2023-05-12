@@ -24,12 +24,14 @@ func _reloadLabel(difficultySelected):
 
 
 func _on_ReturnMainMenu_pressed():
+	Select2.play()
 	SaveSystem.save_value_user("Online", "Account", "0")
 	get_tree().change_scene("res://menus/main_menus/WelcomeMenu.tscn")
 	queue_free()
 
 
 func _on_OptionsButton_pressed():
+	Select1.play()
 	$SettingsMenu.show()
 
 
@@ -38,15 +40,30 @@ func _on_ExitButton_pressed():
 
 
 func _on_EasyButton_pressed():
+	Select1.play()
 	GlobalVariables.difficultySelected = 0
 	_reloadLabel(GlobalVariables.difficultySelected)
 
 
 func _on_MediumButton_pressed():
+	Select1.play()
 	GlobalVariables.difficultySelected = 1
 	_reloadLabel(GlobalVariables.difficultySelected)
 
 
 func _on_HardButton_pressed():
+	Select1.play()
 	GlobalVariables.difficultySelected = 2
 	_reloadLabel(GlobalVariables.difficultySelected)
+
+
+func _on_ProfileButton_pressed():
+	Select1.play()
+
+
+func _on_LeaderboardButton_pressed():
+	Select1.play()
+
+
+func _on_PlayButton_pressed():
+	Select1.play()

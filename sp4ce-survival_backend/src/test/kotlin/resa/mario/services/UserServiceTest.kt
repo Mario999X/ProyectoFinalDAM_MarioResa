@@ -120,7 +120,7 @@ internal class UserServiceTest {
 
     @OptIn(ExperimentalCoroutinesApi::class)
     @Test
-    fun registerFailed() = runTest {
+    fun registerFailedByUsernameUsed() = runTest {
         coEvery { repository.findByUsername(any()) } returns user
 
         val result = service.register(userDtoRegister)
@@ -135,7 +135,7 @@ internal class UserServiceTest {
 
     @OptIn(ExperimentalCoroutinesApi::class)
     @Test
-    fun registerFailed2() = runTest {
+    fun registerFailedByEmailUsed() = runTest {
         coEvery { repository.findByUsername(any()) } returns null
         coEvery { repository.findByEmail(any()) } returns user
 
@@ -173,7 +173,7 @@ internal class UserServiceTest {
 
     @OptIn(ExperimentalCoroutinesApi::class)
     @Test
-    fun createFailed() = runTest {
+    fun createFailedByUsernameUsed() = runTest {
         coEvery { repository.findByUsername(any()) } returns user
 
         val result = service.create(userDtoCreate)
@@ -188,7 +188,7 @@ internal class UserServiceTest {
 
     @OptIn(ExperimentalCoroutinesApi::class)
     @Test
-    fun createFailed2() = runTest {
+    fun createFailedByEmailUsed() = runTest {
         coEvery { repository.findByUsername(any()) } returns null
         coEvery { repository.findByEmail(any()) } returns user
 
@@ -220,7 +220,7 @@ internal class UserServiceTest {
 
     @OptIn(ExperimentalCoroutinesApi::class)
     @Test
-    fun findByUsernameFailed() = runTest {
+    fun findByUsernameNotFound() = runTest {
         coEvery { repository.findByUsername(any()) } returns null
 
         val result = service.findByUsername(user.username)
@@ -252,7 +252,25 @@ internal class UserServiceTest {
 
     @OptIn(ExperimentalCoroutinesApi::class)
     @Test
-    fun findUserProfileFailed() = runTest {
+    fun findUserProfileNoScore() = runTest {
+        coEvery { repository.findByUsername(any()) } returns user
+        coEvery { scoreRepository.findByUserId(any()) } returns null
+
+        val result = service.findUserProfile(user)
+
+        assertAll(
+            { assertNotNull(result) },
+            { assertEquals(user.username, result.component1()!!.username) },
+            { assertNull(result.component1()!!.score) }
+        )
+
+        coVerify { repository.findByUsername(any()) }
+        coVerify { scoreRepository.findByUserId(any()) }
+    }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    @Test
+    fun findUserProfileNotFound() = runTest {
         coEvery { repository.findByUsername(any()) } returns null
 
         val result = service.findUserProfile(user)
@@ -282,7 +300,28 @@ internal class UserServiceTest {
 
     @OptIn(ExperimentalCoroutinesApi::class)
     @Test
-    fun updatePasswordFailed() = runTest {
+    fun updatePassword() = runTest {
+        coEvery { passwordEncoder.matches(any(), any()) } returns true
+        coEvery { passwordEncoder.matches(userDtoUpdate.newPassword, any()) } returns false
+        coEvery { passwordEncoder.encode(any()) } returns userDtoUpdate.newPassword
+        coEvery { repository.save(any()) } returns user
+
+        val result = service.updatePassword(user, userDtoUpdate)
+
+        assertAll(
+            { assertNotNull(result) },
+            { assertTrue(result.component1()!!) }
+        )
+
+        coVerify { passwordEncoder.matches(any(), any()) }
+        coVerify { passwordEncoder.matches(userDtoUpdate.newPassword, any()) }
+        coVerify { passwordEncoder.encode(any()) }
+        coVerify { repository.save(any()) }
+    }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    @Test
+    fun updatePasswordActualPasswordIncorrect() = runTest {
         coEvery { passwordEncoder.matches(any(), any()) } returns false
 
         val result = service.updatePassword(user, userDtoUpdate)
@@ -293,6 +332,23 @@ internal class UserServiceTest {
         )
 
         coVerify { passwordEncoder.matches(any(), any()) }
+    }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    @Test
+    fun updatePasswordNewPasswordSameAsOldOne() = runTest {
+        coEvery { passwordEncoder.matches(any(), any()) } returns true
+        coEvery { passwordEncoder.matches(userDtoUpdate.newPassword, any()) } returns true
+
+        val result = service.updatePassword(user, userDtoUpdate)
+
+        assertAll(
+            { assertNotNull(result) },
+            { assertEquals("The new password is the same as the old password", result.component2()!!.message) }
+        )
+
+        coVerify { passwordEncoder.matches(any(), any()) }
+        coVerify { passwordEncoder.matches(userDtoUpdate.newPassword, any()) }
     }
 
     @OptIn(ExperimentalCoroutinesApi::class)
@@ -316,6 +372,21 @@ internal class UserServiceTest {
 
     @OptIn(ExperimentalCoroutinesApi::class)
     @Test
+    fun deleteNotFound() = runTest {
+        coEvery { repository.findByUsername(any()) } returns null
+
+        val result = service.delete(user.username)
+
+        assertAll(
+            { assertNotNull(result) },
+            { assertEquals("User not found with username: ${user.username}", result.component2()!!.message) }
+        )
+
+        coVerify { repository.findByUsername(any()) }
+    }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    @Test
     fun findScoreByUsername() = runTest {
         coEvery { scoreRepository.findByUserId(any()) } returns score
 
@@ -324,6 +395,20 @@ internal class UserServiceTest {
         assertAll(
             { assertNotNull(result) },
             { assertEquals(score.scoreNumber, result!!.scoreNumber) }
+        )
+
+        coVerify { scoreRepository.findByUserId(any()) }
+    }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    @Test
+    fun findScoreByUsernameNotFound() = runTest {
+        coEvery { scoreRepository.findByUserId(any()) } returns null
+
+        val result = service.findScoreByUserId(user.id!!)
+
+        assertAll(
+            { assertNull(result) }
         )
 
         coVerify { scoreRepository.findByUserId(any()) }

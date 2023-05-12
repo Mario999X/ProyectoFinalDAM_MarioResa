@@ -18,10 +18,10 @@ import java.util.UUID
 data class Score(
     @Id
     val id: UUID? = null,
-    @Column("user_id")
+    @Column("UserId")
     val userId: UUID,
-    @Column("score_number")
+    @Column("ScoreNumber")
     val scoreNumber: Long,
-    @Column("date_obtained")
+    @Column("DateObtained")
     val dateObtained: LocalDate
 )

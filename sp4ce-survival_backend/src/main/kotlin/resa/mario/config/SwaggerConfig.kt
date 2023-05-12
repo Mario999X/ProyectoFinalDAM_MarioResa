@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration
 
 /**
  * Configuration class for Swagger
- *
+ * Swagger is only available in dev mode
  */
 @Configuration
 class SwaggerConfig {
@@ -22,12 +22,12 @@ class SwaggerConfig {
                     .title("Sp4ceSurvival-API")
                     .version(APIConfig.API_VERSION)
                     .description(
-                        "Proyecto de fin de grado DAM: Sp4ce Survival -- Backend"
+                        "Sp4ce Survival API -- Backend || Proyecto de fin de FP Superior DAM Curso 22/23. IES Luis Vives."
                     )
             )
             .externalDocs(
                 ExternalDocumentation()
-                    .description("Repositorio del proyecto en Github")
+                    .description("Project repository on Github")
                     .url("https://github.com/Mario999X/ProyectoFinalDAM_MarioResa")
             )
     }

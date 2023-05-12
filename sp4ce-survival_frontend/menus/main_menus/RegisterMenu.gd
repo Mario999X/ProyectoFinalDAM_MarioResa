@@ -14,11 +14,13 @@ func _prepare_register_query(username, email, password, repeatPassword):
 
 
 func _on_ReturnMainMenu_pressed():
+	Select2.play()
 	get_tree().change_scene("res://menus/main_menus/WelcomeMenu.tscn")
 	queue_free()
 
 
 func _on_RegisterButton_pressed():
+	Select1.play()
 	var usernameRegisterField = $RegisterElementsPanel/RegisterElementsContainer/UsernameRegisterLineEdit
 	var emailRegisterField = $RegisterElementsPanel/RegisterElementsContainer/EmailRegisterLineEdit
 	var passwordRegisterField = $RegisterElementsPanel/RegisterElementsContainer/PasswordRegisterLineEdit
@@ -32,9 +34,9 @@ func _on_RegisterButton_pressed():
 	var regex = RegEx.new()
 	regex.compile("^[\\w\\-\\.]+@[\\w\\-]+\\.[\\w\\-]{2,4}$")
 	
-	if (!usernameRegisterField.text.strip_edges().empty() && !emailRegisterField.text.strip_edges().empty()
-	&& regex.search(emailRegisterField.text.strip_edges()) != null && passwordRegisterField.text.strip_edges().length() >= 5 
-	&& repeatPasswordRegisterField.text.strip_edges() == passwordRegisterField.text.strip_edges()): 
+	if (!usernameRegisterField.text.strip_edges().empty() and !emailRegisterField.text.strip_edges().empty()
+	and regex.search(emailRegisterField.text.strip_edges()) != null and passwordRegisterField.text.strip_edges().length() >= 5 
+	and repeatPasswordRegisterField.text.strip_edges() == passwordRegisterField.text.strip_edges()): 
 		
 		$LoadScreen.show()
 		_prepare_register_query(usernameRegisterField.text.strip_edges(), emailRegisterField.text.strip_edges(), 

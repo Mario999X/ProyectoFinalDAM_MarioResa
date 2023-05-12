@@ -7,8 +7,8 @@ services:
     image: postgres:14.1-alpine
     restart: always
     environment:
-      - POSTGRES_USER=mario
-      - POSTGRES_PASSWORD=user1234
+      - POSTGRES_USER=m@rioUser
+      - POSTGRES_PASSWORD=uSer$909
       - POSTGRES_DB=sp4ceSurvival
     volumes:
       - postgresSp4ce:/var/lib/postgresql/data
@@ -18,10 +18,11 @@ services:
     container_name: "sp4ce-survival_back"
     restart: always
     environment:
-      - POSTGRES_CONNECTION=r2dbc:postgresql://mario:user1234@postgresSp4ce/sp4ceSurvival
+      - POSTGRES_CONNECTION=r2dbc:postgresql://m@rioUser:uSer$909@postgresSp4ce/sp4ceSurvival
       - JWT_SECRET=F5G7J9P
       - KEY_STORE_PATH=classpath:certs/sp4ceSurvivalServer.p12
       - SCHEMA_FILE=schema-production.sql
+      - PROFILE_ACTIVE=prod
     ports:
       - '6969:6969'
     depends_on:

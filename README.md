@@ -1,5 +1,5 @@
 # ProyectoFinalDAM_MarioResa
-Proyecto final de Desarrollo de Aplicaciones Multiplataforma del curso 22/23.
+Proyecto final de Desarrollo de Aplicaciones Multiplataforma del curso 22/23. IES Luis Vives.
 
 ## Introducción
 El gran proyecto es un videojuego con capacidades competitivas online (sin ser multijugador) usando una tabla de puntuaciones que cualquier usuario registrado pueda ver dentro de este.

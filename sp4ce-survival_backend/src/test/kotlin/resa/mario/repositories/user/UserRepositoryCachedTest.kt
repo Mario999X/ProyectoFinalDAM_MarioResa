@@ -7,6 +7,7 @@ import io.mockk.impl.annotations.InjectMockKs
 import io.mockk.impl.annotations.MockK
 import io.mockk.junit5.MockKExtension
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.test.runTest
@@ -72,6 +73,20 @@ internal class UserRepositoryCachedTest {
 
     @OptIn(ExperimentalCoroutinesApi::class)
     @Test
+    fun findByUsernameNotFound() = runTest {
+        coEvery { repository.findByUsername(any()) } returns emptyFlow()
+
+        val result = repositoryCached.findByUsername(user.username)
+
+        assertAll(
+            { assertNull(result) }
+        )
+
+        coVerify { repository.findByUsername(any()) }
+    }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    @Test
     fun findByEmail() = runTest {
         coEvery { repository.findByEmail(any()) } returns flowOf(user)
 
@@ -80,6 +95,20 @@ internal class UserRepositoryCachedTest {
         assertAll(
             { assertNotNull(result) },
             { assertEquals(result!!.username, user.username) }
+        )
+
+        coVerify { repository.findByEmail(any()) }
+    }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    @Test
+    fun findByEmailNotFound() = runTest {
+        coEvery { repository.findByEmail(any()) } returns emptyFlow()
+
+        val result = repositoryCached.findByEmail(user.email)
+
+        assertAll(
+            { assertNull(result) }
         )
 
         coVerify { repository.findByEmail(any()) }
@@ -131,6 +160,21 @@ internal class UserRepositoryCachedTest {
             { assertEquals(result!!.username, user.username) }
         )
 
+        coVerify { repository.findById(any()) }
         coVerify { repository.deleteById(any()) }
+    }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    @Test
+    fun deleteByIdNotFound() = runTest {
+        coEvery { repository.findById(any()) } returns null
+
+        val result = repositoryCached.deleteById(user.id!!)
+
+        assertAll(
+            { assertNull(result) },
+        )
+
+        coVerify { repository.findById(any()) }
     }
 }
