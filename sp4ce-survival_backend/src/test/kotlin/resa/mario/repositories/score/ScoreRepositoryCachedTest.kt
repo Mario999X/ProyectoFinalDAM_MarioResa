@@ -7,6 +7,7 @@ import io.mockk.impl.annotations.InjectMockKs
 import io.mockk.impl.annotations.MockK
 import io.mockk.junit5.MockKExtension
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest
 import org.junit.jupiter.api.Assertions.*
@@ -69,6 +70,20 @@ internal class ScoreRepositoryCachedTest {
 
     @OptIn(ExperimentalCoroutinesApi::class)
     @Test
+    fun findByUserIdNotFound() = runTest {
+        coEvery { repository.findByUserId(any()) } returns emptyFlow()
+
+        val result = repositoryCached.findByUserId(score.userId)
+
+        assertAll(
+            { assertNull(result) }
+        )
+
+        coVerify { repository.findByUserId(any()) }
+    }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    @Test
     fun save() = runTest {
         coEvery { repository.save(any()) } returns score
 
@@ -96,6 +111,22 @@ internal class ScoreRepositoryCachedTest {
             { assertEquals(score.id, result!!.id)}
         )
 
+        coVerify { userRepository.findById(any()) }
+        coVerify { repository.findByUserId(any()) }
         coVerify { repository.delete(any()) }
+    }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    @Test
+    fun deleteByUserIdNotFound() = runTest {
+        coEvery { userRepository.findById(any()) } returns null
+
+        val result = repositoryCached.deleteByUserId(user.id!!)
+
+        assertAll(
+            { assertNull(result) }
+        )
+
+        coVerify { userRepository.findById(any()) }
     }
 }

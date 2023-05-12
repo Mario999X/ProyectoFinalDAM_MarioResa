@@ -88,7 +88,7 @@ Las clases se encuentran documentadas con *KDoc* en inglés, y usando una librer
 en formato *HTML*.
 
 Además, los *endpoints* se encuentran documentados con **Swagger**, visibles desde el
-siguiente [enlace](https://localhost:6969/swagger-ui/index.html#/), con la aplicación en ejecución.
+siguiente [enlace](https://localhost:6969/swagger-ui/index.html#/), con la aplicación en ejecución y en modo **"dev"**.
 
 ## Seguridad
 
