@@ -67,3 +67,5 @@ func _on_LeaderboardButton_pressed():
 
 func _on_PlayButton_pressed():
 	Select1.play()
+	get_tree().change_scene("res://levels/MainLevel.tscn")
+	queue_free()
