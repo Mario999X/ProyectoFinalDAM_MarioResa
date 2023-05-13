@@ -45,9 +45,9 @@ func _ready():
 		save_value("Sound", "Muted", "Off")
 		save_value("Screen", "FullScreen", "On")
 	
-	var fileUser = File.new()
+	var file_user = File.new()
 	
-	if fileUser.file_exists(save_path_user):
+	if file_user.file_exists(save_path_user):
 		print("UserFile Found!")
 	else:
 		print("UserFile Not Found! | Preparing Default Values...")

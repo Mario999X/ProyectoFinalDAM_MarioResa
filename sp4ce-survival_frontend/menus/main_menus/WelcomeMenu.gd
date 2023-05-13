@@ -5,11 +5,11 @@ func _ready():
 	print(get_tree().current_scene.name, " | ", OS.get_time().hour, ":", OS.get_time().minute)
 	LoadSettings.load_Settings()
 	
-	var onlineMode = SaveSystem.load_value_user("Online", "Account")
+	var online_mode = SaveSystem.load_value_user("Online", "Account")
 	
-	if onlineMode != "0":
+	if online_mode != "0":
 		$LoadScreen.show()
-		_check_token_query(onlineMode)
+		_check_token_query(online_mode)
 
 
 func _on_ExitButton_pressed():
@@ -46,27 +46,27 @@ func _prepare_login_query(username, password):
 
 func _on_LoginButton_pressed():
 	Select1.play()
-	var usernameField = $LoginElementsPanel/LoginElementsContainer/UsernameLineEdit
-	var passwordField = $LoginElementsPanel/LoginElementsContainer/PasswordLineEdit
+	var username_field = $LoginElementsPanel/LoginElementsContainer/UsernameLineEdit
+	var password_field = $LoginElementsPanel/LoginElementsContainer/PasswordLineEdit
 	
-	var usernameMessage = $LoginElementsPanel/LoginElementsContainer/MessageWarningUsername
-	var passwordMessage = $LoginElementsPanel/LoginElementsContainer/MessageWarningPassword
+	var username_message = $LoginElementsPanel/LoginElementsContainer/MessageWarningUsername
+	var password_message = $LoginElementsPanel/LoginElementsContainer/MessageWarningPassword
 	
-	if !usernameField.text.strip_edges().empty() and passwordField.text.strip_edges().length() >= 5 :
+	if !username_field.text.strip_edges().empty() and password_field.text.strip_edges().length() >= 5 :
 		$LoadScreen.show()
-		_prepare_login_query(usernameField.text.strip_edges(), passwordField.text.strip_edges())
+		_prepare_login_query(username_field.text.strip_edges(), password_field.text.strip_edges())
 		
-	if usernameField.text.strip_edges().empty():
-		usernameMessage.text = "USERNAME_CANNOT_BE_EMPTY"
-		usernameMessage.show()
+	if username_field.text.strip_edges().empty():
+		username_message.text = "USERNAME_CANNOT_BE_EMPTY"
+		username_message.show()
 	else:
-		usernameMessage.hide()
+		username_message.hide()
 	
-	if passwordField.text.strip_edges().length() <= 4:
-		passwordMessage.text = "PASSWORD_MUST_BE_AT_LEAST_5_CHARACTERS"
-		passwordMessage.show()
+	if password_field.text.strip_edges().length() <= 4:
+		password_message.text = "PASSWORD_MUST_BE_AT_LEAST_5_CHARACTERS"
+		password_message.show()
 	else:
-		passwordMessage.hide()
+		password_message.hide()
 	
 
 
@@ -96,9 +96,9 @@ func _on_Login_request_completed(result, response_code, headers, body):
 
 
 func _on_RequestTimer_timeout():
-	var onlineMode = SaveSystem.load_value_user("Online", "Account")
+	var online_mode = SaveSystem.load_value_user("Online", "Account")
 	
-	if onlineMode != "0":
+	if online_mode != "0":
 		get_tree().change_scene("res://menus/main_menus/MainMenu.tscn")
 		queue_free()
 	

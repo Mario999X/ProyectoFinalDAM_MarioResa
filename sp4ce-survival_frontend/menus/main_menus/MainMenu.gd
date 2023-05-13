@@ -3,24 +3,24 @@ extends CanvasLayer
 func _ready():
 	print(get_tree().current_scene.name, " | ", OS.get_time().hour, ":", OS.get_time().minute)
 	
-	_reloadLabel(GlobalVariables.difficultySelected)
+	_reloadLabel(GlobalVariables.difficulty_selected)
 	
-	var onlineMode = SaveSystem.load_value_user("Online", "Account")
+	var online_mode = SaveSystem.load_value_user("Online", "Account")
 	
-	if onlineMode == "0":
+	if online_mode == "0":
 		$MainElementsPanel/MainElementsContainer/OnlineElementsPanel/OnlineElementsContainer/ProfileButton.disabled = true
 		$MainElementsPanel/MainElementsContainer/OnlineElementsPanel/OnlineElementsContainer/LeaderboardButton.disabled = true
 
 
-func _reloadLabel(difficultySelected):
-	var originalLabel = $MainElementsPanel/MainElementsContainer/DifficultyLabelsContainer/DifficultySelectedLabel
+func _reloadLabel(difficulty_selected):
+	var original_label = $MainElementsPanel/MainElementsContainer/DifficultyLabelsContainer/DifficultySelectedLabel
 	
-	if difficultySelected == 0:
-		originalLabel.text = $MainElementsPanel/MainElementsContainer/DifficultyLevelsContainer/EasyButton.text
-	elif difficultySelected == 1:
-		originalLabel.text = $MainElementsPanel/MainElementsContainer/DifficultyLevelsContainer/MediumButton.text
+	if difficulty_selected == 0:
+		original_label.text = $MainElementsPanel/MainElementsContainer/DifficultyLevelsContainer/EasyButton.text
+	elif difficulty_selected == 1:
+		original_label.text = $MainElementsPanel/MainElementsContainer/DifficultyLevelsContainer/MediumButton.text
 	else:
-		originalLabel.text = $MainElementsPanel/MainElementsContainer/DifficultyLevelsContainer/HardButton.text
+		original_label.text = $MainElementsPanel/MainElementsContainer/DifficultyLevelsContainer/HardButton.text
 
 
 func _on_ReturnMainMenu_pressed():
@@ -41,20 +41,20 @@ func _on_ExitButton_pressed():
 
 func _on_EasyButton_pressed():
 	Select1.play()
-	GlobalVariables.difficultySelected = 0
-	_reloadLabel(GlobalVariables.difficultySelected)
+	GlobalVariables.difficulty_selected = 0
+	_reloadLabel(GlobalVariables.difficulty_selected)
 
 
 func _on_MediumButton_pressed():
 	Select1.play()
-	GlobalVariables.difficultySelected = 1
-	_reloadLabel(GlobalVariables.difficultySelected)
+	GlobalVariables.difficulty_selected = 1
+	_reloadLabel(GlobalVariables.difficulty_selected)
 
 
 func _on_HardButton_pressed():
 	Select1.play()
-	GlobalVariables.difficultySelected = 2
-	_reloadLabel(GlobalVariables.difficultySelected)
+	GlobalVariables.difficulty_selected = 2
+	_reloadLabel(GlobalVariables.difficulty_selected)
 
 
 func _on_ProfileButton_pressed():

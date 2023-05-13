@@ -5,9 +5,9 @@ func _ready():
 
 
 func set_options():
-	var soundMuted = SaveSystem.load_value("Sound", "Muted")
+	var sound_muted = SaveSystem.load_value("Sound", "Muted")
 	
-	if soundMuted == "Off":
+	if sound_muted == "Off":
 		$SoundElementsPanel/SoundElementsContainer/MutedCheckButton.pressed = false
 	else: $SoundElementsPanel/SoundElementsContainer/MutedCheckButton.pressed = true
 	

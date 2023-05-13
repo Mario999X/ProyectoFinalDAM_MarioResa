@@ -9,10 +9,10 @@ func load_Settings():
 	if lenguage == "en":
 		TranslationServer.set_locale("en_US")
 
-	var soundMuted = SaveSystem.load_value("Sound", "Muted")
+	var sound_muted = SaveSystem.load_value("Sound", "Muted")
 	var bus_idx = AudioServer.get_bus_index("Master")
 	
-	if soundMuted == "Off":
+	if sound_muted == "Off":
 		AudioServer.set_bus_mute(bus_idx, false)
 	else:
 		AudioServer.set_bus_mute(bus_idx, true)
