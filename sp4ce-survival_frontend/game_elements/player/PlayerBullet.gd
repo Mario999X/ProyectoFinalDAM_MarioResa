@@ -2,6 +2,8 @@ extends Area2D
 
 export var speed = 10
 
+var im_bullet_player
+
 var direction := Vector2.ZERO
 
 func _ready():
@@ -21,3 +23,19 @@ func set_direction(direction: Vector2):
 
 func _on_VisibilityNotifier2D_screen_exited():
 	queue_free()
+
+
+
+func _on_PlayerBullet_area_entered(area):
+	if "im_bullet_t1" in area:
+		print("Hit against t1")
+		queue_free()
+		area.queue_free()
+	if "im_bullet_t2" in area:
+		print("Hit against t2")
+		queue_free()
+	if "im_enemy_ship" in area:
+		print("Hit againts enemy ship")
+		queue_free()
+		area.queue_free()
+

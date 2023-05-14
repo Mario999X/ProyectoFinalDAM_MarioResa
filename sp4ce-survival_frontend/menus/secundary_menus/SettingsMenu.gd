@@ -51,3 +51,4 @@ func _on_SpanishButton_pressed():
 func _on_EnglishButton_pressed():
 	TranslationServer.set_locale("en_US")
 	SaveSystem.save_value("Lenguages", "Lenguage", "en")
+

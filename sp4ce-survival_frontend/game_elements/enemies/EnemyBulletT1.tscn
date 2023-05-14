@@ -1,9 +1,11 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://assets/enemies/Enemy_Projectile_Type-1.png" type="Texture" id=1]
+[ext_resource path="res://game_elements/enemies/EnemyBulletT1.gd" type="Script" id=2]
 
 [node name="EnemyBulletT1" type="Area2D"]
 scale = Vector2( 0.6, 0.6 )
+script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -17,3 +19,5 @@ polygon = PoolVector2Array( -15, -23.3333, -10, -14, -3, -12, 9, -17, 23, -15, 1
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
 position = Vector2( -3.57628e-07, -3.57628e-07 )
 scale = Vector2( 0.833333, 0.833333 )
+
+[connection signal="body_entered" from="." to="." method="_on_EnemyBulletT1_body_entered"]

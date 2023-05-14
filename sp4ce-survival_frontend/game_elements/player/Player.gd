@@ -66,6 +66,10 @@ func shoot():
 		print("Reloading...")
 	
 
+func hit_by_enemy():
+	print("Hit by enemy")
+	queue_free()
+
 
 func _on_ReloadTimer_timeout():
 	PlayerGun.stream = load("res://assets/sounds/effects/Shoot.wav")

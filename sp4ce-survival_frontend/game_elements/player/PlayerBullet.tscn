@@ -22,4 +22,5 @@ polygon = PoolVector2Array( -2.66667, -12, 2.66667, -12, 5, -10, 5, -2, 11, 12, 
 position = Vector2( -5.96046e-08, 0.5 )
 scale = Vector2( 0.4, 0.25 )
 
+[connection signal="area_entered" from="." to="." method="_on_PlayerBullet_area_entered"]
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

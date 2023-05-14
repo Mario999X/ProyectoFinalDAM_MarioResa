@@ -9,16 +9,16 @@
 [node name="TestLevel" type="Node"]
 
 [node name="EnemyBulletType1" parent="." instance=ExtResource( 3 )]
-position = Vector2( 1011, 535 )
+position = Vector2( 1040, 177 )
 
 [node name="EnemyShip" parent="." instance=ExtResource( 4 )]
-position = Vector2( 938, 527 )
+position = Vector2( 940, 162 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 858, 524 )
 
 [node name="PlayerBullet" parent="." instance=ExtResource( 2 )]
-position = Vector2( 791, 528 )
+position = Vector2( 39.0001, 1036 )
 
 [node name="EnemyBulletT2" parent="." instance=ExtResource( 5 )]
-position = Vector2( 1055, 536 )
+position = Vector2( 1116, 173 )
