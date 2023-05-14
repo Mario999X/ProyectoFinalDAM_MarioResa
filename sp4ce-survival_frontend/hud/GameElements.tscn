@@ -69,12 +69,12 @@ margin_right = 1917.0
 margin_bottom = 118.0
 grow_horizontal = 2
 grow_vertical = 2
-custom_constants/separation = 400
+custom_constants/separation = 370
 alignment = 1
 
 [node name="PlayerHUDLeftContainer" type="VBoxContainer" parent="PlayerHUDMainPanel/PlayerHUDMainContainer"]
-margin_left = 24.0
-margin_right = 108.0
+margin_left = 72.0
+margin_right = 156.0
 margin_bottom = 115.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -103,8 +103,8 @@ margin_right = 84.0
 margin_bottom = 110.0
 
 [node name="PlayerHUDCenterContainer" type="VBoxContainer" parent="PlayerHUDMainPanel/PlayerHUDMainContainer"]
-margin_left = 508.0
-margin_right = 658.0
+margin_left = 526.0
+margin_right = 676.0
 margin_bottom = 115.0
 alignment = 1
 
@@ -129,46 +129,49 @@ align = 1
 valign = 1
 
 [node name="PlayerHUDRightContainer" type="VBoxContainer" parent="PlayerHUDMainPanel/PlayerHUDMainContainer"]
-margin_left = 1058.0
-margin_right = 1334.0
+margin_left = 1046.0
+margin_right = 1316.0
 margin_bottom = 115.0
 grow_horizontal = 2
 grow_vertical = 2
 custom_constants/separation = 20
 
 [node name="Separation3" type="Control" parent="PlayerHUDMainPanel/PlayerHUDMainContainer/PlayerHUDRightContainer"]
-margin_right = 276.0
+margin_right = 270.0
 
 [node name="AmmoLabelText" type="Label" parent="PlayerHUDMainPanel/PlayerHUDMainContainer/PlayerHUDRightContainer"]
 margin_top = 20.0
-margin_right = 276.0
+margin_right = 270.0
 margin_bottom = 45.0
 custom_fonts/font = SubResource( 2 )
-text = "AMMO: "
+text = "AMMO:"
 
 [node name="AmmoReloadText" type="Label" parent="PlayerHUDMainPanel/PlayerHUDMainContainer/PlayerHUDRightContainer"]
 margin_top = 65.0
-margin_right = 276.0
+margin_right = 270.0
 margin_bottom = 90.0
 custom_fonts/font = SubResource( 2 )
-text = "AMMO_RELOAD_TIMER: "
+text = "AMMO_RELOAD_TIMER:"
 
 [node name="Separation4" type="Control" parent="PlayerHUDMainPanel/PlayerHUDMainContainer/PlayerHUDRightContainer"]
 margin_top = 110.0
-margin_right = 276.0
+margin_right = 270.0
 margin_bottom = 110.0
 
 [node name="PanelHUDButtonContainer" type="PanelContainer" parent="PlayerHUDMainPanel/PlayerHUDMainContainer"]
-margin_left = 1734.0
-margin_right = 1890.0
+margin_left = 1686.0
+margin_top = 3.0
+margin_right = 1842.0
 margin_bottom = 115.0
+grow_horizontal = 2
+grow_vertical = 2
 custom_styles/panel = SubResource( 6 )
 
 [node name="PauseButton" type="TextureButton" parent="PlayerHUDMainPanel/PlayerHUDMainContainer/PanelHUDButtonContainer"]
 margin_left = 3.0
 margin_top = 3.0
 margin_right = 153.0
-margin_bottom = 105.0
+margin_bottom = 103.0
 grow_horizontal = 2
 grow_vertical = 2
 rect_min_size = Vector2( 150, 100 )

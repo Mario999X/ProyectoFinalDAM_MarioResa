@@ -67,5 +67,8 @@ func _on_LeaderboardButton_pressed():
 
 func _on_PlayButton_pressed():
 	Select1.play()
+	
+	BackgroundMusic.playing = false
+	
 	get_tree().change_scene("res://levels/MainLevel.tscn")
 	queue_free()

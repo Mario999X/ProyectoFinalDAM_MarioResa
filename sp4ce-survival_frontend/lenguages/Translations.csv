@@ -28,3 +28,11 @@ CORRECT,Operación completada con éxito,Operation completed successfully
 LOADING,Cargando…,Loading…
 EMAIL,Correo Electrónico,Email
 REPEAT_PASSWORD,Confirme la contraseña,Confirm password
+SCORE:,Puntuación:,Score:
+LIVES:,Vidas:,Lives:
+TIMER:,Tiempo Restante:,Time left:
+AMMO:,Munición:,Ammo:
+AMMO_RELOAD_TIMER:,Recargando:,Reloading:
+GAME_PAUSED,Juego Pausado,Game Paused
+RESUME_GAME,Reanudar partida,Resume game
+EXIT_GAME,Salir de la partida,Quit the game
