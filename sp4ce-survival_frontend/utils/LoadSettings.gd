@@ -1,7 +1,8 @@
 extends Node
+# -- AUTOLOAD --
 
+# Function to load the settings from the user.
 func load_Settings():
-	
 	var lenguage = SaveSystem.load_value("Lenguages", "Lenguage")
 	
 	if lenguage == "es":

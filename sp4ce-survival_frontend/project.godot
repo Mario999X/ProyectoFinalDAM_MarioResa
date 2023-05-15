@@ -23,11 +23,13 @@ BackgroundMusic="*res://sounds/BackgroundMusic.tscn"
 Select1="*res://sounds/Select1.tscn"
 Select2="*res://sounds/Select2.tscn"
 PlayerGun="*res://sounds/PlayerGun.tscn"
+LoadingProgressBarScreen="*res://loading_screens/LoadingProgressBarScreen.gd"
 
 [display]
 
 window/size/width=1920
 window/size/height=1080
+window/size/resizable=false
 window/stretch/mode="viewport"
 window/stretch/aspect="expand"
 

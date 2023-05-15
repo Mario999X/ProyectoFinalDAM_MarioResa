@@ -1,6 +1,8 @@
 extends CanvasLayer
 
-
+# First, we load the Settings of the player with the LoadSettings singleton.
+# Then we check the online status, we verify if there is a token, and if it does, we verify that it is not expired
+# Finally, if the token is not expired, the player is moved to the Main Scene
 func _ready():
 	print(get_tree().current_scene.name, " | ", OS.get_time().hour, ":", OS.get_time().minute)
 	LoadSettings.load_Settings()
@@ -20,14 +22,14 @@ func _on_OptionsButton_pressed():
 	Select1.play()
 	$SettingsMenu.show()
 
-
+# Function to play offline, the online mode is set to 0
 func _on_PlayOfflineButton_pressed():
 	Select1.play()
 	SaveSystem.save_value_user("Online", "Account", "0")
 	get_tree().change_scene("res://menus/main_menus/MainMenu.tscn")
 	queue_free()
 
-
+# HTTP Request for the token check
 # "Use SSL" must be false because I use Self-Signed Certificate
 func _check_token_query(token):
 	var url = "https://localhost:6969/sp4ceSurvival/me"
@@ -35,7 +37,7 @@ func _check_token_query(token):
 	
 	$CheckToken.request(url, headers, false, HTTPClient.METHOD_GET)
 
-
+# HTTP Request for the Login Check
 func _prepare_login_query(username, password):
 	var url = "https://localhost:6969/sp4ceSurvival/login"
 	var query = {"username": username, "password": password}
@@ -43,7 +45,7 @@ func _prepare_login_query(username, password):
 	
 	$Login.request(url, headers, false, HTTPClient.METHOD_GET, to_json(query))
 
-
+# Login Button, we check if the data is logically correct according to the project information.
 func _on_LoginButton_pressed():
 	Select1.play()
 	var username_field = $LoginElementsPanel/LoginElementsContainer/UsernameLineEdit
@@ -69,7 +71,7 @@ func _on_LoginButton_pressed():
 		password_message.hide()
 	
 
-
+# Login Request completed, we act according to the response code
 func _on_Login_request_completed(result, response_code, headers, body):
 	# Timeout
 	if response_code == 0:
@@ -94,7 +96,7 @@ func _on_Login_request_completed(result, response_code, headers, body):
 	$LoadScreen/LoadingElementsContainer/LoadingMessage.text = GlobalVariables.message_http_request
 	$RequestTimer.start()
 
-
+# To show the player the message received from the Request, and also to change the scene if the token is saved.
 func _on_RequestTimer_timeout():
 	var online_mode = SaveSystem.load_value_user("Online", "Account")
 	
@@ -106,7 +108,7 @@ func _on_RequestTimer_timeout():
 	GlobalVariables.message_http_request = "LOADING"
 	$LoadScreen/LoadingElementsContainer/LoadingMessage.text = GlobalVariables.message_http_request
 
-
+# Check Token Request completed, we act according to the response code
 func _on_CheckToken_request_completed(result, response_code, headers, body):
 	# Timeout
 	if response_code == 0:

@@ -57,8 +57,8 @@ script = ExtResource( 5 )
 [node name="PlayerHUDMainPanel" type="PanelContainer" parent="."]
 anchor_right = 1.0
 margin_bottom = 128.0
-grow_horizontal = 2
-grow_vertical = 2
+grow_horizontal = 0
+grow_vertical = 0
 rect_min_size = Vector2( 0, 125 )
 custom_styles/panel = SubResource( 1 )
 
@@ -67,101 +67,176 @@ margin_left = 3.0
 margin_top = 3.0
 margin_right = 1917.0
 margin_bottom = 118.0
-grow_horizontal = 2
-grow_vertical = 2
-custom_constants/separation = 370
+grow_horizontal = 0
+grow_vertical = 0
+custom_constants/separation = 300
 alignment = 1
 
 [node name="PlayerHUDLeftContainer" type="VBoxContainer" parent="PlayerHUDMainPanel/PlayerHUDMainContainer"]
-margin_left = 72.0
-margin_right = 156.0
+margin_left = 84.0
+margin_right = 244.0
 margin_bottom = 115.0
 grow_horizontal = 2
 grow_vertical = 2
 custom_constants/separation = 20
+alignment = 1
 
 [node name="Separation1" type="Control" parent="PlayerHUDMainPanel/PlayerHUDMainContainer/PlayerHUDLeftContainer"]
-margin_right = 84.0
+margin_top = 2.0
+margin_right = 160.0
+margin_bottom = 2.0
+rect_min_size = Vector2( 160, 0 )
 
-[node name="ScoreLabelText" type="Label" parent="PlayerHUDMainPanel/PlayerHUDMainContainer/PlayerHUDLeftContainer"]
-margin_top = 20.0
+[node name="ScoreElementsContainer" type="HBoxContainer" parent="PlayerHUDMainPanel/PlayerHUDMainContainer/PlayerHUDLeftContainer"]
+margin_top = 22.0
+margin_right = 160.0
+margin_bottom = 47.0
+custom_constants/separation = 5
+
+[node name="ScoreLabelText" type="Label" parent="PlayerHUDMainPanel/PlayerHUDMainContainer/PlayerHUDLeftContainer/ScoreElementsContainer"]
 margin_right = 84.0
-margin_bottom = 45.0
+margin_bottom = 25.0
 custom_fonts/font = SubResource( 2 )
 text = "SCORE:"
 
-[node name="LivesLabelText" type="Label" parent="PlayerHUDMainPanel/PlayerHUDMainContainer/PlayerHUDLeftContainer"]
-margin_top = 65.0
-margin_right = 84.0
-margin_bottom = 90.0
+[node name="ScoreLabelNumber" type="Label" parent="PlayerHUDMainPanel/PlayerHUDMainContainer/PlayerHUDLeftContainer/ScoreElementsContainer"]
+margin_left = 89.0
+margin_right = 159.0
+margin_bottom = 25.0
+rect_min_size = Vector2( 70, 0 )
+custom_fonts/font = SubResource( 2 )
+text = "0"
+valign = 1
+
+[node name="LivesElementsContainer" type="HBoxContainer" parent="PlayerHUDMainPanel/PlayerHUDMainContainer/PlayerHUDLeftContainer"]
+margin_top = 67.0
+margin_right = 160.0
+margin_bottom = 92.0
+custom_constants/separation = 5
+
+[node name="LivesLabelText" type="Label" parent="PlayerHUDMainPanel/PlayerHUDMainContainer/PlayerHUDLeftContainer/LivesElementsContainer"]
+margin_right = 74.0
+margin_bottom = 25.0
 custom_fonts/font = SubResource( 2 )
 text = "LIVES:"
 
+[node name="LivesLabelNumber" type="Label" parent="PlayerHUDMainPanel/PlayerHUDMainContainer/PlayerHUDLeftContainer/LivesElementsContainer"]
+margin_left = 79.0
+margin_right = 93.0
+margin_bottom = 25.0
+custom_fonts/font = SubResource( 2 )
+text = "0"
+
 [node name="Separation2" type="Control" parent="PlayerHUDMainPanel/PlayerHUDMainContainer/PlayerHUDLeftContainer"]
-margin_top = 110.0
-margin_right = 84.0
-margin_bottom = 110.0
+margin_top = 112.0
+margin_right = 160.0
+margin_bottom = 112.0
 
 [node name="PlayerHUDCenterContainer" type="VBoxContainer" parent="PlayerHUDMainPanel/PlayerHUDMainContainer"]
-margin_left = 526.0
-margin_right = 676.0
+margin_left = 544.0
+margin_right = 804.0
 margin_bottom = 115.0
 alignment = 1
 
+[node name="Separation5" type="Control" parent="PlayerHUDMainPanel/PlayerHUDMainContainer/PlayerHUDCenterContainer"]
+margin_top = 5.0
+margin_right = 260.0
+margin_bottom = 5.0
+rect_min_size = Vector2( 260, 0 )
+
 [node name="PlayerHUDCenterPanel" type="PanelContainer" parent="PlayerHUDMainPanel/PlayerHUDMainContainer/PlayerHUDCenterContainer"]
-margin_top = 7.0
-margin_right = 150.0
-margin_bottom = 107.0
+margin_top = 9.0
+margin_right = 260.0
+margin_bottom = 109.0
 grow_horizontal = 0
 grow_vertical = 0
 rect_min_size = Vector2( 150, 100 )
 size_flags_vertical = 0
 custom_styles/panel = SubResource( 3 )
 
-[node name="TimerLabelText" type="Label" parent="PlayerHUDMainPanel/PlayerHUDMainContainer/PlayerHUDCenterContainer/PlayerHUDCenterPanel"]
+[node name="TimerElementsContainer" type="HBoxContainer" parent="PlayerHUDMainPanel/PlayerHUDMainContainer/PlayerHUDCenterContainer/PlayerHUDCenterPanel"]
 margin_left = 3.0
-margin_top = 34.0
-margin_right = 147.0
-margin_bottom = 59.0
+margin_top = 3.0
+margin_right = 257.0
+margin_bottom = 90.0
+custom_constants/separation = 5
+
+[node name="TimerLabelText" type="Label" parent="PlayerHUDMainPanel/PlayerHUDMainContainer/PlayerHUDCenterContainer/PlayerHUDCenterPanel/TimerElementsContainer"]
+margin_top = 31.0
+margin_right = 80.0
+margin_bottom = 56.0
 custom_fonts/font = SubResource( 2 )
 text = "TIMER:"
-align = 1
+valign = 1
+
+[node name="TimerLabelNumber" type="Label" parent="PlayerHUDMainPanel/PlayerHUDMainContainer/PlayerHUDCenterContainer/PlayerHUDCenterPanel/TimerElementsContainer"]
+margin_left = 85.0
+margin_top = 31.0
+margin_right = 147.0
+margin_bottom = 56.0
+custom_fonts/font = SubResource( 2 )
+text = "00:00"
 valign = 1
 
 [node name="PlayerHUDRightContainer" type="VBoxContainer" parent="PlayerHUDMainPanel/PlayerHUDMainContainer"]
-margin_left = 1046.0
-margin_right = 1316.0
+margin_left = 1104.0
+margin_right = 1374.0
 margin_bottom = 115.0
-grow_horizontal = 2
+grow_horizontal = 0
 grow_vertical = 2
 custom_constants/separation = 20
 
 [node name="Separation3" type="Control" parent="PlayerHUDMainPanel/PlayerHUDMainContainer/PlayerHUDRightContainer"]
 margin_right = 270.0
+rect_min_size = Vector2( 270, 0 )
 
-[node name="AmmoLabelText" type="Label" parent="PlayerHUDMainPanel/PlayerHUDMainContainer/PlayerHUDRightContainer"]
+[node name="AmmoElementsContainer" type="HBoxContainer" parent="PlayerHUDMainPanel/PlayerHUDMainContainer/PlayerHUDRightContainer"]
 margin_top = 20.0
 margin_right = 270.0
 margin_bottom = 45.0
+custom_constants/separation = 5
+
+[node name="AmmoLabelText" type="Label" parent="PlayerHUDMainPanel/PlayerHUDMainContainer/PlayerHUDRightContainer/AmmoElementsContainer"]
+margin_right = 78.0
+margin_bottom = 25.0
 custom_fonts/font = SubResource( 2 )
 text = "AMMO:"
 
-[node name="AmmoReloadText" type="Label" parent="PlayerHUDMainPanel/PlayerHUDMainContainer/PlayerHUDRightContainer"]
+[node name="AmmoLabelNumber" type="Label" parent="PlayerHUDMainPanel/PlayerHUDMainContainer/PlayerHUDRightContainer/AmmoElementsContainer"]
+margin_left = 83.0
+margin_right = 97.0
+margin_bottom = 25.0
+custom_fonts/font = SubResource( 2 )
+text = "0"
+
+[node name="AmmoReloadElementsContainer" type="HBoxContainer" parent="PlayerHUDMainPanel/PlayerHUDMainContainer/PlayerHUDRightContainer"]
+visible = false
 margin_top = 65.0
-margin_right = 270.0
+margin_right = 289.0
 margin_bottom = 90.0
+custom_constants/separation = 5
+
+[node name="AmmoReloadText" type="Label" parent="PlayerHUDMainPanel/PlayerHUDMainContainer/PlayerHUDRightContainer/AmmoReloadElementsContainer"]
+margin_right = 270.0
+margin_bottom = 25.0
 custom_fonts/font = SubResource( 2 )
 text = "AMMO_RELOAD_TIMER:"
 
+[node name="AmmoReloadNumber" type="Label" parent="PlayerHUDMainPanel/PlayerHUDMainContainer/PlayerHUDRightContainer/AmmoReloadElementsContainer"]
+margin_left = 275.0
+margin_right = 289.0
+margin_bottom = 25.0
+custom_fonts/font = SubResource( 2 )
+text = "0"
+
 [node name="Separation4" type="Control" parent="PlayerHUDMainPanel/PlayerHUDMainContainer/PlayerHUDRightContainer"]
-margin_top = 110.0
+margin_top = 65.0
 margin_right = 270.0
-margin_bottom = 110.0
+margin_bottom = 65.0
 
 [node name="PanelHUDButtonContainer" type="PanelContainer" parent="PlayerHUDMainPanel/PlayerHUDMainContainer"]
-margin_left = 1686.0
-margin_top = 3.0
-margin_right = 1842.0
+margin_left = 1674.0
+margin_right = 1830.0
 margin_bottom = 115.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -171,7 +246,7 @@ custom_styles/panel = SubResource( 6 )
 margin_left = 3.0
 margin_top = 3.0
 margin_right = 153.0
-margin_bottom = 103.0
+margin_bottom = 105.0
 grow_horizontal = 2
 grow_vertical = 2
 rect_min_size = Vector2( 150, 100 )

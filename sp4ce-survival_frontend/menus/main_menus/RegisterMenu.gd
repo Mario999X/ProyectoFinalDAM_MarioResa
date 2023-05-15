@@ -4,7 +4,7 @@ func _ready():
 	print(get_tree().current_scene.name, " | ", OS.get_time().hour, ":", OS.get_time().minute)
 	
 
-
+# HTTP Request for the register
 func _prepare_register_query(username, email, password, repeat_password):
 	var url = "https://localhost:6969/sp4ceSurvival/register"
 	var query = {"username": username, "email": email, "password": password, "repeatPassword": repeat_password}
@@ -12,13 +12,13 @@ func _prepare_register_query(username, email, password, repeat_password):
 	
 	$Register.request(url, headers, false, HTTPClient.METHOD_POST, to_json(query))
 
-
-func _on_ReturnMainMenu_pressed():
+# Function to return to the Welcome Menu
+func _on_ReturnWelcomeMenu_pressed():
 	Select2.play()
 	get_tree().change_scene("res://menus/main_menus/WelcomeMenu.tscn")
 	queue_free()
 
-
+# Register Buttoon, we check if the data is logically correct according to the project information.
 func _on_RegisterButton_pressed():
 	Select1.play()
 	var username_register_field = $RegisterElementsPanel/RegisterElementsContainer/UsernameRegisterLineEdit
@@ -72,7 +72,7 @@ func _on_RegisterButton_pressed():
 	
 	
 
-
+# Register Request Completed, we act according to the response code
 func _on_Register_request_completed(result, response_code, headers, body):
 	if response_code == 0:
 		GlobalVariables.message_http_request = "TIMEOUT"
@@ -90,7 +90,7 @@ func _on_Register_request_completed(result, response_code, headers, body):
 	$LoadScreen/LoadingElementsContainer/LoadingMessage.text = GlobalVariables.message_http_request
 	$RequestTimer.start()
 
-
+# To show the player the message received from the Request, and also to change the scene if the token is saved.
 func _on_RequestTimer_timeout():
 	var online_mode = SaveSystem.load_value_user("Online", "Account")
 	
