@@ -21,3 +21,4 @@ position = Vector2( -3.57628e-07, -3.57628e-07 )
 scale = Vector2( 0.833333, 0.833333 )
 
 [connection signal="body_entered" from="." to="." method="_on_EnemyBulletT1_body_entered"]
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

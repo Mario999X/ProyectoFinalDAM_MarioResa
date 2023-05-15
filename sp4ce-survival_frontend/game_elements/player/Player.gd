@@ -1,6 +1,7 @@
 extends KinematicBody2D
 
 const BULLET = preload("res://game_elements/player/PlayerBullet.tscn")
+signal reload_complete
 
 export var speed = 175
 export var ammo = 10
@@ -11,6 +12,7 @@ var screen_size
 
 func _ready():
 	screen_size = get_viewport_rect().size
+	PlayerGun.stream = load("res://assets/sounds/effects/Shoot.wav")
 
 func _physics_process(delta):
 	look_at(get_global_mouse_position())
@@ -35,6 +37,11 @@ func _physics_process(delta):
 		shoot()
 	
 
+func start(pos):
+	position = pos
+	self.show()
+	
+
 func reload():
 	can_shoot = false
 	PlayerGun.stream = load("res://assets/sounds/effects/Reload.wav")
@@ -42,10 +49,12 @@ func reload():
 
 
 func shoot():
+	if self.visible == false:
+		return
 	if can_shoot:
 		PlayerGun.play()
 		print(str(ammo))
-		ammo -=1
+		ammo -= 1
 		
 		var bullet_instance = BULLET.instance()
 	
@@ -59,7 +68,8 @@ func shoot():
 	
 		bullet_instance.set_direction(direction)
 		
-		if ammo < 1:
+		if ammo == 0:
+			yield(get_tree().create_timer(0.3), "timeout")
 			reload()
 	else:
 		PlayerGun.play()
@@ -75,3 +85,5 @@ func _on_ReloadTimer_timeout():
 	PlayerGun.stream = load("res://assets/sounds/effects/Shoot.wav")
 	ammo = 10
 	can_shoot = true
+	emit_signal("reload_complete")
+

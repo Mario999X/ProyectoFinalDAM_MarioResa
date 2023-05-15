@@ -1,4 +1,4 @@
-extends Control
+extends CanvasLayer
 
 var is_paused = false setget set_paused
 
@@ -12,6 +12,7 @@ func set_paused(value):
 
 func _on_PlayerHUD_pause_button():
 	self.is_paused = !is_paused
+
 
 func _unhandled_key_input(event):
 	if event.is_action_pressed("pause_game"):
@@ -29,7 +30,7 @@ func _on_ResumeGameButton_pressed():
 func _on_ExitGameButton_pressed():
 	Select2.play()
 	self.is_paused = !is_paused
-	queue_free()
+	get_parent().queue_free()
 	
 	BackgroundMusic.stream = load("res://assets/sounds/music/loops/Menus_Music.mp3")
 	BackgroundMusic.playing = true

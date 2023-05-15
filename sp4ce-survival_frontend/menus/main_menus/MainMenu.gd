@@ -17,7 +17,7 @@ func _ready():
 func _reloadLabel(difficulty_selected):
 	var original_label = $MainElementsPanel/MainElementsContainer/DifficultyLabelsContainer/DifficultySelectedLabel
 	
-	if difficulty_selected == 1:
+	if difficulty_selected == 3:
 		original_label.text = $MainElementsPanel/MainElementsContainer/DifficultyLevelsContainer/EasyButton.text
 	elif difficulty_selected == 2:
 		original_label.text = $MainElementsPanel/MainElementsContainer/DifficultyLevelsContainer/MediumButton.text
@@ -43,7 +43,7 @@ func _on_ExitButton_pressed():
 
 func _on_EasyButton_pressed():
 	Select1.play()
-	GlobalVariables.difficulty_selected = 1
+	GlobalVariables.difficulty_selected = 3
 	_reloadLabel(GlobalVariables.difficulty_selected)
 
 
@@ -55,7 +55,7 @@ func _on_MediumButton_pressed():
 
 func _on_HardButton_pressed():
 	Select1.play()
-	GlobalVariables.difficulty_selected = 3
+	GlobalVariables.difficulty_selected = 1
 	_reloadLabel(GlobalVariables.difficulty_selected)
 
 
