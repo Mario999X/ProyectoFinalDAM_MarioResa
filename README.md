@@ -43,7 +43,7 @@ Un usuario obtiene una puntuación y la puede almacenar/actualizar.
 
 ## Funcionamiento de la Aplicación
 
-Realmente ambas partes son elementos individuales que forman parte de algo mayor; el videojuego podrá ser disfrutado de manera individual debido a que se ofrece soporte offline.
+Realmente ambas partes son elementos individuales que forman parte de algo mayor, aunque el videojuego podrá ser disfrutado de manera individual debido a que se ofrece soporte offline.
 
 Pero, dejando eso de lado, la ejecución del programa seguiría el siguiente orden, a lo que posibles **menús** pueda acceder el usuario: 
 
