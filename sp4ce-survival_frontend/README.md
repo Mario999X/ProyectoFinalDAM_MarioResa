@@ -18,9 +18,6 @@ El videojuego se ha diseñado usando [Godot](https://godotengine.org/), en su ve
 
 En este repositorio, se podrá observar el código fuente de la aplicación.
 
-Si se quiere descargar el videojuego en formato de ejecutable, se realizará a través del siguiente enlace:
-- [Coming Soon]
-
 ## Documentación
 
 En el documento [PDF del proyecto](/docs/Proyecto_Desarrollo_de_aplicaciones_IES_Luis_Vives-Mario_Resa.pdf), 
@@ -32,10 +29,10 @@ En **Godot** no existe un formato específico de documentar el código, como **J
 
 ### Teclado y Ratón
 
-- **W**: Movimiento hacia arriba.
-- **A**: Movimiento hacia la derecha.
-- **S**: Movimiento hacia abajo.
-- **D**: Movimiento hacia la izquierda.
+- **W**: Desplazamiento hacia arriba.
+- **A**: Desplazamiento hacia la derecha.
+- **S**: Desplazamiento hacia abajo.
+- **D**: Desplazamiento hacia la izquierda.
 
 - **Esc**: Pausar.
 
