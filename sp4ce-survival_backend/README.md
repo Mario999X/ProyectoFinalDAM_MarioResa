@@ -48,12 +48,12 @@ Las tablas son cargadas desde el archivo **schema.sql correspondiente** localiza
 y los datos base son cargados cada vez que se ejecuta la aplicación desde la clase *main*, haciendo un reseteo a las
 tablas si se lanza el *docker-compose de desarrollo*.
 
-Según el despliegue de la aplicación, la base de datos tendra los puertos expuestos.
+Según el despliegue de la aplicación, la base de datos tendrá los puertos expuestos.
 
-- Si se ejecuta el *docker-compose de desarrollo* (**dev**), la base de datos estara expuesta y se podra ejecutar la
+- Si se ejecuta el *docker-compose de desarrollo* (**dev**), la base de datos estará expuesta y se podrá ejecutar la
   aplicación desde el IDE.
 - Si se ejecuta el *docker-compose de producción* (**production**), la base de datos **no** estará expuesta y se
-  trabajara a través de los puertos expuestos del propio *servicio*.
+  trabajará a través de los puertos expuestos del propio *servicio*.
 
 ## Dominio
 
@@ -105,7 +105,7 @@ La ruta **base** del servicio: https://localhost:6969/sp4ceSurvival
 
 | Método | Endpoint(*base*)            		      | Auth | Descripción                                                    		       		          | Status Code(OK) | Return Content |
 |--------|-------------------------------------|------|-------------------------------------------------------------------------------------|-----------------|----------------|
-| POST   | /register                   		      | NO   | Registro de un usuario por si mismo.                           		       		          | 201             | JSON           |
+| POST   | /register                   		      | NO   | Registro de un usuario por sí mismo.                           		       		          | 201             | JSON           |
 | POST   | /create                     		      | JWT  | Creación de un usuario por parte de un administrador.          		       		          | 201             | JSON           |
 | GET 	  | /login                      		      | NO   | Iniciar sesión usando el nombre de usuario y la contraseña.    		       		          | 200             | JSON           |
 | GET    | /username?username=X        		      | JWT  | Búsqueda de un usuario usando su nombre de usuario.            		       		          | 200             | JSON           |
