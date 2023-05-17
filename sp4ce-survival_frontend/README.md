@@ -8,6 +8,7 @@ Proyecto final del Módulo Superior de Desarrollo de Aplicaciones Multiplataform
 
 - [Introducción](#introducción)
 - [Documentación](#documentación)
+- [Controles](#controles)
 - [Atribuciones](#atribuciones)
 - [Autor](#autor)
 
@@ -26,6 +27,19 @@ En el documento [PDF del proyecto](/docs/Proyecto_Desarrollo_de_aplicaciones_IES
 se ha escrito un apartado estilo GDD que documenta el videojuego en sus aspectos generales y decisiones de diseño tomadas.
 
 En **Godot** no existe un formato específico de documentar el código, como **JavaDoc o Kdoc**, por lo que se ha tratado de explicar brevemente valores o funciones clave con simples comentarios.
+
+## Controles
+
+### Teclado y Ratón
+
+- **W**: Movimiento hacia arriba.
+- **A**: Movimiento hacia la derecha.
+- **S**: Movimiento hacia abajo.
+- **D**: Movimiento hacia la izquierda.
+
+- **Esc**: Pausar.
+
+- **Click Izquierdo del Ratón**: Disparar.
 
 ## Atribuciones
 
