@@ -15,7 +15,7 @@ const spawn_point_count = 4
 const radius = 25
 
 
-export var speed = 0
+export var speed = 175
 var velocity = Vector2.ZERO
 
 func _ready():
@@ -36,6 +36,7 @@ func _process(delta):
 	var new_rotation = rotater.rotation_degrees + rotate_speed * delta
 	rotater.rotation_degrees = fmod(new_rotation, 360)
 	
+	position += transform.x * speed * delta
 
 
 func _on_VisibilityNotifier2D_screen_exited():

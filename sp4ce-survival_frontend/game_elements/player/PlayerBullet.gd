@@ -25,7 +25,6 @@ func _on_VisibilityNotifier2D_screen_exited():
 	queue_free()
 
 
-
 func _on_PlayerBullet_area_entered(area):
 	if "im_bullet_t1" in area:
 		print("Hit against t1")

@@ -13,7 +13,8 @@ position = Vector2( 1040, 177 )
 speed = 0
 
 [node name="EnemyShip" parent="." instance=ExtResource( 4 )]
-position = Vector2( 940, 162 )
+position = Vector2( 898, 168 )
+speed = 0
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
 position = Vector2( 858, 524 )
