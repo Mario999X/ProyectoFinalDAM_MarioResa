@@ -10,6 +10,7 @@
 
 [node name="EnemyBulletType1" parent="." instance=ExtResource( 3 )]
 position = Vector2( 1040, 177 )
+speed = 0
 
 [node name="EnemyShip" parent="." instance=ExtResource( 4 )]
 position = Vector2( 940, 162 )
@@ -22,3 +23,4 @@ position = Vector2( 39.0001, 1036 )
 
 [node name="EnemyBulletT2" parent="." instance=ExtResource( 5 )]
 position = Vector2( 1116, 173 )
+speed = 0
