@@ -97,11 +97,9 @@ rotation = 1.5708
 position = Vector2( 960, 768 )
 
 [node name="PlayerHUD" parent="." instance=ExtResource( 2 )]
-layer = 2
 
 [node name="PauseMenu" parent="." instance=ExtResource( 1 )]
 pause_mode = 2
-layer = 2
 visible = false
 
 [node name="GameTimerDuration" type="Timer" parent="."]
