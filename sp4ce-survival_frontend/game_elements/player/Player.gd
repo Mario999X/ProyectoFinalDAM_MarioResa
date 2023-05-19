@@ -2,6 +2,7 @@ extends KinematicBody2D
 
 const BULLET = preload("res://game_elements/player/PlayerBullet.tscn")
 signal reload_complete
+signal hit_by_enemy
 
 export var speed = 175
 export var ammo = 10
@@ -78,6 +79,7 @@ func shoot():
 
 func hit_by_enemy():
 	print("Hit by enemy")
+	emit_signal("hit_by_enemy")
 	queue_free()
 
 

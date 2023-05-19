@@ -4,6 +4,7 @@
 [ext_resource path="res://game_elements/enemies/EnemyShip.gd" type="Script" id=2]
 
 [node name="EnemyShip" type="Area2D"]
+rotation = 1.5708
 scale = Vector2( 0.75, 0.75 )
 script = ExtResource( 2 )
 __meta__ = {

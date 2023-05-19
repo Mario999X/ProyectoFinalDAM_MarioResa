@@ -97,9 +97,11 @@ rotation = 1.5708
 position = Vector2( 960, 768 )
 
 [node name="PlayerHUD" parent="." instance=ExtResource( 2 )]
+layer = 2
 
 [node name="PauseMenu" parent="." instance=ExtResource( 1 )]
 pause_mode = 2
+layer = 2
 visible = false
 
 [node name="GameTimerDuration" type="Timer" parent="."]
@@ -108,7 +110,11 @@ one_shot = true
 
 [node name="ScoreUpdateTimer" type="Timer" parent="."]
 
+[node name="EnemyShipTimer" type="Timer" parent="."]
+
+[connection signal="hit_by_enemy" from="Player" to="." method="_on_Player_hit_by_enemy"]
 [connection signal="reload_complete" from="Player" to="." method="_on_Player_reload_complete"]
 [connection signal="pause_button" from="PlayerHUD" to="PauseMenu" method="_on_PlayerHUD_pause_button"]
 [connection signal="start_game" from="PlayerHUD" to="." method="_on_PlayerHUD_start_game"]
 [connection signal="timeout" from="ScoreUpdateTimer" to="." method="_on_ScoreUpdateTimer_timeout"]
+[connection signal="timeout" from="EnemyShipTimer" to="." method="_on_EnemyShipTimer_timeout"]

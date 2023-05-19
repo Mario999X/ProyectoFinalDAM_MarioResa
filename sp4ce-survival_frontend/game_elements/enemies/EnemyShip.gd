@@ -58,6 +58,6 @@ func _on_ShootTimer_timeout():
 			bullet = bullet_t1_scene.instance()
 		else:
 			bullet = bullet_t2_scene.instance()
-		get_tree().root.add_child(bullet)
+		get_parent().add_child(bullet)
 		bullet.position = s.global_position
 		bullet.rotation = s.global_rotation
