@@ -4,8 +4,6 @@ export var speed = 10
 
 var im_bullet_player
 
-signal enemy_hit
-
 var direction := Vector2.ZERO
 
 func _ready():
@@ -28,10 +26,14 @@ func _on_VisibilityNotifier2D_screen_exited():
 
 
 func _on_PlayerBullet_area_entered(area):
+	var level_node = get_parent()
+	
 	if "im_bullet_t1" in area:
 		print("Hit against t1")
 		queue_free()
 		area.queue_free()
+		
+		GlobalSignals.emit_signal("enemy_t1_hit")
 		
 	if "im_bullet_t2" in area:
 		print("Hit against t2")
@@ -42,5 +44,5 @@ func _on_PlayerBullet_area_entered(area):
 		queue_free()
 		area.queue_free()
 		
-		emit_signal("enemy_hit")
+		GlobalSignals.emit_signal("enemy_ship_hit")
 

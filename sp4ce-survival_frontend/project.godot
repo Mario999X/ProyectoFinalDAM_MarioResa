@@ -24,6 +24,7 @@ Select1="*res://sounds/Select1.tscn"
 Select2="*res://sounds/Select2.tscn"
 PlayerGun="*res://sounds/PlayerGun.tscn"
 LoadingProgressBarScreen="*res://loading_screens/LoadingProgressBarScreen.gd"
+GlobalSignals="*res://utils/GlobalSignals.gd"
 
 [display]
 

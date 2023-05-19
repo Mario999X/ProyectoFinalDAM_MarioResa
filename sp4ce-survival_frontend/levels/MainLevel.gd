@@ -14,12 +14,33 @@ func _ready():
 	BackgroundMusic.playing = true
 	lives = GlobalVariables.difficulty_selected
 	
+	_global_signals_connect_on_level()
+
+func _global_signals_connect_on_level():
+	GlobalSignals.connect("enemy_t1_hit", self, "_on_enemy_bullet_t1_hit")
+	GlobalSignals.connect("enemy_ship_hit", self, "_on_enemy_ship_hit")
+	GlobalSignals.connect("enemy_out_of_reach", self, "_on_enemy_out_of_reach")
+
+func _on_enemy_out_of_reach():
+	print("On level, enemy ship out of reach")
+	total_enemies -= 1
+
+func _on_enemy_ship_hit():
+	print("On level, enemy ship hit")
+	score += 5
+	total_enemies -= 1
+
+func _on_enemy_bullet_t1_hit():
+	print("On level, T1 Hit")
+	score += 1
 
 func _on_PlayerHUD_start_game():
 	score = 0
 	total_enemies = 0
 	
 	$Player.start($PlayerSpawnLocation.position)
+	yield(get_tree().create_timer(1), "timeout")
+	
 	$ScoreUpdateTimer.start()
 	$GameTimerDuration.start()
 	$PlayerHUD.update_lives(lives)
@@ -33,28 +54,23 @@ func _on_ScoreUpdateTimer_timeout():
 	score += 1
 	$PlayerHUD.update_score(score)
 	$PlayerHUD.update_timer_duration(floor($GameTimerDuration.time_left))
-
-
-func _input(event):
-	if event.is_action_pressed("shoot"):
-		if $Player.ammo > 0:
-			$PlayerHUD.update_ammo($Player.ammo -1)
-		else:
-			return
-
+	
 
 func _on_Player_reload_complete():
 	$PlayerHUD.update_ammo($Player.ammo)
 
 
 func _on_EnemyShipTimer_timeout():
-	if total_enemies < 10:
+	if total_enemies < 5:
 		total_enemies += 1
 		var enemy = enemy_ship_scene.instance()
 		var enemy_spawn_location = $MobPath/MobSpawnLocation
+		
 		enemy_spawn_location.offset = randi()
+		
 		var direction = enemy_spawn_location.rotation + PI / 2
 		enemy.position = enemy_spawn_location.position
+		
 		direction += rand_range(-PI / 4, PI / 4)
 		enemy.rotation = direction
 		
@@ -71,3 +87,10 @@ func _on_Player_hit_by_enemy():
 		$ScoreUpdateTimer.stop()
 	else:
 		$PlayerHUD.update_lives(lives)
+
+
+func _on_Player_shoot():
+	if $Player.ammo >= 0:
+		$PlayerHUD.update_ammo($Player.ammo)
+	else:
+		return

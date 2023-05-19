@@ -23,7 +23,7 @@ extents = Vector2( 960, 12 )
 
 [sub_resource type="Curve2D" id=6]
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, 0, 128, 0, 0, 0, 0, 0, 448, 0, 0, 0, 0, 0, 128, 0, 0, 0, 0, 1920, 128, 0, 0, 0, 0, 1920, 448 )
+"points": PoolVector2Array( 0, 0, 0, 0, 0, 128, 0, 0, 0, 0, 1920, 128, 0, 0, 0, 0, 1920, 1080, 0, 0, 0, 0, 0, 1080, 0, 0, 0, 0, 0, 128 )
 }
 
 [node name="MainLevel" type="Node"]
@@ -47,6 +47,7 @@ visible = false
 position = Vector2( -1, -1.90735e-06 )
 
 [node name="RightWall" type="StaticBody2D" parent="."]
+visible = false
 position = Vector2( 1928, 152 )
 __meta__ = {
 "_edit_group_": true
@@ -57,6 +58,7 @@ position = Vector2( -12, 452 )
 shape = SubResource( 2 )
 
 [node name="BottomWall" type="StaticBody2D" parent="."]
+visible = false
 position = Vector2( 8, 1080 )
 __meta__ = {
 "_edit_group_": true
@@ -67,6 +69,7 @@ position = Vector2( 952, -4 )
 shape = SubResource( 3 )
 
 [node name="LeftWall" type="StaticBody2D" parent="."]
+visible = false
 position = Vector2( -8, 128 )
 __meta__ = {
 "_edit_group_": true
@@ -77,6 +80,7 @@ position = Vector2( 12, 476 )
 shape = SubResource( 4 )
 
 [node name="UpperWall" type="StaticBody2D" parent="."]
+visible = false
 position = Vector2( 8, 128 )
 __meta__ = {
 "_edit_group_": true
@@ -91,7 +95,6 @@ curve = SubResource( 6 )
 
 [node name="MobSpawnLocation" type="PathFollow2D" parent="MobPath"]
 position = Vector2( 0, 128 )
-rotation = 1.5708
 
 [node name="PlayerSpawnLocation" type="Position2D" parent="."]
 position = Vector2( 960, 768 )
@@ -112,6 +115,7 @@ one_shot = true
 
 [connection signal="hit_by_enemy" from="Player" to="." method="_on_Player_hit_by_enemy"]
 [connection signal="reload_complete" from="Player" to="." method="_on_Player_reload_complete"]
+[connection signal="shoot" from="Player" to="." method="_on_Player_shoot"]
 [connection signal="pause_button" from="PlayerHUD" to="PauseMenu" method="_on_PlayerHUD_pause_button"]
 [connection signal="start_game" from="PlayerHUD" to="." method="_on_PlayerHUD_start_game"]
 [connection signal="timeout" from="ScoreUpdateTimer" to="." method="_on_ScoreUpdateTimer_timeout"]

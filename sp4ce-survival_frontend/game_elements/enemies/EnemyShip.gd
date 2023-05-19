@@ -10,7 +10,7 @@ onready var rotater = $Rotater
 
 # Fields for the shot pattern
 const rotate_speed = 75
-const shooter_timer_wait_time = 0.5
+const shooter_timer_wait_time = 0.8
 const spawn_point_count = 4
 const radius = 25
 
@@ -40,6 +40,7 @@ func _process(delta):
 
 
 func _on_VisibilityNotifier2D_screen_exited():
+	GlobalSignals.emit_signal("enemy_out_of_reach")
 	queue_free()
 
 

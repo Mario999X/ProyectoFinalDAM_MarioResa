@@ -1,11 +1,12 @@
 extends KinematicBody2D
 
 const BULLET = preload("res://game_elements/player/PlayerBullet.tscn")
+signal shoot
 signal reload_complete
 signal hit_by_enemy
 
 export var speed = 175
-export var ammo = 10
+export var ammo = 20
 
 var can_shoot = true
 
@@ -68,10 +69,10 @@ func shoot():
 		var direction = bullet_instance.global_position.direction_to(target).normalized()
 	
 		bullet_instance.set_direction(direction)
-		
 		if ammo == 0:
-			yield(get_tree().create_timer(0.3), "timeout")
+			yield(get_tree().create_timer(0.1), "timeout")
 			reload()
+		emit_signal("shoot")
 	else:
 		PlayerGun.play()
 		print("Reloading...")
@@ -85,7 +86,7 @@ func hit_by_enemy():
 
 func _on_ReloadTimer_timeout():
 	PlayerGun.stream = load("res://assets/sounds/effects/Shoot.wav")
-	ammo = 10
+	ammo = 20
 	can_shoot = true
 	emit_signal("reload_complete")
 
