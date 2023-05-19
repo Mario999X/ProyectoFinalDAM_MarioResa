@@ -99,6 +99,8 @@ func _on_Player_hit_by_enemy():
 		bullet_t2.queue_free()
 	
 	lives -= 1
+	$PlayerHUD.update_lives(lives)
+	
 	$EnemyShipTimer.stop()
 	$ScoreUpdateTimer.stop()
 	
@@ -107,7 +109,6 @@ func _on_Player_hit_by_enemy():
 	else:
 		$GameTimerDuration.paused = true
 		
-		$PlayerHUD.update_lives(lives)
 		_reset_locations()
 
 
