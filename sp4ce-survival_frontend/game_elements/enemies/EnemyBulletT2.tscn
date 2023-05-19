@@ -6,8 +6,8 @@
 [sub_resource type="CircleShape2D" id=1]
 radius = 15.1327
 
-[node name="EnemyBulletT2" type="Area2D"]
-scale = Vector2( 0.8, 0.8 )
+[node name="EnemyBulletT2" type="Area2D" groups=["Enemy_Bullets_T2"]]
+scale = Vector2( 0.6, 0.6 )
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true

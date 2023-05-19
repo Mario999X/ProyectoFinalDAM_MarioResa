@@ -3,7 +3,7 @@
 [ext_resource path="res://assets/enemies/Enemy_Ship.png" type="Texture" id=1]
 [ext_resource path="res://game_elements/enemies/EnemyShip.gd" type="Script" id=2]
 
-[node name="EnemyShip" type="Area2D"]
+[node name="EnemyShip" type="Area2D" groups=["Enemy_Ships"]]
 rotation = 1.5708
 scale = Vector2( 0.75, 0.75 )
 script = ExtResource( 2 )

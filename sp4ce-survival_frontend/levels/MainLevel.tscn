@@ -113,6 +113,10 @@ one_shot = true
 
 [node name="EnemyShipTimer" type="Timer" parent="."]
 
+[node name="ActualScoreRegistered" type="HTTPRequest" parent="."]
+use_threads = true
+timeout = 10.0
+
 [connection signal="hit_by_enemy" from="Player" to="." method="_on_Player_hit_by_enemy"]
 [connection signal="reload_complete" from="Player" to="." method="_on_Player_reload_complete"]
 [connection signal="shoot" from="Player" to="." method="_on_Player_shoot"]
@@ -120,3 +124,4 @@ one_shot = true
 [connection signal="start_game" from="PlayerHUD" to="." method="_on_PlayerHUD_start_game"]
 [connection signal="timeout" from="ScoreUpdateTimer" to="." method="_on_ScoreUpdateTimer_timeout"]
 [connection signal="timeout" from="EnemyShipTimer" to="." method="_on_EnemyShipTimer_timeout"]
+[connection signal="request_completed" from="ActualScoreRegistered" to="." method="_on_ActualScoreRegistered_request_completed"]

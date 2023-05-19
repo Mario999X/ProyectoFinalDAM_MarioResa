@@ -12,7 +12,15 @@ var lives
 func _ready():
 	BackgroundMusic.stream = load("res://assets/sounds/music/loops/Game_Music.mp3")
 	BackgroundMusic.playing = true
+	
 	lives = GlobalVariables.difficulty_selected
+	total_enemies = 0
+	score = 0
+	
+	var online_mode = SaveSystem.load_value_user("Online", "Account")
+	
+	if online_mode != "0" and GlobalVariables.actual_score == 0:
+		_obtain_actual_score_query(online_mode)
 	
 	_global_signals_connect_on_level()
 
@@ -35,11 +43,8 @@ func _on_enemy_bullet_t1_hit():
 	score += 1
 
 func _on_PlayerHUD_start_game():
-	score = 0
-	total_enemies = 0
-	
 	$Player.start($PlayerSpawnLocation.position)
-	yield(get_tree().create_timer(1), "timeout")
+	yield(get_tree().create_timer(2), "timeout")
 	
 	$ScoreUpdateTimer.start()
 	$GameTimerDuration.start()
@@ -81,12 +86,42 @@ func _on_EnemyShipTimer_timeout():
 
 
 func _on_Player_hit_by_enemy():
+	var enemy_ships = get_tree().get_nodes_in_group("Enemy_Ships")
+	for enemy in enemy_ships:
+		enemy.queue_free()
+		
+	var bullets_t1 = get_tree().get_nodes_in_group("Enemy_Bullets_T1")
+	for bullet_t1 in bullets_t1:
+		bullet_t1.queue_free()
+		
+	var bullets_t2 = get_tree().get_nodes_in_group("Enemy_Bullets_T2")
+	for bullet_t2 in bullets_t2:
+		bullet_t2.queue_free()
+	
 	lives -= 1
+	$EnemyShipTimer.stop()
+	$ScoreUpdateTimer.stop()
+	
 	if lives == 0:
-		$EnemyShipTimer.stop()
-		$ScoreUpdateTimer.stop()
+		$GameTimerDuration.stop()
 	else:
+		$GameTimerDuration.paused = true
+		
 		$PlayerHUD.update_lives(lives)
+		_reset_locations()
+
+
+func _reset_locations():
+	yield(get_tree().create_timer(2), "timeout")
+	
+	$Player.start($PlayerSpawnLocation.position)
+	
+	yield(get_tree().create_timer(2), "timeout")
+	
+	$ScoreUpdateTimer.start()
+	$GameTimerDuration.paused = false
+	$PlayerHUD.update_ammo($Player.ammo)
+	$EnemyShipTimer.start()
 
 
 func _on_Player_shoot():
@@ -94,3 +129,28 @@ func _on_Player_shoot():
 		$PlayerHUD.update_ammo($Player.ammo)
 	else:
 		return
+
+func _obtain_actual_score_query(token):
+	var url = "https://localhost:6969/sp4ceSurvival/score"
+	var headers = ["Authorization: Bearer " + token]
+	
+	$ActualScoreRegistered.request(url, headers, false, HTTPClient.METHOD_GET)
+
+
+func _on_ActualScoreRegistered_request_completed(result, response_code, headers, body):
+	# Timeout
+	if response_code == 0:
+		SaveSystem.save_value_user("Online", "Account", "0")
+	# Connected
+	if response_code == 204:
+		return
+	else:
+		var response = JSON.parse(body.get_string_from_utf8()).result
+		
+		if (response_code == 200):
+			GlobalVariables.actual_score = int(response.scoreNumber)
+			print(GlobalVariables.actual_score)
+
+		if (response_code == 403):
+			SaveSystem.save_value_user("Online", "Account", "0")
+			

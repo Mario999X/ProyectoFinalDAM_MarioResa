@@ -14,5 +14,5 @@ var message_http_request = null
 var message_player_level = null
 
 # Main Timer time for the initial duration of the level
-var main_timer_duration = null
+var actual_score = 0
 

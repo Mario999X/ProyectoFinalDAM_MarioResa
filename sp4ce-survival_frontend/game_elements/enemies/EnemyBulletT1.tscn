@@ -3,7 +3,7 @@
 [ext_resource path="res://assets/enemies/Enemy_Projectile_Type-1.png" type="Texture" id=1]
 [ext_resource path="res://game_elements/enemies/EnemyBulletT1.gd" type="Script" id=2]
 
-[node name="EnemyBulletT1" type="Area2D"]
+[node name="EnemyBulletT1" type="Area2D" groups=["Enemy_Bullets_T1"]]
 scale = Vector2( 0.6, 0.6 )
 script = ExtResource( 2 )
 __meta__ = {

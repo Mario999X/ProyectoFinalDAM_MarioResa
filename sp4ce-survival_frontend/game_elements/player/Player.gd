@@ -42,6 +42,7 @@ func _physics_process(delta):
 func start(pos):
 	position = pos
 	self.show()
+	$PlayerHitBox.set_deferred("disabled", false)
 	
 
 func reload():
@@ -80,8 +81,11 @@ func shoot():
 
 func hit_by_enemy():
 	print("Hit by enemy")
+	
+	hide()
 	emit_signal("hit_by_enemy")
-	queue_free()
+	$PlayerHitBox.set_deferred("disabled", true)
+	
 
 
 func _on_ReloadTimer_timeout():

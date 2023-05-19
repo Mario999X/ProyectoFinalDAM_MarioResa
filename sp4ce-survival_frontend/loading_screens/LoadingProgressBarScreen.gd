@@ -9,6 +9,7 @@ func load_scene_progress_bar(current_scene, next_scene):
 	var loading_scene_instance = loading_scene.instance()
 	get_tree().get_root().call_deferred("add_child", loading_scene_instance)
 	
+	
 	var loader = ResourceLoader.load_interactive(next_scene)
 	
 	if loader == null:
@@ -17,6 +18,8 @@ func load_scene_progress_bar(current_scene, next_scene):
 		
 	
 	yield(get_tree().create_timer(0.5), "timeout")
+	
+
 	
 	while true:
 		var error = loader.poll()
