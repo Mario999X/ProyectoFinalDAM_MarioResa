@@ -88,7 +88,7 @@ custom_fonts/font = SubResource( 2 )
 text = "OPTIONS"
 
 [node name="SettingsMenu" parent="." instance=ExtResource( 3 )]
-layer = 2
+layer = 3
 visible = false
 
 [connection signal="pressed" from="PauseMenuPanelContainer/PauseMenuContainer/ResumeGameButton" to="." method="_on_ResumeGameButton_pressed"]

@@ -121,6 +121,7 @@ wait_time = 2.0
 use_threads = true
 timeout = 10.0
 
+[connection signal="game_over" from="." to="." method="_on_MainLevel_game_over"]
 [connection signal="hit_by_enemy" from="Player" to="." method="_on_Player_hit_by_enemy"]
 [connection signal="reload_complete" from="Player" to="." method="_on_Player_reload_complete"]
 [connection signal="shoot" from="Player" to="." method="_on_Player_shoot"]

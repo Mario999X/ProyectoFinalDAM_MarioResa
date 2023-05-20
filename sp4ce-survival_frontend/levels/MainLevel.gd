@@ -160,8 +160,8 @@ func _on_ActualScoreRegistered_request_completed(result, response_code, headers,
 		var response = JSON.parse(body.get_string_from_utf8()).result
 		
 		if (response_code == 200):
-			GlobalVariables.actual_score = int(response.scoreNumber)
-			print(GlobalVariables.actual_score)
+			GlobalVariables.actual_score_registered = int(response.scoreNumber)
+			print(GlobalVariables.actual_score_registered)
 
 		if (response_code == 403):
 			SaveSystem.save_value_user("Online", "Account", "0")
@@ -174,6 +174,8 @@ func _on_GameTimerDuration_timeout():
 	
 	$Player.hide()
 	$Player.set_deferred("disabled", true)
+	
+	score = score + 1000
 	match (GlobalVariables.difficulty_selected):
 		1:
 			score = score * 7
@@ -182,6 +184,14 @@ func _on_GameTimerDuration_timeout():
 		3:
 			score = score * 2
 		
-	GlobalVariables.actual_score_obtained = score + 1000
+	GlobalVariables.actual_score_obtained = score
 	emit_signal("game_over")
 	
+
+
+func _on_MainLevel_game_over():
+	BackgroundMusic.stream = load("res://assets/sounds/music/loops/Menus_Music.mp3")
+	BackgroundMusic.playing = true
+	
+	get_tree().change_scene("res://menus/main_menus/MainMenu.tscn")
+	queue_free()

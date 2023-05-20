@@ -36,7 +36,6 @@ size = 20
 font_data = ExtResource( 2 )
 
 [node name="RegisterMenu" type="CanvasLayer"]
-layer = 0
 script = ExtResource( 6 )
 
 [node name="BackgroundColor" type="ColorRect" parent="."]
@@ -228,7 +227,6 @@ texture_hover = ExtResource( 5 )
 expand = true
 
 [node name="LoadScreen" parent="." instance=ExtResource( 7 )]
-layer = 2
 visible = false
 
 [node name="Register" type="HTTPRequest" parent="."]
