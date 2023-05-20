@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://assets/fonts/Xolonium-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://assets/icons/Pause_Pressed.png" type="Texture" id=2]
@@ -26,6 +26,15 @@ border_width_top = 3
 border_width_right = 3
 border_width_bottom = 10
 border_color = Color( 0, 0.580392, 0.486275, 1 )
+border_blend = true
+
+[sub_resource type="StyleBoxFlat" id=7]
+bg_color = Color( 0, 0, 0, 1 )
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 10
+border_color = Color( 1, 0.501961, 0, 1 )
 border_blend = true
 
 [sub_resource type="StyleBoxFlat" id=6]
@@ -182,54 +191,51 @@ margin_bottom = 115.0
 grow_horizontal = 0
 grow_vertical = 2
 custom_constants/separation = 20
+alignment = 1
 
 [node name="Separation3" type="Control" parent="PlayerHUDMainPanel/PlayerHUDMainContainer/PlayerHUDRightContainer"]
+margin_top = 8.0
 margin_right = 270.0
+margin_bottom = 8.0
 rect_min_size = Vector2( 270, 0 )
 
-[node name="AmmoElementsContainer" type="HBoxContainer" parent="PlayerHUDMainPanel/PlayerHUDMainContainer/PlayerHUDRightContainer"]
-margin_top = 20.0
+[node name="AmmoElementsPanel" type="PanelContainer" parent="PlayerHUDMainPanel/PlayerHUDMainContainer/PlayerHUDRightContainer"]
+margin_top = 28.0
 margin_right = 270.0
-margin_bottom = 45.0
+margin_bottom = 86.0
+custom_styles/panel = SubResource( 7 )
+
+[node name="AmmoElementsContainer" type="HBoxContainer" parent="PlayerHUDMainPanel/PlayerHUDMainContainer/PlayerHUDRightContainer/AmmoElementsPanel"]
+margin_left = 3.0
+margin_top = 3.0
+margin_right = 267.0
+margin_bottom = 48.0
 custom_constants/separation = 5
 
-[node name="AmmoLabelText" type="Label" parent="PlayerHUDMainPanel/PlayerHUDMainContainer/PlayerHUDRightContainer/AmmoElementsContainer"]
-margin_right = 78.0
-margin_bottom = 25.0
+[node name="Separation8" type="Control" parent="PlayerHUDMainPanel/PlayerHUDMainContainer/PlayerHUDRightContainer/AmmoElementsPanel/AmmoElementsContainer"]
+margin_bottom = 45.0
+rect_min_size = Vector2( 0, 45 )
+
+[node name="AmmoLabelText" type="Label" parent="PlayerHUDMainPanel/PlayerHUDMainContainer/PlayerHUDRightContainer/AmmoElementsPanel/AmmoElementsContainer"]
+margin_left = 5.0
+margin_top = 10.0
+margin_right = 83.0
+margin_bottom = 35.0
 custom_fonts/font = SubResource( 2 )
 text = "AMMO:"
 
-[node name="AmmoLabelNumber" type="Label" parent="PlayerHUDMainPanel/PlayerHUDMainContainer/PlayerHUDRightContainer/AmmoElementsContainer"]
-margin_left = 83.0
-margin_right = 97.0
-margin_bottom = 25.0
-custom_fonts/font = SubResource( 2 )
-text = "0"
-
-[node name="AmmoReloadElementsContainer" type="HBoxContainer" parent="PlayerHUDMainPanel/PlayerHUDMainContainer/PlayerHUDRightContainer"]
-visible = false
-margin_top = 65.0
-margin_right = 289.0
-margin_bottom = 90.0
-custom_constants/separation = 5
-
-[node name="AmmoReloadText" type="Label" parent="PlayerHUDMainPanel/PlayerHUDMainContainer/PlayerHUDRightContainer/AmmoReloadElementsContainer"]
-margin_right = 270.0
-margin_bottom = 25.0
-custom_fonts/font = SubResource( 2 )
-text = "AMMO_RELOAD_TIMER:"
-
-[node name="AmmoReloadNumber" type="Label" parent="PlayerHUDMainPanel/PlayerHUDMainContainer/PlayerHUDRightContainer/AmmoReloadElementsContainer"]
-margin_left = 275.0
-margin_right = 289.0
-margin_bottom = 25.0
+[node name="AmmoLabelNumber" type="Label" parent="PlayerHUDMainPanel/PlayerHUDMainContainer/PlayerHUDRightContainer/AmmoElementsPanel/AmmoElementsContainer"]
+margin_left = 88.0
+margin_top = 10.0
+margin_right = 102.0
+margin_bottom = 35.0
 custom_fonts/font = SubResource( 2 )
 text = "0"
 
 [node name="Separation4" type="Control" parent="PlayerHUDMainPanel/PlayerHUDMainContainer/PlayerHUDRightContainer"]
-margin_top = 65.0
+margin_top = 106.0
 margin_right = 270.0
-margin_bottom = 65.0
+margin_bottom = 106.0
 
 [node name="PanelHUDButtonContainer" type="PanelContainer" parent="PlayerHUDMainPanel/PlayerHUDMainContainer"]
 margin_left = 1674.0
@@ -270,7 +276,7 @@ custom_styles/panel = SubResource( 4 )
 margin_left = 3.0
 margin_top = 3.0
 margin_right = 703.0
-margin_bottom = 141.0
+margin_bottom = 134.0
 grow_horizontal = 2
 grow_vertical = 2
 custom_constants/separation = 10
@@ -291,13 +297,14 @@ valign = 1
 [node name="Separation7" type="Control" parent="PlayerHUDCenterPanel/PlayerHUDCenterContainer"]
 margin_top = 51.0
 margin_right = 700.0
-margin_bottom = 91.0
-rect_min_size = Vector2( 700, 40 )
+margin_bottom = 71.0
+rect_min_size = Vector2( 700, 20 )
 
 [node name="StartButton" type="Button" parent="PlayerHUDCenterPanel/PlayerHUDCenterContainer"]
-margin_top = 101.0
+margin_top = 81.0
 margin_right = 700.0
-margin_bottom = 138.0
+margin_bottom = 131.0
+rect_min_size = Vector2( 0, 50 )
 custom_fonts/font = SubResource( 5 )
 text = "START"
 

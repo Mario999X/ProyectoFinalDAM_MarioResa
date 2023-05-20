@@ -112,6 +112,10 @@ one_shot = true
 [node name="ScoreUpdateTimer" type="Timer" parent="."]
 
 [node name="EnemyShipTimer" type="Timer" parent="."]
+wait_time = 1.5
+
+[node name="PlayerRespawnTimer" type="Timer" parent="."]
+wait_time = 2.0
 
 [node name="ActualScoreRegistered" type="HTTPRequest" parent="."]
 use_threads = true
@@ -122,6 +126,7 @@ timeout = 10.0
 [connection signal="shoot" from="Player" to="." method="_on_Player_shoot"]
 [connection signal="pause_button" from="PlayerHUD" to="PauseMenu" method="_on_PlayerHUD_pause_button"]
 [connection signal="start_game" from="PlayerHUD" to="." method="_on_PlayerHUD_start_game"]
+[connection signal="timeout" from="GameTimerDuration" to="." method="_on_GameTimerDuration_timeout"]
 [connection signal="timeout" from="ScoreUpdateTimer" to="." method="_on_ScoreUpdateTimer_timeout"]
 [connection signal="timeout" from="EnemyShipTimer" to="." method="_on_EnemyShipTimer_timeout"]
 [connection signal="request_completed" from="ActualScoreRegistered" to="." method="_on_ActualScoreRegistered_request_completed"]

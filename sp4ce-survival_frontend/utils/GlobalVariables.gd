@@ -10,9 +10,9 @@ var difficulty_selected = 3
 # Message to show to the player in the load screen for HTTP Request
 var message_http_request = null
 
-# Message to show to the player in the start of the level
-var message_player_level = null
 
-# Main Timer time for the initial duration of the level
-var actual_score = 0
+# Score Registered for User [ONLINE] - 0 Default
+var actual_score_registered = 0
 
+# Score obtained for User in One Game, this is set after every game completed
+var actual_score_obtained = null

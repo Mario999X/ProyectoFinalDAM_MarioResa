@@ -19,7 +19,7 @@ func _ready():
 	
 	var online_mode = SaveSystem.load_value_user("Online", "Account")
 	
-	if online_mode != "0" and GlobalVariables.actual_score == 0:
+	if online_mode != "0" and GlobalVariables.actual_score_registered == 0:
 		_obtain_actual_score_query(online_mode)
 	
 	_global_signals_connect_on_level()
@@ -35,23 +35,24 @@ func _on_enemy_out_of_reach():
 
 func _on_enemy_ship_hit():
 	print("On level, enemy ship hit")
-	score += 5
+	score += 10
 	total_enemies -= 1
 
 func _on_enemy_bullet_t1_hit():
 	print("On level, T1 Hit")
-	score += 1
+	score += 3
 
 func _on_PlayerHUD_start_game():
 	$Player.start($PlayerSpawnLocation.position)
-	yield(get_tree().create_timer(2), "timeout")
+	$PlayerHUD.update_ammo($Player.ammo)
+	$PlayerHUD.update_lives(lives)
+	
+	$PlayerRespawnTimer.start(); yield($PlayerRespawnTimer, "timeout")
 	
 	$ScoreUpdateTimer.start()
 	$GameTimerDuration.start()
-	$PlayerHUD.update_lives(lives)
 	$PlayerHUD.update_score(score)
 	$PlayerHUD.update_timer_duration(floor($GameTimerDuration.time_left))
-	$PlayerHUD.update_ammo($Player.ammo)
 	$EnemyShipTimer.start()
 
 
@@ -86,6 +87,8 @@ func _on_EnemyShipTimer_timeout():
 
 
 func _on_Player_hit_by_enemy():
+	PlayerDeath.play()
+	
 	var enemy_ships = get_tree().get_nodes_in_group("Enemy_Ships")
 	for enemy in enemy_ships:
 		enemy.queue_free()
@@ -106,6 +109,16 @@ func _on_Player_hit_by_enemy():
 	
 	if lives == 0:
 		$GameTimerDuration.stop()
+		match (GlobalVariables.difficulty_selected):
+			1:
+				score = score * 7
+			2:
+				score = score * 4
+			3:
+				score = score * 2
+		
+		GlobalVariables.actual_score_obtained = score
+		emit_signal("game_over")
 	else:
 		$GameTimerDuration.paused = true
 		
@@ -113,15 +126,13 @@ func _on_Player_hit_by_enemy():
 
 
 func _reset_locations():
-	yield(get_tree().create_timer(2), "timeout")
+	$PlayerRespawnTimer.start(); yield($PlayerRespawnTimer, "timeout")
 	
 	$Player.start($PlayerSpawnLocation.position)
-	
-	yield(get_tree().create_timer(2), "timeout")
+	$PlayerHUD.update_ammo($Player.ammo)
 	
 	$ScoreUpdateTimer.start()
 	$GameTimerDuration.paused = false
-	$PlayerHUD.update_ammo($Player.ammo)
 	$EnemyShipTimer.start()
 
 
@@ -143,7 +154,7 @@ func _on_ActualScoreRegistered_request_completed(result, response_code, headers,
 	if response_code == 0:
 		SaveSystem.save_value_user("Online", "Account", "0")
 	# Connected
-	if response_code == 204:
+	elif response_code == 204:
 		return
 	else:
 		var response = JSON.parse(body.get_string_from_utf8()).result
@@ -155,3 +166,22 @@ func _on_ActualScoreRegistered_request_completed(result, response_code, headers,
 		if (response_code == 403):
 			SaveSystem.save_value_user("Online", "Account", "0")
 			
+
+
+func _on_GameTimerDuration_timeout():
+	$EnemyShipTimer.stop()
+	$ScoreUpdateTimer.stop()
+	
+	$Player.hide()
+	$Player.set_deferred("disabled", true)
+	match (GlobalVariables.difficulty_selected):
+		1:
+			score = score * 7
+		2:
+			score = score * 4
+		3:
+			score = score * 2
+		
+	GlobalVariables.actual_score_obtained = score + 1000
+	emit_signal("game_over")
+	

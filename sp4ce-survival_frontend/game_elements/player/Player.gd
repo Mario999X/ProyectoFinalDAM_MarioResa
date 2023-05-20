@@ -82,6 +82,7 @@ func shoot():
 func hit_by_enemy():
 	print("Hit by enemy")
 	
+	ammo = 20
 	hide()
 	emit_signal("hit_by_enemy")
 	$PlayerHitBox.set_deferred("disabled", true)

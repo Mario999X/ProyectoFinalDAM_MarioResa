@@ -25,6 +25,8 @@ Select2="*res://sounds/Select2.tscn"
 PlayerGun="*res://sounds/PlayerGun.tscn"
 LoadingProgressBarScreen="*res://loading_screens/LoadingProgressBarScreen.gd"
 GlobalSignals="*res://utils/GlobalSignals.gd"
+PlayerDeath="*res://sounds/PlayerDeath.tscn"
+WinMusic="*res://sounds/WinMusic.tscn"
 
 [display]
 

@@ -96,18 +96,6 @@ func _on_Login_request_completed(result, response_code, headers, body):
 	$LoadScreen/LoadingElementsContainer/LoadingMessage.text = GlobalVariables.message_http_request
 	$RequestTimer.start()
 
-# To show the player the message received from the Request, and also to change the scene if the token is saved.
-func _on_RequestTimer_timeout():
-	var online_mode = SaveSystem.load_value_user("Online", "Account")
-	
-	if online_mode != "0":
-		get_tree().change_scene("res://menus/main_menus/MainMenu.tscn")
-		queue_free()
-	
-	$LoadScreen.hide()
-	GlobalVariables.message_http_request = "LOADING"
-	$LoadScreen/LoadingElementsContainer/LoadingMessage.text = GlobalVariables.message_http_request
-
 # Check Token Request completed, we act according to the response code
 func _on_CheckToken_request_completed(result, response_code, headers, body):
 	# Timeout
@@ -130,6 +118,17 @@ func _on_CheckToken_request_completed(result, response_code, headers, body):
 	$LoadScreen/LoadingElementsContainer/LoadingMessage.text = GlobalVariables.message_http_request
 	$RequestTimer.start()
 
+# To show the player the message received from the Request, and also to change the scene if the token is saved.
+func _on_RequestTimer_timeout():
+	var online_mode = SaveSystem.load_value_user("Online", "Account")
+	
+	if online_mode != "0":
+		get_tree().change_scene("res://menus/main_menus/MainMenu.tscn")
+		queue_free()
+	
+	$LoadScreen.hide()
+	GlobalVariables.message_http_request = "LOADING"
+	$LoadScreen/LoadingElementsContainer/LoadingMessage.text = GlobalVariables.message_http_request
 
 func _on_RegisterButton_pressed():
 	Select1.play()

@@ -65,6 +65,7 @@ border_blend = true
 font_data = ExtResource( 2 )
 
 [node name="MainMenu" type="CanvasLayer"]
+layer = 0
 script = ExtResource( 7 )
 
 [node name="BackgroundColor" type="ColorRect" parent="."]

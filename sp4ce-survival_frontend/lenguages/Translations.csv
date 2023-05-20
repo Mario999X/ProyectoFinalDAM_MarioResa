@@ -36,3 +36,5 @@ AMMO_RELOAD_TIMER:,Recargando:,Reloading:
 GAME_PAUSED,Juego Pausado,Game Paused
 RESUME_GAME,Reanudar partida,Resume game
 EXIT_GAME,Salir de la partida,Quit the game
+START,Comenzar,Start
+USER_MESSAGE_LEVEL,"""Los enemigos se acercan, ¿estás preparado?""","""The enemies are coming, are you ready?"""
