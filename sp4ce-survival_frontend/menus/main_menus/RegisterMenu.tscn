@@ -29,6 +29,7 @@ size = 15
 font_data = SubResource( 7 )
 
 [sub_resource type="DynamicFont" id=11]
+size = 18
 font_data = ExtResource( 2 )
 
 [sub_resource type="DynamicFont" id=10]
@@ -215,7 +216,7 @@ rect_min_size = Vector2( 0, 50 )
 custom_fonts/font = SubResource( 10 )
 text = "REGISTER"
 
-[node name="ReturnMainMenu" type="TextureButton" parent="."]
+[node name="ReturnWelcomeMenu" type="TextureButton" parent="."]
 anchor_top = 0.5
 anchor_bottom = 0.5
 margin_top = -40.0
@@ -227,7 +228,6 @@ texture_hover = ExtResource( 5 )
 expand = true
 
 [node name="LoadScreen" parent="." instance=ExtResource( 7 )]
-layer = 2
 visible = false
 
 [node name="Register" type="HTTPRequest" parent="."]
@@ -238,6 +238,6 @@ wait_time = 3.0
 one_shot = true
 
 [connection signal="pressed" from="RegisterElementsPanel/RegisterElementsContainer/RegisterButton" to="." method="_on_RegisterButton_pressed"]
-[connection signal="pressed" from="ReturnMainMenu" to="." method="_on_ReturnMainMenu_pressed"]
+[connection signal="pressed" from="ReturnWelcomeMenu" to="." method="_on_ReturnWelcomeMenu_pressed"]
 [connection signal="request_completed" from="Register" to="." method="_on_Register_request_completed"]
 [connection signal="timeout" from="RequestTimer" to="." method="_on_RequestTimer_timeout"]

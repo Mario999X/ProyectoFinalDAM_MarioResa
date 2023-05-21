@@ -8,6 +8,7 @@ Proyecto final del Módulo Superior de Desarrollo de Aplicaciones Multiplataform
 
 - [Introducción](#introducción)
 - [Documentación](#documentación)
+- [Controles](#controles)
 - [Atribuciones](#atribuciones)
 - [Autor](#autor)
 
@@ -17,15 +18,25 @@ El videojuego se ha diseñado usando [Godot](https://godotengine.org/), en su ve
 
 En este repositorio, se podrá observar el código fuente de la aplicación.
 
-Si se quiere descargar el videojuego en formato de ejecutable, se realizará a través del siguiente enlace:
-- [Coming Soon]
-
 ## Documentación
 
 En el documento [PDF del proyecto](/docs/Proyecto_Desarrollo_de_aplicaciones_IES_Luis_Vives-Mario_Resa.pdf), 
 se ha escrito un apartado estilo GDD que documenta el videojuego en sus aspectos generales y decisiones de diseño tomadas.
 
 En **Godot** no existe un formato específico de documentar el código, como **JavaDoc o Kdoc**, por lo que se ha tratado de explicar brevemente valores o funciones clave con simples comentarios.
+
+## Controles
+
+### Teclado y Ratón
+
+- **W**: Desplazamiento hacia arriba.
+- **A**: Desplazamiento hacia la derecha.
+- **S**: Desplazamiento hacia abajo.
+- **D**: Desplazamiento hacia la izquierda.
+
+- **Esc**: Pausar.
+
+- **Click Izquierdo del Ratón**: Disparar.
 
 ## Atribuciones
 

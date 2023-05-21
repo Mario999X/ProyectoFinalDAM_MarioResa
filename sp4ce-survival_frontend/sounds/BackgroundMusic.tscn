@@ -3,5 +3,7 @@
 [ext_resource path="res://assets/sounds/music/loops/Menus_Music.mp3" type="AudioStream" id=1]
 
 [node name="BackgroundMusic" type="AudioStreamPlayer"]
+pause_mode = 2
 stream = ExtResource( 1 )
+volume_db = -10.0
 autoplay = true

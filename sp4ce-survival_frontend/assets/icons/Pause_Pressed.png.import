@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Space_Background.png-1bbf5173255c5db1e63022200c2baee4.stex"
+path="res://.import/Pause_Pressed.png-584b6bd9fe51d6a96c215ab5fad2779c.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/backgrounds/Space_Background.png"
-dest_files=[ "res://.import/Space_Background.png-1bbf5173255c5db1e63022200c2baee4.stex" ]
+source_file="res://assets/icons/Pause_Pressed.png"
+dest_files=[ "res://.import/Pause_Pressed.png-584b6bd9fe51d6a96c215ab5fad2779c.stex" ]
 
 [params]
 

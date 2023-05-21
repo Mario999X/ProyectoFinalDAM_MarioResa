@@ -1,13 +1,17 @@
 extends CanvasLayer
 
+
+var screen_size = OS.get_screen_size()
+var window_size = OS.get_window_size()
+
 func _ready():
 	set_options()
 
 
 func set_options():
-	var soundMuted = SaveSystem.load_value("Sound", "Muted")
+	var sound_muted = SaveSystem.load_value("Sound", "Muted")
 	
-	if soundMuted == "Off":
+	if sound_muted == "Off":
 		$SoundElementsPanel/SoundElementsContainer/MutedCheckButton.pressed = false
 	else: $SoundElementsPanel/SoundElementsContainer/MutedCheckButton.pressed = true
 	
@@ -37,6 +41,9 @@ func _on_MutedCheckButton_toggled(button_pressed):
 func _on_FullScreenCheckButton_toggled(button_pressed):
 	if button_pressed == false:
 		OS.window_fullscreen = false
+		
+		OS.set_window_position(screen_size*0.5 - window_size*0.5)
+		
 		SaveSystem.save_value("Screen", "FullScreen", "Off")
 	else:
 		OS.window_fullscreen = true
@@ -51,3 +58,4 @@ func _on_SpanishButton_pressed():
 func _on_EnglishButton_pressed():
 	TranslationServer.set_locale("en_US")
 	SaveSystem.save_value("Lenguages", "Lenguage", "en")
+

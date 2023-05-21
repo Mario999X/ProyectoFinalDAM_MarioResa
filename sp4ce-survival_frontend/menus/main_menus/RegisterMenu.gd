@@ -4,75 +4,75 @@ func _ready():
 	print(get_tree().current_scene.name, " | ", OS.get_time().hour, ":", OS.get_time().minute)
 	
 
-
-func _prepare_register_query(username, email, password, repeatPassword):
+# HTTP Request for the register
+func _prepare_register_query(username, email, password, repeat_password):
 	var url = "https://localhost:6969/sp4ceSurvival/register"
-	var query = {"username": username, "email": email, "password": password, "repeatPassword": repeatPassword}
+	var query = {"username": username, "email": email, "password": password, "repeatPassword": repeat_password}
 	var headers = ["Content-Type: application/json"]
 	
 	$Register.request(url, headers, false, HTTPClient.METHOD_POST, to_json(query))
 
-
-func _on_ReturnMainMenu_pressed():
+# Function to return to the Welcome Menu
+func _on_ReturnWelcomeMenu_pressed():
 	Select2.play()
 	get_tree().change_scene("res://menus/main_menus/WelcomeMenu.tscn")
 	queue_free()
 
-
+# Register Buttoon, we check if the data is logically correct according to the project information.
 func _on_RegisterButton_pressed():
 	Select1.play()
-	var usernameRegisterField = $RegisterElementsPanel/RegisterElementsContainer/UsernameRegisterLineEdit
-	var emailRegisterField = $RegisterElementsPanel/RegisterElementsContainer/EmailRegisterLineEdit
-	var passwordRegisterField = $RegisterElementsPanel/RegisterElementsContainer/PasswordRegisterLineEdit
-	var repeatPasswordRegisterField = $RegisterElementsPanel/RegisterElementsContainer/RepeatPasswordRegisterLineEdit
+	var username_register_field = $RegisterElementsPanel/RegisterElementsContainer/UsernameRegisterLineEdit
+	var email_register_field = $RegisterElementsPanel/RegisterElementsContainer/EmailRegisterLineEdit
+	var password_register_field = $RegisterElementsPanel/RegisterElementsContainer/PasswordRegisterLineEdit
+	var repeat_password_register_field = $RegisterElementsPanel/RegisterElementsContainer/RepeatPasswordRegisterLineEdit
 	
-	var usernameRegisterMessage = $RegisterElementsPanel/RegisterElementsContainer/MessageWarningUsername
-	var emailRegisterMessage = $RegisterElementsPanel/RegisterElementsContainer/MessageWarningEmail
-	var passwordRegisterMessage = $RegisterElementsPanel/RegisterElementsContainer/MessageWarningPassword
-	var repeatPasswordRegisterMessage = $RegisterElementsPanel/RegisterElementsContainer/MessageWarningRepeatPassword
+	var username_register_message = $RegisterElementsPanel/RegisterElementsContainer/MessageWarningUsername
+	var email_register_message = $RegisterElementsPanel/RegisterElementsContainer/MessageWarningEmail
+	var password_register_message = $RegisterElementsPanel/RegisterElementsContainer/MessageWarningPassword
+	var repeat_password_register_message = $RegisterElementsPanel/RegisterElementsContainer/MessageWarningRepeatPassword
 	
 	var regex = RegEx.new()
 	regex.compile("^[\\w\\-\\.]+@[\\w\\-]+\\.[\\w\\-]{2,4}$")
 	
-	if (!usernameRegisterField.text.strip_edges().empty() and !emailRegisterField.text.strip_edges().empty()
-	and regex.search(emailRegisterField.text.strip_edges()) != null and passwordRegisterField.text.strip_edges().length() >= 5 
-	and repeatPasswordRegisterField.text.strip_edges() == passwordRegisterField.text.strip_edges()): 
+	if (!username_register_field.text.strip_edges().empty() and !email_register_field.text.strip_edges().empty()
+	and regex.search(email_register_field.text.strip_edges()) != null and password_register_field.text.strip_edges().length() >= 5 
+	and repeat_password_register_field.text.strip_edges() == password_register_field.text.strip_edges()): 
 		
 		$LoadScreen.show()
-		_prepare_register_query(usernameRegisterField.text.strip_edges(), emailRegisterField.text.strip_edges(), 
-		passwordRegisterField.text.strip_edges(), repeatPasswordRegisterField.text.strip_edges())
+		_prepare_register_query(username_register_field.text.strip_edges(), email_register_field.text.strip_edges(), 
+		password_register_field.text.strip_edges(), repeat_password_register_field.text.strip_edges())
 	
-	if usernameRegisterField.text.strip_edges().empty():
-		usernameRegisterMessage.text = "USERNAME_CANNOT_BE_EMPTY"
-		usernameRegisterMessage.show()
+	if username_register_field.text.strip_edges().empty():
+		username_register_message.text = "USERNAME_CANNOT_BE_EMPTY"
+		username_register_message.show()
 	else:
-		usernameRegisterMessage.hide()
+		username_register_message.hide()
 	
-	if emailRegisterField.text.strip_edges().empty():
-		emailRegisterMessage.text = "EMAIL_CANNOT_BE_EMPTY"
-		emailRegisterMessage.show()
+	if email_register_field.text.strip_edges().empty():
+		email_register_message.text = "EMAIL_CANNOT_BE_EMPTY"
+		email_register_message.show()
 	
-	elif regex.search(emailRegisterField.text.strip_edges()) == null:
-		emailRegisterMessage.text = "EMAIL_INCORRECT"
-		emailRegisterMessage.show()
+	elif regex.search(email_register_field.text.strip_edges()) == null:
+		email_register_message.text = "EMAIL_INCORRECT"
+		email_register_message.show()
 	else:
-		emailRegisterMessage.hide()
+		email_register_message.hide()
 	
-	if passwordRegisterField.text.strip_edges().length() <= 4:
-		passwordRegisterMessage.text = "PASSWORD_MUST_BE_AT_LEAST_5_CHARACTERS"
-		passwordRegisterMessage.show()
+	if password_register_field.text.strip_edges().length() <= 4:
+		password_register_message.text = "PASSWORD_MUST_BE_AT_LEAST_5_CHARACTERS"
+		password_register_message.show()
 	else:
-		passwordRegisterMessage.hide()
+		password_register_message.hide()
 
-	if repeatPasswordRegisterField.text.strip_edges() != passwordRegisterField.text.strip_edges():
-		repeatPasswordRegisterMessage.text = "PASSWORD_AND_REPEAT_PASSWORD_MUST_BE_THE_SAME"
-		repeatPasswordRegisterMessage.show()
+	if repeat_password_register_field.text.strip_edges() != password_register_field.text.strip_edges():
+		repeat_password_register_message.text = "PASSWORD_AND_REPEAT_PASSWORD_MUST_BE_THE_SAME"
+		repeat_password_register_message.show()
 	else:
-		repeatPasswordRegisterMessage.hide()
+		repeat_password_register_message.hide()
 	
 	
 
-
+# Register Request Completed, we act according to the response code
 func _on_Register_request_completed(result, response_code, headers, body):
 	if response_code == 0:
 		GlobalVariables.message_http_request = "TIMEOUT"
@@ -90,11 +90,11 @@ func _on_Register_request_completed(result, response_code, headers, body):
 	$LoadScreen/LoadingElementsContainer/LoadingMessage.text = GlobalVariables.message_http_request
 	$RequestTimer.start()
 
-
+# To show the player the message received from the Request, and also to change the scene if the token is saved.
 func _on_RequestTimer_timeout():
-	var onlineMode = SaveSystem.load_value_user("Online", "Account")
+	var online_mode = SaveSystem.load_value_user("Online", "Account")
 	
-	if onlineMode != "0":
+	if online_mode != "0":
 		get_tree().change_scene("res://menus/main_menus/MainMenu.tscn")
 		queue_free()
 	
