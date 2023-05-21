@@ -38,3 +38,8 @@ RESUME_GAME,Reanudar partida,Resume game
 EXIT_GAME,Salir de la partida,Quit the game
 START,Comenzar,Start
 USER_MESSAGE_LEVEL,"""Los enemigos se acercan, ¿estás preparado?""","""The enemies are coming, are you ready?"""
+SCORE_OBTAINED:,Puntuación conseguida:,Score obtained:
+NEW_RECORD_OBTAINED,RECORD OBTENIDO,RECORD OBTAINED
+ACTUAL_BEST_SCORE:,Mejor puntuación obtenida:,Best score obtained:
+TRY_AGAIN,Reintentar,Try again
+RETURN_TO_MENU,Regresar a menú principal,Return to main menu

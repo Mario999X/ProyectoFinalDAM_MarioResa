@@ -119,7 +119,7 @@ wait_time = 2.0
 
 [node name="ActualScoreRegistered" type="HTTPRequest" parent="."]
 use_threads = true
-timeout = 10.0
+timeout = 8.0
 
 [connection signal="game_over" from="." to="." method="_on_MainLevel_game_over"]
 [connection signal="hit_by_enemy" from="Player" to="." method="_on_Player_hit_by_enemy"]

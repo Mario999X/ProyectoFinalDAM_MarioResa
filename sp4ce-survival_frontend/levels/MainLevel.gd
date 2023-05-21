@@ -3,13 +3,14 @@ extends Node
 const enemy_ship_scene = preload("res://game_elements/enemies/EnemyShip.tscn")
 
 signal game_over
-# signal time_added
 
 var total_enemies
 var score
 var lives
 
 func _ready():
+	print(get_tree().current_scene.name, " | ", OS.get_time().hour, ":", OS.get_time().minute)
+	
 	BackgroundMusic.stream = load("res://assets/sounds/music/loops/Game_Music.mp3")
 	BackgroundMusic.playing = true
 	
@@ -190,8 +191,8 @@ func _on_GameTimerDuration_timeout():
 
 
 func _on_MainLevel_game_over():
-	BackgroundMusic.stream = load("res://assets/sounds/music/loops/Menus_Music.mp3")
-	BackgroundMusic.playing = true
+	BackgroundMusic.playing = false
+	$PlayerRespawnTimer.start(); yield($PlayerRespawnTimer, "timeout")
 	
-	get_tree().change_scene("res://menus/main_menus/MainMenu.tscn")
+	get_tree().change_scene("res://menus/main_menus/PostGameMenu.tscn")
 	queue_free()

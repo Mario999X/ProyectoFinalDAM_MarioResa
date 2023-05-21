@@ -1,6 +1,9 @@
 extends Node
 # -- AUTOLOAD --
 
+var screen_size = OS.get_screen_size()
+var window_size = OS.get_window_size()
+
 # Function to load the settings from the user.
 func load_Settings():
 	var lenguage = SaveSystem.load_value("Lenguages", "Lenguage")
@@ -22,6 +25,9 @@ func load_Settings():
 	
 	if fullScreen == "Off":
 		OS.window_fullscreen = false
+		
+		OS.set_window_position(screen_size*0.5 - window_size*0.5)
+		
 	else:
 		OS.window_fullscreen = true
 	

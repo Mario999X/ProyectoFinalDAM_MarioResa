@@ -5,6 +5,7 @@ extends CanvasLayer
 # Finally, if the token is not expired, the player is moved to the Main Scene
 func _ready():
 	print(get_tree().current_scene.name, " | ", OS.get_time().hour, ":", OS.get_time().minute)
+	
 	LoadSettings.load_Settings()
 	
 	var online_mode = SaveSystem.load_value_user("Online", "Account")

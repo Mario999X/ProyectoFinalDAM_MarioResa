@@ -1,5 +1,9 @@
 extends CanvasLayer
 
+
+var screen_size = OS.get_screen_size()
+var window_size = OS.get_window_size()
+
 func _ready():
 	set_options()
 
@@ -37,6 +41,9 @@ func _on_MutedCheckButton_toggled(button_pressed):
 func _on_FullScreenCheckButton_toggled(button_pressed):
 	if button_pressed == false:
 		OS.window_fullscreen = false
+		
+		OS.set_window_position(screen_size*0.5 - window_size*0.5)
+		
 		SaveSystem.save_value("Screen", "FullScreen", "Off")
 	else:
 		OS.window_fullscreen = true
