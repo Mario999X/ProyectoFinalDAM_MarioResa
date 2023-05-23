@@ -2,12 +2,12 @@ extends Node
 # -- AUTOLOAD --
 
 # Paths for the main directory and the save file for settings
-var save_path = "res://save_data"
-var save_path2 = "res://save_data/save-file.cfg"
+var save_path
+var save_path2
 
-# Save File User with Personal Information, we use the 0S unique ID as a password
-var save_path_user = "res://save_data/save-file-user.cfg"
-var password = OS.get_unique_id()
+# Save File User with Personal Information, we use the 0S name as a password
+var save_path_user
+var password = OS.get_name()
 
 # Settings File
 var config = ConfigFile.new()
@@ -15,20 +15,30 @@ var config = ConfigFile.new()
 # User Personal File
 var config_user = ConfigFile.new()
 
-# Load of both files
-# If the load of the encrypted Personal file fails, it is deleted and a new one is generated.
+# We verify the way of execution of the application and then we decide the storage paths
 func _init():
+	if OS.has_feature("editor"):
+		save_path = ProjectSettings.globalize_path("res://save_data")
+		save_path2 = ProjectSettings.globalize_path("res://save_data/save-file.cfg")
+		
+		save_path_user = ProjectSettings.globalize_path("res://save_data/save-file-user.cfg")
+	else:
+		save_path = OS.get_executable_path().get_base_dir().plus_file("save_data")
+		save_path2 = OS.get_executable_path().get_base_dir().plus_file("save_data/save-file.cfg")
+		
+		save_path_user = OS.get_executable_path().get_base_dir().plus_file("save_data/save-file-user.cfg")
+
+# We check if the files exists, if not, we set default values
+func _ready():
 	var _load_response = config.load(save_path2)
+	
+	var directory = Directory.new()
 	
 	var _load_response_user = config_user.load_encrypted_pass(save_path_user, password)
 	if _load_response_user == ERR_FILE_CORRUPT:
 		print("Deleting Old User File!")
-		Directory.new().remove(save_path_user)
-	
-
-# We check if the files exists, if not, we set default values
-func _ready():
-	var directory = Directory.new()
+		directory.new().remove(save_path_user)
+		
 	
 	if directory.dir_exists(save_path):
 		print("Directory Found!")

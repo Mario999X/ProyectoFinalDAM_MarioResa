@@ -3,10 +3,7 @@
 [ext_resource path="res://assets/fonts/Xolonium-Regular.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://menus/main_menus/PostGameMenu.gd" type="Script" id=2]
 [ext_resource path="res://loading_screens/LoadingScreen.tscn" type="PackedScene" id=3]
-
-[sub_resource type="StreamTexture" id=1]
-flags = 4
-load_path = "res://.import/Game_Background_GameOver.png-602b37acdb7ba5d99943b289a1fdc54f.stex"
+[ext_resource path="res://assets/backgrounds/PostGame_Background.png" type="Texture" id=4]
 
 [sub_resource type="StyleBoxFlat" id=4]
 bg_color = Color( 0, 0, 0, 1 )
@@ -41,7 +38,7 @@ color = Color( 0, 0, 0, 0.823529 )
 modulate = Color( 1, 1, 1, 0.509804 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-texture = SubResource( 1 )
+texture = ExtResource( 4 )
 expand = true
 
 [node name="MainElementsPanel" type="PanelContainer" parent="."]
