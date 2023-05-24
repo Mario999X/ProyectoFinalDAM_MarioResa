@@ -33,7 +33,7 @@ script = ExtResource( 3 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
-color = Color( 0, 0, 0, 0.901961 )
+color = Color( 0, 0, 0, 1 )
 
 [node name="GameTexture" type="TextureRect" parent="BackgroundColor"]
 modulate = Color( 1, 1, 1, 0.509804 )
