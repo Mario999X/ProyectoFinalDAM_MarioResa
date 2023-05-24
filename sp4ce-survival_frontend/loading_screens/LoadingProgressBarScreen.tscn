@@ -1,8 +1,11 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://assets/fonts/Xolonium-Regular.ttf" type="DynamicFontData" id=1]
-[ext_resource path="res://assets/backgrounds/Menu_Background.png" type="Texture" id=2]
 [ext_resource path="res://loading_screens/LoadingProgressBarScreen.gd" type="Script" id=3]
+
+[sub_resource type="StreamTexture" id=5]
+flags = 4
+load_path = "res://.import/Game_Background.png-83279b5032ae0c08bb0daa7f501829dc.stex"
 
 [sub_resource type="DynamicFont" id=2]
 size = 20
@@ -32,7 +35,7 @@ color = Color( 0, 0, 0, 1 )
 modulate = Color( 1, 1, 1, 0.509804 )
 anchor_right = 1.0
 anchor_bottom = 1.0
-texture = ExtResource( 2 )
+texture = SubResource( 5 )
 expand = true
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
