@@ -1,10 +1,12 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://assets/backgrounds/Menu_Background.png" type="Texture" id=1]
 [ext_resource path="res://assets/fonts/Xolonium-Regular.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://assets/icons/Return_Arrow_Hoover.png" type="Texture" id=3]
 [ext_resource path="res://assets/icons/Return_Arrow_Original.png" type="Texture" id=4]
 [ext_resource path="res://assets/icons/Return_Arrow_Pressed.png" type="Texture" id=5]
+[ext_resource path="res://menus/main_menus/ProfileMenu.gd" type="Script" id=6]
+[ext_resource path="res://loading_screens/LoadingScreen.tscn" type="PackedScene" id=7]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0, 0, 0, 1 )
@@ -28,7 +30,21 @@ border_width_bottom = 10
 border_color = Color( 0.815686, 0.384314, 0, 1 )
 border_blend = true
 
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0, 0, 0, 1 )
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 10
+border_color = Color( 0.780392, 0, 0, 1 )
+border_blend = true
+
+[sub_resource type="DynamicFont" id=9]
+size = 25
+font_data = ExtResource( 2 )
+
 [node name="ProfileMenu" type="CanvasLayer"]
+script = ExtResource( 6 )
 
 [node name="BackgroundColor" type="ColorRect" parent="."]
 anchor_right = 1.0
@@ -60,7 +76,7 @@ custom_styles/panel = SubResource( 1 )
 margin_left = 3.0
 margin_top = 3.0
 margin_right = 603.0
-margin_bottom = 304.0
+margin_bottom = 306.0
 custom_constants/separation = 30
 
 [node name="Separation1" type="Control" parent="ProfileMainPanel/ProfileMainContainer"]
@@ -71,24 +87,24 @@ rect_min_size = Vector2( 600, 0 )
 margin_top = 30.0
 margin_right = 600.0
 margin_bottom = 60.0
-custom_constants/separation = 5
+custom_constants/separation = 10
 
 [node name="Separation2" type="Control" parent="ProfileMainPanel/ProfileMainContainer/ProfileUsernameContainer"]
 margin_bottom = 30.0
 rect_min_size = Vector2( 0, 30 )
 
 [node name="UsernameLabelText" type="Label" parent="ProfileMainPanel/ProfileMainContainer/ProfileUsernameContainer"]
-margin_left = 5.0
+margin_left = 10.0
 margin_top = 2.0
-margin_right = 152.0
+margin_right = 157.0
 margin_bottom = 28.0
 custom_fonts/font = SubResource( 2 )
 text = "USERNAME:"
 
 [node name="UsernameLabelUser" type="Label" parent="ProfileMainPanel/ProfileMainContainer/ProfileUsernameContainer"]
-margin_left = 157.0
+margin_left = 167.0
 margin_top = 2.0
-margin_right = 174.0
+margin_right = 184.0
 margin_bottom = 28.0
 custom_fonts/font = SubResource( 2 )
 text = "A"
@@ -97,24 +113,24 @@ text = "A"
 margin_top = 90.0
 margin_right = 600.0
 margin_bottom = 120.0
-custom_constants/separation = 5
+custom_constants/separation = 10
 
 [node name="Separation3" type="Control" parent="ProfileMainPanel/ProfileMainContainer/ProfileEmailContainer"]
 margin_bottom = 30.0
 rect_min_size = Vector2( 0, 30 )
 
 [node name="EmailLabelText" type="Label" parent="ProfileMainPanel/ProfileMainContainer/ProfileEmailContainer"]
-margin_left = 5.0
+margin_left = 10.0
 margin_top = 2.0
-margin_right = 88.0
+margin_right = 93.0
 margin_bottom = 28.0
 custom_fonts/font = SubResource( 2 )
 text = "EMAIL:"
 
 [node name="EmailLabelUser" type="Label" parent="ProfileMainPanel/ProfileMainContainer/ProfileEmailContainer"]
-margin_left = 93.0
+margin_left = 103.0
 margin_top = 2.0
-margin_right = 110.0
+margin_right = 120.0
 margin_bottom = 28.0
 custom_fonts/font = SubResource( 2 )
 text = "A"
@@ -123,24 +139,24 @@ text = "A"
 margin_top = 150.0
 margin_right = 600.0
 margin_bottom = 180.0
-custom_constants/separation = 5
+custom_constants/separation = 10
 
 [node name="Separation4" type="Control" parent="ProfileMainPanel/ProfileMainContainer/ProfileCreationDateContainer"]
 margin_bottom = 30.0
 rect_min_size = Vector2( 0, 30 )
 
 [node name="CreationDateLabelText" type="Label" parent="ProfileMainPanel/ProfileMainContainer/ProfileCreationDateContainer"]
-margin_left = 5.0
+margin_left = 10.0
 margin_top = 2.0
-margin_right = 213.0
+margin_right = 218.0
 margin_bottom = 28.0
 custom_fonts/font = SubResource( 2 )
 text = "CREATION_DATE:"
 
 [node name="CreationDateLabelUser" type="Label" parent="ProfileMainPanel/ProfileMainContainer/ProfileCreationDateContainer"]
-margin_left = 218.0
+margin_left = 228.0
 margin_top = 2.0
-margin_right = 235.0
+margin_right = 245.0
 margin_bottom = 28.0
 custom_fonts/font = SubResource( 2 )
 text = "A"
@@ -148,70 +164,121 @@ text = "A"
 [node name="ProfileScoreElementsPanel" type="PanelContainer" parent="ProfileMainPanel/ProfileMainContainer"]
 margin_top = 210.0
 margin_right = 600.0
-margin_bottom = 301.0
+margin_bottom = 303.0
 custom_styles/panel = SubResource( 3 )
 
 [node name="ProfileScoreElementsContainer" type="VBoxContainer" parent="ProfileMainPanel/ProfileMainContainer/ProfileScoreElementsPanel"]
 margin_left = 3.0
 margin_top = 3.0
 margin_right = 597.0
-margin_bottom = 81.0
-custom_constants/separation = 9
+margin_bottom = 83.0
+custom_constants/separation = 10
 
 [node name="Separation5" type="Control" parent="ProfileMainPanel/ProfileMainContainer/ProfileScoreElementsPanel/ProfileScoreElementsContainer"]
 margin_right = 594.0
 
 [node name="MaxScoreContainer" type="HBoxContainer" parent="ProfileMainPanel/ProfileMainContainer/ProfileScoreElementsPanel/ProfileScoreElementsContainer"]
-margin_top = 9.0
+margin_top = 10.0
 margin_right = 594.0
-margin_bottom = 39.0
-custom_constants/separation = 5
+margin_bottom = 40.0
+custom_constants/separation = 10
 
 [node name="Separation6" type="Control" parent="ProfileMainPanel/ProfileMainContainer/ProfileScoreElementsPanel/ProfileScoreElementsContainer/MaxScoreContainer"]
 margin_bottom = 30.0
 rect_min_size = Vector2( 0, 30 )
 
 [node name="MaxScoreLabelText" type="Label" parent="ProfileMainPanel/ProfileMainContainer/ProfileScoreElementsPanel/ProfileScoreElementsContainer/MaxScoreContainer"]
-margin_left = 5.0
+margin_left = 10.0
 margin_top = 2.0
-margin_right = 163.0
+margin_right = 168.0
 margin_bottom = 28.0
 custom_fonts/font = SubResource( 2 )
 text = "MAX_SCORE:"
 
 [node name="MaxScoreLabelNumber" type="Label" parent="ProfileMainPanel/ProfileMainContainer/ProfileScoreElementsPanel/ProfileScoreElementsContainer/MaxScoreContainer"]
-margin_left = 168.0
+margin_left = 178.0
 margin_top = 2.0
-margin_right = 185.0
+margin_right = 195.0
 margin_bottom = 28.0
 custom_fonts/font = SubResource( 2 )
 text = "A"
 
 [node name="MaxScoreDateContainer" type="HBoxContainer" parent="ProfileMainPanel/ProfileMainContainer/ProfileScoreElementsPanel/ProfileScoreElementsContainer"]
-margin_top = 48.0
+margin_top = 50.0
 margin_right = 594.0
-margin_bottom = 78.0
-custom_constants/separation = 5
+margin_bottom = 80.0
+custom_constants/separation = 10
 
 [node name="Separation7" type="Control" parent="ProfileMainPanel/ProfileMainContainer/ProfileScoreElementsPanel/ProfileScoreElementsContainer/MaxScoreDateContainer"]
 margin_bottom = 30.0
 rect_min_size = Vector2( 0, 30 )
 
 [node name="MaxScoreDateLabelText" type="Label" parent="ProfileMainPanel/ProfileMainContainer/ProfileScoreElementsPanel/ProfileScoreElementsContainer/MaxScoreDateContainer"]
-margin_left = 5.0
+margin_left = 10.0
 margin_top = 2.0
-margin_right = 312.0
+margin_right = 317.0
 margin_bottom = 28.0
 custom_fonts/font = SubResource( 2 )
 text = "DATE_SCORE_OBTAINED:"
 
 [node name="MaxScoreDateLabelUser" type="Label" parent="ProfileMainPanel/ProfileMainContainer/ProfileScoreElementsPanel/ProfileScoreElementsContainer/MaxScoreDateContainer"]
-margin_left = 317.0
+margin_left = 327.0
 margin_top = 2.0
-margin_right = 334.0
+margin_right = 344.0
 margin_bottom = 28.0
 custom_fonts/font = SubResource( 2 )
 text = "A"
+
+[node name="ProfileSecundaryPanel" type="PanelContainer" parent="."]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -14.0
+margin_top = -7.0
+margin_right = -5.0
+margin_bottom = 7.0
+grow_horizontal = 0
+grow_vertical = 2
+custom_styles/panel = SubResource( 4 )
+
+[node name="ProfileButtonsContainer" type="VBoxContainer" parent="ProfileSecundaryPanel"]
+margin_left = 3.0
+margin_top = 3.0
+margin_right = 364.0
+margin_bottom = 273.0
+custom_constants/separation = 25
+alignment = 1
+
+[node name="Separation" type="Control" parent="ProfileSecundaryPanel/ProfileButtonsContainer"]
+margin_right = 361.0
+
+[node name="ChangePasswordButton" type="Button" parent="ProfileSecundaryPanel/ProfileButtonsContainer"]
+margin_top = 25.0
+margin_right = 361.0
+margin_bottom = 95.0
+rect_min_size = Vector2( 0, 70 )
+custom_fonts/font = SubResource( 9 )
+text = "CHANGE_PASSWORD"
+
+[node name="Separation2" type="Control" parent="ProfileSecundaryPanel/ProfileButtonsContainer"]
+margin_top = 120.0
+margin_right = 361.0
+margin_bottom = 150.0
+rect_min_size = Vector2( 0, 30 )
+
+[node name="DeleteAccountButton" type="Button" parent="ProfileSecundaryPanel/ProfileButtonsContainer"]
+margin_top = 175.0
+margin_right = 361.0
+margin_bottom = 245.0
+rect_min_size = Vector2( 0, 70 )
+custom_fonts/font = SubResource( 9 )
+text = "DELETE_OWN_ACCOUNT"
+
+[node name="Separation3" type="Control" parent="ProfileSecundaryPanel/ProfileButtonsContainer"]
+margin_top = 270.0
+margin_right = 361.0
+margin_bottom = 270.0
 
 [node name="ReturnMainMenu" type="TextureButton" parent="."]
 anchor_top = 0.5
@@ -223,3 +290,18 @@ texture_normal = ExtResource( 4 )
 texture_pressed = ExtResource( 5 )
 texture_hover = ExtResource( 3 )
 expand = true
+
+[node name="LoadScreen" parent="." instance=ExtResource( 7 )]
+layer = 2
+visible = false
+
+[node name="ObtainProfile" type="HTTPRequest" parent="."]
+
+[node name="RequestTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="pressed" from="ProfileSecundaryPanel/ProfileButtonsContainer/ChangePasswordButton" to="." method="_on_ChangePasswordButton_pressed"]
+[connection signal="pressed" from="ProfileSecundaryPanel/ProfileButtonsContainer/DeleteAccountButton" to="." method="_on_DeleteAccountButton_pressed"]
+[connection signal="pressed" from="ReturnMainMenu" to="." method="_on_ReturnMainMenu_pressed"]
+[connection signal="request_completed" from="ObtainProfile" to="." method="_on_ObtainProfile_request_completed"]
+[connection signal="timeout" from="RequestTimer" to="." method="_on_RequestTimer_timeout"]

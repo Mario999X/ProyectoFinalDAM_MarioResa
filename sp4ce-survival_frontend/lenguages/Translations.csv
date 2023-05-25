@@ -43,3 +43,10 @@ NEW_RECORD_OBTAINED,RECORD OBTENIDO,RECORD OBTAINED
 ACTUAL_BEST_SCORE:,Mejor puntuación obtenida:,Best score obtained:
 TRY_AGAIN,Reintentar,Try again
 RETURN_TO_MENU,Regresar a menú principal,Return to main menu
+USERNAME:,Nombre de Usuario:,Username:
+EMAIL:,Correo Electrónico:,Email:
+CREATION_DATE:,Fecha de creación de cuenta:,Creation date of account:
+MAX_SCORE:,Puntuación más alta registrada:,Registered Highest Score:
+DATE_SCORE_OBTAINED:,Fecha de la puntuación:,Scoring Date:
+CHANGE_PASSWORD,CAMBIAR CONTRASEÑA,CHANGE PASSWORD
+DELETE_OWN_ACCOUNT,ELIMINAR CUENTA,DELETE ACCOUNT

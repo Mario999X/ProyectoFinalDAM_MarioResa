@@ -167,7 +167,7 @@ layer = 2
 visible = false
 
 [node name="RequestTimer" type="Timer" parent="."]
-wait_time = 3.0
+wait_time = 2.0
 one_shot = true
 
 [node name="UploadNewScore" type="HTTPRequest" parent="."]

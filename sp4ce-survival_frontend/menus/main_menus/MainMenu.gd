@@ -61,6 +61,8 @@ func _on_HardButton_pressed():
 
 func _on_ProfileButton_pressed():
 	Select1.play()
+	get_tree().change_scene("res://menus/main_menus/ProfileMenu.tscn")
+	queue_free()
 
 
 func _on_LeaderboardButton_pressed():
