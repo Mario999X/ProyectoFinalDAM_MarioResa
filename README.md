@@ -83,7 +83,16 @@ dejará al usuario en el menú de bienvenida).
 
 ### Menú de perfil - [Solo Online]
 
-[Coming Soon]
+El usuario podrá ver la información más relevante sobre su cuenta:
+- Nombre de usuario.
+- Correo electrónico.
+- Fecha de creación.
+- Puntuación más alta registrada.
+- Fecha de obtención de aquella puntuación.
+
+Además, se le permitirá hacer dos acciones:
+- Cambiar la contraseña.
+- Borrar la cuenta.
 
 ### Menú tabla de puntuaciones - [Solo Online]
 
