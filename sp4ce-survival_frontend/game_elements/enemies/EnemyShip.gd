@@ -1,12 +1,7 @@
 extends Area2D
 
-var im_enemy_ship
-
 const bullet_t1_scene = preload("res://game_elements/enemies/EnemyBulletT1.tscn")
 const bullet_t2_scene = preload("res://game_elements/enemies/EnemyBulletT2.tscn")
-
-onready var shoot_timer = $ShootTimer
-onready var rotater = $Rotater
 
 # Fields for the shot pattern
 const rotate_speed = 75
@@ -14,9 +9,14 @@ const shooter_timer_wait_time = 0.8
 const spawn_point_count = 4
 const radius = 25
 
-
 export var speed = 175
+
+var im_enemy_ship
 var velocity = Vector2.ZERO
+
+onready var shoot_timer = $ShootTimer
+onready var rotater = $Rotater
+
 
 func _ready():
 	var stop = 2 * PI / spawn_point_count
@@ -31,6 +31,7 @@ func _ready():
 	shoot_timer.wait_time = shooter_timer_wait_time
 	shoot_timer.start()
 	
+
 
 func _process(delta):
 	var new_rotation = rotater.rotation_degrees + rotate_speed * delta

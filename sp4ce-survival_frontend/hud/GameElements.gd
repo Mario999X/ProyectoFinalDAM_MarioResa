@@ -8,6 +8,17 @@ func _ready():
 	pass
 	
 
+func _on_PauseButton_pressed():
+	Select1.play()
+	emit_signal("pause_button")
+
+
+func _on_StartButton_pressed():
+	Select1.play()
+	$PlayerHUDCenterPanel.hide()
+	emit_signal("start_game")
+
+
 func update_score(score: int):
 	$PlayerHUDMainPanel/PlayerHUDMainContainer/PlayerHUDLeftContainer/ScoreElementsContainer/ScoreLabelNumber.text = str(score)
 
@@ -20,13 +31,3 @@ func update_timer_duration(time):
 
 func update_lives(lives: int):
 	$PlayerHUDMainPanel/PlayerHUDMainContainer/PlayerHUDLeftContainer/LivesElementsContainer/LivesLabelNumber.text = str(lives)
-
-func _on_PauseButton_pressed():
-	Select1.play()
-	emit_signal("pause_button")
-
-
-func _on_StartButton_pressed():
-	Select1.play()
-	$PlayerHUDCenterPanel.hide()
-	emit_signal("start_game")

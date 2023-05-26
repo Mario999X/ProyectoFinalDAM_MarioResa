@@ -1,12 +1,14 @@
 extends Node
 
-const enemy_ship_scene = preload("res://game_elements/enemies/EnemyShip.tscn")
-
 signal game_over
 
-var total_enemies
+const enemy_ship_scene = preload("res://game_elements/enemies/EnemyShip.tscn")
+
 var score
 var lives
+
+var _total_enemies
+
 
 func _ready():
 	print(get_tree().current_scene.name, " | ", OS.get_time().hour, ":", OS.get_time().minute)
@@ -15,7 +17,7 @@ func _ready():
 	BackgroundMusic.playing = true
 	
 	lives = GlobalVariables.difficulty_selected
-	total_enemies = 0
+	_total_enemies = 0
 	score = 0
 	
 	var online_mode = SaveSystem.load_value_user("Online", "Account")
@@ -25,23 +27,6 @@ func _ready():
 	
 	_global_signals_connect_on_level()
 
-func _global_signals_connect_on_level():
-	GlobalSignals.connect("enemy_t1_hit", self, "_on_enemy_bullet_t1_hit")
-	GlobalSignals.connect("enemy_ship_hit", self, "_on_enemy_ship_hit")
-	GlobalSignals.connect("enemy_out_of_reach", self, "_on_enemy_out_of_reach")
-
-func _on_enemy_out_of_reach():
-	print("On level, enemy ship out of reach")
-	total_enemies -= 1
-
-func _on_enemy_ship_hit():
-	print("On level, enemy ship hit")
-	score += 10
-	total_enemies -= 1
-
-func _on_enemy_bullet_t1_hit():
-	print("On level, T1 Hit")
-	score += 3
 
 func _on_PlayerHUD_start_game():
 	$Player.start($PlayerSpawnLocation.position)
@@ -68,8 +53,8 @@ func _on_Player_reload_complete():
 
 
 func _on_EnemyShipTimer_timeout():
-	if total_enemies < 5:
-		total_enemies += 1
+	if _total_enemies < 5:
+		_total_enemies += 1
 		var enemy = enemy_ship_scene.instance()
 		var enemy_spawn_location = $MobPath/MobSpawnLocation
 		
@@ -143,12 +128,6 @@ func _on_Player_shoot():
 	else:
 		return
 
-func _obtain_actual_score_query(token):
-	var url = "https://localhost:6969/sp4ceSurvival/score"
-	var headers = ["Authorization: Bearer " + token]
-	
-	$ActualScoreRegistered.request(url, headers, false, HTTPClient.METHOD_GET)
-
 
 func _on_ActualScoreRegistered_request_completed(result, response_code, headers, body):
 	# Timeout
@@ -189,10 +168,34 @@ func _on_GameTimerDuration_timeout():
 	emit_signal("game_over")
 	
 
-
 func _on_MainLevel_game_over():
 	BackgroundMusic.playing = false
 	$PlayerRespawnTimer.start(); yield($PlayerRespawnTimer, "timeout")
 	
 	get_tree().change_scene("res://menus/main_menus/PostGameMenu.tscn")
 	queue_free()
+
+
+func _global_signals_connect_on_level():
+	GlobalSignals.connect("enemy_t1_hit", self, "_on_enemy_bullet_t1_hit")
+	GlobalSignals.connect("enemy_ship_hit", self, "_on_enemy_ship_hit")
+	GlobalSignals.connect("enemy_out_of_reach", self, "_on_enemy_out_of_reach")
+
+func _on_enemy_out_of_reach():
+	print("On level, enemy ship out of reach")
+	_total_enemies -= 1
+
+func _on_enemy_ship_hit():
+	print("On level, enemy ship hit")
+	score += 10
+	_total_enemies -= 1
+
+func _on_enemy_bullet_t1_hit():
+	print("On level, T1 Hit")
+	score += 3
+
+func _obtain_actual_score_query(token):
+	var url = "https://localhost:6969/sp4ceSurvival/score"
+	var headers = ["Authorization: Bearer " + token]
+	
+	$ActualScoreRegistered.request(url, headers, false, HTTPClient.METHOD_GET)

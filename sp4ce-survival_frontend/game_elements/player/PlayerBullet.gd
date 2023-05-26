@@ -3,8 +3,8 @@ extends Area2D
 export var speed = 10
 
 var im_bullet_player
-
 var direction := Vector2.ZERO
+
 
 func _ready():
 	pass
@@ -14,12 +14,6 @@ func _physics_process(delta):
 		var velocity = direction * speed
 		
 		global_position += velocity
-
-
-func set_direction(direction: Vector2):
-	self.direction = direction
-	self.rotation = direction.angle()
-
 
 func _on_VisibilityNotifier2D_screen_exited():
 	queue_free()
@@ -45,4 +39,12 @@ func _on_PlayerBullet_area_entered(area):
 		area.queue_free()
 		
 		GlobalSignals.emit_signal("enemy_ship_hit")
+
+
+func set_direction(direction: Vector2):
+	self.direction = direction
+	self.rotation = direction.angle()
+
+
+
 

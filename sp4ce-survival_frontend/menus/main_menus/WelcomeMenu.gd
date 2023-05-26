@@ -30,22 +30,6 @@ func _on_PlayOfflineButton_pressed():
 	get_tree().change_scene("res://menus/main_menus/MainMenu.tscn")
 	queue_free()
 
-# HTTP Request for the token check
-# "Use SSL" must be false because I use Self-Signed Certificate
-func _check_token_query(token):
-	var url = "https://localhost:6969/sp4ceSurvival/me"
-	var headers = ["Authorization: Bearer " + token]
-	
-	$CheckToken.request(url, headers, false, HTTPClient.METHOD_GET)
-
-# HTTP Request for the Login Check
-func _prepare_login_query(username, password):
-	var url = "https://localhost:6969/sp4ceSurvival/login"
-	var query = {"username": username, "password": password}
-	var headers = ["Content-Type: application/json"]
-	
-	$Login.request(url, headers, false, HTTPClient.METHOD_GET, to_json(query))
-
 # Login Button, we check if the data is logically correct according to the project information.
 func _on_LoginButton_pressed():
 	Select1.play()
@@ -135,3 +119,19 @@ func _on_RegisterButton_pressed():
 	Select1.play()
 	get_tree().change_scene("res://menus/main_menus/RegisterMenu.tscn")
 	queue_free()
+
+# HTTP Request for the token check
+# "Use SSL" must be false because I use Self-Signed Certificate
+func _check_token_query(token):
+	var url = "https://localhost:6969/sp4ceSurvival/me"
+	var headers = ["Authorization: Bearer " + token]
+	
+	$CheckToken.request(url, headers, false, HTTPClient.METHOD_GET)
+
+# HTTP Request for the Login Check
+func _prepare_login_query(username, password):
+	var url = "https://localhost:6969/sp4ceSurvival/login"
+	var query = {"username": username, "password": password}
+	var headers = ["Content-Type: application/json"]
+	
+	$Login.request(url, headers, false, HTTPClient.METHOD_GET, to_json(query))

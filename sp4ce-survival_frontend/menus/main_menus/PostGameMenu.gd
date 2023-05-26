@@ -1,6 +1,6 @@
 extends CanvasLayer
 
-var new_score
+var _new_score
 
 func _ready():
 	print(get_tree().current_scene.name, " | ", OS.get_time().hour, ":", OS.get_time().minute)
@@ -23,18 +23,18 @@ func _upload_new_score(token):
 
 func _compare_scores(online_mode):
 	if GlobalVariables.actual_score_obtained > GlobalVariables.actual_score_registered:
-		new_score = true
+		_new_score = true
 		
 		$MainElementsPanel/MainElementsContainer/ScoreObtainedContainer/ScoreObtainedMessage.show()
 		
 		GlobalVariables.actual_score_registered = GlobalVariables.actual_score_obtained
 	else:
-		new_score = false
+		_new_score = false
 	
 	
 	# Online ON
 	if online_mode != "0":
-		match(new_score):
+		match(_new_score):
 			true:
 				$LoadScreen.show()
 				_upload_new_score(online_mode)

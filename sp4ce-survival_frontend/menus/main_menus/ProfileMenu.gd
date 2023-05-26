@@ -9,19 +9,6 @@ func _ready():
 	_obtain_profile_query(online_mode)
 	
 
-
-func _obtain_profile_query(token):
-	var url = "https://localhost:6969/sp4ceSurvival/me"
-	var headers = ["Authorization: Bearer " + token]
-	
-	$ObtainProfile.request(url, headers, false, HTTPClient.METHOD_GET)
-
-func _delete_account_query(token):
-	var url = "https://localhost:6969/sp4ceSurvival/me"
-	var headers = ["Authorization: Bearer " + token]
-	
-	$DeleteAccount.request(url, headers, false, HTTPClient.METHOD_DELETE)
-
 func _on_ObtainProfile_request_completed(result, response_code, headers, body):
 	# Timeout
 	if response_code == 0:
@@ -108,3 +95,16 @@ func _on_DeleteAccount_request_completed(result, response_code, headers, body):
 	
 	$LoadScreen/LoadingElementsContainer/LoadingMessage.text = GlobalVariables.message_http_request
 	$RequestTimer.start()
+
+
+func _obtain_profile_query(token):
+	var url = "https://localhost:6969/sp4ceSurvival/me"
+	var headers = ["Authorization: Bearer " + token]
+	
+	$ObtainProfile.request(url, headers, false, HTTPClient.METHOD_GET)
+
+func _delete_account_query(token):
+	var url = "https://localhost:6969/sp4ceSurvival/me"
+	var headers = ["Authorization: Bearer " + token]
+	
+	$DeleteAccount.request(url, headers, false, HTTPClient.METHOD_DELETE)

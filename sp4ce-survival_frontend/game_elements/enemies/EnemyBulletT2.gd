@@ -1,8 +1,8 @@
 extends Area2D
 
-var im_bullet_t2
-
 export var speed = 150
+
+var im_bullet_t2
 
 func _process(delta):
 	position += transform.x * speed * delta

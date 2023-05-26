@@ -1,16 +1,17 @@
 extends KinematicBody2D
 
-const BULLET = preload("res://game_elements/player/PlayerBullet.tscn")
 signal shoot
 signal reload_complete
 signal hit_by_enemy
+
+const BULLET = preload("res://game_elements/player/PlayerBullet.tscn")
 
 export var speed = 175
 export var ammo = 20
 
 var can_shoot = true
-
 var screen_size
+
 
 func _ready():
 	screen_size = get_viewport_rect().size
@@ -36,8 +37,15 @@ func _physics_process(delta):
 	position.y = clamp(position.y, 0, screen_size.y)
 	
 	if Input.is_action_just_pressed("shoot"):
-		shoot()
+		_shoot()
 	
+
+func _on_ReloadTimer_timeout():
+	PlayerGun.stream = load("res://assets/sounds/effects/Shoot.wav")
+	ammo = 20
+	can_shoot = true
+	emit_signal("reload_complete")
+
 
 func start(pos):
 	position = pos
@@ -45,13 +53,21 @@ func start(pos):
 	$PlayerHitBox.set_deferred("disabled", false)
 	
 
-func reload():
+func hit_by_enemy():
+	print("Hit by enemy")
+	
+	ammo = 20
+	hide()
+	emit_signal("hit_by_enemy")
+	$PlayerHitBox.set_deferred("disabled", true)
+	
+
+func _reload():
 	can_shoot = false
 	PlayerGun.stream = load("res://assets/sounds/effects/Reload.wav")
 	$ReloadTimer.start()
 
-
-func shoot():
+func _shoot():
 	if self.visible == false:
 		return
 	if can_shoot:
@@ -72,26 +88,10 @@ func shoot():
 		bullet_instance.set_direction(direction)
 		if ammo == 0:
 			yield(get_tree().create_timer(0.1), "timeout")
-			reload()
+			_reload()
 		emit_signal("shoot")
 	else:
 		PlayerGun.play()
 		print("Reloading...")
 	
-
-func hit_by_enemy():
-	print("Hit by enemy")
-	
-	ammo = 20
-	hide()
-	emit_signal("hit_by_enemy")
-	$PlayerHitBox.set_deferred("disabled", true)
-	
-
-
-func _on_ReloadTimer_timeout():
-	PlayerGun.stream = load("res://assets/sounds/effects/Shoot.wav")
-	ammo = 20
-	can_shoot = true
-	emit_signal("reload_complete")
 

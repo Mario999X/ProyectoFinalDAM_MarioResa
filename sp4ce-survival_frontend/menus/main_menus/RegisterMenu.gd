@@ -4,14 +4,6 @@ func _ready():
 	print(get_tree().current_scene.name, " | ", OS.get_time().hour, ":", OS.get_time().minute)
 	
 
-# HTTP Request for the register
-func _prepare_register_query(username, email, password, repeat_password):
-	var url = "https://localhost:6969/sp4ceSurvival/register"
-	var query = {"username": username, "email": email, "password": password, "repeatPassword": repeat_password}
-	var headers = ["Content-Type: application/json"]
-	
-	$Register.request(url, headers, false, HTTPClient.METHOD_POST, to_json(query))
-
 # Function to return to the Welcome Menu
 func _on_ReturnWelcomeMenu_pressed():
 	Select2.play()
@@ -101,3 +93,12 @@ func _on_RequestTimer_timeout():
 	$LoadScreen.hide()
 	GlobalVariables.message_http_request = "LOADING"
 	$LoadScreen/LoadingElementsContainer/LoadingMessage.text = GlobalVariables.message_http_request
+
+
+# HTTP Request for the register
+func _prepare_register_query(username, email, password, repeat_password):
+	var url = "https://localhost:6969/sp4ceSurvival/register"
+	var query = {"username": username, "email": email, "password": password, "repeatPassword": repeat_password}
+	var headers = ["Content-Type: application/json"]
+	
+	$Register.request(url, headers, false, HTTPClient.METHOD_POST, to_json(query))
