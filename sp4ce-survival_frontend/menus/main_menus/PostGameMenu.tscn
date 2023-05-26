@@ -58,7 +58,7 @@ custom_styles/panel = SubResource( 4 )
 margin_left = 3.0
 margin_top = 3.0
 margin_right = 903.0
-margin_bottom = 235.0
+margin_bottom = 245.0
 custom_constants/separation = 20
 
 [node name="Separation2" type="Control" parent="MainElementsPanel/MainElementsContainer"]
@@ -137,30 +137,30 @@ rect_min_size = Vector2( 900, 30 )
 [node name="ButtonsContainer" type="HBoxContainer" parent="MainElementsPanel/MainElementsContainer"]
 margin_top = 172.0
 margin_right = 900.0
-margin_bottom = 212.0
+margin_bottom = 222.0
 custom_constants/separation = 100
 alignment = 1
 
 [node name="TryAgainButton" type="Button" parent="MainElementsPanel/MainElementsContainer/ButtonsContainer"]
 margin_left = 171.0
 margin_right = 345.0
-margin_bottom = 40.0
-rect_min_size = Vector2( 0, 40 )
+margin_bottom = 50.0
+rect_min_size = Vector2( 0, 50 )
 custom_fonts/font = SubResource( 9 )
 text = "TRY_AGAIN"
 
 [node name="ReturnToMenuButton" type="Button" parent="MainElementsPanel/MainElementsContainer/ButtonsContainer"]
 margin_left = 445.0
 margin_right = 728.0
-margin_bottom = 40.0
+margin_bottom = 50.0
 rect_min_size = Vector2( 0, 40 )
 custom_fonts/font = SubResource( 9 )
 text = "RETURN_TO_MENU"
 
 [node name="Separation3" type="Control" parent="MainElementsPanel/MainElementsContainer"]
-margin_top = 232.0
+margin_top = 242.0
 margin_right = 900.0
-margin_bottom = 232.0
+margin_bottom = 242.0
 
 [node name="LoadScreen" parent="." instance=ExtResource( 3 )]
 layer = 2
