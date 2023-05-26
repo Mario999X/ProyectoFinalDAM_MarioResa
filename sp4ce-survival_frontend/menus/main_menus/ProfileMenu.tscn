@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://assets/backgrounds/Menu_Background.png" type="Texture" id=1]
 [ext_resource path="res://assets/fonts/Xolonium-Regular.ttf" type="DynamicFontData" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://assets/icons/Return_Arrow_Pressed.png" type="Texture" id=5]
 [ext_resource path="res://menus/main_menus/ProfileMenu.gd" type="Script" id=6]
 [ext_resource path="res://loading_screens/LoadingScreen.tscn" type="PackedScene" id=7]
+[ext_resource path="res://menus/secundary_menus/ConfirmationMenu.tscn" type="PackedScene" id=8]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0, 0, 0, 1 )
@@ -76,17 +77,17 @@ custom_styles/panel = SubResource( 1 )
 margin_left = 3.0
 margin_top = 3.0
 margin_right = 603.0
-margin_bottom = 306.0
-custom_constants/separation = 30
+margin_bottom = 311.0
+custom_constants/separation = 25
 
 [node name="Separation1" type="Control" parent="ProfileMainPanel/ProfileMainContainer"]
 margin_right = 600.0
 rect_min_size = Vector2( 600, 0 )
 
 [node name="ProfileUsernameContainer" type="HBoxContainer" parent="ProfileMainPanel/ProfileMainContainer"]
-margin_top = 30.0
+margin_top = 25.0
 margin_right = 600.0
-margin_bottom = 60.0
+margin_bottom = 55.0
 custom_constants/separation = 10
 
 [node name="Separation2" type="Control" parent="ProfileMainPanel/ProfileMainContainer/ProfileUsernameContainer"]
@@ -110,9 +111,9 @@ custom_fonts/font = SubResource( 2 )
 text = "A"
 
 [node name="ProfileEmailContainer" type="HBoxContainer" parent="ProfileMainPanel/ProfileMainContainer"]
-margin_top = 90.0
+margin_top = 80.0
 margin_right = 600.0
-margin_bottom = 120.0
+margin_bottom = 110.0
 custom_constants/separation = 10
 
 [node name="Separation3" type="Control" parent="ProfileMainPanel/ProfileMainContainer/ProfileEmailContainer"]
@@ -136,9 +137,9 @@ custom_fonts/font = SubResource( 2 )
 text = "A"
 
 [node name="ProfileCreationDateContainer" type="HBoxContainer" parent="ProfileMainPanel/ProfileMainContainer"]
-margin_top = 150.0
+margin_top = 135.0
 margin_right = 600.0
-margin_bottom = 180.0
+margin_bottom = 165.0
 custom_constants/separation = 10
 
 [node name="Separation4" type="Control" parent="ProfileMainPanel/ProfileMainContainer/ProfileCreationDateContainer"]
@@ -162,9 +163,9 @@ custom_fonts/font = SubResource( 2 )
 text = "A"
 
 [node name="ProfileScoreElementsPanel" type="PanelContainer" parent="ProfileMainPanel/ProfileMainContainer"]
-margin_top = 210.0
+margin_top = 190.0
 margin_right = 600.0
-margin_bottom = 303.0
+margin_bottom = 283.0
 custom_styles/panel = SubResource( 3 )
 
 [node name="ProfileScoreElementsContainer" type="VBoxContainer" parent="ProfileMainPanel/ProfileMainContainer/ProfileScoreElementsPanel"]
@@ -229,6 +230,12 @@ margin_bottom = 28.0
 custom_fonts/font = SubResource( 2 )
 text = "A"
 
+[node name="Separation8" type="Control" parent="ProfileMainPanel/ProfileMainContainer"]
+margin_top = 308.0
+margin_right = 600.0
+margin_bottom = 308.0
+rect_min_size = Vector2( 600, 0 )
+
 [node name="ProfileSecundaryPanel" type="PanelContainer" parent="."]
 anchor_left = 1.0
 anchor_top = 0.5
@@ -291,17 +298,27 @@ texture_pressed = ExtResource( 5 )
 texture_hover = ExtResource( 3 )
 expand = true
 
-[node name="LoadScreen" parent="." instance=ExtResource( 7 )]
+[node name="RequestTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="ConfirmationMenu" parent="." instance=ExtResource( 8 )]
 layer = 2
+visible = false
+
+[node name="LoadScreen" parent="." instance=ExtResource( 7 )]
+layer = 3
 visible = false
 
 [node name="ObtainProfile" type="HTTPRequest" parent="."]
 
-[node name="RequestTimer" type="Timer" parent="."]
-one_shot = true
+[node name="DeleteAccount" type="HTTPRequest" parent="."]
+timeout = 10.0
 
 [connection signal="pressed" from="ProfileSecundaryPanel/ProfileButtonsContainer/ChangePasswordButton" to="." method="_on_ChangePasswordButton_pressed"]
 [connection signal="pressed" from="ProfileSecundaryPanel/ProfileButtonsContainer/DeleteAccountButton" to="." method="_on_DeleteAccountButton_pressed"]
 [connection signal="pressed" from="ReturnMainMenu" to="." method="_on_ReturnMainMenu_pressed"]
-[connection signal="request_completed" from="ObtainProfile" to="." method="_on_ObtainProfile_request_completed"]
 [connection signal="timeout" from="RequestTimer" to="." method="_on_RequestTimer_timeout"]
+[connection signal="confirmation" from="ConfirmationMenu" to="." method="_on_ConfirmationMenu_confirmation"]
+[connection signal="request_completed" from="ObtainProfile" to="." method="_on_ObtainProfile_request_completed"]
+[connection signal="request_completed" from="DeleteAccount" to="." method="_on_DeleteAccount_request_completed"]

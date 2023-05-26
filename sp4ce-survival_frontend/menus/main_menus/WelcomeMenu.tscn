@@ -233,22 +233,24 @@ __meta__ = {
 [node name="RegisterAndOfflineElementsContainer" type="HBoxContainer" parent="RegisterAndOfflineElementsPanel"]
 margin_left = 3.0
 margin_top = 3.0
-margin_right = 476.0
+margin_right = 553.0
 margin_bottom = 67.0
 rect_min_size = Vector2( 0, 50 )
 custom_constants/separation = 100
 alignment = 1
 
 [node name="RegisterButton" type="Button" parent="RegisterAndOfflineElementsPanel/RegisterAndOfflineElementsContainer"]
-margin_right = 151.0
+margin_right = 225.0
 margin_bottom = 64.0
+rect_min_size = Vector2( 225, 0 )
 custom_fonts/font = SubResource( 9 )
 text = "REGISTER"
 
 [node name="PlayOfflineButton" type="Button" parent="RegisterAndOfflineElementsPanel/RegisterAndOfflineElementsContainer"]
-margin_left = 251.0
-margin_right = 473.0
+margin_left = 325.0
+margin_right = 550.0
 margin_bottom = 64.0
+rect_min_size = Vector2( 225, 0 )
 custom_fonts/font = SubResource( 9 )
 text = "PLAY_OFFLINE"
 

@@ -227,17 +227,18 @@ custom_constants/separation = 37
 alignment = 1
 
 [node name="ProfileButton" type="Button" parent="MainElementsPanel/MainElementsContainer/OnlineElementsPanel/OnlineElementsContainer"]
-margin_left = 99.0
-margin_right = 199.0
+margin_left = 67.0
+margin_right = 227.0
 margin_bottom = 42.0
-rect_min_size = Vector2( 100, 0 )
+rect_min_size = Vector2( 160, 0 )
 custom_fonts/font = SubResource( 7 )
 text = "PROFILE"
 
 [node name="LeaderboardButton" type="Button" parent="MainElementsPanel/MainElementsContainer/OnlineElementsPanel/OnlineElementsContainer"]
-margin_left = 236.0
-margin_right = 392.0
+margin_left = 264.0
+margin_right = 424.0
 margin_bottom = 42.0
+rect_min_size = Vector2( 160, 0 )
 custom_fonts/font = SubResource( 7 )
 text = "LEADERBOARD"
 
