@@ -5,6 +5,7 @@ Proyecto final de Desarrollo de Aplicaciones Multiplataforma del curso 22/23. IE
 ## Índice
 
 - [Introducción](#introducción)
+- [Plataformas Soportadas](#plataformas-soportadas)
 - [Diseño](#diseño)
 - [Funcionamiento de la Aplicación](#funcionamiento-de-la-aplicación)
 - [Autor](#autor)
@@ -24,6 +25,13 @@ puntuación posible.
 Si se quiere descargar el videojuego en formato de ejecutable, se realizará a través del siguiente enlace:
 
 - [Coming Soon]
+
+## Plataformas Soportadas
+ ![Windows](https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white)
+ 
+<!-- ![Mac OS](https://img.shields.io/badge/mac%20os-000000?style=for-the-badge&logo=apple&logoColor=F0F0F0) -->
+
+ ![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)
 
 ## Diseño
 
@@ -75,7 +83,16 @@ dejará al usuario en el menú de bienvenida).
 
 ### Menú de perfil - [Solo Online]
 
-[Coming Soon]
+El usuario podrá ver la información más relevante sobre su cuenta:
+- Nombre de usuario.
+- Correo electrónico.
+- Fecha de creación.
+- Puntuación más alta registrada.
+- Fecha de obtención de aquella puntuación.
+
+Además, se le permitirá hacer dos acciones:
+- Cambiar la contraseña.
+- Borrar la cuenta.
 
 ### Menú tabla de puntuaciones - [Solo Online]
 
