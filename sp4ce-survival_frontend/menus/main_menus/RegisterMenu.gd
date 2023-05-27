@@ -13,6 +13,7 @@ func _on_ReturnWelcomeMenu_pressed():
 # Register Buttoon, we check if the data is logically correct according to the project information.
 func _on_RegisterButton_pressed():
 	Select1.play()
+	
 	var username_register_field = $RegisterElementsPanel/RegisterElementsContainer/UsernameRegisterLineEdit
 	var email_register_field = $RegisterElementsPanel/RegisterElementsContainer/EmailRegisterLineEdit
 	var password_register_field = $RegisterElementsPanel/RegisterElementsContainer/PasswordRegisterLineEdit
@@ -76,7 +77,7 @@ func _on_Register_request_completed(result, response_code, headers, body):
 			var token = response.value
 			SaveSystem.save_value_user("Online", "Account", token)
 		
-		if response_code == 400 || response_code == 409:
+		if response_code == 400 or response_code == 409:
 			GlobalVariables.message_http_request = response.value
 			
 	$LoadScreen/LoadingElementsContainer/LoadingMessage.text = GlobalVariables.message_http_request

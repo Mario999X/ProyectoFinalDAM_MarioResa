@@ -34,14 +34,14 @@ border_blend = true
 font_path = "res://assets/fonts/Xolonium-Regular.ttf"
 
 [sub_resource type="DynamicFont" id=2]
-size = 20
+size = 21
 font_data = SubResource( 3 )
 
 [sub_resource type="DynamicFontData" id=4]
 font_path = "res://assets/fonts/Xolonium-Regular.ttf"
 
 [sub_resource type="DynamicFont" id=5]
-size = 17
+size = 20
 font_data = SubResource( 4 )
 
 [sub_resource type="DynamicFont" id=6]
@@ -130,7 +130,7 @@ custom_styles/panel = SubResource( 1 )
 margin_left = 3.0
 margin_top = 3.0
 margin_right = 503.0
-margin_bottom = 428.0
+margin_bottom = 437.0
 custom_constants/separation = 25
 
 [node name="Separation4" type="Control" parent="MainElementsPanel/MainElementsContainer"]
@@ -139,81 +139,81 @@ margin_right = 500.0
 [node name="DifficultyLabelsContainer" type="HBoxContainer" parent="MainElementsPanel/MainElementsContainer"]
 margin_top = 25.0
 margin_right = 500.0
-margin_bottom = 50.0
+margin_bottom = 51.0
 custom_constants/separation = 10
 
 [node name="Control" type="Control" parent="MainElementsPanel/MainElementsContainer/DifficultyLabelsContainer"]
-margin_bottom = 25.0
+margin_bottom = 26.0
 
 [node name="DifficultyLabel" type="Label" parent="MainElementsPanel/MainElementsContainer/DifficultyLabelsContainer"]
 margin_left = 10.0
-margin_right = 256.0
-margin_bottom = 25.0
+margin_right = 275.0
+margin_bottom = 26.0
 custom_fonts/font = SubResource( 2 )
 text = "CHOSEN_DIFFICULTY:"
 
 [node name="DifficultySelectedLabel" type="Label" parent="MainElementsPanel/MainElementsContainer/DifficultyLabelsContainer"]
-margin_left = 266.0
-margin_right = 266.0
-margin_bottom = 25.0
+margin_left = 285.0
+margin_right = 285.0
+margin_bottom = 26.0
 custom_fonts/font = SubResource( 2 )
 
 [node name="DifficultyLevelsContainer" type="HBoxContainer" parent="MainElementsPanel/MainElementsContainer"]
-margin_top = 75.0
+margin_top = 76.0
 margin_right = 500.0
-margin_bottom = 125.0
+margin_bottom = 126.0
 rect_min_size = Vector2( 0, 50 )
 custom_constants/separation = 47
 alignment = 1
 
 [node name="EasyButton" type="Button" parent="MainElementsPanel/MainElementsContainer/DifficultyLevelsContainer"]
-margin_left = 77.0
-margin_right = 157.0
+margin_left = 70.0
+margin_right = 150.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 80, 0 )
 custom_fonts/font = SubResource( 5 )
 text = "EASY"
 
 [node name="MediumButton" type="Button" parent="MainElementsPanel/MainElementsContainer/DifficultyLevelsContainer"]
-margin_left = 204.0
-margin_right = 295.0
+margin_left = 197.0
+margin_right = 302.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 80, 0 )
 custom_fonts/font = SubResource( 5 )
 text = "MEDIUM"
 
 [node name="HardButton" type="Button" parent="MainElementsPanel/MainElementsContainer/DifficultyLevelsContainer"]
-margin_left = 342.0
-margin_right = 422.0
+margin_left = 349.0
+margin_right = 429.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 80, 0 )
 custom_fonts/font = SubResource( 5 )
 text = "HARD"
 
 [node name="Separation" type="Control" parent="MainElementsPanel/MainElementsContainer"]
-margin_top = 150.0
+margin_top = 151.0
 margin_right = 500.0
-margin_bottom = 170.0
+margin_bottom = 171.0
 rect_min_size = Vector2( 500, 20 )
 
 [node name="PlayButton" type="Button" parent="MainElementsPanel/MainElementsContainer"]
-margin_top = 195.0
+margin_top = 196.0
 margin_right = 500.0
-margin_bottom = 270.0
+margin_bottom = 271.0
 rect_min_size = Vector2( 0, 75 )
 custom_fonts/font = SubResource( 6 )
 text = "PLAY"
 
 [node name="Separation2" type="Control" parent="MainElementsPanel/MainElementsContainer"]
-margin_top = 295.0
+margin_top = 296.0
 margin_right = 500.0
-margin_bottom = 315.0
+margin_bottom = 316.0
 rect_min_size = Vector2( 0, 20 )
 
 [node name="OnlineElementsPanel" type="PanelContainer" parent="MainElementsPanel/MainElementsContainer"]
-margin_top = 340.0
+margin_top = 341.0
 margin_right = 500.0
-margin_bottom = 390.0
+margin_bottom = 399.0
 rect_min_size = Vector2( 0, 50 )
 custom_styles/panel = SubResource( 10 )
 
@@ -221,7 +221,7 @@ custom_styles/panel = SubResource( 10 )
 margin_left = 4.0
 margin_top = 4.0
 margin_right = 496.0
-margin_bottom = 46.0
+margin_bottom = 54.0
 rect_min_size = Vector2( 0, 40 )
 custom_constants/separation = 37
 alignment = 1
@@ -229,23 +229,23 @@ alignment = 1
 [node name="ProfileButton" type="Button" parent="MainElementsPanel/MainElementsContainer/OnlineElementsPanel/OnlineElementsContainer"]
 margin_left = 67.0
 margin_right = 227.0
-margin_bottom = 42.0
-rect_min_size = Vector2( 160, 0 )
+margin_bottom = 50.0
+rect_min_size = Vector2( 160, 50 )
 custom_fonts/font = SubResource( 7 )
 text = "PROFILE"
 
 [node name="LeaderboardButton" type="Button" parent="MainElementsPanel/MainElementsContainer/OnlineElementsPanel/OnlineElementsContainer"]
 margin_left = 264.0
 margin_right = 424.0
-margin_bottom = 42.0
+margin_bottom = 50.0
 rect_min_size = Vector2( 160, 0 )
 custom_fonts/font = SubResource( 7 )
 text = "LEADERBOARD"
 
 [node name="Separation3" type="Control" parent="MainElementsPanel/MainElementsContainer"]
-margin_top = 415.0
+margin_top = 424.0
 margin_right = 500.0
-margin_bottom = 425.0
+margin_bottom = 434.0
 rect_min_size = Vector2( 0, 10 )
 
 [node name="OptionsAndExitElementsPanel" type="PanelContainer" parent="."]

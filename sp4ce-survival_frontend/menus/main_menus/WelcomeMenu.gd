@@ -6,7 +6,6 @@ extends CanvasLayer
 func _ready():
 	print(get_tree().current_scene.name, " | ", OS.get_time().hour, ":", OS.get_time().minute)
 	
-	LoadSettings.load_Settings()
 	
 	var online_mode = SaveSystem.load_value_user("Online", "Account")
 	
@@ -65,16 +64,16 @@ func _on_Login_request_completed(result, response_code, headers, body):
 	else:
 		var response = JSON.parse(body.get_string_from_utf8()).result
 		
-		if (response_code == 200):
+		if response_code == 200:
 			GlobalVariables.message_http_request = "CORRECT"
 			var token = response.value
 			SaveSystem.save_value_user("Online", "Account", token)
 			
-		if (response_code == 400):
+		if response_code == 400:
 			var error = response.value
 			GlobalVariables.message_http_request = error
 			
-		if (response_code == 403):
+		if response_code == 403:
 			var error = response.message
 			GlobalVariables.message_http_request = error
 			
@@ -92,10 +91,10 @@ func _on_CheckToken_request_completed(result, response_code, headers, body):
 	else:
 		var response = JSON.parse(body.get_string_from_utf8()).result
 		
-		if (response_code == 200):
+		if response_code == 200:
 			GlobalVariables.message_http_request = "CORRECT"
 
-		if (response_code == 403):
+		if response_code == 403:
 			SaveSystem.save_value_user("Online", "Account", "0")
 			
 			var error = response.message
@@ -121,7 +120,7 @@ func _on_RegisterButton_pressed():
 	queue_free()
 
 # HTTP Request for the token check
-# "Use SSL" must be false because I use Self-Signed Certificate
+# "ssl_validate_domain" must be false because I use Self-Signed Certificate
 func _check_token_query(token):
 	var url = "https://localhost:6969/sp4ceSurvival/me"
 	var headers = ["Authorization: Bearer " + token]

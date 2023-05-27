@@ -28,7 +28,7 @@ font_path = "res://assets/fonts/Xolonium-Regular.ttf"
 size = 17
 font_data = SubResource( 7 )
 
-[sub_resource type="DynamicFont" id=11]
+[sub_resource type="DynamicFont" id=13]
 size = 18
 font_data = ExtResource( 2 )
 
@@ -93,14 +93,15 @@ margin_bottom = 85.0
 rect_min_size = Vector2( 0, 40 )
 custom_fonts/font = SubResource( 8 )
 max_length = 20
+clear_button_enabled = true
 
 [node name="MessageWarningUsername" type="Label" parent="RegisterElementsPanel/RegisterElementsContainer"]
 visible = false
 margin_top = 90.0
-margin_right = 400.0
+margin_right = 550.0
 margin_bottom = 115.0
 rect_min_size = Vector2( 0, 25 )
-custom_fonts/font = SubResource( 11 )
+custom_fonts/font = SubResource( 13 )
 text = "WARNING_USERNAME"
 align = 1
 
@@ -125,6 +126,7 @@ margin_bottom = 187.0
 rect_min_size = Vector2( 0, 40 )
 custom_fonts/font = SubResource( 8 )
 max_length = 50
+clear_button_enabled = true
 
 [node name="MessageWarningEmail" type="Label" parent="RegisterElementsPanel/RegisterElementsContainer"]
 visible = false
@@ -132,7 +134,7 @@ margin_top = 222.0
 margin_right = 400.0
 margin_bottom = 247.0
 rect_min_size = Vector2( 0, 25 )
-custom_fonts/font = SubResource( 11 )
+custom_fonts/font = SubResource( 13 )
 text = "WARNING_EMAIL"
 align = 1
 
@@ -158,6 +160,7 @@ rect_min_size = Vector2( 0, 40 )
 custom_fonts/font = SubResource( 8 )
 max_length = 25
 secret = true
+clear_button_enabled = true
 
 [node name="MessageWarningPassword" type="Label" parent="RegisterElementsPanel/RegisterElementsContainer"]
 visible = false
@@ -165,7 +168,7 @@ margin_top = 367.0
 margin_right = 400.0
 margin_bottom = 392.0
 rect_min_size = Vector2( 0, 25 )
-custom_fonts/font = SubResource( 11 )
+custom_fonts/font = SubResource( 13 )
 text = "WARNING_PASSWORD"
 align = 1
 
@@ -191,6 +194,7 @@ rect_min_size = Vector2( 0, 40 )
 custom_fonts/font = SubResource( 8 )
 max_length = 25
 secret = true
+clear_button_enabled = true
 
 [node name="MessageWarningRepeatPassword" type="Label" parent="RegisterElementsPanel/RegisterElementsContainer"]
 visible = false
@@ -198,7 +202,7 @@ margin_top = 499.0
 margin_right = 400.0
 margin_bottom = 524.0
 rect_min_size = Vector2( 0, 25 )
-custom_fonts/font = SubResource( 11 )
+custom_fonts/font = SubResource( 13 )
 text = "WARNING_REPEAT_PASSWORD"
 align = 1
 

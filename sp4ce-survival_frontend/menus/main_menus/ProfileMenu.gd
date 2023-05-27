@@ -60,6 +60,7 @@ func _on_ReturnMainMenu_pressed():
 
 func _on_ChangePasswordButton_pressed():
 	Select1.play()
+	$ChangePasswordMenu.show()
 
 
 func _on_DeleteAccountButton_pressed():
@@ -108,3 +109,42 @@ func _delete_account_query(token):
 	var headers = ["Authorization: Bearer " + token]
 	
 	$DeleteAccount.request(url, headers, false, HTTPClient.METHOD_DELETE)
+
+
+func _on_ChangePasswordMenu_try_password_change():
+	var token = SaveSystem.load_value_user("Online", "Account")
+	
+	var url = "https://localhost:6969/sp4ceSurvival/me/password"
+	var query = {"actualPassword": $ChangePasswordMenu.actual_password, "newPassword": $ChangePasswordMenu.new_password, "repeatNewPassword": $ChangePasswordMenu.repeat_new_password}
+	var headers = ["Content-Type: application/json", "Authorization: Bearer " + token]
+	
+	$LoadScreen.show()
+	$ChangePassword.request(url, headers, false, HTTPClient.METHOD_PUT, to_json(query))
+	
+
+
+func _on_ChangePassword_request_completed(result, response_code, headers, body):
+	# Timeout
+	if response_code == 0:
+		GlobalVariables.message_http_request = "TIMEOUT"
+	# Connected
+	else:
+		var response = JSON.parse(body.get_string_from_utf8()).result
+		
+		if response_code == 200:
+			GlobalVariables.message_http_request = "CORRECT"
+			
+		if response_code == 400:
+			var error = response.value
+			GlobalVariables.message_http_request = error
+			
+		if response_code == 403:
+			
+			var error = response.message
+			GlobalVariables.message_http_request = error
+			
+			SaveSystem.save_value_user("Online", "Account", "0")
+		
+	
+	$LoadScreen/LoadingElementsContainer/LoadingMessage.text = GlobalVariables.message_http_request
+	$RequestTimer.start()

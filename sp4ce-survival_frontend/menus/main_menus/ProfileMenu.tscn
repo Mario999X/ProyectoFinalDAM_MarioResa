@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://assets/backgrounds/Menu_Background.png" type="Texture" id=1]
 [ext_resource path="res://assets/fonts/Xolonium-Regular.ttf" type="DynamicFontData" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://menus/main_menus/ProfileMenu.gd" type="Script" id=6]
 [ext_resource path="res://loading_screens/LoadingScreen.tscn" type="PackedScene" id=7]
 [ext_resource path="res://menus/secundary_menus/ConfirmationMenu.tscn" type="PackedScene" id=8]
+[ext_resource path="res://menus/main_menus/ChangePasswordMenu.tscn" type="PackedScene" id=9]
 
 [sub_resource type="StyleBoxFlat" id=1]
 bg_color = Color( 0, 0, 0, 1 )
@@ -27,7 +28,7 @@ bg_color = Color( 0, 0, 0, 1 )
 border_width_left = 3
 border_width_top = 3
 border_width_right = 3
-border_width_bottom = 10
+border_width_bottom = 3
 border_color = Color( 0.815686, 0.384314, 0, 1 )
 border_blend = true
 
@@ -77,7 +78,7 @@ custom_styles/panel = SubResource( 1 )
 margin_left = 3.0
 margin_top = 3.0
 margin_right = 603.0
-margin_bottom = 311.0
+margin_bottom = 304.0
 custom_constants/separation = 25
 
 [node name="Separation1" type="Control" parent="ProfileMainPanel/ProfileMainContainer"]
@@ -165,7 +166,7 @@ text = "A"
 [node name="ProfileScoreElementsPanel" type="PanelContainer" parent="ProfileMainPanel/ProfileMainContainer"]
 margin_top = 190.0
 margin_right = 600.0
-margin_bottom = 283.0
+margin_bottom = 276.0
 custom_styles/panel = SubResource( 3 )
 
 [node name="ProfileScoreElementsContainer" type="VBoxContainer" parent="ProfileMainPanel/ProfileMainContainer/ProfileScoreElementsPanel"]
@@ -231,9 +232,9 @@ custom_fonts/font = SubResource( 2 )
 text = "A"
 
 [node name="Separation8" type="Control" parent="ProfileMainPanel/ProfileMainContainer"]
-margin_top = 308.0
+margin_top = 301.0
 margin_right = 600.0
-margin_bottom = 308.0
+margin_bottom = 301.0
 rect_min_size = Vector2( 600, 0 )
 
 [node name="ProfileSecundaryPanel" type="PanelContainer" parent="."]
@@ -243,7 +244,7 @@ anchor_right = 1.0
 anchor_bottom = 0.5
 margin_left = -14.0
 margin_top = -7.0
-margin_right = -5.0
+margin_right = -14.0
 margin_bottom = 7.0
 grow_horizontal = 0
 grow_vertical = 2
@@ -306,13 +307,21 @@ one_shot = true
 layer = 2
 visible = false
 
+[node name="ChangePasswordMenu" parent="." instance=ExtResource( 9 )]
+layer = 2
+visible = false
+
 [node name="LoadScreen" parent="." instance=ExtResource( 7 )]
 layer = 3
 visible = false
 
 [node name="ObtainProfile" type="HTTPRequest" parent="."]
+timeout = 10.0
 
 [node name="DeleteAccount" type="HTTPRequest" parent="."]
+timeout = 10.0
+
+[node name="ChangePassword" type="HTTPRequest" parent="."]
 timeout = 10.0
 
 [connection signal="pressed" from="ProfileSecundaryPanel/ProfileButtonsContainer/ChangePasswordButton" to="." method="_on_ChangePasswordButton_pressed"]
@@ -320,5 +329,7 @@ timeout = 10.0
 [connection signal="pressed" from="ReturnMainMenu" to="." method="_on_ReturnMainMenu_pressed"]
 [connection signal="timeout" from="RequestTimer" to="." method="_on_RequestTimer_timeout"]
 [connection signal="confirmation" from="ConfirmationMenu" to="." method="_on_ConfirmationMenu_confirmation"]
+[connection signal="try_password_change" from="ChangePasswordMenu" to="." method="_on_ChangePasswordMenu_try_password_change"]
 [connection signal="request_completed" from="ObtainProfile" to="." method="_on_ObtainProfile_request_completed"]
 [connection signal="request_completed" from="DeleteAccount" to="." method="_on_DeleteAccount_request_completed"]
+[connection signal="request_completed" from="ChangePassword" to="." method="_on_ChangePassword_request_completed"]

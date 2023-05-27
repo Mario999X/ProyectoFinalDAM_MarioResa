@@ -4,6 +4,9 @@ extends Node
 var _screen_size = OS.get_screen_size()
 var _window_size = OS.get_window_size()
 
+func _ready():
+	load_Settings()
+
 # Function to load the settings from the user.
 func load_Settings():
 	var lenguage = SaveSystem.load_value("Lenguages", "Lenguage")

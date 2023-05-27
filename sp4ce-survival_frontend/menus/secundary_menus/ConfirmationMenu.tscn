@@ -40,47 +40,49 @@ custom_styles/panel = SubResource( 3 )
 [node name="MainButtonsContainer" type="VBoxContainer" parent="MainButtonsPanel"]
 margin_left = 3.0
 margin_top = 3.0
-margin_right = 389.0
-margin_bottom = 152.0
+margin_right = 603.0
+margin_bottom = 172.0
 custom_constants/separation = 10
 
 [node name="Control2" type="Control" parent="MainButtonsPanel/MainButtonsContainer"]
-margin_right = 386.0
+margin_right = 600.0
+margin_bottom = 10.0
+rect_min_size = Vector2( 600, 10 )
 
 [node name="MainButtonsLabelText" type="Label" parent="MainButtonsPanel/MainButtonsContainer"]
-margin_top = 10.0
-margin_right = 386.0
-margin_bottom = 49.0
+margin_top = 20.0
+margin_right = 600.0
+margin_bottom = 59.0
 custom_fonts/font = SubResource( 2 )
-text = "USER_CONFIRMATION"
+text = "USER_CONFIRMATION_QUESTION"
 align = 1
 
 [node name="Control" type="Control" parent="MainButtonsPanel/MainButtonsContainer"]
-margin_top = 59.0
-margin_right = 386.0
-margin_bottom = 69.0
-rect_min_size = Vector2( 0, 10 )
+margin_top = 69.0
+margin_right = 600.0
+margin_bottom = 89.0
+rect_min_size = Vector2( 0, 20 )
 
 [node name="SecondaryButtonsContainer" type="HBoxContainer" parent="MainButtonsPanel/MainButtonsContainer"]
-margin_top = 79.0
-margin_right = 386.0
-margin_bottom = 149.0
+margin_top = 99.0
+margin_right = 600.0
+margin_bottom = 169.0
 custom_constants/separation = 125
 alignment = 1
 
 [node name="YesButton" type="Button" parent="MainButtonsPanel/MainButtonsContainer/SecondaryButtonsContainer"]
-margin_left = 46.0
-margin_right = 130.0
+margin_left = 147.0
+margin_right = 237.0
 margin_bottom = 70.0
-rect_min_size = Vector2( 0, 70 )
+rect_min_size = Vector2( 90, 70 )
 custom_fonts/font = SubResource( 2 )
 text = "YES"
 
 [node name="NoButton" type="Button" parent="MainButtonsPanel/MainButtonsContainer/SecondaryButtonsContainer"]
-margin_left = 255.0
-margin_right = 339.0
+margin_left = 362.0
+margin_right = 452.0
 margin_bottom = 70.0
-rect_min_size = Vector2( 84, 0 )
+rect_min_size = Vector2( 90, 0 )
 custom_fonts/font = SubResource( 2 )
 text = "NO"
 
