@@ -1425,6 +1425,36 @@
 					"response": []
 				},
 				{
+					"name": "Me/Profile_NoScore",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token_noScore}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://localhost:6969/sp4ceSurvival/me",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "6969",
+							"path": [
+								"sp4ceSurvival",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "UpdateScore",
 					"request": {
 						"auth": {
