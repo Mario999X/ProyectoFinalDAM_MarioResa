@@ -103,6 +103,7 @@ position = Vector2( 960, 768 )
 
 [node name="PauseMenu" parent="." instance=ExtResource( 1 )]
 pause_mode = 2
+layer = 2
 visible = false
 
 [node name="GameTimerDuration" type="Timer" parent="."]

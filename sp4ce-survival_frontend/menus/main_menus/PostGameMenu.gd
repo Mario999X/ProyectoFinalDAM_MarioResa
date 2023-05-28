@@ -15,34 +15,6 @@ func _ready():
 	_compare_scores(online_mode)
 	
 
-func _upload_new_score(token):
-	var url = "https://localhost:6969/sp4ceSurvival/me/score?scoreNumber=" + str(GlobalVariables.actual_score_registered)
-	var headers = ["Authorization: Bearer " + token]
-	
-	$UploadNewScore.request(url, headers, false, HTTPClient.METHOD_PUT)
-
-func _compare_scores(online_mode):
-	if GlobalVariables.actual_score_obtained > GlobalVariables.actual_score_registered:
-		_new_score = true
-		
-		$MainElementsPanel/MainElementsContainer/ScoreObtainedContainer/ScoreObtainedMessage.show()
-		
-		GlobalVariables.actual_score_registered = GlobalVariables.actual_score_obtained
-	else:
-		_new_score = false
-	
-	
-	# Online ON
-	if online_mode != "0":
-		match(_new_score):
-			true:
-				$LoadScreen.show()
-				_upload_new_score(online_mode)
-			false:
-				pass
-	
-	# Reset apply to the score obtained
-	GlobalVariables.actual_score_obtained = 0
 
 func _on_ReturnToMenuButton_pressed():
 	Select2.play()
@@ -94,3 +66,33 @@ func _on_RequestTimer_timeout():
 	
 	GlobalVariables.message_http_request = "LOADING"
 	$LoadScreen/LoadingElementsContainer/LoadingMessage.text = GlobalVariables.message_http_request
+
+
+func _upload_new_score(token):
+	var url = "https://localhost:6969/sp4ceSurvival/me/score?scoreNumber=" + str(GlobalVariables.actual_score_registered)
+	var headers = ["Authorization: Bearer " + token]
+	
+	$UploadNewScore.request(url, headers, false, HTTPClient.METHOD_PUT)
+
+func _compare_scores(online_mode):
+	if GlobalVariables.actual_score_obtained > GlobalVariables.actual_score_registered:
+		_new_score = true
+		
+		$MainElementsPanel/MainElementsContainer/ScoreObtainedContainer/ScoreObtainedMessage.show()
+		
+		GlobalVariables.actual_score_registered = GlobalVariables.actual_score_obtained
+	else:
+		_new_score = false
+	
+	
+	# Online ON
+	if online_mode != "0":
+		match(_new_score):
+			true:
+				$LoadScreen.show()
+				_upload_new_score(online_mode)
+			false:
+				pass
+	
+	# Reset apply to the score obtained
+	GlobalVariables.actual_score_obtained = 0

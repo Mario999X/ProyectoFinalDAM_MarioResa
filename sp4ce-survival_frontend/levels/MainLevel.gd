@@ -10,6 +10,9 @@ var lives
 var _total_enemies
 
 
+var effect = preload("res://game_elements/effects/Explosion.tscn")
+
+
 func _ready():
 	print(get_tree().current_scene.name, " | ", OS.get_time().hour, ":", OS.get_time().minute)
 	
@@ -73,6 +76,10 @@ func _on_EnemyShipTimer_timeout():
 
 
 func _on_Player_hit_by_enemy():
+	var explosion = effect.instance()
+	add_child(explosion)
+	explosion.global_position = Vector2($Player.position)
+	
 	PlayerDeath.play()
 	
 	var enemy_ships = get_tree().get_nodes_in_group("Enemy_Ships")
