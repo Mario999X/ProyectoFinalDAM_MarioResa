@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://assets/backgrounds/Menu_Background.png" type="Texture" id=1]
 [ext_resource path="res://assets/fonts/Xolonium-Regular.ttf" type="DynamicFontData" id=2]
@@ -58,7 +58,7 @@ border_color = Color( 0.815686, 0.384314, 0, 1 )
 border_blend = true
 
 [sub_resource type="DynamicFont" id=7]
-size = 17
+size = 19
 font_data = ExtResource( 2 )
 
 [sub_resource type="StyleBoxFlat" id=8]
@@ -72,6 +72,10 @@ border_blend = true
 
 [sub_resource type="DynamicFont" id=9]
 size = 25
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=13]
+size = 17
 font_data = ExtResource( 2 )
 
 [node name="MainMenu" type="CanvasLayer"]
@@ -227,16 +231,16 @@ custom_constants/separation = 37
 alignment = 1
 
 [node name="ProfileButton" type="Button" parent="MainElementsPanel/MainElementsContainer/OnlineElementsPanel/OnlineElementsContainer"]
-margin_left = 67.0
-margin_right = 227.0
+margin_left = 64.0
+margin_right = 224.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 160, 50 )
 custom_fonts/font = SubResource( 7 )
 text = "PROFILE"
 
 [node name="LeaderboardButton" type="Button" parent="MainElementsPanel/MainElementsContainer/OnlineElementsPanel/OnlineElementsContainer"]
-margin_left = 264.0
-margin_right = 424.0
+margin_left = 261.0
+margin_right = 428.0
 margin_bottom = 50.0
 rect_min_size = Vector2( 160, 0 )
 custom_fonts/font = SubResource( 7 )
@@ -293,6 +297,12 @@ texture_normal = ExtResource( 5 )
 texture_pressed = ExtResource( 4 )
 texture_hover = ExtResource( 6 )
 expand = true
+
+[node name="OnlineModeLabel" type="Label" parent="."]
+margin_right = 40.0
+margin_bottom = 14.0
+custom_fonts/font = SubResource( 13 )
+text = "ONLINE_MODE"
 
 [node name="SettingsMenu" parent="." instance=ExtResource( 3 )]
 layer = 2

@@ -10,8 +10,11 @@ func _ready():
 	var online_mode = SaveSystem.load_value_user("Online", "Account")
 	
 	if online_mode == "0":
+		$OnlineModeLabel.text = "STATUS: OFFLINE"
 		$MainElementsPanel/MainElementsContainer/OnlineElementsPanel/OnlineElementsContainer/ProfileButton.disabled = true
 		$MainElementsPanel/MainElementsContainer/OnlineElementsPanel/OnlineElementsContainer/LeaderboardButton.disabled = true
+	else:
+		$OnlineModeLabel.text = "STATUS: ONLINE"
 
 
 func _reloadLabel(difficulty_selected):
@@ -67,6 +70,8 @@ func _on_ProfileButton_pressed():
 
 func _on_LeaderboardButton_pressed():
 	Select1.play()
+	get_tree().change_scene("res://menus/main_menus/LeaderboardMenu.tscn")
+	queue_free()
 
 
 func _on_PlayButton_pressed():

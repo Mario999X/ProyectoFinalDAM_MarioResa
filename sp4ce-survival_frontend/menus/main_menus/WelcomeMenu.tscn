@@ -131,18 +131,18 @@ __meta__ = {
 [node name="LoginElementsContainer" type="VBoxContainer" parent="LoginElementsPanel"]
 margin_left = 3.0
 margin_top = 3.0
-margin_right = 353.0
+margin_right = 403.0
 margin_bottom = 280.0
 size_flags_vertical = 0
 
 [node name="Separation3" type="Control" parent="LoginElementsPanel/LoginElementsContainer"]
-margin_right = 350.0
+margin_right = 400.0
 margin_bottom = 10.0
-rect_min_size = Vector2( 350, 10 )
+rect_min_size = Vector2( 400, 10 )
 
 [node name="UsernameLabel" type="Label" parent="LoginElementsPanel/LoginElementsContainer"]
 margin_top = 14.0
-margin_right = 350.0
+margin_right = 400.0
 margin_bottom = 40.0
 custom_fonts/font = SubResource( 2 )
 text = "USERNAME"
@@ -150,7 +150,7 @@ align = 1
 
 [node name="UsernameLineEdit" type="LineEdit" parent="LoginElementsPanel/LoginElementsContainer"]
 margin_top = 44.0
-margin_right = 350.0
+margin_right = 400.0
 margin_bottom = 84.0
 rect_min_size = Vector2( 100, 40 )
 custom_fonts/font = SubResource( 8 )
@@ -169,13 +169,13 @@ align = 1
 
 [node name="Separation" type="Control" parent="LoginElementsPanel/LoginElementsContainer"]
 margin_top = 88.0
-margin_right = 350.0
+margin_right = 400.0
 margin_bottom = 110.0
 rect_min_size = Vector2( 0, 22 )
 
 [node name="PasswordLabel" type="Label" parent="LoginElementsPanel/LoginElementsContainer"]
 margin_top = 114.0
-margin_right = 350.0
+margin_right = 400.0
 margin_bottom = 140.0
 custom_fonts/font = SubResource( 2 )
 text = "PASSWORD"
@@ -183,7 +183,7 @@ align = 1
 
 [node name="PasswordLineEdit" type="LineEdit" parent="LoginElementsPanel/LoginElementsContainer"]
 margin_top = 144.0
-margin_right = 350.0
+margin_right = 400.0
 margin_bottom = 184.0
 rect_min_size = Vector2( 100, 40 )
 custom_fonts/font = SubResource( 8 )
@@ -202,13 +202,13 @@ align = 1
 
 [node name="Separation2" type="Control" parent="LoginElementsPanel/LoginElementsContainer"]
 margin_top = 188.0
-margin_right = 350.0
+margin_right = 400.0
 margin_bottom = 223.0
 rect_min_size = Vector2( 0, 35 )
 
 [node name="LoginButton" type="Button" parent="LoginElementsPanel/LoginElementsContainer"]
 margin_top = 227.0
-margin_right = 350.0
+margin_right = 400.0
 margin_bottom = 277.0
 rect_min_size = Vector2( 0, 50 )
 custom_fonts/font = SubResource( 10 )

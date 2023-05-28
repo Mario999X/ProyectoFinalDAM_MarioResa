@@ -19,6 +19,60 @@ fun getUsersInit() = listOf(
         password = "12345",
         email = "mario111@gmail.com",
         role = User.UserRole.USER.name,
+    ),
+    UserDTOCreate(
+        username = "Mario112",
+        password = "12345",
+        email = "mario112@gmail.com",
+        role = User.UserRole.USER.name,
+    ),
+    UserDTOCreate(
+        username = "Mario113",
+        password = "12345",
+        email = "mario113@gmail.com",
+        role = User.UserRole.USER.name,
+    ),
+    UserDTOCreate(
+        username = "Mario114",
+        password = "12345",
+        email = "mario114@gmail.com",
+        role = User.UserRole.USER.name,
+    ),
+    UserDTOCreate(
+        username = "Mario115",
+        password = "12345",
+        email = "mario115@gmail.com",
+        role = User.UserRole.USER.name,
+    ),
+    UserDTOCreate(
+        username = "Mario116",
+        password = "12345",
+        email = "mario116@gmail.com",
+        role = User.UserRole.USER.name,
+    ),
+    UserDTOCreate(
+        username = "Mario117",
+        password = "12345",
+        email = "mario117@gmail.com",
+        role = User.UserRole.USER.name,
+    ),
+    UserDTOCreate(
+        username = "Mario118",
+        password = "12345",
+        email = "mario118@gmail.com",
+        role = User.UserRole.USER.name,
+    ),
+    UserDTOCreate(
+        username = "Mario119",
+        password = "12345",
+        email = "mario119@gmail.com",
+        role = User.UserRole.USER.name,
+    ),
+    UserDTOCreate(
+        username = "Mario110",
+        password = "12345",
+        email = "mario110@gmail.com",
+        role = User.UserRole.USER.name,
     )
 )
 
@@ -28,5 +82,14 @@ fun getUsersInit() = listOf(
  */
 fun getScoresInit() = listOf(
     "1230",
-    "12"
+    "12",
+    "10",
+    "12",
+    "12",
+    "18",
+    "14",
+    "15",
+    "120",
+    "115",
+    "1190",
 )

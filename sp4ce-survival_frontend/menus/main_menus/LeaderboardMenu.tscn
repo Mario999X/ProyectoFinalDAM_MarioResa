@@ -1,0 +1,245 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://assets/backgrounds/Menu_Background.png" type="Texture" id=1]
+[ext_resource path="res://assets/fonts/Xolonium-Regular.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://loading_screens/LoadingScreen.tscn" type="PackedScene" id=3]
+[ext_resource path="res://assets/icons/Return_Hoover.png" type="Texture" id=4]
+[ext_resource path="res://menus/main_menus/LeaderboardMenu.gd" type="Script" id=5]
+
+[sub_resource type="StyleBoxFlat" id=9]
+bg_color = Color( 0, 0, 0, 1 )
+border_width_left = 3
+border_width_top = 5
+border_width_right = 3
+border_width_bottom = 10
+border_color = Color( 0.176471, 1, 0, 1 )
+border_blend = true
+
+[sub_resource type="StreamTexture" id=1]
+flags = 4
+load_path = "res://.import/Return_Arrow_Original.png-00c4e929c856ce1fadc4e91892d2d462.stex"
+
+[sub_resource type="StreamTexture" id=2]
+flags = 4
+load_path = "res://.import/Return_Arrow_Pressed.png-fbda1602a873315d27ca6239d49ca6d0.stex"
+
+[sub_resource type="StreamTexture" id=3]
+flags = 4
+load_path = "res://.import/Return_Arrow_Hoover.png-518347d003e2ccb7787b1a146a2f8767.stex"
+
+[sub_resource type="StreamTexture" id=4]
+flags = 4
+load_path = "res://.import/Return_Original.png-4d46133248317b19f4e6f082fc92d9ec.stex"
+
+[sub_resource type="StreamTexture" id=5]
+flags = 4
+load_path = "res://.import/Return_Pressed.png-850031fbfded894b0debbc5ac5a7863e.stex"
+
+[sub_resource type="StreamTexture" id=6]
+flags = 4
+load_path = "res://.import/Adavance_Original.png-2bba2a4f1c005361b997c51db3734060.stex"
+
+[sub_resource type="StreamTexture" id=7]
+flags = 4
+load_path = "res://.import/Advance_Pressed.png-c5a110b49b74838b6bf9a966cd5a0908.stex"
+
+[sub_resource type="StreamTexture" id=8]
+flags = 4
+load_path = "res://.import/Advance_Hoover.png-3838dc9bf94c61cc0c95acb61c21a8b8.stex"
+
+[sub_resource type="StyleBoxFlat" id=10]
+bg_color = Color( 0, 0, 0, 1 )
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color( 0.760784, 0.482353, 0, 1 )
+border_blend = true
+
+[sub_resource type="DynamicFont" id=11]
+size = 21
+font_data = ExtResource( 2 )
+
+[sub_resource type="StyleBoxFlat" id=12]
+bg_color = Color( 0, 0, 0, 0.862745 )
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color( 0.760784, 0.482353, 0, 1 )
+border_blend = true
+
+[node name="LeaderboardMenu" type="CanvasLayer"]
+script = ExtResource( 5 )
+
+[node name="BackgroundColor" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color( 0, 0, 0, 1 )
+
+[node name="MenuTexture" type="TextureRect" parent="BackgroundColor"]
+modulate = Color( 1, 1, 1, 0.509804 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 1 )
+expand = true
+
+[node name="LeaderboardMainContainer" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="LeaderboardButtonsPanel" type="PanelContainer" parent="LeaderboardMainContainer"]
+margin_right = 1920.0
+margin_bottom = 85.0
+custom_styles/panel = SubResource( 9 )
+
+[node name="LeaderboardButtonsContainer" type="HBoxContainer" parent="LeaderboardMainContainer/LeaderboardButtonsPanel"]
+margin_left = 3.0
+margin_top = 5.0
+margin_right = 1917.0
+margin_bottom = 75.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+custom_constants/separation = 25
+
+[node name="ReturnMainMenuButton" type="TextureButton" parent="LeaderboardMainContainer/LeaderboardButtonsPanel/LeaderboardButtonsContainer"]
+margin_right = 120.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 120, 70 )
+texture_normal = SubResource( 1 )
+texture_pressed = SubResource( 2 )
+texture_hover = SubResource( 3 )
+expand = true
+
+[node name="Separation" type="Control" parent="LeaderboardMainContainer/LeaderboardButtonsPanel/LeaderboardButtonsContainer"]
+margin_left = 145.0
+margin_right = 1595.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 1450, 0 )
+
+[node name="ReturnPageButton" type="TextureButton" parent="LeaderboardMainContainer/LeaderboardButtonsPanel/LeaderboardButtonsContainer"]
+margin_left = 1620.0
+margin_right = 1740.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 120, 0 )
+texture_normal = SubResource( 4 )
+texture_pressed = SubResource( 5 )
+texture_hover = ExtResource( 4 )
+expand = true
+
+[node name="AdvancePageButton" type="TextureButton" parent="LeaderboardMainContainer/LeaderboardButtonsPanel/LeaderboardButtonsContainer"]
+margin_left = 1765.0
+margin_right = 1885.0
+margin_bottom = 70.0
+rect_min_size = Vector2( 120, 0 )
+texture_normal = SubResource( 6 )
+texture_pressed = SubResource( 7 )
+texture_hover = SubResource( 8 )
+expand = true
+
+[node name="Separation" type="Control" parent="LeaderboardMainContainer"]
+margin_top = 89.0
+margin_right = 1920.0
+margin_bottom = 99.0
+rect_min_size = Vector2( 0, 10 )
+
+[node name="LeaderboardHeadersPanel" type="PanelContainer" parent="LeaderboardMainContainer"]
+margin_top = 103.0
+margin_right = 1920.0
+margin_bottom = 139.0
+custom_styles/panel = SubResource( 10 )
+
+[node name="LeaderboardHeadersContainer" type="HBoxContainer" parent="LeaderboardMainContainer/LeaderboardHeadersPanel"]
+margin_left = 3.0
+margin_top = 3.0
+margin_right = 1917.0
+margin_bottom = 33.0
+custom_constants/separation = 300
+
+[node name="HeaderPosition" type="Label" parent="LeaderboardMainContainer/LeaderboardHeadersPanel/LeaderboardHeadersContainer"]
+margin_right = 200.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 200, 30 )
+custom_fonts/font = SubResource( 11 )
+text = "POSITION"
+align = 1
+valign = 1
+uppercase = true
+
+[node name="HeaderUsername" type="Label" parent="LeaderboardMainContainer/LeaderboardHeadersPanel/LeaderboardHeadersContainer"]
+margin_left = 500.0
+margin_right = 700.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 200, 30 )
+custom_fonts/font = SubResource( 11 )
+text = "USERNAME"
+align = 1
+valign = 1
+uppercase = true
+
+[node name="HeaderScore" type="Label" parent="LeaderboardMainContainer/LeaderboardHeadersPanel/LeaderboardHeadersContainer"]
+margin_left = 1000.0
+margin_right = 1200.0
+margin_bottom = 30.0
+rect_min_size = Vector2( 200, 30 )
+custom_fonts/font = SubResource( 11 )
+text = "SCORE"
+align = 1
+valign = 1
+uppercase = true
+
+[node name="HeaderDate" type="Label" parent="LeaderboardMainContainer/LeaderboardHeadersPanel/LeaderboardHeadersContainer"]
+margin_left = 1500.0
+margin_top = 2.0
+margin_right = 1565.0
+margin_bottom = 28.0
+custom_fonts/font = SubResource( 11 )
+text = "DATE"
+align = 1
+valign = 1
+uppercase = true
+
+[node name="Separation2" type="Control" parent="LeaderboardMainContainer"]
+margin_top = 143.0
+margin_right = 1920.0
+margin_bottom = 143.0
+
+[node name="LeaderboardMainPanel" type="PanelContainer" parent="LeaderboardMainContainer"]
+margin_top = 147.0
+margin_right = 1920.0
+margin_bottom = 1080.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 12 )
+
+[node name="LeaderboardScrollContainer" type="ScrollContainer" parent="LeaderboardMainContainer/LeaderboardMainPanel"]
+margin_left = 5.0
+margin_top = 5.0
+margin_right = 1915.0
+margin_bottom = 928.0
+
+[node name="LeaderboardElementsContainer" type="VBoxContainer" parent="LeaderboardMainContainer/LeaderboardMainPanel/LeaderboardScrollContainer"]
+margin_right = 1910.0
+margin_bottom = 923.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_constants/separation = 50
+
+[node name="LoadScreen" parent="." instance=ExtResource( 3 )]
+layer = 2
+visible = false
+
+[node name="ObtainLeaderboardUsers" type="HTTPRequest" parent="."]
+timeout = 10.0
+
+[node name="RequestTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="pressed" from="LeaderboardMainContainer/LeaderboardButtonsPanel/LeaderboardButtonsContainer/ReturnMainMenuButton" to="." method="_on_ReturnMainMenuButton_pressed"]
+[connection signal="pressed" from="LeaderboardMainContainer/LeaderboardButtonsPanel/LeaderboardButtonsContainer/ReturnPageButton" to="." method="_on_ReturnPageButton_pressed"]
+[connection signal="pressed" from="LeaderboardMainContainer/LeaderboardButtonsPanel/LeaderboardButtonsContainer/AdvancePageButton" to="." method="_on_AdvancePageButton_pressed"]
+[connection signal="request_completed" from="ObtainLeaderboardUsers" to="." method="_on_ObtainLeaderboardUsers_request_completed"]
+[connection signal="timeout" from="RequestTimer" to="." method="_on_RequestTimer_timeout"]
