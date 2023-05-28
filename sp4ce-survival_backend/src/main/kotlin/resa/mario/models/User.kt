@@ -31,7 +31,7 @@ data class User(
     val password: String,
     val email: String,
     val role: UserRole,
-    @Column("created_at")
+    @Column("CreatedAt")
     val createdAt: LocalDate,
 ) : UserDetails {
 

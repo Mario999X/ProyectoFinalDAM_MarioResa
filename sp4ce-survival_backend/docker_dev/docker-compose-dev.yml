@@ -7,9 +7,9 @@ services:
     image: postgres:14.1-alpine
     restart: always
     environment:
-      - POSTGRES_USER=mario
-      - POSTGRES_PASSWORD=user1234
-      - POSTGRES_DB=sp4ceSurvival
+      - POSTGRES_USER=testUser999
+      - POSTGRES_PASSWORD=user999
+      - POSTGRES_DB=sp4ceSurvivalDev
     ports:
       - "5555:5432"
     volumes:

@@ -1,0 +1,52 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://assets/fonts/Xolonium-Regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://loading_screens/LoadingProgressBarScreen.gd" type="Script" id=3]
+
+[sub_resource type="StreamTexture" id=5]
+flags = 4
+load_path = "res://.import/Game_Background.png-83279b5032ae0c08bb0daa7f501829dc.stex"
+
+[sub_resource type="DynamicFont" id=2]
+size = 20
+font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0, 0.505882, 0.603922, 1 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0, 0, 0, 1 )
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 10
+border_blend = true
+
+[node name="LoadingProgressBarScreen" type="CanvasLayer"]
+script = ExtResource( 3 )
+
+[node name="BackgroundColor" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color( 0, 0, 0, 1 )
+
+[node name="MenuTexture" type="TextureRect" parent="BackgroundColor"]
+modulate = Color( 1, 1, 1, 0.509804 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = SubResource( 5 )
+expand = true
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -294.5
+margin_top = -31.0
+margin_right = 294.5
+margin_bottom = 31.0
+custom_fonts/font = SubResource( 2 )
+custom_styles/fg = SubResource( 3 )
+custom_styles/bg = SubResource( 4 )

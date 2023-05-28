@@ -1,0 +1,208 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://assets/icons/Return_Arrow_Original.png" type="Texture" id=2]
+[ext_resource path="res://menus/secundary_menus/SettingsMenu.gd" type="Script" id=3]
+[ext_resource path="res://assets/icons/Return_Arrow_Pressed.png" type="Texture" id=4]
+[ext_resource path="res://assets/icons/Return_Arrow_Hoover.png" type="Texture" id=5]
+[ext_resource path="res://assets/fonts/Xolonium-Regular.ttf" type="DynamicFontData" id=6]
+
+[sub_resource type="StreamTexture" id=7]
+flags = 4
+load_path = "res://.import/Menu_Background.png-3265d903de1c82a6adf9a4e8c4fb13ba.stex"
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0, 0, 0, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+
+[sub_resource type="DynamicFont" id=2]
+size = 20
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 20
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 20
+font_data = ExtResource( 6 )
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0, 0, 0, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+
+[sub_resource type="DynamicFont" id=6]
+size = 21
+font_data = ExtResource( 6 )
+
+[sub_resource type="DynamicFontData" id=8]
+font_path = "res://assets/fonts/Xolonium-Regular.ttf"
+
+[sub_resource type="DynamicFont" id=9]
+size = 19
+font_data = SubResource( 8 )
+
+[node name="SettingsMenu" type="CanvasLayer"]
+script = ExtResource( 3 )
+
+[node name="BackgroundColor" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="MenuTexture" type="TextureRect" parent="BackgroundColor"]
+modulate = Color( 1, 1, 1, 0.509804 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = SubResource( 7 )
+expand = true
+
+[node name="ReturnSettingsButton" type="TextureButton" parent="."]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_top = -40.0
+margin_right = 150.0
+margin_bottom = 40.0
+texture_normal = ExtResource( 2 )
+texture_pressed = ExtResource( 4 )
+texture_hover = ExtResource( 5 )
+expand = true
+
+[node name="LenguageElementsPanel" type="PanelContainer" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -112.5
+margin_top = 100.0
+margin_right = 112.5
+margin_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="LenguajeElementsContainer1" type="VBoxContainer" parent="LenguageElementsPanel"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 232.0
+margin_bottom = 81.0
+size_flags_vertical = 0
+custom_constants/separation = 19
+alignment = 1
+
+[node name="LenguageLabel" type="Label" parent="LenguageElementsPanel/LenguajeElementsContainer1"]
+margin_right = 230.0
+margin_bottom = 25.0
+custom_fonts/font = SubResource( 2 )
+text = "LENGUAGE"
+align = 1
+
+[node name="LenguageElementsContainer2" type="HBoxContainer" parent="LenguageElementsPanel/LenguajeElementsContainer1"]
+margin_top = 44.0
+margin_right = 230.0
+margin_bottom = 79.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_constants/separation = 30
+alignment = 1
+
+[node name="SpanishButton" type="Button" parent="LenguageElementsPanel/LenguajeElementsContainer1/LenguageElementsContainer2"]
+margin_right = 100.0
+margin_bottom = 35.0
+rect_min_size = Vector2( 100, 35 )
+custom_fonts/font = SubResource( 3 )
+text = "Español"
+
+[node name="EnglishButton" type="Button" parent="LenguageElementsPanel/LenguajeElementsContainer1/LenguageElementsContainer2"]
+margin_left = 130.0
+margin_right = 230.0
+margin_bottom = 35.0
+rect_min_size = Vector2( 100, 0 )
+custom_fonts/font = SubResource( 4 )
+text = "English"
+
+[node name="SoundElementsPanel" type="PanelContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -75.0
+margin_top = -220.0
+margin_right = 75.0
+margin_bottom = -120.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_styles/panel = SubResource( 5 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="SoundElementsContainer" type="VBoxContainer" parent="SoundElementsPanel"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 158.0
+margin_bottom = 98.0
+custom_constants/separation = 30
+
+[node name="SoundLabel" type="Label" parent="SoundElementsPanel/SoundElementsContainer"]
+margin_right = 156.0
+margin_bottom = 26.0
+custom_fonts/font = SubResource( 6 )
+text = "SOUND"
+align = 1
+
+[node name="MutedCheckButton" type="CheckButton" parent="SoundElementsPanel/SoundElementsContainer"]
+margin_top = 56.0
+margin_right = 156.0
+margin_bottom = 96.0
+custom_fonts/font = SubResource( 9 )
+text = "MUTED"
+
+[node name="ScreenElementsPanel" type="PanelContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -85.0
+margin_top = -50.0
+margin_right = 85.0
+margin_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+custom_styles/panel = SubResource( 5 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="ScreenElementsContainer" type="VBoxContainer" parent="ScreenElementsPanel"]
+margin_left = 2.0
+margin_top = 2.0
+margin_right = 227.0
+margin_bottom = 98.0
+custom_constants/separation = 30
+
+[node name="ScreenLabel" type="Label" parent="ScreenElementsPanel/ScreenElementsContainer"]
+margin_right = 225.0
+margin_bottom = 26.0
+custom_fonts/font = SubResource( 6 )
+text = "SCREEN"
+align = 1
+
+[node name="FullScreenCheckButton" type="CheckButton" parent="ScreenElementsPanel/ScreenElementsContainer"]
+margin_top = 56.0
+margin_right = 225.0
+margin_bottom = 96.0
+custom_fonts/font = SubResource( 9 )
+text = "FULL_SCREEN"
+
+[connection signal="pressed" from="ReturnSettingsButton" to="." method="_on_ReturnSettingsButton_pressed"]
+[connection signal="pressed" from="LenguageElementsPanel/LenguajeElementsContainer1/LenguageElementsContainer2/SpanishButton" to="." method="_on_SpanishButton_pressed"]
+[connection signal="pressed" from="LenguageElementsPanel/LenguajeElementsContainer1/LenguageElementsContainer2/EnglishButton" to="." method="_on_EnglishButton_pressed"]
+[connection signal="toggled" from="SoundElementsPanel/SoundElementsContainer/MutedCheckButton" to="." method="_on_MutedCheckButton_toggled"]
+[connection signal="toggled" from="ScreenElementsPanel/ScreenElementsContainer/FullScreenCheckButton" to="." method="_on_FullScreenCheckButton_toggled"]
