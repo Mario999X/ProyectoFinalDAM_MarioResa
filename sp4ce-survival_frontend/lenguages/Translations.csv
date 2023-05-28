@@ -60,3 +60,6 @@ CURRENT_PASSWORD_EMPTY,La contraseña actual no puede estar vacía,The current p
 NEW_PASSWORD_EMPTY,La nueva contraseña no puede estar vacía,The new password cannot be empty
 REPEATED_PASSWORD,La nueva contraseña coincide con la contraseña actual,The new password matches the current password
 CHANGE_PASSWORD,ACTUALIZAR CONTRASEÑA,UPDATE PASSWORD
+POSITION,Posición,Position
+SCORE,Puntuación,Score
+DATE,Fecha,Date

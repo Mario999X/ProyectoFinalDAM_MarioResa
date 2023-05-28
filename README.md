@@ -17,9 +17,9 @@ puntuaciones que cualquier usuario registrado pueda ver dentro de este.
 
 Este proyecto se encuentra formado por dos partes, clásicas en un desarrollo de software, backend y frontend.
 
-¿Y... el nombre elegido? **¡Sp4ce Survival!**
+¿Y el nombre elegido? **¡Sp4ce Survival!**
 
-Se basará en un bullet hell orientado a la supervivencia del jugador donde su principal objetivo será obtener la mayor
+Se trata de un bullet hell orientado a la supervivencia del jugador donde su principal objetivo será obtener la mayor
 puntuación posible.
 
 Si se quiere descargar el videojuego en formato de ejecutable, se realizará a través del siguiente enlace:
