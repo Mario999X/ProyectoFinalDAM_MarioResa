@@ -1,0 +1,70 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://loading_screens/sync_1.png" type="Texture" id=1]
+[ext_resource path="res://assets/fonts/Xolonium-Regular.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://loading_screens/sync_2.png" type="Texture" id=3]
+[ext_resource path="res://loading_screens/LoadingScreen.gd" type="Script" id=4]
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0, 0, 0, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+
+[sub_resource type="DynamicFont" id=1]
+size = 40
+font_data = ExtResource( 2 )
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ ExtResource( 1 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "move",
+"speed": 5.0
+} ]
+
+[node name="LoadScreen" type="CanvasLayer"]
+script = ExtResource( 4 )
+
+[node name="Background" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 0.392157 )
+
+[node name="LoadingElementsContainer" type="PanelContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -103.5
+margin_top = -50.0
+margin_right = 103.5
+margin_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 0, 100 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 2 )
+
+[node name="LoadingMessage" type="Label" parent="LoadingElementsContainer"]
+margin_left = 2.0
+margin_top = 25.0
+margin_right = 205.0
+margin_bottom = 74.0
+custom_fonts/font = SubResource( 1 )
+text = "LOADING"
+align = 1
+valign = 1
+
+[node name="Sprite" type="AnimatedSprite" parent="."]
+self_modulate = Color( 1, 1, 1, 0.745098 )
+position = Vector2( 958, 377 )
+scale = Vector2( 0.25, 0.25 )
+frames = SubResource( 3 )
+animation = "move"
+frame = 1
+speed_scale = 0.5
+
+[connection signal="visibility_changed" from="." to="." method="_on_LoadScreen_visibility_changed"]

@@ -1,0 +1,319 @@
+[gd_scene load_steps=17 format=2]
+
+[ext_resource path="res://menus/main_menus/WelcomeMenu.gd" type="Script" id=1]
+[ext_resource path="res://assets/backgrounds/Menu_Background.png" type="Texture" id=2]
+[ext_resource path="res://assets/fonts/Xolonium-Regular.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://menus/secundary_menus/SettingsMenu.tscn" type="PackedScene" id=4]
+[ext_resource path="res://loading_screens/LoadingScreen.tscn" type="PackedScene" id=5]
+
+[sub_resource type="StyleBoxFlat" id=12]
+bg_color = Color( 0, 0, 0, 1 )
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 10
+border_color = Color( 0, 0.117647, 0.654902, 1 )
+border_blend = true
+
+[sub_resource type="DynamicFont" id=1]
+size = 25
+font_data = ExtResource( 3 )
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0, 0, 0, 1 )
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color( 0.176471, 1, 0, 1 )
+border_blend = true
+
+[sub_resource type="DynamicFont" id=2]
+size = 21
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFontData" id=7]
+font_path = "res://assets/fonts/Xolonium-Regular.ttf"
+
+[sub_resource type="DynamicFont" id=8]
+size = 17
+font_data = SubResource( 7 )
+
+[sub_resource type="DynamicFont" id=11]
+size = 18
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=10]
+size = 20
+font_data = ExtResource( 3 )
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0, 0, 0, 1 )
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color( 0.815686, 0.384314, 0, 1 )
+border_blend = true
+
+[sub_resource type="DynamicFont" id=9]
+size = 25
+font_data = ExtResource( 3 )
+
+[sub_resource type="StyleBoxFlat" id=6]
+bg_color = Color( 0, 0, 0, 1 )
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color( 0.780392, 0, 0, 1 )
+border_blend = true
+
+[node name="WelcomeMenu" type="CanvasLayer"]
+pause_mode = 2
+script = ExtResource( 1 )
+
+[node name="BackgroundColor" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color( 0, 0, 0, 1 )
+
+[node name="MenuTexture" type="TextureRect" parent="BackgroundColor"]
+modulate = Color( 1, 1, 1, 0.509804 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 2 )
+expand = true
+
+[node name="GameTitlePanel" type="PanelContainer" parent="."]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -201.0
+margin_top = 50.0
+margin_right = 201.0
+margin_bottom = 153.0
+mouse_filter = 2
+custom_styles/panel = SubResource( 12 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="GameTitle" type="Label" parent="GameTitlePanel"]
+margin_left = 3.0
+margin_top = 32.0
+margin_right = 399.0
+margin_bottom = 63.0
+custom_fonts/font = SubResource( 1 )
+text = "SP4CE SURVIVAL"
+align = 1
+valign = 1
+
+[node name="LoginElementsPanel" type="PanelContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -175.0
+margin_top = -140.0
+margin_right = 175.0
+margin_bottom = 140.0
+grow_horizontal = 2
+grow_vertical = 2
+rect_min_size = Vector2( 300, 230 )
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 4 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="LoginElementsContainer" type="VBoxContainer" parent="LoginElementsPanel"]
+margin_left = 3.0
+margin_top = 3.0
+margin_right = 403.0
+margin_bottom = 280.0
+size_flags_vertical = 0
+
+[node name="Separation3" type="Control" parent="LoginElementsPanel/LoginElementsContainer"]
+margin_right = 400.0
+margin_bottom = 10.0
+rect_min_size = Vector2( 400, 10 )
+
+[node name="UsernameLabel" type="Label" parent="LoginElementsPanel/LoginElementsContainer"]
+margin_top = 14.0
+margin_right = 400.0
+margin_bottom = 40.0
+custom_fonts/font = SubResource( 2 )
+text = "USERNAME"
+align = 1
+
+[node name="UsernameLineEdit" type="LineEdit" parent="LoginElementsPanel/LoginElementsContainer"]
+margin_top = 44.0
+margin_right = 400.0
+margin_bottom = 84.0
+rect_min_size = Vector2( 100, 40 )
+custom_fonts/font = SubResource( 8 )
+max_length = 20
+clear_button_enabled = true
+
+[node name="MessageWarningUsername" type="Label" parent="LoginElementsPanel/LoginElementsContainer"]
+visible = false
+margin_top = 87.0
+margin_right = 346.0
+margin_bottom = 112.0
+rect_min_size = Vector2( 0, 25 )
+custom_fonts/font = SubResource( 11 )
+text = "WARNING_USERNAME"
+align = 1
+
+[node name="Separation" type="Control" parent="LoginElementsPanel/LoginElementsContainer"]
+margin_top = 88.0
+margin_right = 400.0
+margin_bottom = 110.0
+rect_min_size = Vector2( 0, 22 )
+
+[node name="PasswordLabel" type="Label" parent="LoginElementsPanel/LoginElementsContainer"]
+margin_top = 114.0
+margin_right = 400.0
+margin_bottom = 140.0
+custom_fonts/font = SubResource( 2 )
+text = "PASSWORD"
+align = 1
+
+[node name="PasswordLineEdit" type="LineEdit" parent="LoginElementsPanel/LoginElementsContainer"]
+margin_top = 144.0
+margin_right = 400.0
+margin_bottom = 184.0
+rect_min_size = Vector2( 100, 40 )
+custom_fonts/font = SubResource( 8 )
+max_length = 25
+secret = true
+clear_button_enabled = true
+
+[node name="MessageWarningPassword" type="Label" parent="LoginElementsPanel/LoginElementsContainer"]
+visible = false
+margin_top = 213.0
+margin_right = 346.0
+margin_bottom = 238.0
+custom_fonts/font = SubResource( 11 )
+text = "WARNING_PASSWORD"
+align = 1
+
+[node name="Separation2" type="Control" parent="LoginElementsPanel/LoginElementsContainer"]
+margin_top = 188.0
+margin_right = 400.0
+margin_bottom = 223.0
+rect_min_size = Vector2( 0, 35 )
+
+[node name="LoginButton" type="Button" parent="LoginElementsPanel/LoginElementsContainer"]
+margin_top = 227.0
+margin_right = 400.0
+margin_bottom = 277.0
+rect_min_size = Vector2( 0, 50 )
+custom_fonts/font = SubResource( 10 )
+text = "LOGIN"
+
+[node name="RegisterAndOfflineElementsPanel" type="PanelContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -200.0
+margin_top = -200.0
+margin_right = 200.0
+margin_bottom = -130.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/panel = SubResource( 5 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="RegisterAndOfflineElementsContainer" type="HBoxContainer" parent="RegisterAndOfflineElementsPanel"]
+margin_left = 3.0
+margin_top = 3.0
+margin_right = 553.0
+margin_bottom = 67.0
+rect_min_size = Vector2( 0, 50 )
+custom_constants/separation = 100
+alignment = 1
+
+[node name="RegisterButton" type="Button" parent="RegisterAndOfflineElementsPanel/RegisterAndOfflineElementsContainer"]
+margin_right = 225.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 225, 0 )
+custom_fonts/font = SubResource( 9 )
+text = "REGISTER"
+
+[node name="PlayOfflineButton" type="Button" parent="RegisterAndOfflineElementsPanel/RegisterAndOfflineElementsContainer"]
+margin_left = 325.0
+margin_right = 550.0
+margin_bottom = 64.0
+rect_min_size = Vector2( 225, 0 )
+custom_fonts/font = SubResource( 9 )
+text = "PLAY_OFFLINE"
+
+[node name="OptionsAndExitElementsPanel" type="PanelContainer" parent="."]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -180.0
+margin_top = -130.0
+margin_right = -20.0
+margin_bottom = -50.0
+custom_styles/panel = SubResource( 6 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="OptionsAndExitElementsPanel" type="VBoxContainer" parent="OptionsAndExitElementsPanel"]
+margin_left = 3.0
+margin_top = 3.0
+margin_right = 157.0
+margin_bottom = 92.0
+custom_constants/separation = 15
+alignment = 1
+
+[node name="OptionsButton" type="Button" parent="OptionsAndExitElementsPanel/OptionsAndExitElementsPanel"]
+margin_right = 154.0
+margin_bottom = 37.0
+custom_fonts/font = SubResource( 9 )
+text = "OPTIONS"
+
+[node name="ExitButton" type="Button" parent="OptionsAndExitElementsPanel/OptionsAndExitElementsPanel"]
+margin_top = 52.0
+margin_right = 154.0
+margin_bottom = 89.0
+custom_fonts/font = SubResource( 9 )
+text = "EXIT"
+
+[node name="SettingsMenu" parent="." instance=ExtResource( 4 )]
+layer = 2
+visible = false
+
+[node name="LoadScreen" parent="." instance=ExtResource( 5 )]
+layer = 3
+visible = false
+
+[node name="RequestTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="Login" type="HTTPRequest" parent="."]
+timeout = 10.0
+
+[node name="CheckToken" type="HTTPRequest" parent="."]
+timeout = 10.0
+
+[connection signal="pressed" from="LoginElementsPanel/LoginElementsContainer/LoginButton" to="." method="_on_LoginButton_pressed"]
+[connection signal="pressed" from="RegisterAndOfflineElementsPanel/RegisterAndOfflineElementsContainer/RegisterButton" to="." method="_on_RegisterButton_pressed"]
+[connection signal="pressed" from="RegisterAndOfflineElementsPanel/RegisterAndOfflineElementsContainer/PlayOfflineButton" to="." method="_on_PlayOfflineButton_pressed"]
+[connection signal="pressed" from="OptionsAndExitElementsPanel/OptionsAndExitElementsPanel/OptionsButton" to="." method="_on_OptionsButton_pressed"]
+[connection signal="pressed" from="OptionsAndExitElementsPanel/OptionsAndExitElementsPanel/ExitButton" to="." method="_on_ExitButton_pressed"]
+[connection signal="timeout" from="RequestTimer" to="." method="_on_RequestTimer_timeout"]
+[connection signal="request_completed" from="Login" to="." method="_on_Login_request_completed"]
+[connection signal="request_completed" from="CheckToken" to="." method="_on_CheckToken_request_completed"]

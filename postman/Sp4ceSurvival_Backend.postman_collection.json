@@ -811,7 +811,7 @@
 					"response": []
 				},
 				{
-					"name": "Create",
+					"name": "Create_TokenExpired",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -850,7 +850,7 @@
 					"response": []
 				},
 				{
-					"name": "FindUserByUsername",
+					"name": "FindUserByUsername_TokenExpired",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -886,7 +886,7 @@
 					"response": []
 				},
 				{
-					"name": "LeaderBoard",
+					"name": "LeaderBoard_TokenExpired",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -922,7 +922,7 @@
 					"response": []
 				},
 				{
-					"name": "Me/Profile",
+					"name": "Me/Profile_TokenExpired",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -952,7 +952,7 @@
 					"response": []
 				},
 				{
-					"name": "UpdateScore",
+					"name": "UpdateScore_TokenExpired",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -989,7 +989,7 @@
 					"response": []
 				},
 				{
-					"name": "FirstScore",
+					"name": "FirstScore_TokenExpired",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -1026,7 +1026,7 @@
 					"response": []
 				},
 				{
-					"name": "UpdateSelfPassword",
+					"name": "UpdateSelfPassword_TokenExpired",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -1066,7 +1066,7 @@
 					"response": []
 				},
 				{
-					"name": "DeleteSelf",
+					"name": "DeleteSelf_TokenExpired",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -1096,7 +1096,7 @@
 					"response": []
 				},
 				{
-					"name": "DeleteSelf-NoScore",
+					"name": "DeleteSelf-NoScore_TokenExpired",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -1126,7 +1126,7 @@
 					"response": []
 				},
 				{
-					"name": "Obtain-SelfScore",
+					"name": "Obtain-SelfScore_TokenExpired",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -1156,7 +1156,7 @@
 					"response": []
 				},
 				{
-					"name": "Obtain-SelfScore-NoScore",
+					"name": "Obtain-SelfScore-NoScore_TokenExpired",
 					"request": {
 						"auth": {
 							"type": "bearer",
