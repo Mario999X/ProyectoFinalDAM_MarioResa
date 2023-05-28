@@ -96,7 +96,13 @@ Además, se le permitirá hacer dos acciones:
 
 ### Menú tabla de puntuaciones - [Solo Online]
 
-[Coming Soon]
+El usuario podrá ver las puntuaciones registradas de otros jugadores con un sencillo menú.
+
+Podrá visualizar 10 puntuaciones por página, y se mostrará la siguiente información:
+- Posición global.
+- Nombre de usuario.
+- Puntuación.
+- Fecha de la puntuación.
 
 ### Menú de opciones
 
