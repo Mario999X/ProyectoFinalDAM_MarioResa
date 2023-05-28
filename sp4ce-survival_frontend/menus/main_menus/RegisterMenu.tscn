@@ -232,6 +232,7 @@ texture_hover = ExtResource( 5 )
 expand = true
 
 [node name="LoadScreen" parent="." instance=ExtResource( 7 )]
+layer = 2
 visible = false
 
 [node name="Register" type="HTTPRequest" parent="."]
