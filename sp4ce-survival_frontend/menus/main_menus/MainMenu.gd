@@ -31,6 +31,9 @@ func _reloadLabel(difficulty_selected):
 func _on_ReturnWelcomeMenu_pressed():
 	Select2.play()
 	SaveSystem.save_value_user("Online", "Account", "0")
+	
+	GlobalVariables.actual_score_registered = 0
+	
 	get_tree().change_scene("res://menus/main_menus/WelcomeMenu.tscn")
 	queue_free()
 

@@ -23,10 +23,15 @@ func _on_ObtainProfile_request_completed(result, response_code, headers, body):
 			$ProfileMainPanel/ProfileMainContainer/ProfileEmailContainer/EmailLabelUser.text = response.email
 			$ProfileMainPanel/ProfileMainContainer/ProfileCreationDateContainer/CreationDateLabelUser.text = response.createdAt
 			
-			$ProfileMainPanel/ProfileMainContainer/ProfileScoreElementsPanel/ProfileScoreElementsContainer/MaxScoreContainer/MaxScoreLabelNumber.text = response.score.scoreNumber
-			$ProfileMainPanel/ProfileMainContainer/ProfileScoreElementsPanel/ProfileScoreElementsContainer/MaxScoreDateContainer/MaxScoreDateLabelUser.text = response.score.dateObtained
-			
-			GlobalVariables.actual_score_registered = int(response.score.scoreNumber)
+			if response.score != null:
+				$ProfileMainPanel/ProfileMainContainer/ProfileScoreElementsPanel/ProfileScoreElementsContainer/MaxScoreContainer/MaxScoreLabelNumber.text = response.score.scoreNumber
+				$ProfileMainPanel/ProfileMainContainer/ProfileScoreElementsPanel/ProfileScoreElementsContainer/MaxScoreDateContainer/MaxScoreDateLabelUser.text = response.score.dateObtained
+				
+				GlobalVariables.actual_score_registered = int(response.score.scoreNumber)
+			else:
+				$ProfileMainPanel/ProfileMainContainer/ProfileScoreElementsPanel/ProfileScoreElementsContainer/MaxScoreContainer/MaxScoreLabelNumber.text = "-"
+				$ProfileMainPanel/ProfileMainContainer/ProfileScoreElementsPanel/ProfileScoreElementsContainer/MaxScoreDateContainer/MaxScoreDateLabelUser.text = "-"
+				
 			
 		if (response_code == 403):
 			SaveSystem.save_value_user("Online", "Account", "0")
