@@ -2,15 +2,19 @@
 
 Proyecto final de Desarrollo de Aplicaciones Multiplataforma del curso 22/23. IES Luis Vives.
 
-## Índice
+## Índice 
 
 - [Introducción](#introducción)
 - [Plataformas Soportadas](#plataformas-soportadas)
+- [Tecnologías Aplicadas](#tecnologías-aplicadas)
 - [Diseño](#diseño)
 - [Funcionamiento de la Aplicación](#funcionamiento-de-la-aplicación)
 - [Autor](#autor)
 
 ## Introducción
+
+![LICENSE](https://img.shields.io/github/license/Mario999X/ProyectoFinalDAM_MarioResa?style=for-the-badge)
+![LastCommit](https://img.shields.io/github/last-commit/Mario999X/ProyectoFinalDAM_MarioResa?color=orange&style=for-the-badge)
 
 El gran proyecto es un videojuego con capacidades competitivas online (sin ser multijugador) usando una tabla de
 puntuaciones que cualquier usuario registrado pueda ver dentro de este.
@@ -27,11 +31,28 @@ Si se quiere descargar el videojuego en formato de ejecutable, se realizará a t
 - [Coming Soon]
 
 ## Plataformas Soportadas
- ![Windows](https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white)
+
+![Windows](https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white)
  
 <!-- ![Mac OS](https://img.shields.io/badge/mac%20os-000000?style=for-the-badge&logo=apple&logoColor=F0F0F0) -->
 
- ![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)
+![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)
+
+## Tecnologías Aplicadas
+
+![PostreSQL](https://img.shields.io/badge/PostgreSQL-0078D6?style=for-the-badge&logo=PostgreSQL&logoColor=white)
+
+![Spring](https://img.shields.io/badge/Spring-6DA55F?style=for-the-badge&logo=Spring&logoColor=white) **v3.0.4**
+
+![Kotlin](https://img.shields.io/badge/Kotlin-882BFF?style=for-the-badge&logo=Kotlin&logoColor=white) **v1.7.22**
+
+![JWT](https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=JSON%20web%20tokens)
+
+![Godot](https://img.shields.io/badge/Godot-0078D6?style=for-the-badge&logo=GodotEngine&logoColor=white) **v3.5.2**
+
+![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white)
+
+![Postman](https://img.shields.io/badge/Postman-FF6C37?style=for-the-badge&logo=postman&logoColor=white)
 
 ## Diseño
 
