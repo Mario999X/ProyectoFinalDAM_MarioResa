@@ -56,7 +56,8 @@ Para ejecutar el docker-compose de producción, y así tener el servicio de form
 #### **Linux**
 - [Docker Desktop](https://docs.docker.com/desktop/install/linux-install/)
 
-Si es un sistema sin entorno de escritorio, existe otra [alternativa](https://docs.docker.com/compose/gettingstarted/).
+En caso de no disponer de un entorno de escritorio, existe la [alternativa](https://docs.docker.com/compose/gettingstarted/) 
+de instalar los componentes necesarios por separado.
 
 ## Tecnologías Aplicadas
 
