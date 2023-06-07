@@ -58,7 +58,7 @@ Los niveles de dificultad afectan de forma grave al aguante del jugador, pero ta
 
 - **Esc**: Pausar.
 
-- **Click Izquierdo del Ratón**: Disparar.
+- **Clic Izquierdo del Ratón**: Disparar.
 
 ## Atribuciones
 
