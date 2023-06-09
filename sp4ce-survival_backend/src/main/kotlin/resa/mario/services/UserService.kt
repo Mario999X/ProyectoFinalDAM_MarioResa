@@ -59,9 +59,14 @@ class UserService
         userRepositoryCached.findByUsername(username)
     }
 
+    /**
+     *  Function to obtain 10 users
+     *
+     * @return List of Users
+     */
     suspend fun findAllOnly10(): List<User> {
-        log.info { "Obtaining All Users" }
-        return userRepositoryCached.findAllOnly10().toList()
+        log.info { "Obtaining 10 Users" }
+        return userRepositoryCached.findAllOnly10()
     }
 
     /**

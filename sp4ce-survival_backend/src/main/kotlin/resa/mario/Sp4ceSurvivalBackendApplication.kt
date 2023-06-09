@@ -48,6 +48,8 @@ class Sp4ceSurvivalBackendApplication
 
         val actualAdmins = controller.getAllUsersOnly10Initializer().filter { u -> u.role == User.UserRole.ADMIN }
 
+        //println(actualAdmins)
+
         if (actualAdmins.isEmpty()){
             println("\tNO ADMINS DETECTED, CREATING DEFAULT ONE...")
             controller.createUserInitializer(getUsersInit()[0])

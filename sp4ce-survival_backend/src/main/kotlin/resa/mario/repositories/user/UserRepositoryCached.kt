@@ -29,12 +29,12 @@ class UserRepositoryCached
 ) : IUserRepository {
 
     /**
-     * Function to obtain first 10 users in the database
+     * Function to obtain first 10 users in the database, sorted by role
      *
-     * @return A possible flow of users
+     * @return A possible list with 10 users
      */
-    override suspend fun findAllOnly10(): Flow<User> = withContext(Dispatchers.IO) {
-        return@withContext repository.findAll().take(10)
+    override suspend fun findAllOnly10(): List<User> = withContext(Dispatchers.IO) {
+        return@withContext repository.findAll().toList().sortedByDescending { u -> u.role == User.UserRole.ADMIN }.take(10)
     }
 
     /**

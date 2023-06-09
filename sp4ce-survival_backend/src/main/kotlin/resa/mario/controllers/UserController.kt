@@ -377,6 +377,11 @@ class UserController
         service.saveScore(userId.toString(), scoreNumber)
     }
 
+    /**
+     * Function without endpoint to load initial data
+     *
+     * @return List of users
+     */
     suspend fun getAllUsersOnly10Initializer(): List<User>{
         log.info { "OBTAINING INITIAL USERS" }
         return service.findAllOnly10()

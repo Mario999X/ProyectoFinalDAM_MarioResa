@@ -61,7 +61,7 @@ internal class UserRepositoryCachedTest {
     fun findAllOnly10() = runTest {
         coEvery { repository.findAll() } returns flowOf(user)
 
-        val result = repositoryCached.findAllOnly10().toList()
+        val result = repositoryCached.findAllOnly10()
 
         assertAll(
             { assertNotNull(result) },

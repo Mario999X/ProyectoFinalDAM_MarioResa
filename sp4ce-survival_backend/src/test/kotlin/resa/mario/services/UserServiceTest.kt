@@ -100,7 +100,7 @@ internal class UserServiceTest {
     @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun findAllOnly10() = runTest {
-        coEvery { repository.findAllOnly10() } returns flowOf(user)
+        coEvery { repository.findAllOnly10() } returns listOf(user)
 
         val result = service.findAllOnly10()
 
