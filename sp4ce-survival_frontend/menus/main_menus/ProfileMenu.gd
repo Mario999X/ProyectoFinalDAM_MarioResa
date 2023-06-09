@@ -48,6 +48,8 @@ func _on_RequestTimer_timeout():
 	var online_mode = SaveSystem.load_value_user("Online", "Account")
 	
 	if online_mode == "0":
+		GlobalVariables.actual_score_registered = 0
+		
 		get_tree().change_scene("res://menus/main_menus/MainMenu.tscn")
 		queue_free()
 	

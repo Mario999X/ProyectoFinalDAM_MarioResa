@@ -377,4 +377,9 @@ class UserController
         service.saveScore(userId.toString(), scoreNumber)
     }
 
+    suspend fun getAllUsersOnly10Initializer(): List<User>{
+        log.info { "OBTAINING INITIAL USERS" }
+        return service.findAllOnly10()
+    }
+
 }

@@ -58,6 +58,21 @@ internal class UserRepositoryCachedTest {
 
     @OptIn(ExperimentalCoroutinesApi::class)
     @Test
+    fun findAllOnly10() = runTest {
+        coEvery { repository.findAll() } returns flowOf(user)
+
+        val result = repositoryCached.findAllOnly10().toList()
+
+        assertAll(
+            { assertNotNull(result) },
+            { assertEquals(result[0].username, user.username) }
+        )
+
+        coVerify { repository.findAll() }
+    }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    @Test
     fun findByUsername() = runTest {
         coEvery { repository.findByUsername(any()) } returns flowOf(user)
 

@@ -76,7 +76,7 @@ pause_game={
 
 [locale]
 
-translations=PoolStringArray( "res://lenguages/Translations.en_US.translation", "res://lenguages/Translations.es_ES.translation" )
+translations=PoolStringArray( "res://languages/Translations.en_US.translation", "res://languages/Translations.es_ES.translation" )
 
 [physics]
 

@@ -99,6 +99,21 @@ internal class UserServiceTest {
 
     @OptIn(ExperimentalCoroutinesApi::class)
     @Test
+    fun findAllOnly10() = runTest {
+        coEvery { repository.findAllOnly10() } returns flowOf(user)
+
+        val result = service.findAllOnly10()
+
+        assertAll(
+            { assertNotNull(result) },
+            { assertEquals(result[0].username, user.username) }
+        )
+
+        coVerify { repository.findAllOnly10() }
+    }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    @Test
     fun register() = runTest {
         coEvery { repository.findByUsername(any()) } returns null
         coEvery { repository.findByEmail(any()) } returns null
