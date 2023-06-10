@@ -29,7 +29,7 @@ puntuación posible.
 
 Si se quiere descargar el videojuego en formato de ejecutable, se realizará a través del siguiente enlace:
 
-- [Coming Soon]
+- [Itch.io - Sp4ce Survival](https://mario999x.itch.io/sp4ce-survival)
 
 ## Plataformas Soportadas
 
