@@ -52,9 +52,9 @@ Los niveles de dificultad afectan de forma grave al aguante del jugador, pero ta
 ### Teclado y Ratón
 
 - **W**: Desplazamiento hacia arriba.
-- **A**: Desplazamiento hacia la derecha.
+- **A**: Desplazamiento hacia la izquierda.
 - **S**: Desplazamiento hacia abajo.
-- **D**: Desplazamiento hacia la izquierda.
+- **D**: Desplazamiento hacia la derecha.
 
 - **Esc**: Pausar.
 
