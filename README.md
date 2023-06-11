@@ -15,7 +15,6 @@ Proyecto final de Desarrollo de Aplicaciones Multiplataforma del curso 22/23. IE
 ## Introducción
 
 ![LICENSE](https://img.shields.io/github/license/Mario999X/ProyectoFinalDAM_MarioResa?style=for-the-badge)
-![LastCommit](https://img.shields.io/github/last-commit/Mario999X/ProyectoFinalDAM_MarioResa?color=orange&style=for-the-badge)
 
 El gran proyecto es un videojuego con capacidades competitivas online (sin ser multijugador) usando una tabla de
 puntuaciones que cualquier usuario registrado pueda ver dentro de este.
