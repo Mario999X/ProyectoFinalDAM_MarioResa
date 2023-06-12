@@ -72,7 +72,7 @@ func _on_RequestTimer_timeout():
 
 
 func _upload_new_score(token):
-	var url = base_url + "/score?scoreNumber=" + str(GlobalVariables.actual_score_registered)
+	var url = base_url + "/me/score?scoreNumber=" + str(GlobalVariables.actual_score_registered)
 	var headers = ["Authorization: Bearer " + token]
 	
 	$UploadNewScore.request(url, headers, false, HTTPClient.METHOD_PUT)
