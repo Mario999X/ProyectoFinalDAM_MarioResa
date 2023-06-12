@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+var base_url = GlobalVariables.api_url
+
 func _ready():
 	print(get_tree().current_scene.name, " | ", OS.get_time().hour, ":", OS.get_time().minute)
 	
@@ -98,7 +100,7 @@ func _on_RequestTimer_timeout():
 
 # HTTP Request for the register
 func _prepare_register_query(username, email, password, repeat_password):
-	var url = "https://localhost:6969/sp4ceSurvival/register"
+	var url = base_url + "/register"
 	var query = {"username": username, "email": email, "password": password, "repeatPassword": repeat_password}
 	var headers = ["Content-Type: application/json"]
 	

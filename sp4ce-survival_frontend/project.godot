@@ -78,6 +78,10 @@ pause_game={
 
 translations=PoolStringArray( "res://languages/Translations.en_US.translation", "res://languages/Translations.es_ES.translation" )
 
+[logging]
+
+file_logging/max_log_files=3
+
 [physics]
 
 common/enable_pause_aware_picking=true

@@ -23,18 +23,18 @@ func _on_PlayerBullet_area_entered(area):
 	var level_node = get_parent()
 	
 	if "im_bullet_t1" in area:
-		print("Hit against t1")
+		#print("Hit against t1")
 		queue_free()
 		area.queue_free()
 		
 		GlobalSignals.emit_signal("enemy_t1_hit")
 		
 	if "im_bullet_t2" in area:
-		print("Hit against t2")
+		#print("Hit against t2")
 		queue_free()
 		
 	if "im_enemy_ship" in area:
-		print("Hit againts enemy ship")
+		#print("Hit againts enemy ship")
 		queue_free()
 		area.queue_free()
 		

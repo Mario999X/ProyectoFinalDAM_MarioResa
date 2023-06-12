@@ -4,6 +4,8 @@ Servicio orientado a la gestión del sistema online de almacenamiento de datos d
 
 Proyecto final del Módulo Superior de Desarrollo de Aplicaciones Multiplataforma curso 22/23. IES Luis Vives.
 
+***
+
 # Índice
 
 - [Diseño](#diseño)

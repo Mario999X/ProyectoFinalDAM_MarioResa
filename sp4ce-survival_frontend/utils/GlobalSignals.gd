@@ -1,6 +1,9 @@
 extends Node
 # -- AUTOLOAD --
 
+# Global signals
+
+## Signals for main level
 
 signal enemy_t1_hit
 

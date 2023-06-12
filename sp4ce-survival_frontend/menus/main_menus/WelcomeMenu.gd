@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+var base_url = GlobalVariables.api_url
+
 # First, we load the Settings of the player with the LoadSettings singleton.
 # Then we check the online status, we verify if there is a token, and if it does, we verify that it is not expired
 # Finally, if the token is not expired, the player is moved to the Main Scene
@@ -122,14 +124,14 @@ func _on_RegisterButton_pressed():
 # HTTP Request for the token check
 # "ssl_validate_domain" must be false because I use Self-Signed Certificate
 func _check_token_query(token):
-	var url = "https://localhost:6969/sp4ceSurvival/me"
+	var url = base_url + "/me"
 	var headers = ["Authorization: Bearer " + token]
 	
 	$CheckToken.request(url, headers, false, HTTPClient.METHOD_GET)
 
 # HTTP Request for the Login Check
 func _prepare_login_query(username, password):
-	var url = "https://localhost:6969/sp4ceSurvival/login"
+	var url = base_url + "/login"
 	var query = {"username": username, "password": password}
 	var headers = ["Content-Type: application/json"]
 	

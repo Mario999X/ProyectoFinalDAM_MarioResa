@@ -4,6 +4,8 @@ Proyecto final de Desarrollo de Aplicaciones Multiplataforma del curso 22/23. IE
 
 _**Attention:** The Readmes are translated in English in the [official wiki](https://github.com/Mario999X/ProyectoFinalDAM_MarioResa/wiki) of the project._
 
+***
+
 ## Índice 
 
 - [Introducción](#introducción)
@@ -82,7 +84,7 @@ de instalar los componentes necesarios por separado.
 
 #### Diagrama de Clases
 
-<img align="center" src="diagrams/Class_diagram.png">
+<img src="diagrams/Class_diagram.png">
 
 Se observan dos elementos principales del proyecto, *Usuario* y *Puntuación*.
 
@@ -95,7 +97,7 @@ Además, exiten **dos** roles para los usuarios:
 
 #### Diagrama de Entidad-Relación
 
-<img align="center" src="diagrams/Entity_Relationship_diagram.png">
+<img src="diagrams/Entity_Relationship_diagram.png">
 
 Un usuario obtiene una puntuación y la puede almacenar/actualizar.
 

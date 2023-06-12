@@ -54,7 +54,7 @@ func start(pos):
 	
 
 func hit_by_enemy():
-	print("Hit by enemy")
+	#print("Hit by enemy")
 	
 	ammo = 20
 	hide()

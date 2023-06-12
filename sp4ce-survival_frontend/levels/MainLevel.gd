@@ -193,18 +193,18 @@ func _global_signals_connect_on_level():
 
 # It is taken into account when the enemy has left the field of vision
 func _on_enemy_out_of_reach():
-	print("On level, enemy ship out of reach")
+	#print("On level, enemy ship out of reach")
 	_total_enemies -= 1
 
 # It is triggered if the player manages to hit an enemy ship
 func _on_enemy_ship_hit():
-	print("On level, enemy ship hit")
+	#print("On level, enemy ship hit")
 	score += 10
 	_total_enemies -= 1
 
 # It is triggered if the player manages to hit an enemy bullet T1
 func _on_enemy_bullet_t1_hit():
-	print("On level, T1 Hit")
+	#print("On level, T1 Hit")
 	score += 3
 
 # Request to obtain actual score registered
