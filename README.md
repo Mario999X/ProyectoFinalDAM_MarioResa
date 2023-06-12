@@ -2,6 +2,8 @@
 
 Proyecto final de Desarrollo de Aplicaciones Multiplataforma del curso 22/23. IES Luis Vives.
 
+_**Attention:** The Readmes are translated in English in the [official wiki](https://github.com/Mario999X/ProyectoFinalDAM_MarioResa/wiki) of the project._
+
 ## Índice 
 
 - [Introducción](#introducción)
