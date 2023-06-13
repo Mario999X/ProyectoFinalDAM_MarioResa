@@ -34,7 +34,7 @@ class UserRepositoryCached
      * @return A possible list with 10 users
      */
     override suspend fun findAllOnly10(): List<User> = withContext(Dispatchers.IO) {
-        return@withContext repository.findAll().toList().sortedByDescending { u -> u.role == User.UserRole.ADMIN }.take(10)
+        return@withContext repository.findFirst10ByOrderByRole(User.UserRole.ADMIN.name).toList()
     }
 
     /**
