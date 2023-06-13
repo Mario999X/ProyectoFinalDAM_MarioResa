@@ -51,13 +51,13 @@ fun getUsersInit() = listOf(
         role = User.UserRole.USER.name,
     ),
     UserDTOCreate(
-        username = "Test117",
+        username = "Victor117",
         password = "12345",
         email = "test117@gmail.com",
         role = User.UserRole.USER.name,
     ),
     UserDTOCreate(
-        username = "Test118",
+        username = "Laura118",
         password = "12345",
         email = "test118@gmail.com",
         role = User.UserRole.USER.name,
