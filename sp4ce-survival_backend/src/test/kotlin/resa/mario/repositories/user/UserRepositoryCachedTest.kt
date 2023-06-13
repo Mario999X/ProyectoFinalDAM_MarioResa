@@ -59,7 +59,7 @@ internal class UserRepositoryCachedTest {
     @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun findAllOnly10() = runTest {
-        coEvery { repository.findAll() } returns flowOf(user)
+        coEvery { repository.findFirst10ByOrderByRole(any()) } returns flowOf(user)
 
         val result = repositoryCached.findAllOnly10()
 
@@ -68,7 +68,7 @@ internal class UserRepositoryCachedTest {
             { assertEquals(result[0].username, user.username) }
         )
 
-        coVerify { repository.findAll() }
+        coVerify { repository.findFirst10ByOrderByRole(any()) }
     }
 
     @OptIn(ExperimentalCoroutinesApi::class)
