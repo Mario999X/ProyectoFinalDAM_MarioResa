@@ -83,7 +83,7 @@ fun getUsersInit() = listOf(
 fun getScoresInit() = listOf(
     "1230",
     "12",
-    "10",
+    "100",
     "12",
     "12",
     "18",
