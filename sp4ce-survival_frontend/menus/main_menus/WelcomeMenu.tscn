@@ -16,7 +16,7 @@ border_color = Color( 0, 0.117647, 0.654902, 1 )
 border_blend = true
 
 [sub_resource type="DynamicFont" id=1]
-size = 25
+size = 29
 font_data = ExtResource( 3 )
 
 [sub_resource type="StyleBoxFlat" id=4]
@@ -29,22 +29,22 @@ border_color = Color( 0.176471, 1, 0, 1 )
 border_blend = true
 
 [sub_resource type="DynamicFont" id=2]
-size = 21
+size = 29
 font_data = ExtResource( 3 )
 
 [sub_resource type="DynamicFontData" id=7]
 font_path = "res://assets/fonts/Xolonium-Regular.ttf"
 
 [sub_resource type="DynamicFont" id=8]
-size = 17
+size = 24
 font_data = SubResource( 7 )
 
 [sub_resource type="DynamicFont" id=11]
-size = 18
+size = 26
 font_data = ExtResource( 3 )
 
 [sub_resource type="DynamicFont" id=10]
-size = 20
+size = 24
 font_data = ExtResource( 3 )
 
 [sub_resource type="StyleBoxFlat" id=5]
@@ -57,7 +57,7 @@ border_color = Color( 0.815686, 0.384314, 0, 1 )
 border_blend = true
 
 [sub_resource type="DynamicFont" id=9]
-size = 25
+size = 29
 font_data = ExtResource( 3 )
 
 [sub_resource type="StyleBoxFlat" id=6]
@@ -101,9 +101,9 @@ __meta__ = {
 
 [node name="GameTitle" type="Label" parent="GameTitlePanel"]
 margin_left = 3.0
-margin_top = 32.0
+margin_top = 30.0
 margin_right = 399.0
-margin_bottom = 63.0
+margin_bottom = 65.0
 custom_fonts/font = SubResource( 1 )
 text = "SP4CE SURVIVAL"
 align = 1
@@ -131,61 +131,61 @@ __meta__ = {
 [node name="LoginElementsContainer" type="VBoxContainer" parent="LoginElementsPanel"]
 margin_left = 3.0
 margin_top = 3.0
-margin_right = 403.0
-margin_bottom = 280.0
+margin_right = 453.0
+margin_bottom = 323.0
 size_flags_vertical = 0
 
 [node name="Separation3" type="Control" parent="LoginElementsPanel/LoginElementsContainer"]
-margin_right = 400.0
-margin_bottom = 10.0
-rect_min_size = Vector2( 400, 10 )
+margin_right = 450.0
+margin_bottom = 15.0
+rect_min_size = Vector2( 450, 15 )
 
 [node name="UsernameLabel" type="Label" parent="LoginElementsPanel/LoginElementsContainer"]
-margin_top = 14.0
-margin_right = 400.0
-margin_bottom = 40.0
+margin_top = 19.0
+margin_right = 450.0
+margin_bottom = 54.0
 custom_fonts/font = SubResource( 2 )
 text = "USERNAME"
 align = 1
 
 [node name="UsernameLineEdit" type="LineEdit" parent="LoginElementsPanel/LoginElementsContainer"]
-margin_top = 44.0
-margin_right = 400.0
-margin_bottom = 84.0
-rect_min_size = Vector2( 100, 40 )
+margin_top = 58.0
+margin_right = 450.0
+margin_bottom = 108.0
+rect_min_size = Vector2( 100, 50 )
 custom_fonts/font = SubResource( 8 )
 max_length = 20
 clear_button_enabled = true
 
 [node name="MessageWarningUsername" type="Label" parent="LoginElementsPanel/LoginElementsContainer"]
 visible = false
-margin_top = 87.0
-margin_right = 346.0
-margin_bottom = 112.0
+margin_top = 102.0
+margin_right = 450.0
+margin_bottom = 129.0
 rect_min_size = Vector2( 0, 25 )
 custom_fonts/font = SubResource( 11 )
 text = "WARNING_USERNAME"
 align = 1
 
 [node name="Separation" type="Control" parent="LoginElementsPanel/LoginElementsContainer"]
-margin_top = 88.0
-margin_right = 400.0
-margin_bottom = 110.0
+margin_top = 112.0
+margin_right = 450.0
+margin_bottom = 134.0
 rect_min_size = Vector2( 0, 22 )
 
 [node name="PasswordLabel" type="Label" parent="LoginElementsPanel/LoginElementsContainer"]
-margin_top = 114.0
-margin_right = 400.0
-margin_bottom = 140.0
+margin_top = 138.0
+margin_right = 450.0
+margin_bottom = 173.0
 custom_fonts/font = SubResource( 2 )
 text = "PASSWORD"
 align = 1
 
 [node name="PasswordLineEdit" type="LineEdit" parent="LoginElementsPanel/LoginElementsContainer"]
-margin_top = 144.0
-margin_right = 400.0
-margin_bottom = 184.0
-rect_min_size = Vector2( 100, 40 )
+margin_top = 177.0
+margin_right = 450.0
+margin_bottom = 227.0
+rect_min_size = Vector2( 100, 50 )
 custom_fonts/font = SubResource( 8 )
 max_length = 25
 secret = true
@@ -193,23 +193,23 @@ clear_button_enabled = true
 
 [node name="MessageWarningPassword" type="Label" parent="LoginElementsPanel/LoginElementsContainer"]
 visible = false
-margin_top = 213.0
-margin_right = 346.0
-margin_bottom = 238.0
+margin_top = 211.0
+margin_right = 450.0
+margin_bottom = 244.0
 custom_fonts/font = SubResource( 11 )
 text = "WARNING_PASSWORD"
 align = 1
 
 [node name="Separation2" type="Control" parent="LoginElementsPanel/LoginElementsContainer"]
-margin_top = 188.0
-margin_right = 400.0
-margin_bottom = 223.0
+margin_top = 231.0
+margin_right = 450.0
+margin_bottom = 266.0
 rect_min_size = Vector2( 0, 35 )
 
 [node name="LoginButton" type="Button" parent="LoginElementsPanel/LoginElementsContainer"]
-margin_top = 227.0
-margin_right = 400.0
-margin_bottom = 277.0
+margin_top = 270.0
+margin_right = 450.0
+margin_bottom = 320.0
 rect_min_size = Vector2( 0, 50 )
 custom_fonts/font = SubResource( 10 )
 text = "LOGIN"
@@ -235,7 +235,7 @@ __meta__ = {
 [node name="RegisterAndOfflineElementsContainer" type="HBoxContainer" parent="RegisterAndOfflineElementsPanel"]
 margin_left = 3.0
 margin_top = 3.0
-margin_right = 553.0
+margin_right = 578.0
 margin_bottom = 67.0
 rect_min_size = Vector2( 0, 50 )
 custom_constants/separation = 100
@@ -250,7 +250,7 @@ text = "REGISTER"
 
 [node name="PlayOfflineButton" type="Button" parent="RegisterAndOfflineElementsPanel/RegisterAndOfflineElementsContainer"]
 margin_left = 325.0
-margin_right = 550.0
+margin_right = 575.0
 margin_bottom = 64.0
 rect_min_size = Vector2( 225, 0 )
 custom_fonts/font = SubResource( 9 )
@@ -273,21 +273,21 @@ __meta__ = {
 [node name="OptionsAndExitElementsPanel" type="VBoxContainer" parent="OptionsAndExitElementsPanel"]
 margin_left = 3.0
 margin_top = 3.0
-margin_right = 157.0
-margin_bottom = 92.0
+margin_right = 158.0
+margin_bottom = 100.0
 custom_constants/separation = 15
 alignment = 1
 
 [node name="OptionsButton" type="Button" parent="OptionsAndExitElementsPanel/OptionsAndExitElementsPanel"]
-margin_right = 154.0
-margin_bottom = 37.0
+margin_right = 155.0
+margin_bottom = 41.0
 custom_fonts/font = SubResource( 9 )
 text = "OPTIONS"
 
 [node name="ExitButton" type="Button" parent="OptionsAndExitElementsPanel/OptionsAndExitElementsPanel"]
-margin_top = 52.0
-margin_right = 154.0
-margin_bottom = 89.0
+margin_top = 56.0
+margin_right = 155.0
+margin_bottom = 97.0
 custom_fonts/font = SubResource( 9 )
 text = "EXIT"
 

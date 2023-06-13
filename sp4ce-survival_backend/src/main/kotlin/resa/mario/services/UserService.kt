@@ -1,6 +1,10 @@
 package resa.mario.services
 
+import com.github.michaelbull.result.Err
+import com.github.michaelbull.result.Ok
+import com.github.michaelbull.result.Result
 import kotlinx.coroutines.flow.firstOrNull
+import kotlinx.coroutines.flow.toList
 import kotlinx.coroutines.runBlocking
 import mu.KotlinLogging
 import org.springframework.beans.factory.annotation.Autowired
@@ -12,14 +16,13 @@ import org.springframework.security.core.userdetails.UserDetailsService
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import resa.mario.dto.*
+import resa.mario.exceptions.UserException
 import resa.mario.exceptions.UserException.*
 import resa.mario.mappers.toDTOProfile
 import resa.mario.mappers.toScore
 import resa.mario.mappers.toScoreDTO
 import resa.mario.mappers.toUser
 import resa.mario.models.Score
-import com.github.michaelbull.result.*
-import resa.mario.exceptions.UserException
 import resa.mario.models.User
 import resa.mario.repositories.score.ScoreRepositoryCached
 import resa.mario.repositories.user.UserRepositoryCached
@@ -54,6 +57,16 @@ class UserService
      */
     override fun loadUserByUsername(username: String): UserDetails? = runBlocking {
         userRepositoryCached.findByUsername(username)
+    }
+
+    /**
+     *  Function to obtain 10 users
+     *
+     * @return List of Users
+     */
+    suspend fun findAllOnly10(): List<User> {
+        log.info { "Obtaining 10 Users" }
+        return userRepositoryCached.findAllOnly10()
     }
 
     /**

@@ -2,6 +2,10 @@
 
 Proyecto final de Desarrollo de Aplicaciones Multiplataforma del curso 22/23. IES Luis Vives.
 
+_**Attention:** The Readmes are translated in English in the [official wiki](https://github.com/Mario999X/ProyectoFinalDAM_MarioResa/wiki) of the project._
+
+***
+
 ## Índice 
 
 - [Introducción](#introducción)
@@ -15,7 +19,6 @@ Proyecto final de Desarrollo de Aplicaciones Multiplataforma del curso 22/23. IE
 ## Introducción
 
 ![LICENSE](https://img.shields.io/github/license/Mario999X/ProyectoFinalDAM_MarioResa?style=for-the-badge)
-![LastCommit](https://img.shields.io/github/last-commit/Mario999X/ProyectoFinalDAM_MarioResa?color=orange&style=for-the-badge)
 
 El gran proyecto es un videojuego con capacidades competitivas online (sin ser multijugador) usando una tabla de
 puntuaciones que cualquier usuario registrado pueda ver dentro de este.
@@ -29,7 +32,7 @@ puntuación posible.
 
 Si se quiere descargar el videojuego en formato de ejecutable, se realizará a través del siguiente enlace:
 
-- [Coming Soon]
+- [Itch.io - Sp4ce Survival](https://mario999x.itch.io/sp4ce-survival)
 
 ## Plataformas Soportadas
 
@@ -81,7 +84,7 @@ de instalar los componentes necesarios por separado.
 
 #### Diagrama de Clases
 
-<img align="center" src="diagrams/Class_diagram.png">
+<img src="diagrams/Class_diagram.png">
 
 Se observan dos elementos principales del proyecto, *Usuario* y *Puntuación*.
 
@@ -94,7 +97,7 @@ Además, exiten **dos** roles para los usuarios:
 
 #### Diagrama de Entidad-Relación
 
-<img align="center" src="diagrams/Entity_Relationship_diagram.png">
+<img src="diagrams/Entity_Relationship_diagram.png">
 
 Un usuario obtiene una puntuación y la puede almacenar/actualizar.
 

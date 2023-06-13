@@ -1,10 +1,7 @@
 package resa.mario.repositories.user
 
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.asFlow
-import kotlinx.coroutines.flow.firstOrNull
-import kotlinx.coroutines.flow.toList
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.withContext
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Page
@@ -30,6 +27,15 @@ class UserRepositoryCached
     private val repository: UserRepository,
     private val scoreRepository: ScoreRepository
 ) : IUserRepository {
+
+    /**
+     * Function to obtain first 10 users in the database, sorted by role
+     *
+     * @return A possible list with 10 users
+     */
+    override suspend fun findAllOnly10(): List<User> = withContext(Dispatchers.IO) {
+        return@withContext repository.findAll().toList().sortedByDescending { u -> u.role == User.UserRole.ADMIN }.take(10)
+    }
 
     /**
      * Function that using the user´s username to search that unique user.

@@ -2,6 +2,7 @@ extends CanvasLayer
 
 signal try_password_change
 
+
 var actual_password
 var new_password
 var repeat_new_password
@@ -36,6 +37,7 @@ func _on_ChangePasswordButton_pressed():
 		repeat_new_password = repeat_new_password_field.text.strip_edges()
 		
 		emit_signal("try_password_change")
+		self.hide()
 	
 	
 	if actual_password_field.text.strip_edges().empty():
@@ -66,3 +68,4 @@ func _on_ChangePasswordButton_pressed():
 		repeat_new_password_message.hide()
 	
 	
+

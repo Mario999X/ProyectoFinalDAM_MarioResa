@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+var base_url = GlobalVariables.api_url
+
 var row = preload("res://menus/main_menus/leaderboard_elements/Row.tscn")
 onready var table = get_node("LeaderboardMainContainer/LeaderboardMainPanel/LeaderboardScrollContainer/LeaderboardElementsContainer")
 
@@ -65,7 +67,7 @@ func _obtain_leaderboard_query(token):
 	if page == 0:
 		$LeaderboardMainContainer/LeaderboardButtonsPanel/LeaderboardButtonsContainer/ReturnPageButton.disabled = true
 	
-	var url = "https://localhost:6969/sp4ceSurvival/leaderboard?page=" + str(page)
+	var url = base_url + "/leaderboard?page=" + str(page)
 	var headers = ["Authorization: Bearer " + token]
 	
 	$ObtainLeaderboardUsers.request(url, headers, false, HTTPClient.METHOD_GET)

@@ -303,4 +303,19 @@ internal class UserControllerTest {
 
         coVerify { service.saveScore(any(), any()) }
     }
+
+    @OptIn(ExperimentalCoroutinesApi::class)
+    @Test
+    fun getAllUsersOnly10Initializer() = runTest {
+        coEvery { service.findAllOnly10() } returns listOf(user)
+
+        val result = controller.getAllUsersOnly10Initializer()
+
+        assertAll(
+            { assertNotNull(result) },
+            { assertEquals(result[0].username, user.username) }
+        )
+
+        coVerify { service.findAllOnly10() }
+    }
 }

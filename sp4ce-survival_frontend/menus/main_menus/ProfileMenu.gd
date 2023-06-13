@@ -1,5 +1,7 @@
 extends CanvasLayer
 
+var base_url = GlobalVariables.api_url
+
 func _ready():
 	print(get_tree().current_scene.name, " | ", OS.get_time().hour, ":", OS.get_time().minute)
 	
@@ -48,6 +50,8 @@ func _on_RequestTimer_timeout():
 	var online_mode = SaveSystem.load_value_user("Online", "Account")
 	
 	if online_mode == "0":
+		GlobalVariables.actual_score_registered = 0
+		
 		get_tree().change_scene("res://menus/main_menus/MainMenu.tscn")
 		queue_free()
 	
@@ -104,13 +108,13 @@ func _on_DeleteAccount_request_completed(result, response_code, headers, body):
 
 
 func _obtain_profile_query(token):
-	var url = "https://localhost:6969/sp4ceSurvival/me"
+	var url = base_url + "/me"
 	var headers = ["Authorization: Bearer " + token]
 	
 	$ObtainProfile.request(url, headers, false, HTTPClient.METHOD_GET)
 
 func _delete_account_query(token):
-	var url = "https://localhost:6969/sp4ceSurvival/me"
+	var url = base_url + "/me"
 	var headers = ["Authorization: Bearer " + token]
 	
 	$DeleteAccount.request(url, headers, false, HTTPClient.METHOD_DELETE)
@@ -119,7 +123,7 @@ func _delete_account_query(token):
 func _on_ChangePasswordMenu_try_password_change():
 	var token = SaveSystem.load_value_user("Online", "Account")
 	
-	var url = "https://localhost:6969/sp4ceSurvival/me/password"
+	var url = base_url + "/me/password"
 	var query = {"actualPassword": $ChangePasswordMenu.actual_password, "newPassword": $ChangePasswordMenu.new_password, "repeatNewPassword": $ChangePasswordMenu.repeat_new_password}
 	var headers = ["Content-Type: application/json", "Authorization: Bearer " + token]
 	

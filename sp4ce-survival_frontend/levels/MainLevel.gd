@@ -13,6 +13,7 @@ var _total_enemies
 var effect = preload("res://game_elements/effects/Explosion.tscn")
 
 
+# We change the current music, and set the level variables; also, we check the current registered score if the player is connected.
 func _ready():
 	print(get_tree().current_scene.name, " | ", OS.get_time().hour, ":", OS.get_time().minute)
 	
@@ -30,7 +31,7 @@ func _ready():
 	
 	_global_signals_connect_on_level()
 
-
+# We start the information of the player and the game.
 func _on_PlayerHUD_start_game():
 	$Player.start($PlayerSpawnLocation.position)
 	$PlayerHUD.update_ammo($Player.ammo)
@@ -44,17 +45,18 @@ func _on_PlayerHUD_start_game():
 	$PlayerHUD.update_timer_duration(floor($GameTimerDuration.time_left))
 	$EnemyShipTimer.start()
 
-
+# For every second, we update the score
 func _on_ScoreUpdateTimer_timeout():
 	score += 1
 	$PlayerHUD.update_score(score)
 	$PlayerHUD.update_timer_duration(floor($GameTimerDuration.time_left))
 	
 
+
 func _on_Player_reload_complete():
 	$PlayerHUD.update_ammo($Player.ammo)
 
-
+# We handle the appearance of enemies on the screen.
 func _on_EnemyShipTimer_timeout():
 	if _total_enemies < 5:
 		_total_enemies += 1
@@ -74,7 +76,7 @@ func _on_EnemyShipTimer_timeout():
 		return
 	
 
-
+# We act if the player has been hit, this can end the game
 func _on_Player_hit_by_enemy():
 	var explosion = effect.instance()
 	add_child(explosion)
@@ -117,7 +119,7 @@ func _on_Player_hit_by_enemy():
 		
 		_reset_locations()
 
-
+# If the player has not lost all lives, the positions are reset and the game continues.
 func _reset_locations():
 	$PlayerRespawnTimer.start(); yield($PlayerRespawnTimer, "timeout")
 	
@@ -128,14 +130,14 @@ func _reset_locations():
 	$GameTimerDuration.paused = false
 	$EnemyShipTimer.start()
 
-
+# We act every time the player shoots
 func _on_Player_shoot():
 	if $Player.ammo >= 0:
 		$PlayerHUD.update_ammo($Player.ammo)
 	else:
 		return
 
-
+# It acts according to the response received from the server
 func _on_ActualScoreRegistered_request_completed(result, response_code, headers, body):
 	# Timeout
 	if response_code == 0:
@@ -154,7 +156,7 @@ func _on_ActualScoreRegistered_request_completed(result, response_code, headers,
 			SaveSystem.save_value_user("Online", "Account", "0")
 			
 
-
+# The game ends when the main counter reaches 0
 func _on_GameTimerDuration_timeout():
 	$EnemyShipTimer.stop()
 	$ScoreUpdateTimer.stop()
@@ -175,6 +177,7 @@ func _on_GameTimerDuration_timeout():
 	emit_signal("game_over")
 	
 
+# We completely finish the game and take the player to the next menu
 func _on_MainLevel_game_over():
 	BackgroundMusic.playing = false
 	$PlayerRespawnTimer.start(); yield($PlayerRespawnTimer, "timeout")
@@ -182,25 +185,29 @@ func _on_MainLevel_game_over():
 	get_tree().change_scene("res://menus/main_menus/PostGameMenu.tscn")
 	queue_free()
 
-
+# We connect the global variables
 func _global_signals_connect_on_level():
 	GlobalSignals.connect("enemy_t1_hit", self, "_on_enemy_bullet_t1_hit")
 	GlobalSignals.connect("enemy_ship_hit", self, "_on_enemy_ship_hit")
 	GlobalSignals.connect("enemy_out_of_reach", self, "_on_enemy_out_of_reach")
 
+# It is taken into account when the enemy has left the field of vision
 func _on_enemy_out_of_reach():
-	print("On level, enemy ship out of reach")
+	#print("On level, enemy ship out of reach")
 	_total_enemies -= 1
 
+# It is triggered if the player manages to hit an enemy ship
 func _on_enemy_ship_hit():
-	print("On level, enemy ship hit")
+	#print("On level, enemy ship hit")
 	score += 10
 	_total_enemies -= 1
 
+# It is triggered if the player manages to hit an enemy bullet T1
 func _on_enemy_bullet_t1_hit():
-	print("On level, T1 Hit")
+	#print("On level, T1 Hit")
 	score += 3
 
+# Request to obtain actual score registered
 func _obtain_actual_score_query(token):
 	var url = "https://localhost:6969/sp4ceSurvival/score"
 	var headers = ["Authorization: Bearer " + token]

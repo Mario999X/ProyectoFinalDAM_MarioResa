@@ -4,6 +4,8 @@ Videojuego de género Bullet Hell y con capacidades online competitivas.
 
 Proyecto final del Módulo Superior de Desarrollo de Aplicaciones Multiplataforma curso 22/23. IES Luis Vives.
 
+***
+
 ## Índice
 
 - [Introducción](#introducción)
@@ -52,13 +54,13 @@ Los niveles de dificultad afectan de forma grave al aguante del jugador, pero ta
 ### Teclado y Ratón
 
 - **W**: Desplazamiento hacia arriba.
-- **A**: Desplazamiento hacia la derecha.
+- **A**: Desplazamiento hacia la izquierda.
 - **S**: Desplazamiento hacia abajo.
-- **D**: Desplazamiento hacia la izquierda.
+- **D**: Desplazamiento hacia la derecha.
 
 - **Esc**: Pausar.
 
-- **Click Izquierdo del Ratón**: Disparar.
+- **Clic Izquierdo del Ratón**: Disparar.
 
 ## Atribuciones
 

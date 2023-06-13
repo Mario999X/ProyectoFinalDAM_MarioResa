@@ -16,3 +16,6 @@ var actual_score_registered = 0
 
 # Score obtained for User in One Game, this is set after every game completed
 var actual_score_obtained = null
+
+# Base URL for REST-API Service
+var api_url = "https://localhost:6969/sp4ceSurvival"

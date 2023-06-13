@@ -18,15 +18,15 @@ border_width_right = 2
 border_width_bottom = 2
 
 [sub_resource type="DynamicFont" id=2]
-size = 20
+size = 29
 font_data = ExtResource( 6 )
 
 [sub_resource type="DynamicFont" id=3]
-size = 20
+size = 24
 font_data = ExtResource( 6 )
 
 [sub_resource type="DynamicFont" id=4]
-size = 20
+size = 24
 font_data = ExtResource( 6 )
 
 [sub_resource type="StyleBoxFlat" id=5]
@@ -37,14 +37,14 @@ border_width_right = 2
 border_width_bottom = 2
 
 [sub_resource type="DynamicFont" id=6]
-size = 21
+size = 29
 font_data = ExtResource( 6 )
 
 [sub_resource type="DynamicFontData" id=8]
 font_path = "res://assets/fonts/Xolonium-Regular.ttf"
 
 [sub_resource type="DynamicFont" id=9]
-size = 19
+size = 24
 font_data = SubResource( 8 )
 
 [node name="SettingsMenu" type="CanvasLayer"]
@@ -90,39 +90,39 @@ __meta__ = {
 [node name="LenguajeElementsContainer1" type="VBoxContainer" parent="LenguageElementsPanel"]
 margin_left = 2.0
 margin_top = 2.0
-margin_right = 232.0
-margin_bottom = 81.0
+margin_right = 259.0
+margin_bottom = 92.0
 size_flags_vertical = 0
 custom_constants/separation = 19
 alignment = 1
 
 [node name="LenguageLabel" type="Label" parent="LenguageElementsPanel/LenguajeElementsContainer1"]
-margin_right = 230.0
-margin_bottom = 25.0
+margin_right = 257.0
+margin_bottom = 35.0
 custom_fonts/font = SubResource( 2 )
-text = "LENGUAGE"
+text = "LANGUAGE"
 align = 1
 
 [node name="LenguageElementsContainer2" type="HBoxContainer" parent="LenguageElementsPanel/LenguajeElementsContainer1"]
-margin_top = 44.0
-margin_right = 230.0
-margin_bottom = 79.0
+margin_top = 54.0
+margin_right = 257.0
+margin_bottom = 90.0
 grow_horizontal = 2
 grow_vertical = 2
 custom_constants/separation = 30
 alignment = 1
 
 [node name="SpanishButton" type="Button" parent="LenguageElementsPanel/LenguajeElementsContainer1/LenguageElementsContainer2"]
-margin_right = 100.0
-margin_bottom = 35.0
+margin_right = 118.0
+margin_bottom = 36.0
 rect_min_size = Vector2( 100, 35 )
 custom_fonts/font = SubResource( 3 )
 text = "Español"
 
 [node name="EnglishButton" type="Button" parent="LenguageElementsPanel/LenguajeElementsContainer1/LenguageElementsContainer2"]
-margin_left = 130.0
-margin_right = 230.0
-margin_bottom = 35.0
+margin_left = 148.0
+margin_right = 257.0
+margin_bottom = 36.0
 rect_min_size = Vector2( 100, 0 )
 custom_fonts/font = SubResource( 4 )
 text = "English"
@@ -146,21 +146,21 @@ __meta__ = {
 [node name="SoundElementsContainer" type="VBoxContainer" parent="SoundElementsPanel"]
 margin_left = 2.0
 margin_top = 2.0
-margin_right = 158.0
-margin_bottom = 98.0
+margin_right = 180.0
+margin_bottom = 107.0
 custom_constants/separation = 30
 
 [node name="SoundLabel" type="Label" parent="SoundElementsPanel/SoundElementsContainer"]
-margin_right = 156.0
-margin_bottom = 26.0
+margin_right = 178.0
+margin_bottom = 35.0
 custom_fonts/font = SubResource( 6 )
 text = "SOUND"
 align = 1
 
 [node name="MutedCheckButton" type="CheckButton" parent="SoundElementsPanel/SoundElementsContainer"]
-margin_top = 56.0
-margin_right = 156.0
-margin_bottom = 96.0
+margin_top = 65.0
+margin_right = 178.0
+margin_bottom = 105.0
 custom_fonts/font = SubResource( 9 )
 text = "MUTED"
 
@@ -183,21 +183,21 @@ __meta__ = {
 [node name="ScreenElementsContainer" type="VBoxContainer" parent="ScreenElementsPanel"]
 margin_left = 2.0
 margin_top = 2.0
-margin_right = 227.0
-margin_bottom = 98.0
+margin_right = 275.0
+margin_bottom = 107.0
 custom_constants/separation = 30
 
 [node name="ScreenLabel" type="Label" parent="ScreenElementsPanel/ScreenElementsContainer"]
-margin_right = 225.0
-margin_bottom = 26.0
+margin_right = 273.0
+margin_bottom = 35.0
 custom_fonts/font = SubResource( 6 )
 text = "SCREEN"
 align = 1
 
 [node name="FullScreenCheckButton" type="CheckButton" parent="ScreenElementsPanel/ScreenElementsContainer"]
-margin_top = 56.0
-margin_right = 225.0
-margin_bottom = 96.0
+margin_top = 65.0
+margin_right = 273.0
+margin_bottom = 105.0
 custom_fonts/font = SubResource( 9 )
 text = "FULL_SCREEN"
 

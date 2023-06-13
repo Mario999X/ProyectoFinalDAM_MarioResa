@@ -14,6 +14,7 @@ import java.util.UUID
  */
 @Repository
 interface IUserRepository {
+    suspend fun findAllOnly10(): List<User>
     suspend fun findByUsername(username: String): User?
     suspend fun findByEmail(email: String): User?
     suspend fun findUsersForLeaderBoard(page: PageRequest): Flow<Page<UserDTOLeaderBoard>>

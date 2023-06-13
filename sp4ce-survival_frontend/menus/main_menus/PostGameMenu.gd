@@ -2,8 +2,11 @@ extends CanvasLayer
 
 var _new_score
 
+var base_url = GlobalVariables.api_url
+
 func _ready():
 	print(get_tree().current_scene.name, " | ", OS.get_time().hour, ":", OS.get_time().minute)
+	print("Score obtained: " + str(GlobalVariables.actual_score_obtained))
 	
 	var online_mode = SaveSystem.load_value_user("Online", "Account")
 	
@@ -69,7 +72,7 @@ func _on_RequestTimer_timeout():
 
 
 func _upload_new_score(token):
-	var url = "https://localhost:6969/sp4ceSurvival/me/score?scoreNumber=" + str(GlobalVariables.actual_score_registered)
+	var url = base_url + "/me/score?scoreNumber=" + str(GlobalVariables.actual_score_registered)
 	var headers = ["Authorization: Bearer " + token]
 	
 	$UploadNewScore.request(url, headers, false, HTTPClient.METHOD_PUT)

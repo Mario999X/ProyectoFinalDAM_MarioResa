@@ -25,20 +25,36 @@ import resa.mario.models.User
 class Sp4ceSurvivalBackendApplication
 @Autowired constructor(private val controller: UserController) : CommandLineRunner {
     override fun run(vararg args: String?) = runBlocking {
-        println("STARTING API REST...")
+        println("\tSTARTING REST-API...")
 
-        val users = mutableListOf<User>()
+        val actualUsers = controller.getAllUsersOnly10Initializer()
 
-        getUsersInit().forEach {
-            val user = controller.createUserInitializer(it)
-            users.add(user!!)
+        if (actualUsers.isEmpty()){
+            println("\tCREATING DATA USERS...")
+
+            val users = mutableListOf<User>()
+
+            getUsersInit().forEach {
+                val user = controller.createUserInitializer(it)
+                users.add(user!!)
+            }
+
+            var i = 0
+            getScoresInit().forEach {
+                controller.createScoreInitializer(users[i].id!!, it)
+                i++
+            }
         }
 
-        var i = 0
-        getScoresInit().forEach {
-            controller.createScoreInitializer(users[i].id!!, it)
-            i++
+        val actualAdmins = controller.getAllUsersOnly10Initializer().filter { u -> u.role == User.UserRole.ADMIN }
+
+        //println(actualAdmins)
+
+        if (actualAdmins.isEmpty()){
+            println("\tNO ADMINS DETECTED, CREATING DEFAULT ONE...")
+            controller.createUserInitializer(getUsersInit()[0])
         }
+
     }
 }
 
