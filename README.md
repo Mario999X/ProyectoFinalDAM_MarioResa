@@ -2,7 +2,9 @@
 
 Proyecto final de Desarrollo de Aplicaciones Multiplataforma del curso 22/23. IES Luis Vives.
 
-_**Attention:** The Readmes are translated in English in the [official wiki](https://github.com/Mario999X/ProyectoFinalDAM_MarioResa/wiki) of the project._
+***
+
+_**Attention:** The Readmes are translated in English in the [**official wiki**](https://github.com/Mario999X/ProyectoFinalDAM_MarioResa/wiki) of the project._
 
 ***
 
@@ -30,9 +32,14 @@ Este proyecto se encuentra formado por dos partes, clásicas en un desarrollo de
 Se trata de un bullet hell orientado a la supervivencia del jugador donde su principal objetivo será obtener la mayor
 puntuación posible.
 
-Si se quiere descargar el videojuego en formato de ejecutable, se realizará a través del siguiente enlace:
+### Descarga Oficial
 
-- [Itch.io - Sp4ce Survival](https://mario999x.itch.io/sp4ce-survival)
+Si se quiere descargar el videojuego en formato de ejecutable, deberá hacerlo desde la respectiva página de **itch.io**, 
+pulsa sobre el icono de la aplicación para navegar hasta ella:
+
+<p align="center">
+	<a href="https://mario999x.itch.io/sp4ce-survival"><img src="sp4ce-survival_frontend/icon.png" height="200px"/></a>
+</p>
 
 ## Plataformas Soportadas
 
